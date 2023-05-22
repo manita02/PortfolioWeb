@@ -1,0 +1,64 @@
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem; ">
+                    <div class="card-body p-5 text-center">
+
+                        <div class="container mb-md-5 mt-md-4 pb-5" *ngIf="proyecto">
+                            <div class="row">
+                                <div>
+                                    <h2 class="fw-bold mb-2 text-uppercase">EDITAR PROYECTO</h2>
+                                    <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+                                        <div class="form-group form-outline form-white mb-4">
+                                            <label for="nombreE" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control form-control-lg" id="nombreE"
+                                                name="nombreE" [(ngModel)]="proyecto.nombreE" required>
+
+                                        </div>
+
+                                        <div class="form-outline form-white mb-4">
+                                            <label for="anocomienzo" class="form-label">Año en el que comenzó...</label>
+                                            <input class="form-control form-control-lg" type="number" min="1111" max="9999" id="anocomienzo" name="anocomienzo" [(ngModel)]="proyecto.anocomienzo" required>
+                                        
+                                        </div>
+
+                                        <div class="form-group form-outline form-white mb-4">
+                                            <label for="descripcionE" class="form-label">Descripción</label>
+                                            <input type="text" class="form-control form-control-lg" id="descripcionE"
+                                                name="descripcionE" [(ngModel)]="proyecto.descripcionE" required>
+                                        </div>
+
+                                        <div class="form-group form-outline form-white mb-4">
+                                            <label for="link" class="form-label">Copie la dirección URL que redirige a su
+                                                proyecto</label>
+                                            <input type="url" class="form-control form-control-lg" id="link" name="link"
+                                                [(ngModel)]="proyecto.link" required>
+                                        </div>
+
+                                        <div class="form-outline form-white mb-4">
+                                            <label for="img" class="form-label">URL Imagen de su proyecto</label>
+                                            <input class="form-control form-control-lg" type="url"  id="img" name="img" [(ngModel)]="proyecto.img" required>
+                                        </div>
+
+
+                                        <button class="btn btn-outline-light btn-lg px-5">
+                                            Actualizar Proyecto
+                                        </button>
+
+                                        <button class="btn btn-outline-primary btn-lg px-5" style="margin-top: 20px;" routerLink="/">
+                                            Volver
+                                       </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

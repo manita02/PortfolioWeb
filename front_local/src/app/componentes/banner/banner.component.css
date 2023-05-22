@@ -1,0 +1,45 @@
+
+img{
+    width: 100%;
+    height: 35em;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.abajo{
+    margin-top: 15rem;
+}
+
+h1{
+    font-weight: bolder;
+}
+
+.boton{
+    position: relative;
+    margin-top: -18rem;
+    float: right;
+}
+
+
+
+
+
+/*----------VISTA CELULAR------------*/
+@media (max-width: 575px) {
+    img{
+        width: 100%;
+        height: 20em;      
+    }
+
+    .abajo{
+        margin-top: 5rem;
+    }
+
+    .boton{
+        position: relative;
+        margin-top: -8rem;
+        float: right;
+    }
+    
+}

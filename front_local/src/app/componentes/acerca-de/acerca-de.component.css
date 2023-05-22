@@ -1,0 +1,483 @@
+.row{
+    padding: 20px;
+}
+
+div{
+    background-color:#72FFFF;
+    text-align: center;
+}
+
+
+/*boton info personal*/
+.boton{
+    position: absolute;
+    margin-left: 15px;
+}
+
+@media (max-width: 1315px) { 
+    .boton{
+        position: absolute;
+        margin-left: 30px;
+        margin-top: -1%
+    }
+
+}
+
+@media (max-width: 1201px) { 
+    .boton{
+        position: absolute;
+        margin-left: 15px;
+        margin-top: -1%
+    }
+
+}
+
+
+@media (max-width: 1173px) { 
+    .boton{
+        position: absolute;
+        margin-left: 10px;
+    }
+
+}
+
+@media (max-width: 1057px) { 
+    .boton{
+        position: absolute;
+        margin-left: 5px;
+        margin-top: -1.5%
+    }
+
+}
+
+@media (max-width: 957px) { 
+    .boton{
+        position: absolute;
+        margin-left: 115px;
+        margin-top: -1%
+    }
+
+}
+
+@media (max-width: 830px) { 
+    .boton{
+        position: absolute;
+        margin-left: 110px;
+        margin-top: -2%
+    }
+
+}
+
+
+@media (max-width: 674px) { 
+    .boton{
+        position: absolute;
+        margin-left: 100px;
+        margin-top: -2.5%
+    }
+
+}
+
+@media (max-width: 651px) { 
+    .boton{
+        position: absolute;
+        margin-left: 75px;
+        margin-top: -2.7%
+    }
+
+}
+
+
+@media (max-width: 575px) { 
+    .boton{
+        position: absolute;
+        margin-left: 350px;
+        margin-top: 12%
+    }
+
+}
+
+
+@media (max-width: 553px) { 
+    .boton{
+        position: absolute;
+        margin-left: 330px;
+        margin-top: 12%
+    }
+
+}
+
+
+@media (max-width: 500px) { 
+    .boton{
+        position: absolute;
+        margin-left: 320px;
+        margin-top: 9%
+    }
+
+}
+
+@media (max-width: 447px) { 
+    .boton{
+        position: absolute;
+        margin-left: 290px;
+        margin-top: 9%
+    }
+
+}
+
+@media (max-width: 414px) { 
+    .boton{
+        position: absolute;
+        margin-left: 270px;
+        margin-top: 9%
+    }
+
+}
+
+@media (max-width: 375px) { 
+    .boton{
+        position: absolute;
+        margin-left: 240px;
+        margin-top: 9%
+    }
+
+}
+
+/* fin boton info personal*/
+
+
+
+
+
+#name{ 
+    font-weight: bolder;
+    margin-top: 20%;   
+    font-size: 20px;
+    
+}
+
+
+
+/*foto de perfil*/
+#perfilphoto{
+        
+    position: absolute;
+    height: 300px;
+    width: 260px;
+    border-radius: 100%;
+    box-shadow: 4px 4px 4px grey; 
+    left: 1%; 
+    top: 550px;
+            
+}
+
+@media (max-width: 1600px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 300px;
+        width: 260px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 1%; 
+        top: 550px;
+                
+    }
+}
+
+
+
+@media (max-width: 1514px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 300px;
+        width: 260px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 0.3%; 
+        top: 550px;
+                
+    }
+}
+
+
+@media (max-width: 1449px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 280px;
+        width: 240px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 1%; 
+        top: 550px;
+                
+    }
+}
+
+@media (max-width: 1382px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 280px;
+        width: 240px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 0.3%; 
+        top: 550px;
+                
+    }
+}
+
+@media (max-width: 1315px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 280px;
+        width: 240px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 1%; 
+        top: 550px;
+                
+    }
+}
+
+@media (max-width: 1289px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 280px;
+        width: 240px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 0.2%; 
+        top: 550px;
+                
+    }
+}
+
+@media (max-width: 1257px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 220px;
+        width: 190px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 3%; 
+        top: 600px;
+                
+    }
+}
+
+@media (max-width: 1201px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 220px;
+        width: 190px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 2%; 
+        top: 600px;
+                
+    }
+}
+
+@media (max-width: 1123px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 220px;
+        width: 190px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 1%; 
+        top: 600px;
+                
+    }
+}
+
+@media (max-width: 1065px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 220px;
+        width: 190px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 0.3%; 
+        top: 600px;
+                
+    }
+}
+
+@media (max-width: 1037px){
+    #perfilphoto{
+        
+        position: absolute;
+        height: 200px;
+        width: 170px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 0.7%; 
+        top: 590px;
+                
+    }
+}
+
+
+
+@media (max-width: 969px) { 
+    #perfilphoto{
+        position: absolute;
+        height: 200px;
+        width: 170px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 0.5%; 
+        top: 590px;
+    }
+
+}
+
+@media (max-width: 863px) { 
+    #perfilphoto{
+        position: absolute;
+        height: 170px;
+        width: 140px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 1%; 
+        top: 610px;
+    }
+
+}
+
+@media (max-width: 765px) { 
+    #perfilphoto{
+        position: absolute;
+        height: 170px;
+        width: 140px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 0.5%; 
+        top: 610px;
+    }
+
+}
+
+@media (max-width: 737px) { 
+    #perfilphoto{
+        position: absolute;
+        height: 150px;
+        width: 130px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 0.5%; 
+        top: 620px;
+    }
+
+}
+
+@media (max-width: 695px) { 
+    #perfilphoto{
+        position: absolute;
+        height: 150px;
+        width: 130px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 0.5%; 
+        top: 590px;
+    }
+
+}
+
+
+
+@media (max-width: 575px){
+    #perfilphoto{
+        position: absolute;
+        height: 250px;
+        width: 210px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 30%; 
+        top: 320px; /*360*/
+    }
+
+}
+
+@media (max-width: 499px){
+    #perfilphoto{
+        position: absolute;
+        height: 250px;
+        width: 210px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 28%; 
+        top: 320px; /*360*/
+    }
+
+}
+
+@media (max-width: 447px){
+    #perfilphoto{
+        position: absolute;
+        height: 250px;
+        width: 210px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 25%; 
+        top: 310px; /*360*/
+    }
+
+}
+
+
+
+
+@media (max-width: 437px){
+    #perfilphoto{
+        position: absolute;
+        height: 250px;
+        width: 210px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 25%; 
+        top: 310px; 
+    }
+
+}
+
+@media (max-width: 399px){
+    #perfilphoto{
+        position: absolute;
+        height: 250px;
+        width: 210px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 25%; 
+        top: 300px;
+    }
+}
+
+
+@media (max-width: 375px){
+    #perfilphoto{
+        position: absolute;
+        height: 250px;
+        width: 210px;
+        border-radius: 100%;
+        box-shadow: 4px 4px 4px grey; 
+        left: 23%; 
+        top: 290px;
+    }
+}
+
+
+
+

@@ -1,0 +1,41 @@
+<div class="row">
+
+    <h1 class="display-4">Proyectos</h1>
+
+    <div class="col-lg-2">
+        <button type="button" class="btn btn-dark" routerLink="/nuevoproyecto" *ngIf="isLogged">
+            <i class="bi bi-plus-circle-fill mas"></i>
+        </button>
+
+    </div>
+
+    <div class="row">
+        <div class="card mb-2 text-center col-sm-4 col-md-4 col-lg-4 carta color img-fluid" style="width: 40rem"
+            *ngFor="let Proyecto of proyecto">
+            <a href="{{Proyecto.img}}" target="blank"><img src="{{Proyecto.img}}" class="card-img-top img-fluid"
+                    alt="..."></a>
+            <div class="card-body color">
+                <h2 class="card-title">{{Proyecto.nombreE}}</h2>
+                <i>
+                    <h5 class="card-text">Inicio: {{Proyecto.anocomienzo}}</h5>
+                </i>
+                <p class="card-text">{{Proyecto.descripcionE}}</p>
+
+                <button class="btn btn-success boton" (click)="goProject(Proyecto.link)"> <i
+                        class="bi bi-eyeglasses"></i></button>
+
+                <button *ngIf="isLogged" class="btn btn-secondary boton" routerLink="/editproyect/{{Proyecto.id}}">
+                    <i class="bi bi-pen-fill"></i>
+
+                </button>
+
+
+                <button *ngIf="isLogged" class="btn btn-danger boton" (click)="delete(Proyecto.id)">
+                    <i class="bi bi-trash3-fill"></i></button>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

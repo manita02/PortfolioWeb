@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="card text-bg-dark" *ngFor="let Banner of banner">
+    <img src="{{Banner.img}}" class="card-img" alt="...">
+
+
+
+    <div class="card-img-overlay">
+      <h1 class="card-title text-center abajo">{{Banner.titulo}}</h1>
+
+      <button *ngIf="isLogged" class="btn btn-secondary boton" routerLink="/editbanner/{{Banner.id}}">
+        <i class="bi bi-pen-fill"></i>
+      </button>
+
+      <!-- <p class="card-text text-center abajo ">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+    </div>
+  </div>
+
+
+</div>

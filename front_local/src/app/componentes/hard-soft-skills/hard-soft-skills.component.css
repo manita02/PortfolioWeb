@@ -1,0 +1,189 @@
+
+
+.mas {
+    font-size: 2em;
+  }
+  
+.row{
+    /*background-color: #C3E5AE;*/
+    background-color:#72FFFF;
+    padding-left: 20px;
+}
+
+td{
+    padding: 10px; 
+}
+
+
+.botones{
+    
+    margin-left: 197px;
+    margin-bottom: 15px;
+}
+
+
+@media (max-width: 1600px) { 
+    .botones{
+    
+        margin-left: 190px;
+    }
+
+}
+
+@media (max-width: 1500px) { 
+    .botones{
+        margin-left: 175px;
+    }
+
+}
+
+@media (max-width: 1400px) { 
+    .botones{
+        margin-left: 155px;
+    }
+
+}
+
+@media (max-width: 1400px) { 
+    .botones{
+        margin-left: 155px;
+    }
+
+}
+
+@media (max-width: 1300px) { 
+    .botones{
+        margin-left: 138px;
+    }
+
+}
+
+@media (max-width: 1200px) { 
+    .botones{
+        margin-left: 125px;
+    }
+
+}
+
+@media (max-width: 1100px) { 
+    .botones{
+        margin-left: 107px;
+    }
+
+}
+
+@media (max-width: 984px) { 
+    .botones{
+        margin-left: 87px;
+    }
+
+}
+
+
+@media (max-width: 886px) { 
+    .botones{
+        margin-left: 70px;
+    }
+
+}
+
+
+@media (max-width: 800px) { 
+    .botones{
+        margin-left: 55px;
+    }
+
+}
+
+@media (max-width: 700px) { 
+    .botones{
+        margin-left: 35px;
+    }
+
+}
+
+@media (max-width: 575px) { 
+    .botones{
+        margin-left: 203px;
+    }
+
+}
+
+@media (max-width: 575px) { 
+    .botones{
+        margin-left: 203px;
+    }
+
+}
+
+@media (max-width: 543px) { 
+    .botones{
+        margin-left: 185px;
+    }
+
+}
+
+
+@media (max-width: 510px) { 
+    .botones{
+        margin-left: 170px;
+    }
+
+}
+
+@media (max-width: 447px) { 
+    .botones{
+        margin-left: 145px;
+    }
+
+}
+
+@media (max-width: 414px) { 
+    .botones{
+        margin-left: 127px;
+    }
+
+}
+
+@media (max-width: 400px) { 
+    .botones{
+        margin-left: 117px;
+    }
+
+}
+
+
+@media (max-width: 385px) { 
+    .botones{
+        margin-left: 114px;
+    }
+
+}
+
+
+@media (max-width: 375px) { 
+    .botones{
+        margin-left: 109px;
+    }
+
+}
+
+
+@media (max-width: 365px) { 
+    .botones{
+        margin-left: 100px;
+    }
+
+}
+
+
+@media (max-width: 360px) { 
+    .botones{
+        margin-left: 95px;
+    }
+
+}
+
+
+
+

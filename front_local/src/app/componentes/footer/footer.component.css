@@ -1,0 +1,18 @@
+.row{
+    /*background-color: #C3E5AE;*/ 
+    background-color:#00D7FF; 
+}
+
+footer{
+    color: #FFFFFF;
+    font-size: 17px;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 2px -2px 5px #FCE1AA;
+}
+
+.arriba{
+    padding-top: 10px;
+}

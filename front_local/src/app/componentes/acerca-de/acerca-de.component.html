@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" *ngFor="let Persona of persona">
+        <img src="{{Persona.img}}" id="perfilphoto" class="img-fluid" alt="">
+
+    </div>
+
+
+
+    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" *ngFor="let Persona of persona">
+
+        <div class="boton">
+            <td *ngIf="isLogged"><button class="btn btn-secondary" routerLink="/editinfop/{{Persona.id}}">
+                    <i class="bi bi-pen-fill"></i>
+                </button>
+            </td>
+        </div>
+
+        <p id="name">{{Persona.nombre}} {{Persona.apellido}}</p>
+
+        <h6><i>{{Persona.profesion}}</i></h6>
+
+
+    </div>
+
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" *ngFor="let Persona of persona">
+        <span>
+
+            <h1 class="display-4">Información Personal</h1>
+
+            <p>{{Persona.acercaDe}}</p>
+
+
+
+
+        </span>
+    </div>
+
+</div>

@@ -1,0 +1,73 @@
+
+.boton{
+    font-size: 8px;
+    padding: 5px;   
+}
+
+
+.botones{
+    float: left;
+    margin-right: 0.5em;
+}
+
+.mas{
+    font-size: 20px;
+    
+}
+
+#APlogo{
+    width: 10em; 
+}
+
+img{
+    width: 3em;
+    padding-right: 0.5em;
+}
+
+
+
+#gmail{
+    padding-right: 0.6em;
+}
+
+.contenedor{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.redSocial{
+    margin-right: 0.5em;
+}
+
+/*-----VISTA CELULAR------*/
+
+@media (max-width: 575px) {
+    .contenedor{
+        flex-direction: column;
+    }
+    
+    .redSocial{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 1em;
+        padding-bottom: 1.5em;
+    }
+
+    .botones{
+        
+            display: none;
+    
+        
+    }
+
+    .mas{
+        display: none;
+        
+    }
+
+   
+}
+
+

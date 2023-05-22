@@ -1,0 +1,59 @@
+
+.mas {
+    font-size: 2em;
+  }
+
+  p{
+    margin-top: 5px;
+}
+
+
+
+  .row{
+    
+    background-color:#72FFFF;
+    padding: 20px;
+    
+}
+
+
+div{
+    background-color:#72FFFF;
+  
+}
+
+.carta{   
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    cursor: default;
+    transition: all 400ms ease;
+
+}
+
+.carta:hover{
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3%);
+}
+
+.color{
+    background-color: white;
+}
+
+.boton{
+    margin-left: 10px;
+}
+
+
+img{
+    height: 23em;  
+}
+
+
+
+
+
