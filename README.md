@@ -303,6 +303,7 @@
   </section>
 
 ## Sitio Web Online :globe_with_meridians:
+- ⚠️Aclaración⚠️: tarda un par de minutos en levantar la información de la base de datos ya que se encuentra en un hosting gratuito (Render, Clever Cloud y Firebase)
   ```
     https://portfoliowebanajuarez.web.app/
   ```
