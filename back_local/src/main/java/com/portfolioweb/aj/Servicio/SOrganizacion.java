@@ -3,6 +3,9 @@ package com.portfolioweb.aj.Servicio;
 import com.portfolioweb.aj.Dto.dtoOrganizacion;
 import com.portfolioweb.aj.Entidad.Organizacion;
 import com.portfolioweb.aj.Repositorio.ROrganizacion;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +18,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class SOrganizacion {
+
+    private static final String DEFAULT_LOGO_RESOURCE = "organizaction-default.png";
 
     @Autowired
     private ROrganizacion rOrganizacion;
@@ -34,7 +39,7 @@ public class SOrganizacion {
                 dto.getNombre(),
                 dto.getUbicacion(),
                 dto.getUrlWeb(),
-                decodeLogo(dto.getLogoImg())
+                resolveLogoForSave(dto.getLogoImg())
         );
         return toDto(rOrganizacion.save(organizacion));
     }
@@ -77,22 +82,47 @@ public class SOrganizacion {
         dto.setNombre(organizacion.getNombre());
         dto.setUbicacion(organizacion.getUbicacion());
         dto.setUrlWeb(organizacion.getUrlWeb());
-        dto.setLogoImg(encodeLogo(organizacion.getLogoImg()));
+        dto.setLogoImg(encodeLogo(resolveLogoForRead(organizacion.getLogoImg())));
         return dto;
     }
 
-    private byte[] decodeLogo(String base64) {
-        if (StringUtils.isBlank(base64)) {
-            return null;
+    private byte[] resolveLogoForSave(String base64) {
+        if (StringUtils.isNotBlank(base64)) {
+            return decodeLogo(base64);
         }
+        return loadDefaultLogo();
+    }
+
+    private byte[] resolveLogoForRead(byte[] logo) {
+        if (logo != null && logo.length > 0) {
+            return logo;
+        }
+        return loadDefaultLogo();
+    }
+
+    private byte[] loadDefaultLogo() {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(DEFAULT_LOGO_RESOURCE)) {
+            if (inputStream == null) {
+                throw new IllegalStateException("No se encontro la imagen por defecto: " + DEFAULT_LOGO_RESOURCE);
+            }
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            byte[] chunk = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(chunk)) != -1) {
+                buffer.write(chunk, 0, bytesRead);
+            }
+            return buffer.toByteArray();
+        } catch (IOException exception) {
+            throw new IllegalStateException("Error al cargar la imagen por defecto", exception);
+        }
+    }
+
+    private byte[] decodeLogo(String base64) {
         String data = base64.contains(",") ? base64.substring(base64.indexOf(",") + 1) : base64;
         return Base64.getDecoder().decode(data.trim());
     }
 
     private String encodeLogo(byte[] logo) {
-        if (logo == null || logo.length == 0) {
-            return null;
-        }
         return Base64.getEncoder().encodeToString(logo);
     }
 }
