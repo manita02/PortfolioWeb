@@ -24,7 +24,7 @@ public class Organizacion {
     private String urlWeb;
 
     @Lob
-    @Column(name = "logo_img")
+    @Column(name = "logo_img", nullable = true)
     private byte[] logoImg;
 
     public Organizacion() {
