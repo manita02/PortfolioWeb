@@ -5,6 +5,9 @@ import javax.validation.constraints.NotBlank;
 
 
 public class dtoHabilidades {
+
+    private int id;
+
     @NotBlank
     private String nombreH; 
     @NotBlank
@@ -24,6 +27,14 @@ public class dtoHabilidades {
     }
 
     //getters y setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getImg() {
         return img;
     }
