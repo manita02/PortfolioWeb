@@ -1,0 +1,10 @@
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3306/backendaj?useSSL=false&serverTimezone=UTC
+spring.datasource.username=TU_USUARIO
+spring.datasource.password=TU_CONTRASEÑA
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+
+# JWT
+jwt.secret=CAMBIAR_POR_UN_SECRETO_LARGO_Y_ALEATORIO
+jwt.expiration=5000
