@@ -1,15 +1,14 @@
-
 package com.portfolioweb.aj.Controlador;
 
 import com.portfolioweb.aj.Dto.dtoProyecto;
-import com.portfolioweb.aj.Entidad.Proyecto;
 import com.portfolioweb.aj.Seguridad.Controller.Mensaje;
 import com.portfolioweb.aj.Servicio.SProyecto;
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,97 +19,75 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("proyecto")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CProyecto {
+
     @Autowired
-    SProyecto sProyecto; 
-    
+    private SProyecto sProyecto;
+
     @GetMapping("/lista")
-    public ResponseEntity<List<Proyecto>> list(){
-        List<Proyecto> list = sProyecto.list(); 
-        return new ResponseEntity(list,HttpStatus.OK); 
+    public ResponseEntity<List<dtoProyecto>> list() {
+        return new ResponseEntity(sProyecto.list(), HttpStatus.OK);
     }
-    
+
+    @GetMapping("/actuales")
+    public ResponseEntity<List<dtoProyecto>> listActuales() {
+        return new ResponseEntity(sProyecto.listActuales(), HttpStatus.OK);
+    }
+
     @GetMapping("/detail/{id}")
-    public ResponseEntity<Proyecto> getById(@PathVariable("id") int id){
-        if(!sProyecto.existsById(id))
+    public ResponseEntity<?> getById(@PathVariable("id") int id) {
+        if (!sProyecto.existsById(id)) {
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Proyecto proyecto = sProyecto.getOne(id).get();
-        return new ResponseEntity(proyecto, HttpStatus.OK);
+        }
+        return new ResponseEntity(sProyecto.getOne(id).get(), HttpStatus.OK);
     }
-    
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id){
-        //validacion si existe el ID
-        if(!sProyecto.existsById(id))
-            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
-        sProyecto.delete(id);
-        
-        return new ResponseEntity(new Mensaje("Proyecto eliminado"), HttpStatus.OK); 
-    }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody dtoProyecto dtoproyecto){
-        if(StringUtils.isBlank(dtoproyecto.getNombreE()))
-            return new ResponseEntity(new Mensaje("El nombre es obligatorio"),HttpStatus.BAD_REQUEST); 
-        
-        if(StringUtils.isBlank(dtoproyecto.getDescripcionE()))
-            return new ResponseEntity(new Mensaje("La descripcion es obligatoria"),HttpStatus.BAD_REQUEST);
-        
-        if(StringUtils.isBlank(dtoproyecto.getImg()))
-            return new ResponseEntity(new Mensaje("La imagen es obligatoria"),HttpStatus.BAD_REQUEST);
-        
-        if(StringUtils.isBlank(dtoproyecto.getLink()))
-            return new ResponseEntity(new Mensaje("La URL es obligatoria"),HttpStatus.BAD_REQUEST);
-       
-        if(sProyecto.existsByNombreE(dtoproyecto.getNombreE()))
-            return new ResponseEntity(new Mensaje("Ese proyecto ya existe"),HttpStatus.BAD_REQUEST); 
-    
-        Proyecto proyecto = new Proyecto(dtoproyecto.getNombreE(), dtoproyecto.getDescripcionE(), dtoproyecto.getLink(), dtoproyecto.getImg(), dtoproyecto.getAnocomienzo()); 
-        sProyecto.save(proyecto);
-        
-        return new ResponseEntity(new Mensaje ("Proyecto agregado"), HttpStatus.OK); 
-    
-    }
-    
-    
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoProyecto dtoproyecto){
-        
-        //validacion si existe el ID
-        if(!sProyecto.existsById(id))
-            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST); 
-        
-        
-        //comparacion del nombre experiencia
-        if(sProyecto.existsByNombreE(dtoproyecto.getNombreE()) && sProyecto.getByNombreE(dtoproyecto.getNombreE()).get().getId() != id ){
+    public ResponseEntity<?> create(@RequestBody dtoProyecto dtoproyecto) {
+        Optional<String> validationError = sProyecto.validateDto(dtoproyecto, true);
+        if (validationError.isPresent()) {
+            return new ResponseEntity(new Mensaje(validationError.get()), HttpStatus.BAD_REQUEST);
+        }
+
+        if (sProyecto.existsByNombreE(dtoproyecto.getNombreE())) {
             return new ResponseEntity(new Mensaje("Ese proyecto ya existe"), HttpStatus.BAD_REQUEST);
         }
-        
-        //el campo no puede estar vacio
-        if(StringUtils.isBlank(dtoproyecto.getNombreE()))
-            return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST); 
-        
-        if(StringUtils.isBlank(dtoproyecto.getDescripcionE()))
-            return new ResponseEntity(new Mensaje("La descripcion es obligatoria"),HttpStatus.BAD_REQUEST);
-        
-        if(StringUtils.isBlank(dtoproyecto.getImg()))
-            return new ResponseEntity(new Mensaje("La imagen es obligatoria"),HttpStatus.BAD_REQUEST);
-        
-        if(StringUtils.isBlank(dtoproyecto.getLink()))
-            return new ResponseEntity(new Mensaje("La URL es obligatoria"),HttpStatus.BAD_REQUEST);
-    
-        Proyecto proyecto = sProyecto.getOne(id).get();
-        proyecto.setNombreE(dtoproyecto.getNombreE());
-        proyecto.setDescripcionE(dtoproyecto.getDescripcionE());
-        proyecto.setLink(dtoproyecto.getLink());
-        proyecto.setImg(dtoproyecto.getImg());
-        proyecto.setAnocomienzo(dtoproyecto.getAnocomienzo());
-        sProyecto.save(proyecto); 
-        return new ResponseEntity(new Mensaje("Proyecto actualizado"), HttpStatus.OK);      
-    
+
+        dtoProyecto created = sProyecto.save(dtoproyecto);
+        return new ResponseEntity(created, HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoProyecto dtoproyecto) {
+        if (!sProyecto.existsById(id)) {
+            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
+        }
+
+        Optional<String> validationError = sProyecto.validateDto(dtoproyecto, false);
+        if (validationError.isPresent()) {
+            return new ResponseEntity(new Mensaje(validationError.get()), HttpStatus.BAD_REQUEST);
+        }
+
+        if (sProyecto.existsByNombreE(dtoproyecto.getNombreE())
+                && sProyecto.getByNombreE(dtoproyecto.getNombreE()).get().getId() != id) {
+            return new ResponseEntity(new Mensaje("Ese proyecto ya existe"), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity(sProyecto.update(id, dtoproyecto).get(), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+        if (!sProyecto.existsById(id)) {
+            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
+        }
+        sProyecto.delete(id);
+        return new ResponseEntity(new Mensaje("Proyecto eliminado"), HttpStatus.OK);
     }
 }
