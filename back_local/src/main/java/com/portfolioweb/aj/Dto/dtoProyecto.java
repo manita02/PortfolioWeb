@@ -26,7 +26,7 @@ public class dtoProyecto {
 
     private Long organizacionId;
 
-    private List<Long> habilidadesIds = new ArrayList<>();
+    private List<Integer> habilidadesIds = new ArrayList<>();
 
     private dtoOrganizacion organizacion;
 
@@ -101,11 +101,11 @@ public class dtoProyecto {
         this.organizacionId = organizacionId;
     }
 
-    public List<Long> getHabilidadesIds() {
+    public List<Integer> getHabilidadesIds() {
         return habilidadesIds;
     }
 
-    public void setHabilidadesIds(List<Long> habilidadesIds) {
+    public void setHabilidadesIds(List<Integer> habilidadesIds) {
         this.habilidadesIds = habilidadesIds;
     }
 

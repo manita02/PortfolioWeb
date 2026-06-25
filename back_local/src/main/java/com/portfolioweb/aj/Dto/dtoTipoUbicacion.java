@@ -2,22 +2,22 @@ package com.portfolioweb.aj.Dto;
 
 public class dtoTipoUbicacion {
 
-    private Long id;
+    private int id;
     private String nombre;
 
     public dtoTipoUbicacion() {
     }
 
-    public dtoTipoUbicacion(Long id, String nombre) {
+    public dtoTipoUbicacion(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

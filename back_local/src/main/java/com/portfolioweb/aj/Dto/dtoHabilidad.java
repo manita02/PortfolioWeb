@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 public class dtoHabilidad {
 
-    private Long id;
+    private int id;
 
     @NotBlank
     private String nombre;
@@ -13,18 +13,18 @@ public class dtoHabilidad {
     private String img;
 
     @NotNull
-    private Long tipoHabilidadId;
+    private Integer tipoHabilidadId;
 
     private dtoTipoHabilidad tipoHabilidad;
 
     public dtoHabilidad() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -44,11 +44,11 @@ public class dtoHabilidad {
         this.img = img;
     }
 
-    public Long getTipoHabilidadId() {
+    public Integer getTipoHabilidadId() {
         return tipoHabilidadId;
     }
 
-    public void setTipoHabilidadId(Long tipoHabilidadId) {
+    public void setTipoHabilidadId(Integer tipoHabilidadId) {
         this.tipoHabilidadId = tipoHabilidadId;
     }
 

@@ -19,11 +19,11 @@ public class dtoEducacion {
 
     private String fechaFin;
 
-    private Long tipoEducacionId;
+    private Integer tipoEducacionId;
 
     private Long organizacionId;
 
-    private List<Long> habilidadesIds = new ArrayList<>();
+    private List<Integer> habilidadesIds = new ArrayList<>();
 
     private dtoTipoEducacion tipoEducacion;
 
@@ -78,11 +78,11 @@ public class dtoEducacion {
         this.fechaFin = fechaFin;
     }
 
-    public Long getTipoEducacionId() {
+    public Integer getTipoEducacionId() {
         return tipoEducacionId;
     }
 
-    public void setTipoEducacionId(Long tipoEducacionId) {
+    public void setTipoEducacionId(Integer tipoEducacionId) {
         this.tipoEducacionId = tipoEducacionId;
     }
 
@@ -94,11 +94,11 @@ public class dtoEducacion {
         this.organizacionId = organizacionId;
     }
 
-    public List<Long> getHabilidadesIds() {
+    public List<Integer> getHabilidadesIds() {
         return habilidadesIds;
     }
 
-    public void setHabilidadesIds(List<Long> habilidadesIds) {
+    public void setHabilidadesIds(List<Integer> habilidadesIds) {
         this.habilidadesIds = habilidadesIds;
     }
 
