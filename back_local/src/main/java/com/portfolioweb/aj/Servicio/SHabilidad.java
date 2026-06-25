@@ -31,11 +31,11 @@ public class SHabilidad {
                 .collect(Collectors.toList());
     }
 
-    public Optional<dtoHabilidad> getOne(Long id) {
+    public Optional<dtoHabilidad> getOne(int id) {
         return rHabilidad.findById(id).map(this::toDto);
     }
 
-    public Optional<Habilidad> getEntity(Long id) {
+    public Optional<Habilidad> getEntity(int id) {
         return rHabilidad.findById(id);
     }
 
@@ -47,11 +47,11 @@ public class SHabilidad {
         rHabilidad.save(habilidad);
     }
 
-    public void delete(Long id) {
+    public void delete(int id) {
         rHabilidad.deleteById(id);
     }
 
-    public boolean existsById(Long id) {
+    public boolean existsById(int id) {
         return rHabilidad.existsById(id);
     }
 
@@ -59,7 +59,7 @@ public class SHabilidad {
         return rHabilidad.existsByNombre(nombre);
     }
 
-    public boolean existsTipoHabilidad(Long tipoHabilidadId) {
+    public boolean existsTipoHabilidad(Integer tipoHabilidadId) {
         return tipoHabilidadId != null && rTipoHabilidad.existsById(tipoHabilidadId);
     }
 

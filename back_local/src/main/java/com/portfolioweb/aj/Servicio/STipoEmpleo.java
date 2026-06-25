@@ -19,11 +19,11 @@ public class STipoEmpleo {
         return rTipoEmpleo.findAll();
     }
 
-    public Optional<TipoEmpleo> getOne(Long id) {
+    public Optional<TipoEmpleo> getOne(int id) {
         return rTipoEmpleo.findById(id);
     }
 
-    public boolean existsById(Long id) {
+    public boolean existsById(int id) {
         return rTipoEmpleo.existsById(id);
     }
 }

@@ -111,7 +111,7 @@ public class SProyecto {
             return Optional.of("La organizacion no existe");
         }
         if (dto.getHabilidadesIds() != null) {
-            for (Long habilidadId : dto.getHabilidadesIds()) {
+            for (Integer habilidadId : dto.getHabilidadesIds()) {
                 if (habilidadId == null || !rHabilidad.existsById(habilidadId)) {
                     return Optional.of("Una o mas habilidades no existen");
                 }
@@ -144,7 +144,7 @@ public class SProyecto {
         return proyecto;
     }
 
-    private List<Habilidad> resolveHabilidades(List<Long> habilidadesIds) {
+    private List<Habilidad> resolveHabilidades(List<Integer> habilidadesIds) {
         if (habilidadesIds == null || habilidadesIds.isEmpty()) {
             return new ArrayList<>();
         }
