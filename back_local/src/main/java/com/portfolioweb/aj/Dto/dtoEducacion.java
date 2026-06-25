@@ -23,13 +23,13 @@ public class dtoEducacion {
 
     private Long organizacionId;
 
-    private List<Integer> habilidadesIds = new ArrayList<>();
+    private List<Long> habilidadesIds = new ArrayList<>();
 
     private dtoTipoEducacion tipoEducacion;
 
     private dtoOrganizacion organizacion;
 
-    private List<dtoHabilidades> habilidades = new ArrayList<>();
+    private List<dtoHabilidad> habilidades = new ArrayList<>();
 
     private String archivoImagen;
 
@@ -94,11 +94,11 @@ public class dtoEducacion {
         this.organizacionId = organizacionId;
     }
 
-    public List<Integer> getHabilidadesIds() {
+    public List<Long> getHabilidadesIds() {
         return habilidadesIds;
     }
 
-    public void setHabilidadesIds(List<Integer> habilidadesIds) {
+    public void setHabilidadesIds(List<Long> habilidadesIds) {
         this.habilidadesIds = habilidadesIds;
     }
 
@@ -118,11 +118,11 @@ public class dtoEducacion {
         this.organizacion = organizacion;
     }
 
-    public List<dtoHabilidades> getHabilidades() {
+    public List<dtoHabilidad> getHabilidades() {
         return habilidades;
     }
 
-    public void setHabilidades(List<dtoHabilidades> habilidades) {
+    public void setHabilidades(List<dtoHabilidad> habilidades) {
         this.habilidades = habilidades;
     }
 
