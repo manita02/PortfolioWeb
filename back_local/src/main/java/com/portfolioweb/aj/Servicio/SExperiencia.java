@@ -13,7 +13,9 @@ import com.portfolioweb.aj.Repositorio.RHabilidad;
 import com.portfolioweb.aj.Repositorio.ROrganizacion;
 import com.portfolioweb.aj.Repositorio.RTipoEmpleo;
 import com.portfolioweb.aj.Repositorio.RTipoUbicacion;
+import com.portfolioweb.aj.Util.OrdenFechaUtil;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -52,6 +54,7 @@ public class SExperiencia {
 
     public List<dtoExperiencia> list() {
         return rExperiencia.findAllWithRelations().stream()
+                .sorted(Comparator.comparing(Experiencia::getFechaInicio, OrdenFechaUtil.mesAnioDesc()))
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
@@ -90,6 +93,7 @@ public class SExperiencia {
 
     public List<dtoExperiencia> listActuales() {
         return rExperiencia.findByEsActualTrue().stream()
+                .sorted(Comparator.comparing(Experiencia::getFechaInicio, OrdenFechaUtil.mesAnioDesc()))
                 .map(experiencia -> rExperiencia.findByIdWithRelations(experiencia.getId()).orElse(experiencia))
                 .map(this::toDto)
                 .collect(Collectors.toList());
@@ -193,9 +197,11 @@ public class SExperiencia {
 
         if (experiencia.getHabilidades() != null) {
             dto.setHabilidadesIds(experiencia.getHabilidades().stream()
+                    .sorted(Comparator.comparing(Habilidad::getId).reversed())
                     .map(Habilidad::getId)
                     .collect(Collectors.toList()));
             dto.setHabilidades(experiencia.getHabilidades().stream()
+                    .sorted(Comparator.comparing(Habilidad::getId).reversed())
                     .map(sHabilidad::toDto)
                     .collect(Collectors.toList()));
         }

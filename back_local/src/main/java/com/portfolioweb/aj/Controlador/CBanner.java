@@ -25,94 +25,72 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:4200")
 public class CBanner {
     @Autowired
-    SBanner sBanner; 
-    
+    SBanner sBanner;
+
     @GetMapping("/lista")
-    public ResponseEntity<List<Banner>> list(){
-        List<Banner> list = sBanner.list(); 
-        return new ResponseEntity(list, HttpStatus.OK); 
+    public ResponseEntity<List<dtoBanner>> list(){
+        return new ResponseEntity(sBanner.list(), HttpStatus.OK);
     }
-    
+
     @GetMapping("/detail/{id}")
-    public ResponseEntity<Banner> getById(@PathVariable("id")int id){
+    public ResponseEntity<?> getById(@PathVariable("id")int id){
         if(!sBanner.existsById(id)){
-            return new ResponseEntity(new Mensaje ("No existe el ID"), HttpStatus.NOT_FOUND); 
+            return new ResponseEntity(new Mensaje ("No existe el ID"), HttpStatus.NOT_FOUND);
         }
-        Banner banner = sBanner.getOne(id).get(); 
-        return new ResponseEntity(banner, HttpStatus.OK);
+        return new ResponseEntity(sBanner.getOne(id).get(), HttpStatus.OK);
     }
-    
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id){
        if(!sBanner.existsById(id)){
-           return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.NOT_FOUND); 
+           return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.NOT_FOUND);
        }
        sBanner.delete(id);
-       return new ResponseEntity(new Mensaje("Banner eliminado"), HttpStatus.OK); 
+       return new ResponseEntity(new Mensaje("Banner eliminado"), HttpStatus.OK);
     }
-    
+
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody dtoBanner dtobanner){
         if(StringUtils.isBlank(dtobanner.getTitulo())){
-            return new ResponseEntity(new Mensaje("El nombre es obligatorio"),HttpStatus.BAD_REQUEST); 
+            return new ResponseEntity(new Mensaje("El nombre es obligatorio"),HttpStatus.BAD_REQUEST);
         }
-        
+
         if(StringUtils.isBlank(dtobanner.getImg())){
-            return new ResponseEntity(new Mensaje("La imagen es obligatoria"),HttpStatus.BAD_REQUEST); 
+            return new ResponseEntity(new Mensaje("La imagen es obligatoria"),HttpStatus.BAD_REQUEST);
         }
-        
-        
-        
+
         if(sBanner.existsByTitulo(dtobanner.getTitulo())){
-            return new ResponseEntity(new Mensaje("Ese nombre ya existe"), HttpStatus.BAD_REQUEST); 
+            return new ResponseEntity(new Mensaje("Ese nombre ya existe"), HttpStatus.BAD_REQUEST);
         }
-        
-        if(sBanner.existsByTitulo(dtobanner.getImg())){
-            return new ResponseEntity(new Mensaje("Ese imagen ya esta agregada"), HttpStatus.BAD_REQUEST); 
-        }
-        
-        
-        Banner educacion = new Banner(dtobanner.getTitulo(), dtobanner.getImg());
-        sBanner.save(educacion);
-        return new ResponseEntity(new Mensaje ("Banner creado"), HttpStatus.OK); 
-    
-    }
-    
-    
-    @PutMapping("/update/{id}") 
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoBanner dtobanner){       
-        if(!sBanner.existsById(id)){
-            return new ResponseEntity(new Mensaje ("No existe el ID"), HttpStatus.NOT_FOUND); 
-        }
-        
-        if(sBanner.existsByTitulo(dtobanner.getTitulo()) && sBanner.getByTitulo(dtobanner.getTitulo()).get().getId() != id){
-            return new ResponseEntity(new Mensaje("Ese nombre ya existe"), HttpStatus.BAD_REQUEST); 
-        }
-        
-        
-        if(sBanner.existsByTitulo(dtobanner.getImg()) && sBanner.getByTitulo(dtobanner.getImg()).get().getId() != id){
-            return new ResponseEntity(new Mensaje("Esa imagen ya esta agregada"), HttpStatus.BAD_REQUEST); 
-        }
-         
-       
-        if(StringUtils.isBlank(dtobanner.getTitulo())){
-            return new ResponseEntity(new Mensaje("El campo no puede estar vacío"),HttpStatus.BAD_REQUEST); 
-        }
-        
-        if(StringUtils.isBlank(dtobanner.getImg())){
-            return new ResponseEntity(new Mensaje("La imagen es obligatoria"),HttpStatus.BAD_REQUEST); 
-        }
-        
-        Banner banner = sBanner.getOne(id).get(); 
-        
-        banner.setTitulo(dtobanner.getTitulo());
-        banner.setImg(dtobanner.getImg());
-        
-        
-        
-        
+
+        Banner banner = new Banner();
+        sBanner.mapToEntity(dtobanner, banner, true);
         sBanner.save(banner);
-        
-        return new ResponseEntity(new Mensaje("Banner actualizado"), HttpStatus.OK); 
+        return new ResponseEntity(new Mensaje ("Banner creado"), HttpStatus.OK);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoBanner dtobanner){
+        if(!sBanner.existsById(id)){
+            return new ResponseEntity(new Mensaje ("No existe el ID"), HttpStatus.NOT_FOUND);
+        }
+
+        if(sBanner.existsByTitulo(dtobanner.getTitulo()) && sBanner.getByTitulo(dtobanner.getTitulo()).get().getId() != id){
+            return new ResponseEntity(new Mensaje("Ese nombre ya existe"), HttpStatus.BAD_REQUEST);
+        }
+
+        if(StringUtils.isBlank(dtobanner.getTitulo())){
+            return new ResponseEntity(new Mensaje("El campo no puede estar vacío"),HttpStatus.BAD_REQUEST);
+        }
+
+        if(StringUtils.isBlank(dtobanner.getImg())){
+            return new ResponseEntity(new Mensaje("La imagen es obligatoria"),HttpStatus.BAD_REQUEST);
+        }
+
+        Banner banner = sBanner.getEntity(id).get();
+        sBanner.mapToEntity(dtobanner, banner, false);
+        sBanner.save(banner);
+
+        return new ResponseEntity(new Mensaje("Banner actualizado"), HttpStatus.OK);
     }
 }

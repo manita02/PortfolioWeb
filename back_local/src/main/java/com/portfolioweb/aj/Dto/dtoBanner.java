@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 
 
 public class dtoBanner {
+    private int id;
+
     @NotBlank
     private String titulo; 
     @NotBlank
@@ -21,6 +23,14 @@ public class dtoBanner {
     }
 
     //getters y setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitulo() {
         return titulo;
     }

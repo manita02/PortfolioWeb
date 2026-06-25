@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 
 @Entity
@@ -20,7 +21,11 @@ public class Persona {
     int id;
     private String nombre;
     private String apellido;
-    private String img;
+
+    @Lob
+    @Column(name = "img", nullable = false)
+    private byte[] img;
+
     private String profesion;
     private String acercaDe;
     
@@ -30,7 +35,7 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, String img, String profesion, String acercaDe) {
+    public Persona(String nombre, String apellido, byte[] img, String profesion, String acercaDe) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.img = img;
@@ -63,11 +68,11 @@ public class Persona {
         this.apellido = apellido;
     }
 
-    public String getImg() {
+    public byte[] getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(byte[] img) {
         this.img = img;
     }
 

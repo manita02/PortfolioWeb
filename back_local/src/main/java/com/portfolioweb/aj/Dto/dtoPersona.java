@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 
 
 public class dtoPersona {
+    private int id;
+
     @NotBlank
     private String nombre; 
     @NotBlank
@@ -31,6 +33,14 @@ public class dtoPersona {
     
     
     //getters y setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }

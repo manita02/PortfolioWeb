@@ -7,8 +7,10 @@ import com.portfolioweb.aj.Entidad.Proyecto;
 import com.portfolioweb.aj.Repositorio.RHabilidad;
 import com.portfolioweb.aj.Repositorio.ROrganizacion;
 import com.portfolioweb.aj.Repositorio.RProyecto;
+import com.portfolioweb.aj.Util.OrdenFechaUtil;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -41,6 +43,7 @@ public class SProyecto {
 
     public List<dtoProyecto> list() {
         return rProyecto.findAllWithRelations().stream()
+                .sorted(Comparator.comparing(Proyecto::getFechaInicio, OrdenFechaUtil.mesAnioDesc()))
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
@@ -79,6 +82,7 @@ public class SProyecto {
 
     public List<dtoProyecto> listActuales() {
         return rProyecto.findByEsActualTrue().stream()
+                .sorted(Comparator.comparing(Proyecto::getFechaInicio, OrdenFechaUtil.mesAnioDesc()))
                 .map(proyecto -> rProyecto.findByIdWithRelations(proyecto.getId()).orElse(proyecto))
                 .map(this::toDto)
                 .collect(Collectors.toList());
@@ -172,9 +176,11 @@ public class SProyecto {
 
         if (proyecto.getHabilidades() != null) {
             dto.setHabilidadesIds(proyecto.getHabilidades().stream()
+                    .sorted(Comparator.comparing(Habilidad::getId).reversed())
                     .map(Habilidad::getId)
                     .collect(Collectors.toList()));
             dto.setHabilidades(proyecto.getHabilidades().stream()
+                    .sorted(Comparator.comparing(Habilidad::getId).reversed())
                     .map(sHabilidad::toDto)
                     .collect(Collectors.toList()));
         }
