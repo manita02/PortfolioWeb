@@ -17,7 +17,8 @@ public class Habilidad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_habilidad")
+    private int id;
 
     @Column(nullable = false)
     private String nombre;
@@ -33,11 +34,11 @@ public class Habilidad {
     public Habilidad() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
