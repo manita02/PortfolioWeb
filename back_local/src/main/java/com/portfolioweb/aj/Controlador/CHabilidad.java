@@ -33,7 +33,7 @@ public class CHabilidad {
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getById(@PathVariable("id") int id) {
         if (!sHabilidad.existsById(id)) {
             return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.NOT_FOUND);
         }
@@ -41,7 +41,7 @@ public class CHabilidad {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
         if (!sHabilidad.existsById(id)) {
             return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.NOT_FOUND);
         }
@@ -71,12 +71,12 @@ public class CHabilidad {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody dtoHabilidad dto) {
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoHabilidad dto) {
         if (!sHabilidad.existsById(id)) {
             return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.NOT_FOUND);
         }
         if (sHabilidad.existsByNombre(dto.getNombre())
-                && sHabilidad.getByNombre(dto.getNombre()).get().getId().longValue() != id.longValue()) {
+                && sHabilidad.getByNombre(dto.getNombre()).get().getId() != id) {
             return new ResponseEntity(new Mensaje("Ese nombre ya existe"), HttpStatus.BAD_REQUEST);
         }
         if (StringUtils.isBlank(dto.getNombre())) {
