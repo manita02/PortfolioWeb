@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class RedSocial {
@@ -14,14 +15,18 @@ public class RedSocial {
     @Column(name = "id_red")
     private int id; 
     private String nombreRedS;
-    private String img;
+
+    @Lob
+    @Column(name = "img", nullable = false)
+    private byte[] img;
+
     private String link; 
     
     //constructores
     public RedSocial() {
     }
 
-    public RedSocial(String nombreRedS, String img, String link) {
+    public RedSocial(String nombreRedS, byte[] img, String link) {
         this.nombreRedS = nombreRedS;
         this.img = img;
         this.link = link;
@@ -44,11 +49,11 @@ public class RedSocial {
         this.nombreRedS = nombreRedS;
     }
 
-    public String getImg() {
+    public byte[] getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(byte[] img) {
         this.img = img;
     }
 
