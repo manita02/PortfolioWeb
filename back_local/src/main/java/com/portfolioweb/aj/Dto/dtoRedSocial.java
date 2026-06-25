@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 
 
 public class dtoRedSocial {
+    private int id;
+
     @NotBlank
     private String nombreRedS;
     @NotBlank
@@ -23,6 +25,14 @@ public class dtoRedSocial {
     }
 
     //getters y setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNombreRedS() {
         return nombreRedS;
     }
