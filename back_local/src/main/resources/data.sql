@@ -41,3 +41,11 @@ WHERE NOT EXISTS (SELECT 1 FROM tipo_ubicacion WHERE nombre = 'Híbrido');
 INSERT INTO tipo_ubicacion (nombre)
 SELECT 'Remoto' FROM DUAL
 WHERE NOT EXISTS (SELECT 1 FROM tipo_ubicacion WHERE nombre = 'Remoto');
+
+INSERT INTO tipo_educacion (nombre)
+SELECT 'Formacion Académica' FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM tipo_educacion WHERE nombre = 'Formacion Académica');
+
+INSERT INTO tipo_educacion (nombre)
+SELECT 'Cursos y Certificaciones' FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM tipo_educacion WHERE nombre = 'Cursos y Certificaciones');
