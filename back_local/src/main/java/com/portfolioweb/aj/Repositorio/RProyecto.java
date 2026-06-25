@@ -19,12 +19,14 @@ public interface RProyecto extends JpaRepository<Proyecto, Integer> {
 
     @Query("SELECT DISTINCT p FROM Proyecto p "
             + "LEFT JOIN FETCH p.organizacion "
-            + "LEFT JOIN FETCH p.habilidades")
+            + "LEFT JOIN FETCH p.habilidades h "
+            + "LEFT JOIN FETCH h.tipoHabilidad")
     List<Proyecto> findAllWithRelations();
 
     @Query("SELECT p FROM Proyecto p "
             + "LEFT JOIN FETCH p.organizacion "
-            + "LEFT JOIN FETCH p.habilidades "
+            + "LEFT JOIN FETCH p.habilidades h "
+            + "LEFT JOIN FETCH h.tipoHabilidad "
             + "WHERE p.id = :id")
     Optional<Proyecto> findByIdWithRelations(@Param("id") int id);
 }

@@ -18,13 +18,15 @@ public interface REduacion extends JpaRepository<Educacion, Integer> {
     @Query("SELECT DISTINCT e FROM Educacion e "
             + "LEFT JOIN FETCH e.tipoEducacion "
             + "LEFT JOIN FETCH e.organizacion "
-            + "LEFT JOIN FETCH e.habilidades")
+            + "LEFT JOIN FETCH e.habilidades h "
+            + "LEFT JOIN FETCH h.tipoHabilidad")
     List<Educacion> findAllWithRelations();
 
     @Query("SELECT e FROM Educacion e "
             + "LEFT JOIN FETCH e.tipoEducacion "
             + "LEFT JOIN FETCH e.organizacion "
-            + "LEFT JOIN FETCH e.habilidades "
+            + "LEFT JOIN FETCH e.habilidades h "
+            + "LEFT JOIN FETCH h.tipoHabilidad "
             + "WHERE e.id = :id")
     Optional<Educacion> findByIdWithRelations(@Param("id") int id);
 }

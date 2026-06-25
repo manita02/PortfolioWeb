@@ -14,7 +14,7 @@ public class TipoEmpleo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_empleo")
-    private Long id;
+    private int id;
 
     private String nombre;
 
@@ -25,11 +25,11 @@ public class TipoEmpleo {
         this.nombre = nombre;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

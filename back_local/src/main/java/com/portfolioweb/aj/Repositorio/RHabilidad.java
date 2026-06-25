@@ -1,14 +1,14 @@
 package com.portfolioweb.aj.Repositorio;
 
-import com.portfolioweb.aj.Entidad.TipoEmpleo;
+import com.portfolioweb.aj.Entidad.Habilidad;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RTipoEmpleo extends JpaRepository<TipoEmpleo, Integer> {
+public interface RHabilidad extends JpaRepository<Habilidad, Integer> {
 
-    Optional<TipoEmpleo> findByNombre(String nombre);
+    Optional<Habilidad> findByNombre(String nombre);
 
     boolean existsByNombre(String nombre);
 }

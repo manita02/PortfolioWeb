@@ -1,11 +1,10 @@
 package com.portfolioweb.aj.Servicio;
 
-import com.portfolioweb.aj.Dto.dtoHabilidades;
 import com.portfolioweb.aj.Dto.dtoProyecto;
-import com.portfolioweb.aj.Entidad.Habilidades;
+import com.portfolioweb.aj.Entidad.Habilidad;
 import com.portfolioweb.aj.Entidad.Organizacion;
 import com.portfolioweb.aj.Entidad.Proyecto;
-import com.portfolioweb.aj.Repositorio.RHabilidades;
+import com.portfolioweb.aj.Repositorio.RHabilidad;
 import com.portfolioweb.aj.Repositorio.ROrganizacion;
 import com.portfolioweb.aj.Repositorio.RProyecto;
 import java.util.ArrayList;
@@ -32,7 +31,10 @@ public class SProyecto {
     private ROrganizacion rOrganizacion;
 
     @Autowired
-    private RHabilidades rHabilidades;
+    private RHabilidad rHabilidad;
+
+    @Autowired
+    private SHabilidad sHabilidad;
 
     @Autowired
     private SOrganizacion sOrganizacion;
@@ -110,7 +112,7 @@ public class SProyecto {
         }
         if (dto.getHabilidadesIds() != null) {
             for (Integer habilidadId : dto.getHabilidadesIds()) {
-                if (habilidadId == null || !rHabilidades.existsById(habilidadId)) {
+                if (habilidadId == null || !rHabilidad.existsById(habilidadId)) {
                     return Optional.of("Una o mas habilidades no existen");
                 }
             }
@@ -142,12 +144,12 @@ public class SProyecto {
         return proyecto;
     }
 
-    private List<Habilidades> resolveHabilidades(List<Integer> habilidadesIds) {
+    private List<Habilidad> resolveHabilidades(List<Integer> habilidadesIds) {
         if (habilidadesIds == null || habilidadesIds.isEmpty()) {
             return new ArrayList<>();
         }
         return habilidadesIds.stream()
-                .map(rHabilidades::findById)
+                .map(rHabilidad::findById)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -170,24 +172,15 @@ public class SProyecto {
 
         if (proyecto.getHabilidades() != null) {
             dto.setHabilidadesIds(proyecto.getHabilidades().stream()
-                    .map(Habilidades::getId)
+                    .map(Habilidad::getId)
                     .collect(Collectors.toList()));
             dto.setHabilidades(proyecto.getHabilidades().stream()
-                    .map(this::toHabilidadDto)
+                    .map(sHabilidad::toDto)
                     .collect(Collectors.toList()));
         }
 
         dto.setImagen(encodeBase64(proyecto.getImagen()));
 
-        return dto;
-    }
-
-    private dtoHabilidades toHabilidadDto(Habilidades habilidad) {
-        dtoHabilidades dto = new dtoHabilidades();
-        dto.setId(habilidad.getId());
-        dto.setNombreH(habilidad.getNombreH());
-        dto.setPorcentaje(habilidad.getPorcentaje());
-        dto.setImg(habilidad.getImg());
         return dto;
     }
 

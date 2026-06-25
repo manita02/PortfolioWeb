@@ -21,9 +21,9 @@ public class dtoExperiencia {
 
     private String fechaFin;
 
-    private Long tipoEmpleoId;
+    private Integer tipoEmpleoId;
 
-    private Long tipoUbicacionId;
+    private Integer tipoUbicacionId;
 
     private Long organizacionId;
 
@@ -35,7 +35,7 @@ public class dtoExperiencia {
 
     private dtoOrganizacion organizacion;
 
-    private List<dtoHabilidades> habilidades = new ArrayList<>();
+    private List<dtoHabilidad> habilidades = new ArrayList<>();
 
     public dtoExperiencia() {
     }
@@ -88,19 +88,19 @@ public class dtoExperiencia {
         this.fechaFin = fechaFin;
     }
 
-    public Long getTipoEmpleoId() {
+    public Integer getTipoEmpleoId() {
         return tipoEmpleoId;
     }
 
-    public void setTipoEmpleoId(Long tipoEmpleoId) {
+    public void setTipoEmpleoId(Integer tipoEmpleoId) {
         this.tipoEmpleoId = tipoEmpleoId;
     }
 
-    public Long getTipoUbicacionId() {
+    public Integer getTipoUbicacionId() {
         return tipoUbicacionId;
     }
 
-    public void setTipoUbicacionId(Long tipoUbicacionId) {
+    public void setTipoUbicacionId(Integer tipoUbicacionId) {
         this.tipoUbicacionId = tipoUbicacionId;
     }
 
@@ -144,11 +144,11 @@ public class dtoExperiencia {
         this.organizacion = organizacion;
     }
 
-    public List<dtoHabilidades> getHabilidades() {
+    public List<dtoHabilidad> getHabilidades() {
         return habilidades;
     }
 
-    public void setHabilidades(List<dtoHabilidades> habilidades) {
+    public void setHabilidades(List<dtoHabilidad> habilidades) {
         this.habilidades = habilidades;
     }
 }

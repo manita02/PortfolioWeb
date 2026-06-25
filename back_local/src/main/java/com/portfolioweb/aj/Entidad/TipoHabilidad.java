@@ -8,20 +8,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tipo_ubicacion")
-public class TipoUbicacion {
+@Table(name = "tipo_habilidad")
+public class TipoHabilidad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipo_ubicacion")
+    @Column(name = "id_tipo_habilidad")
     private int id;
 
+    @Column(nullable = false)
     private String nombre;
 
-    public TipoUbicacion() {
+    public TipoHabilidad() {
     }
 
-    public TipoUbicacion(String nombre) {
+    public TipoHabilidad(String nombre) {
         this.nombre = nombre;
     }
 

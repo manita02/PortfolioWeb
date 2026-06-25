@@ -1,14 +1,14 @@
 package com.portfolioweb.aj.Dto;
 
-public class dtoTipoEducacion {
+public class dtoTipoHabilidad {
 
     private int id;
     private String nombre;
 
-    public dtoTipoEducacion() {
+    public dtoTipoHabilidad() {
     }
 
-    public dtoTipoEducacion(int id, String nombre) {
+    public dtoTipoHabilidad(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }

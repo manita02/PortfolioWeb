@@ -7,7 +7,7 @@ package com.portfolioweb.aj.Seguridad.Entity;
 import com.portfolioweb.aj.Entidad.Banner;
 import com.portfolioweb.aj.Entidad.Educacion;
 import com.portfolioweb.aj.Entidad.Experiencia;
-import com.portfolioweb.aj.Entidad.Habilidades;
+import com.portfolioweb.aj.Entidad.Habilidad;
 import com.portfolioweb.aj.Entidad.Persona;
 import com.portfolioweb.aj.Entidad.Proyecto;
 import com.portfolioweb.aj.Entidad.RedSocial;
@@ -64,8 +64,8 @@ public class Usuario{
     
     
     @ManyToOne
-    @JoinColumn(name = "id_habilidades")
-    Habilidades habilidades; 
+    @JoinColumn(name = "id_habilidad")
+    Habilidad habilidad; 
     
     @ManyToOne
     @JoinColumn(name = "id_proyecto")

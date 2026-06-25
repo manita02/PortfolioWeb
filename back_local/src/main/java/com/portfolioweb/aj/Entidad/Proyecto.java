@@ -42,9 +42,9 @@ public class Proyecto {
     @JoinTable(
             name = "proyecto_habilidades",
             joinColumns = @JoinColumn(name = "id_proyecto"),
-            inverseJoinColumns = @JoinColumn(name = "id_habilidades")
+            inverseJoinColumns = @JoinColumn(name = "id_habilidad")
     )
-    private List<Habilidades> habilidades = new ArrayList<>();
+    private List<Habilidad> habilidades = new ArrayList<>();
 
     @Lob
     @Column(name = "imagen", nullable = false)
@@ -117,11 +117,11 @@ public class Proyecto {
         this.organizacion = organizacion;
     }
 
-    public List<Habilidades> getHabilidades() {
+    public List<Habilidad> getHabilidades() {
         return habilidades;
     }
 
-    public void setHabilidades(List<Habilidades> habilidades) {
+    public void setHabilidades(List<Habilidad> habilidades) {
         this.habilidades = habilidades;
     }
 

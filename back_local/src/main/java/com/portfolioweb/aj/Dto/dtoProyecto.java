@@ -30,7 +30,7 @@ public class dtoProyecto {
 
     private dtoOrganizacion organizacion;
 
-    private List<dtoHabilidades> habilidades = new ArrayList<>();
+    private List<dtoHabilidad> habilidades = new ArrayList<>();
 
     private String imagen;
 
@@ -117,11 +117,11 @@ public class dtoProyecto {
         this.organizacion = organizacion;
     }
 
-    public List<dtoHabilidades> getHabilidades() {
+    public List<dtoHabilidad> getHabilidades() {
         return habilidades;
     }
 
-    public void setHabilidades(List<dtoHabilidades> habilidades) {
+    public void setHabilidades(List<dtoHabilidad> habilidades) {
         this.habilidades = habilidades;
     }
 
