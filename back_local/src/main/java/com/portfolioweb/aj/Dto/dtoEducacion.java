@@ -1,52 +1,51 @@
-
 package com.portfolioweb.aj.Dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.NotBlank;
 
-
 public class dtoEducacion {
+
+    private int id;
+
     @NotBlank
-    private String nombreE; 
+    private String nombreE;
+
     @NotBlank
-    private String descripcionE; 
+    private String descripcionE;
+
     @NotBlank
-    private String img; 
-    @NotBlank
-    private int anocomienzo;
-    
-    
-    
-    //constructores 
+    private String fechaInicio;
+
+    private String fechaFin;
+
+    private Long tipoEducacionId;
+
+    private Long organizacionId;
+
+    private List<Integer> habilidadesIds = new ArrayList<>();
+
+    private dtoTipoEducacion tipoEducacion;
+
+    private dtoOrganizacion organizacion;
+
+    private List<dtoHabilidades> habilidades = new ArrayList<>();
+
+    private String archivoImagen;
+
+    private String archivoPdf;
+
     public dtoEducacion() {
     }
 
-    public dtoEducacion(String nombreE, String descripcionE, String img, int anocomienzo) {
-        this.nombreE = nombreE;
-        this.descripcionE = descripcionE;
-        this.img = img;
-        this.anocomienzo = anocomienzo; 
-        
-        
-    }
-    
-    //getters y setters 
-    public String getImg() {
-        return img;
+    public int getId() {
+        return id;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getAnocomienzo() {
-        return anocomienzo;
-    }
-
-    public void setAnocomienzo(int anocomienzo) {
-        this.anocomienzo = anocomienzo;
-    }
-    
-    
     public String getNombreE() {
         return nombreE;
     }
@@ -62,6 +61,84 @@ public class dtoEducacion {
     public void setDescripcionE(String descripcionE) {
         this.descripcionE = descripcionE;
     }
-    
-    
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Long getTipoEducacionId() {
+        return tipoEducacionId;
+    }
+
+    public void setTipoEducacionId(Long tipoEducacionId) {
+        this.tipoEducacionId = tipoEducacionId;
+    }
+
+    public Long getOrganizacionId() {
+        return organizacionId;
+    }
+
+    public void setOrganizacionId(Long organizacionId) {
+        this.organizacionId = organizacionId;
+    }
+
+    public List<Integer> getHabilidadesIds() {
+        return habilidadesIds;
+    }
+
+    public void setHabilidadesIds(List<Integer> habilidadesIds) {
+        this.habilidadesIds = habilidadesIds;
+    }
+
+    public dtoTipoEducacion getTipoEducacion() {
+        return tipoEducacion;
+    }
+
+    public void setTipoEducacion(dtoTipoEducacion tipoEducacion) {
+        this.tipoEducacion = tipoEducacion;
+    }
+
+    public dtoOrganizacion getOrganizacion() {
+        return organizacion;
+    }
+
+    public void setOrganizacion(dtoOrganizacion organizacion) {
+        this.organizacion = organizacion;
+    }
+
+    public List<dtoHabilidades> getHabilidades() {
+        return habilidades;
+    }
+
+    public void setHabilidades(List<dtoHabilidades> habilidades) {
+        this.habilidades = habilidades;
+    }
+
+    public String getArchivoImagen() {
+        return archivoImagen;
+    }
+
+    public void setArchivoImagen(String archivoImagen) {
+        this.archivoImagen = archivoImagen;
+    }
+
+    public String getArchivoPdf() {
+        return archivoPdf;
+    }
+
+    public void setArchivoPdf(String archivoPdf) {
+        this.archivoPdf = archivoPdf;
+    }
 }
