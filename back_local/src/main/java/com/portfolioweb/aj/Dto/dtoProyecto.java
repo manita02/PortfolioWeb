@@ -1,52 +1,50 @@
-
 package com.portfolioweb.aj.Dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.NotBlank;
 
-
 public class dtoProyecto {
+
+    private int id;
+
     @NotBlank
     private String nombreE;
+
     @NotBlank
     private String descripcionE;
+
     @NotBlank
     private String link;
+
+    private boolean esActual;
+
     @NotBlank
-    private String img; 
-    @NotBlank
-    private int anocomienzo; 
-    
-    
-    //constructores
+    private String fechaInicio;
+
+    private String fechaFin;
+
+    private Long organizacionId;
+
+    private List<Integer> habilidadesIds = new ArrayList<>();
+
+    private dtoOrganizacion organizacion;
+
+    private List<dtoHabilidades> habilidades = new ArrayList<>();
+
+    private String imagen;
+
     public dtoProyecto() {
     }
 
-    public dtoProyecto(String nombreE, String descripcionE, String link, String img, int anocomienzo) {
-        this.nombreE = nombreE;
-        this.descripcionE = descripcionE;
-        this.link = link;
-        this.img = img;
-        this.anocomienzo = anocomienzo; 
+    public int getId() {
+        return id;
     }
 
-    
-    //getters y setters
-    public int getAnocomienzo() {
-        return anocomienzo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setAnocomienzo(int añocomienzo) {
-        this.anocomienzo = añocomienzo;
-    }
-
-     public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-    
     public String getNombreE() {
         return nombreE;
     }
@@ -70,6 +68,68 @@ public class dtoProyecto {
     public void setLink(String link) {
         this.link = link;
     }
-    
-    
+
+    public boolean isEsActual() {
+        return esActual;
+    }
+
+    public void setEsActual(boolean esActual) {
+        this.esActual = esActual;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Long getOrganizacionId() {
+        return organizacionId;
+    }
+
+    public void setOrganizacionId(Long organizacionId) {
+        this.organizacionId = organizacionId;
+    }
+
+    public List<Integer> getHabilidadesIds() {
+        return habilidadesIds;
+    }
+
+    public void setHabilidadesIds(List<Integer> habilidadesIds) {
+        this.habilidadesIds = habilidadesIds;
+    }
+
+    public dtoOrganizacion getOrganizacion() {
+        return organizacion;
+    }
+
+    public void setOrganizacion(dtoOrganizacion organizacion) {
+        this.organizacion = organizacion;
+    }
+
+    public List<dtoHabilidades> getHabilidades() {
+        return habilidades;
+    }
+
+    public void setHabilidades(List<dtoHabilidades> habilidades) {
+        this.habilidades = habilidades;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 }

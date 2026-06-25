@@ -1,11 +1,18 @@
-
 package com.portfolioweb.aj.Entidad;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Proyecto {
@@ -14,41 +21,36 @@ public class Proyecto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_proyecto")
     private int id;
+
     private String nombreE;
+
     private String descripcionE;
+
     private String link;
-    private String img;
-    private int anocomienzo;
-    
- 
-    //constructores
+
+    private boolean esActual;
+
+    private String fechaInicio;
+
+    private String fechaFin;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_organizacion", nullable = true)
+    private Organizacion organizacion;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "proyecto_habilidades",
+            joinColumns = @JoinColumn(name = "id_proyecto"),
+            inverseJoinColumns = @JoinColumn(name = "id_habilidades")
+    )
+    private List<Habilidades> habilidades = new ArrayList<>();
+
+    @Lob
+    @Column(name = "imagen", nullable = false)
+    private byte[] imagen;
+
     public Proyecto() {
-    }
-
-    public Proyecto(String nombreE, String descripcionE, String link, String img, int anocomienzo) {
-        this.nombreE = nombreE;
-        this.descripcionE = descripcionE;
-        this.link = link;
-        this.img = img;
-        this.anocomienzo = anocomienzo;
-
-    }
-
-    //getters y setters
-    public int getAnocomienzo() {
-        return anocomienzo;
-    }
-
-    public void setAnocomienzo(int añocomienzo) {
-        this.anocomienzo = añocomienzo;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public int getId() {
@@ -83,4 +85,51 @@ public class Proyecto {
         this.link = link;
     }
 
+    public boolean isEsActual() {
+        return esActual;
+    }
+
+    public void setEsActual(boolean esActual) {
+        this.esActual = esActual;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Organizacion getOrganizacion() {
+        return organizacion;
+    }
+
+    public void setOrganizacion(Organizacion organizacion) {
+        this.organizacion = organizacion;
+    }
+
+    public List<Habilidades> getHabilidades() {
+        return habilidades;
+    }
+
+    public void setHabilidades(List<Habilidades> habilidades) {
+        this.habilidades = habilidades;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
 }
