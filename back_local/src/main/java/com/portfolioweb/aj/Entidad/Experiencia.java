@@ -44,8 +44,8 @@ public class Experiencia {
     private Organizacion organizacion;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "experiencia_habilidades", joinColumns = @JoinColumn(name = "id_experiencia"), inverseJoinColumns = @JoinColumn(name = "id_habilidades"))
-    private List<Habilidades> habilidades = new ArrayList<>();
+    @JoinTable(name = "experiencia_habilidades", joinColumns = @JoinColumn(name = "id_experiencia"), inverseJoinColumns = @JoinColumn(name = "id_habilidad"))
+    private List<Habilidad> habilidades = new ArrayList<>();
 
     public Experiencia() {
     }
@@ -122,11 +122,11 @@ public class Experiencia {
         this.organizacion = organizacion;
     }
 
-    public List<Habilidades> getHabilidades() {
+    public List<Habilidad> getHabilidades() {
         return habilidades;
     }
 
-    public void setHabilidades(List<Habilidades> habilidades) {
+    public void setHabilidades(List<Habilidad> habilidades) {
         this.habilidades = habilidades;
     }
 }
