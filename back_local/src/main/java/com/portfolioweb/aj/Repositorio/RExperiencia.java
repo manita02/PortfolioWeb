@@ -23,14 +23,16 @@ public interface RExperiencia extends JpaRepository<Experiencia, Integer> {
             + "LEFT JOIN FETCH e.tipoEmpleo "
             + "LEFT JOIN FETCH e.tipoUbicacion "
             + "LEFT JOIN FETCH e.organizacion "
-            + "LEFT JOIN FETCH e.habilidades")
+            + "LEFT JOIN FETCH e.habilidades h "
+            + "LEFT JOIN FETCH h.tipoHabilidad")
     List<Experiencia> findAllWithRelations();
 
     @Query("SELECT e FROM Experiencia e "
             + "LEFT JOIN FETCH e.tipoEmpleo "
             + "LEFT JOIN FETCH e.tipoUbicacion "
             + "LEFT JOIN FETCH e.organizacion "
-            + "LEFT JOIN FETCH e.habilidades "
+            + "LEFT JOIN FETCH e.habilidades h "
+            + "LEFT JOIN FETCH h.tipoHabilidad "
             + "WHERE e.id = :id")
     Optional<Experiencia> findByIdWithRelations(@Param("id") int id);
 }
