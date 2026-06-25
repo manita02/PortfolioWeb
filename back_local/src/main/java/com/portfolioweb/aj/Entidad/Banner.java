@@ -5,8 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 
 @Entity
 public class Banner {
@@ -16,14 +15,17 @@ public class Banner {
     @Column(name = "id_banner")
     private int id;
     private String titulo;
-    private String img;
+
+    @Lob
+    @Column(name = "img", nullable = false)
+    private byte[] img;
     
     
     //constructores
     public Banner() {
     }
 
-    public Banner(String titulo, String img) {
+    public Banner(String titulo, byte[] img) {
         this.titulo = titulo;
         this.img = img;
     }
@@ -45,11 +47,11 @@ public class Banner {
         this.titulo = titulo;
     }
 
-    public String getImg() {
+    public byte[] getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(byte[] img) {
         this.img = img;
     }
 
