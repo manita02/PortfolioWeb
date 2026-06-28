@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Utilidades para generar scripts SQL de respaldo compatibles con MySQL.
- */
 public final class SqlScriptUtil {
 
     private SqlScriptUtil() {
