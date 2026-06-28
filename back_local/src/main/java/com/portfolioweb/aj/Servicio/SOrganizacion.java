@@ -2,11 +2,12 @@ package com.portfolioweb.aj.Servicio;
 
 import com.portfolioweb.aj.Dto.dtoOrganizacion;
 import com.portfolioweb.aj.Entidad.Organizacion;
+import com.portfolioweb.aj.Excepcion.ArchivoInvalidoException;
 import com.portfolioweb.aj.Repositorio.ROrganizacion;
+import com.portfolioweb.aj.Util.ArchivoUtil;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -82,7 +83,7 @@ public class SOrganizacion {
         dto.setNombre(organizacion.getNombre());
         dto.setUbicacion(organizacion.getUbicacion());
         dto.setUrlWeb(organizacion.getUrlWeb());
-        dto.setLogoImg(encodeLogo(resolveLogoForRead(organizacion.getLogoImg())));
+        dto.setLogoImg(ArchivoUtil.codificarBase64(resolveLogoForRead(organizacion.getLogoImg())));
         return dto;
     }
 
@@ -118,11 +119,10 @@ public class SOrganizacion {
     }
 
     private byte[] decodeLogo(String base64) {
-        String data = base64.contains(",") ? base64.substring(base64.indexOf(",") + 1) : base64;
-        return Base64.getDecoder().decode(data.trim());
-    }
-
-    private String encodeLogo(byte[] logo) {
-        return Base64.getEncoder().encodeToString(logo);
+        ArchivoUtil.ResultadoArchivo resultado = ArchivoUtil.procesarImagen(base64);
+        if (resultado.tieneError()) {
+            throw new ArchivoInvalidoException(resultado.getMensajeError());
+        }
+        return resultado.getBytes();
     }
 }

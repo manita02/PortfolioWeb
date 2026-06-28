@@ -7,9 +7,9 @@ import com.portfolioweb.aj.Entidad.Proyecto;
 import com.portfolioweb.aj.Repositorio.RHabilidad;
 import com.portfolioweb.aj.Repositorio.ROrganizacion;
 import com.portfolioweb.aj.Repositorio.RProyecto;
+import com.portfolioweb.aj.Util.ArchivoUtil;
 import com.portfolioweb.aj.Util.OrdenFechaUtil;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -121,6 +121,12 @@ public class SProyecto {
                 }
             }
         }
+        if (StringUtils.isNotBlank(dto.getImagen())) {
+            Optional<String> errorImagen = ArchivoUtil.validarImagenBase64(dto.getImagen());
+            if (errorImagen.isPresent()) {
+                return errorImagen;
+            }
+        }
         return Optional.empty();
     }
 
@@ -142,7 +148,7 @@ public class SProyecto {
         proyecto.setHabilidades(resolveHabilidades(dto.getHabilidadesIds()));
 
         if (isCreate || StringUtils.isNotBlank(dto.getImagen())) {
-            proyecto.setImagen(decodeBase64(dto.getImagen()));
+            proyecto.setImagen(ArchivoUtil.decodificarBase64(dto.getImagen()));
         }
 
         return proyecto;
@@ -185,23 +191,8 @@ public class SProyecto {
                     .collect(Collectors.toList()));
         }
 
-        dto.setImagen(encodeBase64(proyecto.getImagen()));
+        dto.setImagen(ArchivoUtil.codificarBase64(proyecto.getImagen()));
 
         return dto;
-    }
-
-    private byte[] decodeBase64(String base64) {
-        if (StringUtils.isBlank(base64)) {
-            return null;
-        }
-        String data = base64.contains(",") ? base64.substring(base64.indexOf(",") + 1) : base64;
-        return Base64.getDecoder().decode(data.trim());
-    }
-
-    private String encodeBase64(byte[] data) {
-        if (data == null || data.length == 0) {
-            return null;
-        }
-        return Base64.getEncoder().encodeToString(data);
     }
 }

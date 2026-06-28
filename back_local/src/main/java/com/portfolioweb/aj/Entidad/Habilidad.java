@@ -1,5 +1,7 @@
 package com.portfolioweb.aj.Entidad;
 
+import com.portfolioweb.aj.Validacion.FileCategory;
+import com.portfolioweb.aj.Validacion.ValidFile;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,6 +26,7 @@ public class Habilidad {
     private String nombre;
 
     @Lob
+    @ValidFile(FileCategory.IMAGE)
     @Column(name = "img", nullable = false)
     private byte[] img;
 

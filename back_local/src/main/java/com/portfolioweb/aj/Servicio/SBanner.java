@@ -3,8 +3,9 @@ package com.portfolioweb.aj.Servicio;
 
 import com.portfolioweb.aj.Dto.dtoBanner;
 import com.portfolioweb.aj.Entidad.Banner;
+import com.portfolioweb.aj.Excepcion.ArchivoInvalidoException;
 import com.portfolioweb.aj.Repositorio.RBanner;
-import java.util.Base64;
+import com.portfolioweb.aj.Util.ArchivoUtil;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -56,7 +57,11 @@ public class SBanner {
    public Banner mapToEntity(dtoBanner dto, Banner banner, boolean isCreate) {
        banner.setTitulo(dto.getTitulo());
        if (isCreate || StringUtils.isNotBlank(dto.getImg())) {
-           banner.setImg(decodeBase64(dto.getImg()));
+           ArchivoUtil.ResultadoArchivo resultado = ArchivoUtil.procesarImagen(dto.getImg());
+           if (resultado.tieneError()) {
+               throw new ArchivoInvalidoException(resultado.getMensajeError());
+           }
+           banner.setImg(resultado.getBytes());
        }
        return banner;
    }
@@ -65,22 +70,7 @@ public class SBanner {
        dtoBanner dto = new dtoBanner();
        dto.setId(banner.getId());
        dto.setTitulo(banner.getTitulo());
-       dto.setImg(encodeBase64(banner.getImg()));
+       dto.setImg(ArchivoUtil.codificarBase64(banner.getImg()));
        return dto;
-   }
-
-   private byte[] decodeBase64(String base64) {
-       if (StringUtils.isBlank(base64)) {
-           return null;
-       }
-       String data = base64.contains(",") ? base64.substring(base64.indexOf(",") + 1) : base64;
-       return Base64.getDecoder().decode(data.trim());
-   }
-
-   private String encodeBase64(byte[] data) {
-       if (data == null || data.length == 0) {
-           return null;
-       }
-       return Base64.getEncoder().encodeToString(data);
    }
 }

@@ -23,6 +23,7 @@ public class Experiencia {
 
     private String nombreE;
 
+    @Column(length = 1000)
     private String descripcionE;
 
     private boolean esActual;

@@ -10,9 +10,9 @@ import com.portfolioweb.aj.Repositorio.REduacion;
 import com.portfolioweb.aj.Repositorio.RHabilidad;
 import com.portfolioweb.aj.Repositorio.ROrganizacion;
 import com.portfolioweb.aj.Repositorio.RTipoEducacion;
+import com.portfolioweb.aj.Util.ArchivoUtil;
 import com.portfolioweb.aj.Util.OrdenFechaUtil;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -112,6 +112,18 @@ public class SEducacion {
                 }
             }
         }
+        if (StringUtils.isNotBlank(dto.getArchivoImagen())) {
+            Optional<String> errorImagen = ArchivoUtil.validarImagenBase64(dto.getArchivoImagen());
+            if (errorImagen.isPresent()) {
+                return errorImagen;
+            }
+        }
+        if (StringUtils.isNotBlank(dto.getArchivoPdf())) {
+            Optional<String> errorPdf = ArchivoUtil.validarPdfBase64(dto.getArchivoPdf());
+            if (errorPdf.isPresent()) {
+                return errorPdf;
+            }
+        }
         return Optional.empty();
     }
 
@@ -129,10 +141,10 @@ public class SEducacion {
         educacion.setHabilidades(resolveHabilidades(dto.getHabilidadesIds()));
 
         if (isCreate || StringUtils.isNotBlank(dto.getArchivoImagen())) {
-            educacion.setArchivoImagen(decodeBase64(dto.getArchivoImagen()));
+            educacion.setArchivoImagen(ArchivoUtil.decodificarBase64(dto.getArchivoImagen()));
         }
         if (isCreate || StringUtils.isNotBlank(dto.getArchivoPdf())) {
-            educacion.setArchivoPdf(decodeBase64(dto.getArchivoPdf()));
+            educacion.setArchivoPdf(ArchivoUtil.decodificarBase64(dto.getArchivoPdf()));
         }
 
         return educacion;
@@ -181,24 +193,9 @@ public class SEducacion {
                     .collect(Collectors.toList()));
         }
 
-        dto.setArchivoImagen(encodeBase64(educacion.getArchivoImagen()));
-        dto.setArchivoPdf(encodeBase64(educacion.getArchivoPdf()));
+        dto.setArchivoImagen(ArchivoUtil.codificarBase64(educacion.getArchivoImagen()));
+        dto.setArchivoPdf(ArchivoUtil.codificarBase64(educacion.getArchivoPdf()));
 
         return dto;
-    }
-
-    private byte[] decodeBase64(String base64) {
-        if (StringUtils.isBlank(base64)) {
-            return null;
-        }
-        String data = base64.contains(",") ? base64.substring(base64.indexOf(",") + 1) : base64;
-        return Base64.getDecoder().decode(data.trim());
-    }
-
-    private String encodeBase64(byte[] data) {
-        if (data == null || data.length == 0) {
-            return null;
-        }
-        return Base64.getEncoder().encodeToString(data);
     }
 }

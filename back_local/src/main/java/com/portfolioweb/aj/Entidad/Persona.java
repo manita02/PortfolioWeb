@@ -1,16 +1,14 @@
 
 package com.portfolioweb.aj.Entidad;
 
-
-
-
+import com.portfolioweb.aj.Validacion.FileCategory;
+import com.portfolioweb.aj.Validacion.ValidFile;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-
 
 @Entity
 public class Persona {
@@ -23,15 +21,15 @@ public class Persona {
     private String apellido;
 
     @Lob
+    @ValidFile(FileCategory.IMAGE)
     @Column(name = "img", nullable = false)
     private byte[] img;
 
     private String profesion;
+
+    @Column(length = 1000)
     private String acercaDe;
-    
-    
-   
-    //constructores
+
     public Persona() {
     }
 
@@ -43,7 +41,6 @@ public class Persona {
         this.acercaDe = acercaDe;
     }
 
-    //GETTERS Y SETTERS
     public int getId() {
         return id;
     }

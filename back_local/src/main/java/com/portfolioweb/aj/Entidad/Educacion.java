@@ -1,5 +1,7 @@
 package com.portfolioweb.aj.Entidad;
 
+import com.portfolioweb.aj.Validacion.FileCategory;
+import com.portfolioweb.aj.Validacion.ValidFile;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -24,6 +26,7 @@ public class Educacion {
 
     private String nombreE;
 
+    @Column(length = 1000)
     private String descripcionE;
 
     private String fechaInicio;
@@ -43,10 +46,12 @@ public class Educacion {
     private List<Habilidad> habilidades = new ArrayList<>();
 
     @Lob
+    @ValidFile(FileCategory.IMAGE)
     @Column(name = "archivo_imagen", nullable = true)
     private byte[] archivoImagen;
 
     @Lob
+    @ValidFile(FileCategory.PDF)
     @Column(name = "archivo_pdf", nullable = true)
     private byte[] archivoPdf;
 

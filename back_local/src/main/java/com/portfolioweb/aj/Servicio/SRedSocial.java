@@ -3,8 +3,9 @@ package com.portfolioweb.aj.Servicio;
 
 import com.portfolioweb.aj.Dto.dtoRedSocial;
 import com.portfolioweb.aj.Entidad.RedSocial;
+import com.portfolioweb.aj.Excepcion.ArchivoInvalidoException;
 import com.portfolioweb.aj.Repositorio.RSocialNetworks;
-import java.util.Base64;
+import com.portfolioweb.aj.Util.ArchivoUtil;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,7 +58,11 @@ public class SRedSocial {
         redSocial.setNombreRedS(dto.getNombreRedS());
         redSocial.setLink(dto.getLink());
         if (isCreate || StringUtils.isNotBlank(dto.getImg())) {
-            redSocial.setImg(decodeBase64(dto.getImg()));
+            ArchivoUtil.ResultadoArchivo resultado = ArchivoUtil.procesarImagen(dto.getImg());
+            if (resultado.tieneError()) {
+                throw new ArchivoInvalidoException(resultado.getMensajeError());
+            }
+            redSocial.setImg(resultado.getBytes());
         }
         return redSocial;
     }
@@ -66,23 +71,8 @@ public class SRedSocial {
         dtoRedSocial dto = new dtoRedSocial();
         dto.setId(redSocial.getId());
         dto.setNombreRedS(redSocial.getNombreRedS());
-        dto.setImg(encodeBase64(redSocial.getImg()));
+        dto.setImg(ArchivoUtil.codificarBase64(redSocial.getImg()));
         dto.setLink(redSocial.getLink());
         return dto;
-    }
-
-    private byte[] decodeBase64(String base64) {
-        if (StringUtils.isBlank(base64)) {
-            return null;
-        }
-        String data = base64.contains(",") ? base64.substring(base64.indexOf(",") + 1) : base64;
-        return Base64.getDecoder().decode(data.trim());
-    }
-
-    private String encodeBase64(byte[] data) {
-        if (data == null || data.length == 0) {
-            return null;
-        }
-        return Base64.getEncoder().encodeToString(data);
     }
 }
