@@ -4,9 +4,10 @@ import com.portfolioweb.aj.Dto.dtoHabilidad;
 import com.portfolioweb.aj.Dto.dtoTipoHabilidad;
 import com.portfolioweb.aj.Entidad.Habilidad;
 import com.portfolioweb.aj.Entidad.TipoHabilidad;
+import com.portfolioweb.aj.Excepcion.ArchivoInvalidoException;
 import com.portfolioweb.aj.Repositorio.RHabilidad;
 import com.portfolioweb.aj.Repositorio.RTipoHabilidad;
-import java.util.Base64;
+import com.portfolioweb.aj.Util.ArchivoUtil;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -68,7 +69,11 @@ public class SHabilidad {
         TipoHabilidad tipoHabilidad = rTipoHabilidad.findById(dto.getTipoHabilidadId()).orElse(null);
         habilidad.setTipoHabilidad(tipoHabilidad);
         if (isCreate || StringUtils.isNotBlank(dto.getImg())) {
-            habilidad.setImg(decodeBase64(dto.getImg()));
+            ArchivoUtil.ResultadoArchivo resultado = ArchivoUtil.procesarImagen(dto.getImg());
+            if (resultado.tieneError()) {
+                throw new ArchivoInvalidoException(resultado.getMensajeError());
+            }
+            habilidad.setImg(resultado.getBytes());
         }
         return habilidad;
     }
@@ -77,7 +82,7 @@ public class SHabilidad {
         dtoHabilidad dto = new dtoHabilidad();
         dto.setId(habilidad.getId());
         dto.setNombre(habilidad.getNombre());
-        dto.setImg(encodeBase64(habilidad.getImg()));
+        dto.setImg(ArchivoUtil.codificarBase64(habilidad.getImg()));
         if (habilidad.getTipoHabilidad() != null) {
             dto.setTipoHabilidadId(habilidad.getTipoHabilidad().getId());
             dto.setTipoHabilidad(toTipoDto(habilidad.getTipoHabilidad()));
@@ -87,20 +92,5 @@ public class SHabilidad {
 
     public dtoTipoHabilidad toTipoDto(TipoHabilidad tipoHabilidad) {
         return new dtoTipoHabilidad(tipoHabilidad.getId(), tipoHabilidad.getNombre());
-    }
-
-    private byte[] decodeBase64(String base64) {
-        if (StringUtils.isBlank(base64)) {
-            return null;
-        }
-        String data = base64.contains(",") ? base64.substring(base64.indexOf(",") + 1) : base64;
-        return Base64.getDecoder().decode(data.trim());
-    }
-
-    private String encodeBase64(byte[] data) {
-        if (data == null || data.length == 0) {
-            return null;
-        }
-        return Base64.getEncoder().encodeToString(data);
     }
 }

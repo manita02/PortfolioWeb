@@ -3,8 +3,9 @@ package com.portfolioweb.aj.Servicio;
 
 import com.portfolioweb.aj.Dto.dtoPersona;
 import com.portfolioweb.aj.Entidad.Persona;
+import com.portfolioweb.aj.Excepcion.ArchivoInvalidoException;
 import com.portfolioweb.aj.Repositorio.IPersonaRepositorio;
-import java.util.Base64;
+import com.portfolioweb.aj.Util.ArchivoUtil;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -59,7 +60,11 @@ public class ImpPersonaServicio{
        persona.setProfesion(dto.getProfesion());
        persona.setAcercaDe(dto.getAcercaDe());
        if (isCreate || StringUtils.isNotBlank(dto.getImg())) {
-           persona.setImg(decodeBase64(dto.getImg()));
+           ArchivoUtil.ResultadoArchivo resultado = ArchivoUtil.procesarImagen(dto.getImg());
+           if (resultado.tieneError()) {
+               throw new ArchivoInvalidoException(resultado.getMensajeError());
+           }
+           persona.setImg(resultado.getBytes());
        }
        return persona;
    }
@@ -69,24 +74,9 @@ public class ImpPersonaServicio{
        dto.setId(persona.getId());
        dto.setNombre(persona.getNombre());
        dto.setApellido(persona.getApellido());
-       dto.setImg(encodeBase64(persona.getImg()));
+       dto.setImg(ArchivoUtil.codificarBase64(persona.getImg()));
        dto.setProfesion(persona.getProfesion());
        dto.setAcercaDe(persona.getAcercaDe());
        return dto;
-   }
-
-   private byte[] decodeBase64(String base64) {
-       if (StringUtils.isBlank(base64)) {
-           return null;
-       }
-       String data = base64.contains(",") ? base64.substring(base64.indexOf(",") + 1) : base64;
-       return Base64.getDecoder().decode(data.trim());
-   }
-
-   private String encodeBase64(byte[] data) {
-       if (data == null || data.length == 0) {
-           return null;
-       }
-       return Base64.getEncoder().encodeToString(data);
    }
 }
