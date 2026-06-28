@@ -22,4 +22,9 @@ public class ManejadorExcepcionesArchivo {
                 HttpStatus.PAYLOAD_TOO_LARGE
         );
     }
+
+    @ExceptionHandler(BackupSqlException.class)
+    public ResponseEntity<Mensaje> manejarBackupSql(BackupSqlException exception) {
+        return new ResponseEntity<>(new Mensaje(exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
 }
