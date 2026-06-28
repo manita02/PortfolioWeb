@@ -1,5 +1,7 @@
 package com.portfolioweb.aj.Entidad;
 
+import com.portfolioweb.aj.Validacion.FileCategory;
+import com.portfolioweb.aj.Validacion.ValidFile;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,9 +23,11 @@ public class Organizacion {
 
     private String ubicacion;
 
+    @Column(length = 2048)
     private String urlWeb;
 
     @Lob
+    @ValidFile(FileCategory.IMAGE)
     @Column(name = "logo_img", nullable = true)
     private byte[] logoImg;
 

@@ -1,6 +1,8 @@
 
 package com.portfolioweb.aj.Entidad;
 
+import com.portfolioweb.aj.Validacion.FileCategory;
+import com.portfolioweb.aj.Validacion.ValidFile;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,16 +15,17 @@ public class RedSocial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_red")
-    private int id; 
+    private int id;
     private String nombreRedS;
 
     @Lob
+    @ValidFile(FileCategory.IMAGE)
     @Column(name = "img", nullable = false)
     private byte[] img;
 
-    private String link; 
-    
-    //constructores
+    @Column(length = 2048)
+    private String link;
+
     public RedSocial() {
     }
 
@@ -32,7 +35,6 @@ public class RedSocial {
         this.link = link;
     }
 
-    //getters y setters
     public int getId() {
         return id;
     }
@@ -64,7 +66,5 @@ public class RedSocial {
     public void setLink(String link) {
         this.link = link;
     }
-    
-    
-    
+
 }
