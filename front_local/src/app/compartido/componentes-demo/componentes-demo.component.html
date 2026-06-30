@@ -1,0 +1,122 @@
+<div class="container py-4">
+  <h1 class="mb-4">Sandbox — Componentes compartidos</h1>
+  <p class="text-muted">Ruta de desarrollo: <code>/dev/componentes</code></p>
+
+  <div class="alert alert-info">
+    <strong>Estado API:</strong>
+    Organizaciones: {{ apiStatus.organizaciones }} |
+    Tipos empleo: {{ apiStatus.tiposEmpleo }} |
+    Tipos ubicación: {{ apiStatus.tiposUbicacion }} |
+    Habilidades: {{ apiStatus.habilidades }} |
+    Tipos educación: {{ apiStatus.tiposEducacion }} |
+    Tipos habilidad: {{ apiStatus.tiposHabilidad }}
+  </div>
+
+  <section class="card mb-4">
+    <div class="card-header">Base64ImageComponent</div>
+    <div class="card-body d-flex gap-4">
+      <div>
+        <p class="small text-muted">Con base64 del API (sin prefijo)</p>
+        <app-base64-image [src]="mockImageBase64" alt="Demo" maxHeight="80px"></app-base64-image>
+      </div>
+      <div>
+        <p class="small text-muted">Sin imagen</p>
+        <app-base64-image [src]="null" alt="Vacío"></app-base64-image>
+      </div>
+    </div>
+  </section>
+
+  <section class="card mb-4">
+    <div class="card-header">ImageUploadComponent</div>
+    <div class="card-body">
+      <app-image-upload [(value)]="uploadValue" label="Imagen de prueba"></app-image-upload>
+      <p class="small text-muted">Valor emitido: {{ uploadValue ? (uploadValue.substring(0, 40) + '...') : '(vacío)' }}</p>
+    </div>
+  </section>
+
+  <section class="card mb-4">
+    <div class="card-header">FileUploadComponent</div>
+    <div class="card-body row">
+      <div class="col-md-6">
+        <app-file-upload mode="image" label="Imagen" [(value)]="fileUploadImage"></app-file-upload>
+      </div>
+      <div class="col-md-6">
+        <app-file-upload mode="pdf" label="Certificado PDF" [(value)]="fileUploadPdf"></app-file-upload>
+      </div>
+    </div>
+  </section>
+
+  <section class="card mb-4">
+    <div class="card-header">PeriodoInput / PeriodoDisplay</div>
+    <div class="card-body">
+      <app-periodo-input
+        [fechaInicio]="fechaInicio"
+        [fechaFin]="fechaFin"
+        [esActual]="esActual"
+        (fechaInicioChange)="fechaInicio = $event"
+        (fechaFinChange)="fechaFin = $event"
+        (esActualChange)="esActual = $event"
+      ></app-periodo-input>
+      <app-periodo-display
+        [fechaInicio]="fechaInicio"
+        [fechaFin]="fechaFin"
+        [esActual]="esActual"
+      ></app-periodo-display>
+    </div>
+  </section>
+
+  <section class="card mb-4">
+    <div class="card-header">CatalogSelectComponent</div>
+    <div class="card-body row">
+      <div class="col-md-6">
+        <app-catalog-select
+          label="Tipo de empleo (API)"
+          [options]="tiposEmpleo"
+          [(selectedId)]="selectedTipoEmpleoId"
+        ></app-catalog-select>
+      </div>
+      <div class="col-md-6">
+        <app-catalog-select
+          label="Tipo de ubicación (API)"
+          [options]="tiposUbicacion"
+          [selectedId]="null"
+        ></app-catalog-select>
+      </div>
+    </div>
+  </section>
+
+  <section class="card mb-4">
+    <div class="card-header">SkillChips / SkillMultiSelect</div>
+    <div class="card-body">
+      <p class="small text-muted">Mock</p>
+      <app-skill-chips [habilidades]="mockSkills" [maxVisible]="2"></app-skill-chips>
+      <hr />
+      <app-skill-multi-select
+        [options]="habilidades.length ? habilidades : mockSkills"
+        [(selectedIds)]="selectedSkillIds"
+      ></app-skill-multi-select>
+      <p class="small mt-2">IDs seleccionados: {{ selectedSkillIds | json }}</p>
+    </div>
+  </section>
+
+  <section class="card mb-4">
+    <div class="card-header">OrgBadge / OrgSelect</div>
+    <div class="card-body">
+      <app-org-badge [organizacion]="mockOrg" size="md"></app-org-badge>
+      <hr />
+      <app-org-select
+        [organizaciones]="organizaciones.length ? organizaciones : [mockOrg]"
+        [(selectedId)]="selectedOrgId"
+        [allowCreate]="true"
+        (createRequested)="onCreateOrg()"
+      ></app-org-select>
+    </div>
+  </section>
+
+  <section class="card mb-4">
+    <div class="card-header">PdfLinkComponent</div>
+    <div class="card-body">
+      <app-pdf-link [base64]="mockPdfBase64"></app-pdf-link>
+    </div>
+  </section>
+</div>
