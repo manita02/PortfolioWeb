@@ -1,10 +1,23 @@
-
-img{
+.banner-card .banner-slide-img,
+.banner-card .base64-image-wrapper {
     width: 100%;
     height: 35em;
-    background-size: cover;
-    background-position: center;
-    
+    max-height: none;
+    display: block;
+}
+
+.banner-card .base64-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+img.banner-slide-img {
+    width: 100%;
+    height: 35em;
+    object-fit: cover;
+    object-position: center;
 }
 
 .abajo{
@@ -27,9 +40,11 @@ h1{
 
 /*----------VISTA CELULAR------------*/
 @media (max-width: 575px) {
-    img{
+    .banner-card .banner-slide-img,
+    .banner-card .base64-image-wrapper,
+    img.banner-slide-img {
         width: 100%;
-        height: 20em;      
+        height: 20em;
     }
 
     .abajo{
