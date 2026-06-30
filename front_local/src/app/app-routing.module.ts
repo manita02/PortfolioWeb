@@ -14,6 +14,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { EditproyectoComponent } from './componentes/proyecto/editproyecto.component';
 import { NewproyectoComponent } from './componentes/proyecto/newproyecto.component';
+import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
 
 const routes: Routes = [
   {path:'',component: HomeComponent},
@@ -29,9 +30,8 @@ const routes: Routes = [
   {path: 'edithabilidad/:id', component: EdithabilidadComponent},
   {path: 'editbanner/:id', component: EditbannerComponent},
   {path: 'nuevaredsocial', component: NewredComponent},
-  {path: 'editred/:id', component: EditredComponent}
-  
-
+  {path: 'editred/:id', component: EditredComponent},
+  {path: 'dev/componentes', component: ComponentesDemoComponent}
 ];
 
 @NgModule({

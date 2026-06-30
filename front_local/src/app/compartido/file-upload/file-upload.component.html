@@ -1,0 +1,40 @@
+<div class="mb-3">
+  <label class="form-label">
+    {{ label }}
+    <span *ngIf="required" class="text-danger">*</span>
+  </label>
+  <input
+    type="file"
+    class="form-control"
+    [accept]="acceptTypes"
+    (change)="onFileSelected($event)"
+  />
+  <div *ngIf="validationError" class="text-danger small mt-1">{{ validationError }}</div>
+
+  <div *ngIf="value && mode === 'image'" class="mt-2">
+    <app-base64-image [src]="value" [alt]="label" maxHeight="150px"></app-base64-image>
+    <button type="button" class="btn btn-sm btn-outline-secondary mt-2" (click)="clearFile()">
+      Quitar archivo
+    </button>
+  </div>
+
+  <div *ngIf="value && mode === 'pdf'" class="mt-2">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-file-earmark-pdf text-danger"></i>
+      <span>{{ fileName || 'documento.pdf' }}</span>
+      <span class="text-muted small" *ngIf="fileSizeLabel">({{ fileSizeLabel }})</span>
+    </div>
+    <a
+      *ngIf="pdfDataUri"
+      [href]="pdfDataUri"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-sm btn-outline-primary mt-2 me-2"
+    >
+      Ver / Descargar
+    </a>
+    <button type="button" class="btn btn-sm btn-outline-secondary mt-2" (click)="clearFile()">
+      Quitar archivo
+    </button>
+  </div>
+</div>

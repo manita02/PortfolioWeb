@@ -1,0 +1,43 @@
+<div class="periodo-input mb-3">
+  <div class="row g-2">
+    <div class="col-md-4">
+      <label class="form-label">
+        Fecha inicio
+        <span *ngIf="required" class="text-danger">*</span>
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="YYYY-MM o YYYY"
+        [ngModel]="fechaInicio"
+        (ngModelChange)="onFechaInicioChange($event)"
+      />
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Fecha fin</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="YYYY-MM o YYYY"
+        [ngModel]="fechaFin || ''"
+        (ngModelChange)="onFechaFinChange($event)"
+        [disabled]="esActual"
+      />
+    </div>
+    <div class="col-md-4 d-flex align-items-end" *ngIf="showEsActual">
+      <div class="form-check mb-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="esActualCheck"
+          [ngModel]="esActual"
+          (ngModelChange)="onEsActualChange($event)"
+        />
+        <label class="form-check-label" for="esActualCheck">
+          Trabajo/estudio actual
+        </label>
+      </div>
+    </div>
+  </div>
+  <small class="text-muted" *ngIf="preview">Vista previa: {{ preview }}</small>
+</div>

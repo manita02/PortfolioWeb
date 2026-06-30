@@ -1,0 +1,12 @@
+.base64-image-wrapper {
+  display: inline-block;
+}
+
+.placeholder {
+  min-width: 80px;
+  min-height: 60px;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+}

@@ -1,0 +1,10 @@
+<a
+  *ngIf="dataUri"
+  [href]="dataUri"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="btn btn-sm btn-outline-danger"
+  download="certificado.pdf"
+>
+  <i class="bi bi-file-earmark-pdf me-1"></i>{{ label }}
+</a>

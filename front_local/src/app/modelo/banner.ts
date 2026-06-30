@@ -1,11 +1,6 @@
-export class Banner {
-    id?: number; 
-    titulo: string; 
-    img: string; 
-
-    constructor(titulo: string, img: string){
-        this.titulo = titulo;  
-        this.img = img; 
-        
-    }
+/** Alineado a dtoBanner — img es base64 (con o sin prefijo data URI). */
+export interface Banner {
+  id?: number;
+  titulo: string;
+  img: string;
 }
