@@ -1,0 +1,16 @@
+<div class="skill-multi-select border rounded p-2">
+  <div *ngFor="let group of groups" class="mb-2">
+    <div class="fw-semibold small text-muted" *ngIf="groups.length > 1">{{ group.nombre }}</div>
+    <div *ngFor="let h of group.habilidades" class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        [id]="'skill-' + h.id"
+        [checked]="isSelected(h.id)"
+        (change)="toggle(h.id, $any($event.target).checked)"
+      />
+      <label class="form-check-label" [for]="'skill-' + h.id">{{ h.nombre }}</label>
+    </div>
+  </div>
+  <div *ngIf="options.length === 0" class="text-muted small">No hay habilidades disponibles.</div>
+</div>

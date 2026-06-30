@@ -1,0 +1,4 @@
+.skill-multi-select {
+  max-height: 200px;
+  overflow-y: auto;
+}

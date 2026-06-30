@@ -1,0 +1,21 @@
+<div class="mb-3">
+  <label class="form-label">
+    {{ label }}
+    <span *ngIf="required" class="text-danger">*</span>
+  </label>
+  <input
+    type="file"
+    class="form-control"
+    accept="image/png,image/jpeg,image/jpg"
+    (change)="onFileSelected($event)"
+  />
+  <div *ngIf="loading" class="text-white-50 small mt-1">Cargando imagen…</div>
+  <div *ngIf="validationError" class="text-danger small mt-1">{{ validationError }}</div>
+
+  <div *ngIf="value" class="mt-2">
+    <app-base64-image [src]="value" [alt]="label" maxHeight="150px"></app-base64-image>
+    <button type="button" class="btn btn-sm btn-outline-secondary mt-2" (click)="clearImage()">
+      Quitar imagen
+    </button>
+  </div>
+</div>

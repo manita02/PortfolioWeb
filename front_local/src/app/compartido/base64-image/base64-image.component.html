@@ -1,0 +1,14 @@
+<div class="base64-image-wrapper" [style.max-height]="maxHeight">
+  <img
+    *ngIf="displaySrc"
+    [src]="displaySrc"
+    [alt]="alt"
+    [class]="cssClass"
+    [style.max-height]="maxHeight"
+    class="img-fluid"
+  />
+  <div *ngIf="!displaySrc" class="placeholder text-muted d-flex align-items-center justify-content-center">
+    <i class="bi bi-image me-1"></i>
+    <span>Sin imagen</span>
+  </div>
+</div>
