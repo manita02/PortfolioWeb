@@ -29,6 +29,8 @@ import { EdithabilidadComponent } from './componentes/hard-soft-skills/edithabil
 import { EditbannerComponent } from './componentes/banner/editbanner.component';
 import { NewredComponent } from './componentes/aplogo/newred.component';
 import { EditredComponent } from './componentes/aplogo/editred.component';
+import { SharedModule } from './compartido/shared.module';
+import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
 
 
 
@@ -62,18 +64,15 @@ import { EditredComponent } from './componentes/aplogo/editred.component';
     EditbannerComponent,
     NewredComponent,
     EditredComponent,
-    
-    
-  
-   
-    
+    ComponentesDemoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgCircleProgressModule.forRoot({}),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [
     interceptorProvider
