@@ -10,7 +10,7 @@ import { PersonaService } from 'src/app/servicio/persona.service';
 })
 export class InfopComponent implements OnInit {
 
-  persona: Persona = null;
+  persona: Persona | null = null;
   constructor(private personaS: PersonaService, private activatedRouter: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {

@@ -1,38 +1,34 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Persona } from '../modelo/persona';
-/*import { persona } from '../modelo/persona.modelo';*/
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonaService {
+  private readonly url = `${environment.apiUrl}/persona/`;
 
-  URL = 'http://localhost:8080/persona/'; 
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) { }
-
-  public lista(): Observable<Persona[]>{
-    return this.httpClient.get<Persona[]>(this.URL + 'lista'); 
+  public lista(): Observable<Persona[]> {
+    return this.httpClient.get<Persona[]>(this.url + 'lista');
   }
 
-  public detail(id: number): Observable<Persona>{
-    return this.httpClient.get<Persona>(this.URL + `detail/${id}`);
+  public detail(id: number): Observable<Persona> {
+    return this.httpClient.get<Persona>(this.url + `detail/${id}`);
   }
 
-  public save(persona: Persona): Observable<any>{
-    return this.httpClient.post<any>(this.URL + 'create', persona); 
+  public save(persona: Persona): Observable<unknown> {
+    return this.httpClient.post(this.url + 'create', persona);
   }
 
-  public update (id: number, persona: Persona): Observable<any>{
-    return this.httpClient.put<any>(this.URL + `update/${id}`, persona); 
+  public update(id: number, persona: Persona): Observable<unknown> {
+    return this.httpClient.put(this.url + `update/${id}`, persona);
   }
 
-  public delete(id: number): Observable<any>{
-    return this.httpClient.delete<any>(this.URL + `delete/${id}`); 
+  public delete(id: number): Observable<unknown> {
+    return this.httpClient.delete(this.url + `delete/${id}`);
   }
-
-
 }

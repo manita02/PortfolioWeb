@@ -30,6 +30,11 @@ export class AcercaDeComponent implements OnInit {
     )
   }
 
+  /** Compatibilidad con registros antiguos que guardaban URL externa. */
+  isUrl(img: string | undefined): boolean {
+    return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+  }
+
   delete(id?: number) {
     if (id != undefined) {
       this.personaS.delete(id).subscribe(
