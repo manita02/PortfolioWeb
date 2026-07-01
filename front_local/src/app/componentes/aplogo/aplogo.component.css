@@ -19,9 +19,25 @@
     width: 10em; 
 }
 
-img{
+.red-social-icon,
+.red-social-link .base64-image-wrapper img {
     width: 3em;
+    height: 3em;
+    object-fit: contain;
     padding-right: 0.5em;
+}
+
+.red-social-link .base64-image-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 0.5em;
+}
+
+.red-social-link .base64-image-wrapper .placeholder {
+    width: 3em;
+    height: 3em;
+    min-height: 3em;
+    font-size: 0.65rem;
 }
 
 
