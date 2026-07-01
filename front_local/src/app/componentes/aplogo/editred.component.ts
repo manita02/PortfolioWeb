@@ -10,7 +10,7 @@ import { RedsocialService } from 'src/app/servicio/redsocial.service';
 })
 export class EditredComponent implements OnInit {
 
-  redsocial: Redsocial = null;
+  redsocial: Redsocial | null = null;
   constructor(private redSocialS: RedsocialService, private activatedRouter: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
