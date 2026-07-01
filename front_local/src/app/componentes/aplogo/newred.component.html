@@ -5,7 +5,6 @@
                 <div class="card bg-dark text-white" style="border-radius: 1rem; ">
                     <div class="card-body p-5 text-center">
 
-
                         <div class="container mb-md-5 mt-md-4 pb-5">
                             <div class="row">
                                 <div>
@@ -14,42 +13,37 @@
                                         <div class="form-group form-outline form-white mb-4">
                                             <label for="nombreRedS" class="form-label">Nombre</label>
                                             <input type="text" class="form-control form-control-lg" id="nombreRedS"
-                                                name="nombreRedS" [(ngModel)]="nombreRedS" required>
-
+                                                name="nombreRedS" [(ngModel)]="redsocial.nombreRedS" required>
                                         </div>
-
 
                                         <div class="form-group form-outline form-white mb-4">
-                                            <label for="link" class="form-label">Copie la dirección URL que redirige a
-                                                su red social</label>
+                                            <label for="link" class="form-label">URL de la red social</label>
                                             <input type="url" class="form-control form-control-lg" id="link" name="link"
-                                                [(ngModel)]="link" required>
+                                                [(ngModel)]="redsocial.link" required>
                                         </div>
 
-                                        <div class="form-outline form-white mb-4">
-                                            <label for="img" class="form-label">URL de la Imagen que represente su Red
-                                                Social (se recomienda en formato PNG)</label>
-                                            <input class="form-control form-control-lg" type="url" id="img" name="img"
-                                                [(ngModel)]="img" required>
+                                        <div class="form-group form-outline form-white mb-4 text-start">
+                                            <app-image-upload
+                                                [(value)]="redsocial.img"
+                                                label="Ícono de la red social"
+                                                [required]="true"
+                                            ></app-image-upload>
+                                            <small class="text-white-50">PNG o JPEG, máximo 2 MB.</small>
                                         </div>
 
-
-                                        <button class="btn btn-outline-light btn-lg px-5 boton">
+                                        <button class="btn btn-outline-light btn-lg px-5 boton"
+                                            [disabled]="!f.valid || !redsocial.img">
                                             Agregar Red Social
                                         </button>
 
-
-                                        <button class="btn btn-outline-primary btn-lg px-5 boton" routerLink="/">
+                                        <button class="btn btn-outline-primary btn-lg px-5 boton" type="button" routerLink="/">
                                             Volver
                                         </button>
-
 
                                     </form>
                                 </div>
                             </div>
                         </div>
-
-
 
                     </div>
                 </div>

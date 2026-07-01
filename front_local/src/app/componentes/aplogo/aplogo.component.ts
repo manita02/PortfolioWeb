@@ -34,6 +34,10 @@ export class APlogoComponent implements OnInit {
 
   }
 
+  isUrl(img: string | undefined): boolean {
+    return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+  }
+
   onLogOut(): void {
     this.tokenService.logOut();
     window.location.reload();

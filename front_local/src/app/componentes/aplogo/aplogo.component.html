@@ -1,31 +1,51 @@
 <div class="row">
-    
-    
+
+
     <div class="contenedor">
         <div class="logoAP">
-            
+
             <dfn title="#Yo Programo"><a href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa" target="_blank"><img src="../../../assets/Logo ArgentinaP.png" id="APlogo" alt="#Yo programo"></a></dfn>
-       
+
         </div>
 
 
-        
 
-        
-    
+
+
         <div class="redSocial">
             <button type="button" class="btn btn-dark mas" routerLink="/nuevaredsocial" *ngIf="isLogged">
                 <i class="bi bi-plus-circle-fill mas"></i>
             </button>
-            
+
             <div>
-                 
-                <a *ngFor="let Redsocial of redsocial" href="{{Redsocial.link}}" target="_blank"><img src="{{Redsocial.img}}" alt=""></a>
-                
+
+                <a
+                    *ngFor="let Redsocial of redsocial"
+                    [href]="Redsocial.link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="red-social-link"
+                    [title]="Redsocial.nombreRedS"
+                >
+                    <img
+                        *ngIf="isUrl(Redsocial.img)"
+                        [src]="Redsocial.img"
+                        [alt]="Redsocial.nombreRedS"
+                        class="red-social-icon"
+                    />
+                    <app-base64-image
+                        *ngIf="!isUrl(Redsocial.img)"
+                        [src]="Redsocial.img"
+                        [alt]="Redsocial.nombreRedS"
+                        cssClass="red-social-icon"
+                        maxHeight="3em"
+                    ></app-base64-image>
+                </a>
+
                 <button type="button" class="btn btn-outline-light" (click)="login()" *ngIf="!isLogged" >Ingresar</button>
                 <button type="button" class="btn btn-outline-light" (click)="onLogOut()" *ngIf="isLogged" >Cerrar Sesión</button>
-                
-                
+
+
             </div>
 
 
@@ -43,21 +63,7 @@
 
         </div>
 
-    
     </div>
 
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
