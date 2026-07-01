@@ -1,10 +1,21 @@
 <div class="row">
     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" *ngFor="let Persona of persona">
-        <img src="{{Persona.img}}" id="perfilphoto" class="img-fluid" alt="">
-
+        <div id="perfilphoto" class="perfil-photo-wrap">
+            <img
+                *ngIf="isUrl(Persona.img)"
+                [src]="Persona.img"
+                class="perfil-photo-img"
+                [alt]="Persona.nombre + ' ' + Persona.apellido"
+            />
+            <app-base64-image
+                *ngIf="!isUrl(Persona.img)"
+                [src]="Persona.img"
+                [alt]="Persona.nombre + ' ' + Persona.apellido"
+                cssClass="perfil-photo-img"
+                maxHeight="100%"
+            ></app-base64-image>
+        </div>
     </div>
-
-
 
     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" *ngFor="let Persona of persona">
 
