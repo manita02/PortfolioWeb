@@ -7,7 +7,6 @@ import { APlogoComponent } from './componentes/aplogo/aplogo.component';
 import { BannerComponent } from './componentes/banner/banner.component';
 import { AcercaDeComponent } from './componentes/acerca-de/acerca-de.component';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
-import { NgCircleProgressModule } from 'ng-circle-progress';
 import { HardSoftSkillsComponent } from './componentes/hard-soft-skills/hard-soft-skills.component';
 import { ProyectoComponent } from './componentes/proyecto/proyecto.component';
 import { FooterComponent } from './componentes/footer/footer.component';
@@ -69,7 +68,6 @@ import { ComponentesDemoComponent } from './compartido/componentes-demo/componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgCircleProgressModule.forRoot({}),
     HttpClientModule,
     FormsModule,
     SharedModule
