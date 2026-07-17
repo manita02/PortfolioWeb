@@ -16,6 +16,8 @@ export class PeriodoInputComponent {
   @Input() esActual = false;
   @Input() showEsActual = true;
   @Input() required = false;
+  @Input() placeholder = 'MM/yyyy';
+  checkboxId = `esActualCheck-${Math.random().toString(36).slice(2, 9)}`;
 
   @Output() fechaInicioChange = new EventEmitter<string>();
   @Output() fechaFinChange = new EventEmitter<string | null>();
