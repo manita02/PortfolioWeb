@@ -7,7 +7,6 @@ import { TokenService } from 'src/app/servicio/token.service';
 @Component({
   selector: 'app-aplogo',
   templateUrl: './aplogo.component.html',
-  styleUrls: ['./aplogo.component.css']
 })
 
 

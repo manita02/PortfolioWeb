@@ -1,7 +1,0 @@
-.hero-banner__img {
-  width: 100%;
-  height: var(--banner-height);
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}

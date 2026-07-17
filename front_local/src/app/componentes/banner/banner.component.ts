@@ -6,7 +6,6 @@ import { TokenService } from 'src/app/servicio/token.service';
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
-  styleUrls: ['./banner.component.css']
 })
 export class BannerComponent implements OnInit {
 
