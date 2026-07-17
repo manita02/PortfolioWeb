@@ -1,15 +1,2 @@
-export class Educacion {
-    id?: number; 
-    nombreE: string; 
-    descripcionE: string; 
-    img: string; 
-    anocomienzo: number; 
 
-    constructor(nombreE: string, descripcionE: string, img: string, anocomienzo: number){
-        this.nombreE = nombreE; 
-        this.descripcionE = descripcionE; 
-        this.img = img; 
-        this.anocomienzo = anocomienzo;
-    }
-
-}
+export type { EducacionDto as Educacion } from './educacion.dto';
