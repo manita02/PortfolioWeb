@@ -1,56 +1,62 @@
-<div class="row">
-    <h1 class="display-4">Experiencia Laboral</h1>
-
-    <div class="col-lg-2">
-        <button type="button" class="btn btn-dark agrego" routerLink="/nuevaexp" *ngIf="isLogged">
-            <i class="bi bi-plus-circle-fill mas"></i>
-        </button>
-    </div>
-</div>
-
-<div class="row exp-list">
-    <div
-        class="card text-start col-sm-12 col-md-6 col-lg-4 carta color"
-        *ngFor="let exp of expe"
+<section class="section section--alt">
+  <div class="section__header">
+    <h2 class="section__title">Experiencia Laboral</h2>
+    <button
+      type="button"
+      class="btn-pf btn-pf--add"
+      routerLink="/nuevaexp"
+      *ngIf="isLogged"
+      data-tip="Agregar experiencia"
+      data-tip-align="end"
+      aria-label="Agregar experiencia"
     >
-        <div class="card-body color">
-            <div class="mb-2" *ngIf="exp.organizacion">
-                <app-org-badge [organizacion]="exp.organizacion" size="md"></app-org-badge>
-            </div>
+      <i class="bi bi-plus-lg"></i>
+    </button>
+  </div>
 
-            <h4 class="card-title">{{ exp.nombreE }}</h4>
-
-            <app-periodo-display
-                [fechaInicio]="exp.fechaInicio"
-                [fechaFin]="exp.fechaFin"
-                [esActual]="exp.esActual"
-            ></app-periodo-display>
-
-            <div class="mt-2 mb-2">
-                <span class="badge bg-secondary me-1" *ngIf="exp.tipoEmpleo">{{ exp.tipoEmpleo.nombre }}</span>
-                <span class="badge bg-info text-dark" *ngIf="exp.tipoUbicacion">{{ exp.tipoUbicacion.nombre }}</span>
-            </div>
-
-            <p class="card-text">{{ exp.descripcionE }}</p>
-
-            <app-skill-chips
-                *ngIf="exp.habilidades?.length"
-                [habilidades]="exp.habilidades"
-                [maxVisible]="4"
-            ></app-skill-chips>
-
-            <div class="mt-3" *ngIf="isLogged">
-                <button class="btn btn-secondary boton" routerLink="/editexp/{{ exp.id }}">
-                    <i class="bi bi-pen-fill"></i>
-                </button>
-                <button class="btn btn-danger boton" (click)="delete(exp.id)">
-                    <i class="bi bi-trash3-fill"></i>
-                </button>
-            </div>
+  <div class="section__grid" *ngIf="expe.length > 0">
+    <article class="card-portfolio" *ngFor="let exp of expe">
+      <div class="card-portfolio__body">
+        <div class="mb-2" *ngIf="exp.organizacion">
+          <app-org-badge [organizacion]="exp.organizacion" size="md"></app-org-badge>
         </div>
-    </div>
-</div>
 
-<div *ngIf="expe.length === 0" class="text-muted py-3 px-3">
+        <h3 class="card-portfolio__title">{{ exp.nombreE }}</h3>
+
+        <app-periodo-display
+          [fechaInicio]="exp.fechaInicio"
+          [fechaFin]="exp.fechaFin"
+          [esActual]="exp.esActual"
+        ></app-periodo-display>
+
+        <div class="badge-pf-group mt-2 mb-2">
+          <span class="badge-pf badge-pf--secondary" *ngIf="exp.tipoEmpleo">{{ exp.tipoEmpleo.nombre }}</span>
+          <span class="badge-pf badge-pf--accent" *ngIf="exp.tipoUbicacion">
+            {{ exp.tipoUbicacion.nombre }}
+          </span>
+        </div>
+
+        <p class="card-portfolio__text">{{ exp.descripcionE }}</p>
+
+        <app-skill-chips
+          *ngIf="exp.habilidades?.length"
+          [habilidades]="exp.habilidades"
+          [maxVisible]="4"
+        ></app-skill-chips>
+
+        <div class="admin-actions" *ngIf="isLogged">
+          <button class="btn-pf btn-pf--edit btn-pf--icon-sm" routerLink="/editexp/{{ exp.id }}" data-tip="Editar" aria-label="Editar">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn-pf btn-pf--delete btn-pf--icon-sm" (click)="delete(exp.id)" data-tip="Eliminar" aria-label="Eliminar">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div *ngIf="expe.length === 0" class="empty-state">
     No hay experiencias cargadas.
-</div>
+  </div>
+</section>
