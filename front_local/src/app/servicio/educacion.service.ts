@@ -1,34 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Educacion } from '../modelo/educacion';
+import { environment } from '../../environments/environment';
+import { EducacionDto } from '../modelo/educacion.dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EducacionService {
-  URL = 'http://localhost:8080/educacion/'; 
+  private readonly url = `${environment.apiUrl}/educacion/`;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
-  public lista(): Observable<Educacion[]>{
-    return this.httpClient.get<Educacion[]>(this.URL + 'lista'); 
+  public lista(): Observable<EducacionDto[]> {
+    return this.httpClient.get<EducacionDto[]>(this.url + 'lista');
   }
 
-  public detail(id: number): Observable<Educacion>{
-    return this.httpClient.get<Educacion>(this.URL + `detail/${id}`);
+  public detail(id: number): Observable<EducacionDto> {
+    return this.httpClient.get<EducacionDto>(this.url + `detail/${id}`);
   }
 
-  public save(educacion: Educacion): Observable<any>{
-    return this.httpClient.post<any>(this.URL + 'create', educacion); 
+  public save(educacion: EducacionDto): Observable<EducacionDto> {
+    return this.httpClient.post<EducacionDto>(this.url + 'create', educacion);
   }
 
-  public update (id: number, educacion: Educacion): Observable<any>{
-    return this.httpClient.put<any>(this.URL + `update/${id}`, educacion); 
+  public update(id: number, educacion: EducacionDto): Observable<EducacionDto> {
+    return this.httpClient.put<EducacionDto>(this.url + `update/${id}`, educacion);
   }
 
-  public delete(id: number): Observable<any>{
-    return this.httpClient.delete<any>(this.URL + `delete/${id}`); 
+  public delete(id: number): Observable<unknown> {
+    return this.httpClient.delete(this.url + `delete/${id}`);
   }
-
 }

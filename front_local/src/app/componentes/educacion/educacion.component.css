@@ -1,8 +1,5 @@
-
 .row{
-    
     background-color:#72FFFF;
-    
 }
 
 h1{
@@ -15,10 +12,13 @@ h1{
 
 div{
     background-color:#72FFFF;
-  
 }
 
-.carta{   
+.edu-list {
+    padding: 0 1rem 1rem;
+}
+
+.carta{
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
@@ -28,7 +28,7 @@ div{
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
     cursor: default;
     transition: all 400ms ease;
-
+    max-width: 22rem;
 }
 
 .carta:hover{
@@ -44,27 +44,17 @@ div{
     margin-left: 10px;
 }
 
-img{
-    width: 16rem;
-    height: 18rem;
+.edu-cert-img,
+.edu-image .base64-image-wrapper img {
+    width: 100%;
+    max-height: 160px;
+    object-fit: contain;
 }
 
 .mas {
     font-size: 2em;
-  }
+}
 
- p{
+p{
     margin-top: 5px;
 }
-
-
-@media (max-width: 700px) { 
-    img{
-        width: 13rem;
-        height: 13rem;
-    }
-
-}
-
-
-

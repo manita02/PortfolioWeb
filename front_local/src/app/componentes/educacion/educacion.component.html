@@ -5,62 +5,70 @@
         <button type="button" class="btn btn-dark agrego" routerLink="/nuevaedu" *ngIf="isLogged">
             <i class="bi bi-plus-circle-fill mas"></i>
         </button>
-
     </div>
-
 </div>
 
-
-<div class="row">
-    <div class="card text-center col-sm-4 col-md-4 col-lg-4 carta color" style="width: 18rem;"
-        *ngFor="let Educacion of educacion">
-        <a href="{{Educacion.img}}" target="blank"><img src="{{Educacion.img}}" class="card-img-top" alt="..."></a>
+<div class="row edu-list">
+    <div
+        class="card text-start col-sm-12 col-md-6 col-lg-4 carta color"
+        *ngFor="let edu of educacion"
+    >
         <div class="card-body color">
-            <h4 class="card-title">{{Educacion.nombreE}}</h4>
-            <i>
-                <h5 class="card-text">Inicio: {{Educacion.anocomienzo}}</h5>
-            </i>
-            <p class="card-text">{{Educacion.descripcionE}}</p>
+            <div class="mb-2" *ngIf="edu.organizacion">
+                <app-org-badge [organizacion]="edu.organizacion" size="md"></app-org-badge>
+            </div>
 
+            <div class="edu-image mb-2" *ngIf="edu.archivoImagen">
+                <img
+                    *ngIf="isUrl(edu.archivoImagen)"
+                    [src]="edu.archivoImagen"
+                    [alt]="edu.nombreE"
+                    class="edu-cert-img"
+                />
+                <app-base64-image
+                    *ngIf="!isUrl(edu.archivoImagen)"
+                    [src]="edu.archivoImagen"
+                    [alt]="edu.nombreE"
+                    cssClass="edu-cert-img"
+                    maxHeight="160px"
+                ></app-base64-image>
+            </div>
 
-            <button *ngIf="isLogged" class="btn btn-secondary boton" routerLink="/editedu/{{Educacion.id}}">
-                <i class="bi bi-pen-fill"></i>
-            </button>
+            <h4 class="card-title">{{ edu.nombreE }}</h4>
 
+            <app-periodo-display
+                [fechaInicio]="edu.fechaInicio"
+                [fechaFin]="edu.fechaFin"
+            ></app-periodo-display>
 
-            <button *ngIf="isLogged" class="btn btn-danger boton" (click)="delete(Educacion.id)">
-                <i class="bi bi-trash3-fill"></i></button>
+            <div class="mt-2 mb-2" *ngIf="edu.tipoEducacion">
+                <span class="badge bg-secondary">{{ edu.tipoEducacion.nombre }}</span>
+            </div>
 
+            <p class="card-text">{{ edu.descripcionE }}</p>
+
+            <app-skill-chips
+                *ngIf="edu.habilidades?.length"
+                [habilidades]="edu.habilidades"
+                [maxVisible]="4"
+            ></app-skill-chips>
+
+            <div class="mt-2" *ngIf="edu.archivoPdf">
+                <app-pdf-link [base64]="edu.archivoPdf" label="Ver certificado"></app-pdf-link>
+            </div>
+
+            <div class="mt-3" *ngIf="isLogged">
+                <button class="btn btn-secondary boton" routerLink="/editedu/{{ edu.id }}">
+                    <i class="bi bi-pen-fill"></i>
+                </button>
+                <button class="btn btn-danger boton" (click)="delete(edu.id)">
+                    <i class="bi bi-trash3-fill"></i>
+                </button>
+            </div>
         </div>
     </div>
-
 </div>
 
-
-
-<!--
-<div class="row">
-
-<h1>Educación</h1>
-<div class="card mb-2 text-center col-sm-4 col-md-4 col-lg-4 carta color" style="width: 30rem" *ngFor="let Educacion of educacion">
-    <img src="https://static.abc.es/media/ciencia/2022/04/28/AdobeStock_293422760-kvsC--620x349@abc.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{Educacion.nombreE}}</h5>
-      <p class="card-text">Fecha Inicio</p>
-      <p class="card-text">{{Educacion.descripcionE}}</p>
-      
-      <button *ngIf="isLogged" class="btn btn-secondary" routerLink="/editedu/{{Educacion.id}}">
-        <i class="bi bi-pen-fill"></i>
-    
-    </button>
-
-
-    <button *ngIf="isLogged" class="btn btn-danger" (click)="delete(Educacion.id)">
-        <i class="bi bi-trash3-fill"></i></button>
-    </div>
-  </div>
-
-
+<div *ngIf="educacion.length === 0" class="text-muted py-3 px-3">
+    No hay educación cargada.
 </div>
-
--->
