@@ -1,60 +1,7 @@
-.banner-card .banner-slide-img,
-.banner-card .base64-image-wrapper {
-    width: 100%;
-    height: 35em;
-    max-height: none;
-    display: block;
-}
-
-.banner-card .base64-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-img.banner-slide-img {
-    width: 100%;
-    height: 35em;
-    object-fit: cover;
-    object-position: center;
-}
-
-.abajo{
-    margin-top: 15rem;
-}
-
-h1{
-    font-weight: bolder;
-}
-
-.boton{
-    position: relative;
-    margin-top: -18rem;
-    float: right;
-}
-
-
-
-
-
-/*----------VISTA CELULAR------------*/
-@media (max-width: 575px) {
-    .banner-card .banner-slide-img,
-    .banner-card .base64-image-wrapper,
-    img.banner-slide-img {
-        width: 100%;
-        height: 20em;
-    }
-
-    .abajo{
-        margin-top: 5rem;
-    }
-
-    .boton{
-        position: relative;
-        margin-top: -8rem;
-        float: right;
-    }
-    
+.hero-banner__img {
+  width: 100%;
+  height: var(--banner-height);
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
