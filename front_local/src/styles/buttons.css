@@ -1,0 +1,189 @@
+.btn-pf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: var(--font-family-base);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--btn-radius);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: var(--btn-shadow);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-fast),
+    box-shadow var(--transition-base);
+}
+
+.btn-pf:hover {
+  box-shadow: var(--btn-shadow-hover);
+}
+
+.btn-pf:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn-pf:active {
+  transform: scale(0.96);
+}
+
+.btn-pf--icon {
+  width: 2.35rem;
+  height: 2.35rem;
+  padding: 0;
+  font-size: 0.95rem;
+  border-radius: var(--btn-radius-icon);
+}
+
+.btn-pf--icon-sm {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  font-size: 0.82rem;
+  border-radius: var(--btn-radius-icon);
+}
+
+.btn-pf--add {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  font-size: 1.15rem;
+  border-radius: var(--btn-radius-pill);
+  background: var(--color-accent);
+  color: var(--color-primary);
+  border-color: transparent;
+  box-shadow: 0 2px 10px rgba(101, 220, 213, 0.35);
+}
+
+.btn-pf--add:hover {
+  background: #AAF0DA;
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(101, 220, 213, 0.45);
+}
+
+.btn-pf--ghost {
+  background: rgba(217, 255, 244, 0.08);
+  border-color: rgba(217, 255, 244, 0.4);
+  color: var(--text-on-dark);
+}
+
+.btn-pf--ghost:hover {
+  background: rgba(217, 255, 244, 0.2);
+  border-color: var(--color-accent);
+  color: var(--text-on-dark);
+}
+
+.btn-pf--auth {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  font-size: 1.05rem;
+  border-radius: var(--btn-radius-pill);
+  flex-shrink: 0;
+}
+
+.btn-pf--auth:hover {
+  background: rgba(101, 220, 213, 0.18);
+  border-color: var(--color-accent);
+  color: var(--text-on-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(101, 220, 213, 0.25);
+}
+
+.btn-pf--edit {
+  background: rgba(67, 99, 126, 0.1);
+  color: var(--color-secondary);
+  border-color: rgba(67, 99, 126, 0.22);
+}
+
+.btn-pf--edit:hover {
+  background: var(--color-secondary);
+  color: var(--text-on-primary);
+  border-color: var(--color-secondary);
+}
+
+.btn-pf--delete {
+  background: rgba(199, 92, 92, 0.1);
+  color: var(--color-danger);
+  border-color: rgba(199, 92, 92, 0.25);
+}
+
+.btn-pf--delete:hover {
+  background: var(--color-danger);
+  color: var(--text-on-primary);
+  border-color: var(--color-danger);
+}
+
+.btn-pf--view {
+  background: var(--color-accent);
+  color: var(--color-primary);
+  border-color: transparent;
+}
+
+.btn-pf--view:hover {
+  background: var(--color-primary);
+  color: var(--text-on-dark);
+}
+
+.btn-pf--surface {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(217, 255, 244, 0.35);
+  color: var(--text-on-dark);
+  backdrop-filter: blur(6px);
+}
+
+.btn-pf--surface:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: var(--color-accent);
+  color: var(--text-on-dark);
+}
+
+.admin-actions .btn-pf--icon,
+.admin-actions .btn-pf--icon-sm {
+  flex-shrink: 0;
+}
+
+.section__header > .btn-pf--add {
+  flex-shrink: 0;
+}
+
+.social-item__admin .btn-pf {
+  box-shadow: none;
+}
+
+.social-item__admin .btn-pf:hover {
+  box-shadow: var(--btn-shadow-hover);
+}
+
+.hero-bar .social-item__admin .btn-pf--edit {
+  background: rgba(255, 255, 255, 0.28);
+  color: var(--text-on-dark);
+  border-color: rgba(217, 255, 244, 0.55);
+}
+
+.hero-bar .social-item__admin .btn-pf--edit:hover {
+  background: var(--color-secondary);
+  color: var(--text-on-primary);
+  border-color: var(--color-secondary);
+}
+
+.hero-bar .social-item__admin .btn-pf--delete {
+  background: rgba(199, 92, 92, 0.42);
+  color: #FFFFFF;
+  border-color: rgba(255, 200, 200, 0.5);
+}
+
+.hero-bar .social-item__admin .btn-pf--delete:hover {
+  background: var(--color-danger);
+  color: var(--text-on-primary);
+  border-color: var(--color-danger);
+}
