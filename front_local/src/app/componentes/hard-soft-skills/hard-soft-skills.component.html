@@ -1,45 +1,53 @@
-<div class="row">
-    <h1 class="display-4">Hard & Soft Skills</h1>
-    <div class="col-lg-2">
-        <button type="button" class="btn btn-dark" routerLink="/nuevahabilidad" *ngIf="isLogged">
-            <i class="bi bi-plus-circle-fill mas"></i>
-        </button>
-    </div>
-</div>
+<section class="section section--alt">
+  <div class="section__header">
+    <h2 class="section__title">Hard &amp; Soft Skills</h2>
+    <button
+      type="button"
+      class="btn-pf btn-pf--add"
+      routerLink="/nuevahabilidad"
+      *ngIf="isLogged"
+      data-tip="Agregar habilidad"
+      data-tip-align="end"
+      aria-label="Agregar habilidad"
+    >
+      <i class="bi bi-plus-lg"></i>
+    </button>
+  </div>
 
-<div *ngFor="let grupo of grupos" class="mb-4">
-    <h5 class="skill-group-title">{{ grupo.tipo }}</h5>
-    <div class="row">
-        <div class="text-center col-sm-4 col-md-4 col-lg-4 skill-card" *ngFor="let h of grupo.habilidades">
-            <div class="skill-icon-wrap" [title]="h.nombre">
-                <img
-                    *ngIf="isUrl(h.img)"
-                    [src]="h.img"
-                    [alt]="h.nombre"
-                    class="skill-icon"
-                />
-                <app-base64-image
-                    *ngIf="!isUrl(h.img)"
-                    [src]="h.img"
-                    [alt]="h.nombre"
-                    cssClass="skill-icon"
-                    maxHeight="80px"
-                ></app-base64-image>
-            </div>
-            <span class="badge bg-primary skill-name-badge">{{ h.nombre }}</span>
-
-            <div class="botones" *ngIf="isLogged">
-                <button class="btn btn-secondary" routerLink="/edithabilidad/{{ h.id }}">
-                    <i class="bi bi-pen-fill"></i>
-                </button>
-                <button class="btn btn-danger" (click)="delete(h.id)">
-                    <i class="bi bi-trash3-fill"></i>
-                </button>
-            </div>
+  <div class="section__inner" *ngFor="let grupo of grupos">
+    <h3 class="skills-group-title">{{ grupo.tipo }}</h3>
+    <div class="skills-grid">
+      <div class="skill-item" *ngFor="let h of grupo.habilidades">
+        <div class="skill-item__icon-wrap" [title]="h.nombre">
+          <img
+            *ngIf="isUrl(h.img)"
+            [src]="h.img"
+            [alt]="h.nombre"
+            class="skill-item__icon"
+          />
+          <app-base64-image
+            *ngIf="!isUrl(h.img)"
+            [src]="h.img"
+            [alt]="h.nombre"
+            cssClass="skill-item__icon"
+            maxHeight="64px"
+          ></app-base64-image>
         </div>
-    </div>
-</div>
+        <span class="badge-pf badge-pf--primary">{{ h.nombre }}</span>
 
-<div *ngIf="grupos.length === 0" class="text-muted py-3">
+        <div class="admin-actions admin-actions--inline" *ngIf="isLogged">
+          <button class="btn-pf btn-pf--edit btn-pf--icon-sm" routerLink="/edithabilidad/{{ h.id }}" data-tip="Editar" aria-label="Editar">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn-pf btn-pf--delete btn-pf--icon-sm" (click)="delete(h.id)" data-tip="Eliminar" aria-label="Eliminar">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="grupos.length === 0" class="empty-state">
     No hay habilidades cargadas.
-</div>
+  </div>
+</section>
