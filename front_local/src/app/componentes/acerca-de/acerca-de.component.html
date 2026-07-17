@@ -1,49 +1,43 @@
-<div class="row">
-    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" *ngFor="let Persona of persona">
-        <div id="perfilphoto" class="perfil-photo-wrap">
-            <img
-                *ngIf="isUrl(Persona.img)"
-                [src]="Persona.img"
-                class="perfil-photo-img"
-                [alt]="Persona.nombre + ' ' + Persona.apellido"
-            />
-            <app-base64-image
-                *ngIf="!isUrl(Persona.img)"
-                [src]="Persona.img"
-                [alt]="Persona.nombre + ' ' + Persona.apellido"
-                cssClass="perfil-photo-img"
-                maxHeight="100%"
-            ></app-base64-image>
+<section class="section section--default" *ngFor="let Persona of persona">
+  <div class="section__inner">
+    <div class="profile-section">
+      <div class="profile-section__photo-wrap">
+        <img
+          *ngIf="isUrl(Persona.img)"
+          [src]="Persona.img"
+          class="profile-section__photo"
+          [alt]="Persona.nombre + ' ' + Persona.apellido"
+        />
+        <app-base64-image
+          *ngIf="!isUrl(Persona.img)"
+          [src]="Persona.img"
+          [alt]="Persona.nombre + ' ' + Persona.apellido"
+          cssClass="profile-section__photo"
+          maxHeight="100%"
+        ></app-base64-image>
+      </div>
+
+      <div class="profile-section__info">
+        <div class="d-flex flex-wrap align-items-start justify-content-between gap-2">
+          <div>
+            <h2 class="profile-section__name">{{ Persona.nombre }} {{ Persona.apellido }}</h2>
+            <p class="profile-section__profession">{{ Persona.profesion }}</p>
+          </div>
+          <div class="admin-actions admin-actions--inline" *ngIf="isLogged">
+            <button
+              class="btn-pf btn-pf--edit btn-pf--icon-sm"
+              routerLink="/editinfop/{{ Persona.id }}"
+              data-tip="Editar perfil"
+              aria-label="Editar perfil"
+            >
+              <i class="bi bi-pencil-square"></i>
+            </button>
+          </div>
         </div>
+
+        <h3 class="profile-section__bio-title">Información Personal</h3>
+        <p class="profile-section__bio">{{ Persona.acercaDe }}</p>
+      </div>
     </div>
-
-    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" *ngFor="let Persona of persona">
-
-        <div class="boton">
-            <td *ngIf="isLogged"><button class="btn btn-secondary" routerLink="/editinfop/{{Persona.id}}">
-                    <i class="bi bi-pen-fill"></i>
-                </button>
-            </td>
-        </div>
-
-        <p id="name">{{Persona.nombre}} {{Persona.apellido}}</p>
-
-        <h6><i>{{Persona.profesion}}</i></h6>
-
-
-    </div>
-
-    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" *ngFor="let Persona of persona">
-        <span>
-
-            <h1 class="display-4">Información Personal</h1>
-
-            <p>{{Persona.acercaDe}}</p>
-
-
-
-
-        </span>
-    </div>
-
-</div>
+  </div>
+</section>
