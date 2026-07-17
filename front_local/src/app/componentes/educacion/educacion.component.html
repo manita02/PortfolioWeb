@@ -1,74 +1,78 @@
-<div class="row">
-    <h1 class="display-4">Educación</h1>
-
-    <div class="col-lg-2">
-        <button type="button" class="btn btn-dark agrego" routerLink="/nuevaedu" *ngIf="isLogged">
-            <i class="bi bi-plus-circle-fill mas"></i>
-        </button>
-    </div>
-</div>
-
-<div class="row edu-list">
-    <div
-        class="card text-start col-sm-12 col-md-6 col-lg-4 carta color"
-        *ngFor="let edu of educacion"
+<section class="section section--default">
+  <div class="section__header">
+    <h2 class="section__title">Educación</h2>
+    <button
+      type="button"
+      class="btn-pf btn-pf--add"
+      routerLink="/nuevaedu"
+      *ngIf="isLogged"
+      data-tip="Agregar educación"
+      data-tip-align="end"
+      aria-label="Agregar educación"
     >
-        <div class="card-body color">
-            <div class="mb-2" *ngIf="edu.organizacion">
-                <app-org-badge [organizacion]="edu.organizacion" size="md"></app-org-badge>
-            </div>
+      <i class="bi bi-plus-lg"></i>
+    </button>
+  </div>
 
-            <div class="edu-image mb-2" *ngIf="edu.archivoImagen">
-                <img
-                    *ngIf="isUrl(edu.archivoImagen)"
-                    [src]="edu.archivoImagen"
-                    [alt]="edu.nombreE"
-                    class="edu-cert-img"
-                />
-                <app-base64-image
-                    *ngIf="!isUrl(edu.archivoImagen)"
-                    [src]="edu.archivoImagen"
-                    [alt]="edu.nombreE"
-                    cssClass="edu-cert-img"
-                    maxHeight="160px"
-                ></app-base64-image>
-            </div>
-
-            <h4 class="card-title">{{ edu.nombreE }}</h4>
-
-            <app-periodo-display
-                [fechaInicio]="edu.fechaInicio"
-                [fechaFin]="edu.fechaFin"
-            ></app-periodo-display>
-
-            <div class="mt-2 mb-2" *ngIf="edu.tipoEducacion">
-                <span class="badge bg-secondary">{{ edu.tipoEducacion.nombre }}</span>
-            </div>
-
-            <p class="card-text">{{ edu.descripcionE }}</p>
-
-            <app-skill-chips
-                *ngIf="edu.habilidades?.length"
-                [habilidades]="edu.habilidades"
-                [maxVisible]="4"
-            ></app-skill-chips>
-
-            <div class="mt-2" *ngIf="edu.archivoPdf">
-                <app-pdf-link [base64]="edu.archivoPdf" label="Ver certificado"></app-pdf-link>
-            </div>
-
-            <div class="mt-3" *ngIf="isLogged">
-                <button class="btn btn-secondary boton" routerLink="/editedu/{{ edu.id }}">
-                    <i class="bi bi-pen-fill"></i>
-                </button>
-                <button class="btn btn-danger boton" (click)="delete(edu.id)">
-                    <i class="bi bi-trash3-fill"></i>
-                </button>
-            </div>
+  <div class="section__grid" *ngIf="educacion.length > 0">
+    <article class="card-portfolio" *ngFor="let edu of educacion">
+      <div class="card-portfolio__body">
+        <div class="mb-2" *ngIf="edu.organizacion">
+          <app-org-badge [organizacion]="edu.organizacion" size="md"></app-org-badge>
         </div>
-    </div>
-</div>
 
-<div *ngIf="educacion.length === 0" class="text-muted py-3 px-3">
+        <div class="edu-image mb-2" *ngIf="edu.archivoImagen">
+          <img
+            *ngIf="isUrl(edu.archivoImagen)"
+            [src]="edu.archivoImagen"
+            [alt]="edu.nombreE"
+            class="edu-cert-img"
+          />
+          <app-base64-image
+            *ngIf="!isUrl(edu.archivoImagen)"
+            [src]="edu.archivoImagen"
+            [alt]="edu.nombreE"
+            cssClass="edu-cert-img"
+            maxHeight="160px"
+          ></app-base64-image>
+        </div>
+
+        <h3 class="card-portfolio__title">{{ edu.nombreE }}</h3>
+
+        <app-periodo-display
+          [fechaInicio]="edu.fechaInicio"
+          [fechaFin]="edu.fechaFin"
+        ></app-periodo-display>
+
+        <div class="mt-2 mb-2" *ngIf="edu.tipoEducacion">
+          <span class="badge-pf badge-pf--secondary">{{ edu.tipoEducacion.nombre }}</span>
+        </div>
+
+        <p class="card-portfolio__text">{{ edu.descripcionE }}</p>
+
+        <app-skill-chips
+          *ngIf="edu.habilidades?.length"
+          [habilidades]="edu.habilidades"
+          [maxVisible]="4"
+        ></app-skill-chips>
+
+        <div class="mt-2" *ngIf="edu.archivoPdf">
+          <app-pdf-link [base64]="edu.archivoPdf" label="Ver certificado"></app-pdf-link>
+        </div>
+
+        <div class="admin-actions" *ngIf="isLogged">
+          <button class="btn-pf btn-pf--edit btn-pf--icon-sm" routerLink="/editedu/{{ edu.id }}" data-tip="Editar" aria-label="Editar">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn-pf btn-pf--delete btn-pf--icon-sm" (click)="delete(edu.id)" data-tip="Eliminar" aria-label="Eliminar">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div *ngIf="educacion.length === 0" class="empty-state">
     No hay educación cargada.
-</div>
+  </div>
+</section>
