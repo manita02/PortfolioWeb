@@ -58,11 +58,8 @@
   --card-max-width: 22rem;
   --card-max-width-wide: 28rem;
 
-  /* Admin */
-  --color-admin-edit: #64748B;
-  --color-admin-delete: #EF4444;
+  /* Admin / estados */
   --color-danger: #C75C5C;
-  --color-danger-hover: #A84848;
 
   /* Botones */
   --btn-radius: 0.75rem;
