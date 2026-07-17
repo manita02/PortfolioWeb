@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Educacion } from 'src/app/modelo/educacion';
+import { EducacionDto } from 'src/app/modelo/educacion.dto';
 import { EducacionService } from 'src/app/servicio/educacion.service';
 import { TokenService } from 'src/app/servicio/token.service';
 
@@ -9,40 +9,36 @@ import { TokenService } from 'src/app/servicio/token.service';
   styleUrls: ['./educacion.component.css']
 })
 export class EducacionComponent implements OnInit {
-  educacion: Educacion[] = [];
-
-  constructor(private educacionS: EducacionService, private tokenService: TokenService) { }
+  educacion: EducacionDto[] = [];
   isLogged = false;
+
+  constructor(
+    private educacionS: EducacionService,
+    private tokenService: TokenService
+  ) {}
+
   ngOnInit(): void {
+    this.isLogged = !!this.tokenService.getToken();
     this.cargarEducacion();
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-    } else {
-      this.isLogged = false;
-    }
+  }
+
+  isUrl(img: string | null | undefined): boolean {
+    return !!img && (img.startsWith('http://') || img.startsWith('https://'));
   }
 
   cargarEducacion(): void {
-    this.educacionS.lista().subscribe(
-      data => {
-        this.educacion = data;
-      }
-    )
+    this.educacionS.lista().subscribe({
+      next: data => { this.educacion = data; }
+    });
   }
 
-  delete(id?: number) {
-    if (confirm('¿Está seguro que desea eliminar esta educación?')) {
-      if (id != undefined) {
-        this.educacionS.delete(id).subscribe(
-          data => {
-            this.cargarEducacion();
-          }, err => {
-            alert("No se pudo borrar la educacion");
-          }
-        )
-      }
-
+  delete(id?: number): void {
+    if (!confirm('¿Está seguro que desea eliminar esta educación?') || id == null) {
+      return;
     }
+    this.educacionS.delete(id).subscribe({
+      next: () => this.cargarEducacion(),
+      error: () => alert('No se pudo borrar la educación')
+    });
   }
-
 }
