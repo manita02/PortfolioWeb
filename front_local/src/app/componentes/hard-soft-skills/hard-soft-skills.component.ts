@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Habilidades } from 'src/app/modelo/habilidades';
+import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
 import { TokenService } from 'src/app/servicio/token.service';
+
+export interface GrupoHabilidades {
+  tipo: string;
+  habilidades: HabilidadDto[];
+}
 
 @Component({
   selector: 'app-hard-soft-skills',
@@ -9,42 +14,50 @@ import { TokenService } from 'src/app/servicio/token.service';
   styleUrls: ['./hard-soft-skills.component.css']
 })
 export class HardSoftSkillsComponent implements OnInit {
+  grupos: GrupoHabilidades[] = [];
+  isLogged = false;
 
-  habilidades: Habilidades[] = []; 
+  constructor(private habilidadesS: HabilidadesService, private tokenService: TokenService) {}
 
-  constructor(private habilidadesS: HabilidadesService, private tokenService: TokenService) { }
-  isLogged = false; 
   ngOnInit(): void {
+    this.isLogged = !!this.tokenService.getToken();
     this.cargarHabilidad();
-    if(this.tokenService.getToken()){
-      this.isLogged = true; 
-    } else{
-      this.isLogged = false; 
-    }
   }
 
-  cargarHabilidad(): void{
-    this.habilidadesS.lista().subscribe(
-      data => {
-        this.habilidades = data; 
+  isUrl(img: string | null | undefined): boolean {
+    return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+  }
+
+  cargarHabilidad(): void {
+    this.habilidadesS.lista().subscribe({
+      next: data => {
+        this.grupos = this.agruparPorTipo(data);
       }
-    )
+    });
   }
 
-  delete(id?: number){
-
-    if (confirm('¿Está seguro que desea eliminar esta habilidad?')) {
-      if(id != undefined){
-        this.habilidadesS.delete(id).subscribe(
-          data => {
-            this.cargarHabilidad(); 
-          }, err => {
-            alert("ERROR ---> URL demasiado larga (utilicé un acortardor de URL online) / CAMPO VACÍO / Tiempo límite excedido");  
-          }
-        )
+  private agruparPorTipo(habilidades: HabilidadDto[]): GrupoHabilidades[] {
+    const map = new Map<string, HabilidadDto[]>();
+    for (const h of habilidades) {
+      const key = h.tipoHabilidad?.nombre ?? 'Sin categoría';
+      if (!map.has(key)) {
+        map.set(key, []);
       }
+      map.get(key)!.push(h);
     }
-  
+    return Array.from(map.entries()).map(([tipo, items]) => ({
+      tipo,
+      habilidades: items
+    }));
   }
 
+  delete(id?: number): void {
+    if (!confirm('¿Está seguro que desea eliminar esta habilidad?') || id == null) {
+      return;
+    }
+    this.habilidadesS.delete(id).subscribe({
+      next: () => this.cargarHabilidad(),
+      error: () => alert('No se pudo borrar la habilidad.')
+    });
+  }
 }
