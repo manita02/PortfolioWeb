@@ -1,59 +1,59 @@
-
 .mas {
     font-size: 2em;
-  }
+}
 
-  p{
+p {
     margin-top: 5px;
 }
 
-
-
-  .row{
-    
-    background-color:#72FFFF;
+.row {
+    background-color: #72FFFF;
     padding: 20px;
-    
 }
 
-
-div{
-    background-color:#72FFFF;
-  
+div {
+    background-color: #72FFFF;
 }
 
-.carta{   
+.proy-list {
+    padding: 0 1rem 1rem;
+}
+
+.carta {
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
-    
+    margin-bottom: 20px;
     overflow: hidden;
     background: #fff;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
     cursor: default;
     transition: all 400ms ease;
-
+    max-width: 28rem;
 }
 
-.carta:hover{
+.carta:hover {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
     transform: translateY(-3%);
 }
 
-.color{
+.color {
     background-color: white;
 }
 
-.boton{
+.boton {
     margin-left: 10px;
 }
 
-
-img{
-    height: 23em;  
+.proy-img,
+.proy-image .base64-image-wrapper,
+.proy-image .base64-image-wrapper img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    display: block;
 }
 
-
-
-
-
+.proy-image .base64-image-wrapper {
+    max-height: 220px;
+}

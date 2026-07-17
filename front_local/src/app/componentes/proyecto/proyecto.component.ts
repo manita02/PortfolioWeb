@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Proyecto } from 'src/app/modelo/proyecto';
+import { ProyectoDto } from 'src/app/modelo/proyecto.dto';
 import { ProyectoService } from 'src/app/servicio/proyecto.service';
 import { TokenService } from 'src/app/servicio/token.service';
 
@@ -9,45 +9,40 @@ import { TokenService } from 'src/app/servicio/token.service';
   styleUrls: ['./proyecto.component.css']
 })
 export class ProyectoComponent implements OnInit {
+  proyecto: ProyectoDto[] = [];
+  isLogged = false;
 
-  proyecto: Proyecto[] = []; 
+  constructor(
+    private proyectoS: ProyectoService,
+    private tokenService: TokenService
+  ) {}
 
-  constructor(private proyectoS: ProyectoService, private tokenService: TokenService) { }
-  isLogged = false; 
   ngOnInit(): void {
+    this.isLogged = !!this.tokenService.getToken();
     this.cargarProyecto();
-    if(this.tokenService.getToken()){
-      this.isLogged = true; 
-    } else{
-      this.isLogged = false; 
+  }
+
+  isUrl(img: string | null | undefined): boolean {
+    return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+  }
+
+  cargarProyecto(): void {
+    this.proyectoS.lista().subscribe({
+      next: data => { this.proyecto = data; }
+    });
+  }
+
+  delete(id?: number): void {
+    if (!confirm('¿Está seguro que desea eliminar este proyecto?') || id == null) {
+      return;
     }
+    this.proyectoS.delete(id).subscribe({
+      next: () => this.cargarProyecto(),
+      error: () => alert('No se pudo borrar el proyecto')
+    });
   }
 
-  cargarProyecto(): void{
-    this.proyectoS.lista().subscribe(
-      data => {
-        this.proyecto = data; 
-      }
-    )
+  goProject(link: string): void {
+    window.open(link, '_blank');
   }
-
-  delete(id?: number){
-    if (confirm('¿Está seguro que desea eliminar este proyecto?')) {
-      if(id != undefined){
-        this.proyectoS.delete(id).subscribe(
-          data => {
-            this.cargarProyecto(); 
-          }, err => {
-            alert("No se pudo borrar el proyecto"); 
-          }
-        )
-      }
-    }   
-
-  }
-
-  goProject(data: string) {
-    window.open(data, "_blank");
-  }
-
 }
