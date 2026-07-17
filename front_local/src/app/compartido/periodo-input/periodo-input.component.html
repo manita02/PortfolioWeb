@@ -8,7 +8,7 @@
       <input
         type="text"
         class="form-control"
-        placeholder="YYYY-MM o YYYY"
+        [placeholder]="placeholder"
         [ngModel]="fechaInicio"
         (ngModelChange)="onFechaInicioChange($event)"
       />
@@ -18,7 +18,7 @@
       <input
         type="text"
         class="form-control"
-        placeholder="YYYY-MM o YYYY"
+        [placeholder]="placeholder"
         [ngModel]="fechaFin || ''"
         (ngModelChange)="onFechaFinChange($event)"
         [disabled]="esActual"
@@ -29,11 +29,11 @@
         <input
           class="form-check-input"
           type="checkbox"
-          id="esActualCheck"
+          [id]="checkboxId"
           [ngModel]="esActual"
           (ngModelChange)="onEsActualChange($event)"
         />
-        <label class="form-check-label" for="esActualCheck">
+        <label class="form-check-label" [for]="checkboxId">
           Trabajo/estudio actual
         </label>
       </div>
