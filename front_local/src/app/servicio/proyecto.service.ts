@@ -1,35 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Proyecto } from '../modelo/proyecto';
+import { environment } from '../../environments/environment';
+import { ProyectoDto } from '../modelo/proyecto.dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProyectoService {
+  private readonly url = `${environment.apiUrl}/proyecto/`;
 
-  expURL = 'http://localhost:8080/proyecto/'
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
-  public lista(): Observable<Proyecto[]>{ 
-    return this.httpClient.get<Proyecto[]>(this.expURL + 'lista'); 
+  public lista(): Observable<ProyectoDto[]> {
+    return this.httpClient.get<ProyectoDto[]>(this.url + 'lista');
   }
 
-  public detail(id: number): Observable<Proyecto>{
-    return this.httpClient.get<Proyecto>(this.expURL + `detail/${id}`);
+  public detail(id: number): Observable<ProyectoDto> {
+    return this.httpClient.get<ProyectoDto>(this.url + `detail/${id}`);
   }
 
-  public save(proyecto: Proyecto): Observable<any>{
-    return this.httpClient.post<any>(this.expURL + 'create', proyecto); 
+  public save(proyecto: ProyectoDto): Observable<ProyectoDto> {
+    return this.httpClient.post<ProyectoDto>(this.url + 'create', proyecto);
   }
 
-  public update(id: number, proyecto: Proyecto): Observable<any>{
-    return this.httpClient.put<any>(this.expURL + `update/${id}`, proyecto); 
+  public update(id: number, proyecto: ProyectoDto): Observable<ProyectoDto> {
+    return this.httpClient.put<ProyectoDto>(this.url + `update/${id}`, proyecto);
   }
 
-  public delete(id: number): Observable<any>{
-    return this.httpClient.delete<any>(this.expURL + `delete/${id}`); 
+  public delete(id: number): Observable<unknown> {
+    return this.httpClient.delete(this.url + `delete/${id}`);
   }
-
-
 }
