@@ -4,44 +4,47 @@
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card bg-dark text-white" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
-  
+
                 <div class="mb-md-5 mt-md-4 pb-5">
                     <h2 class="fw-bold mb-2 text-uppercase">AGREGAR HABILIDAD</h2>
                     <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
                         <div class="form-outline form-white mb-4">
-                            <label for="nombreH" class="form-label">Nombre</label>
-                            <input class="form-control form-control-lg" type="text" class="form-control" id="nombreH" name="nombreH" [(ngModel)]="nombreH" required>
-                        
-                        </div>
-        
-                        <div class="form-outline form-white mb-4">
-                            <label for="porcentaje" class="form-label">Ingrese un numero para el porcentaje (de 0 a 100)</label>
-                            <input class="form-control form-control-lg" type="number" min="1" max="100"  id="porcentaje" name="porcentaje" [(ngModel)]="porcentaje" required>
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input class="form-control form-control-lg" type="text" id="nombre" name="nombre"
+                                [(ngModel)]="habilidad.nombre" required>
                         </div>
 
-                        <div class="form-outline form-white mb-4">
-                          <label for="img" class="form-label">Ingrese la URL de un icono que identifique la habilidad a ingresar (se recomienda en formato PNG)</label>
-                          <input class="form-control form-control-lg" type="url" class="form-control" id="img" name="img" [(ngModel)]="img" required>
-                      
+                        <div class="form-outline form-white mb-4 text-start">
+                            <app-catalog-select
+                                label="Tipo de habilidad"
+                                [options]="tiposHabilidad"
+                                [selectedId]="habilidad.tipoHabilidadId ?? null"
+                                (selectedIdChange)="onTipoChange($event)"
+                                [required]="true"
+                            ></app-catalog-select>
                         </div>
 
+                        <div class="form-outline form-white mb-4 text-start">
+                            <app-image-upload
+                                [(value)]="habilidad.img"
+                                label="Ícono de la habilidad"
+                                [required]="true"
+                            ></app-image-upload>
+                            <small class="text-white-50">PNG o JPEG, máximo 2 MB.</small>
+                        </div>
 
-                        <button class="btn btn-outline-light btn-lg px-5">
+                        <button class="btn btn-outline-light btn-lg px-5"
+                            [disabled]="!f.valid || !habilidad.img || !habilidad.tipoHabilidadId">
                             Agregar Habilidad
                         </button>
-
-
-                        
                     </form>
 
-                    <button class="btn btn-outline-primary btn-lg px-5" style="margin-top: 20px;" routerLink="/">
+                    <button class="btn btn-outline-primary btn-lg px-5" style="margin-top: 20px;" type="button" routerLink="/">
                       Volver
                     </button>
-                    
+
                 </div>
-  
-              
-  
+
             </div>
           </div>
         </div>

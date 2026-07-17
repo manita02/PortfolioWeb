@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Habilidades } from 'src/app/modelo/habilidades';
+import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
+import { TipoCatalogo } from 'src/app/modelo/tipo-catalogo';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
+import { TipoHabilidadService } from 'src/app/servicio/tipo-habilidad.service';
 
 @Component({
   selector: 'app-newhabilidad',
@@ -9,25 +11,40 @@ import { HabilidadesService } from 'src/app/servicio/habilidades.service';
   styleUrls: ['./newhabilidad.component.css']
 })
 export class NewhabilidadComponent implements OnInit {
+  habilidad: HabilidadDto = {
+    nombre: '',
+    img: '',
+    tipoHabilidadId: undefined
+  };
+  tiposHabilidad: TipoCatalogo[] = [];
 
-  nombreH: string; 
-  porcentaje: number; 
-  img: string; 
-
-  constructor(private habilidadesS: HabilidadesService, private router: Router) { }
+  constructor(
+    private habilidadesS: HabilidadesService,
+    private tipoHabilidadS: TipoHabilidadService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.tipoHabilidadS.lista().subscribe({
+      next: data => { this.tiposHabilidad = data; },
+      error: () => alert('No se pudieron cargar los tipos de habilidad.')
+    });
   }
 
-  onCreate(): void{
-    const habilidades = new Habilidades(this.nombreH, this.porcentaje, this.img);
-    this.habilidadesS.save(habilidades).subscribe(data=>{
-      alert("Habilidad añadida"); 
-      this.router.navigate(['']); 
-    }, err =>{
-      alert("ERROR ---> CAMPO VACÍO ó Tiempo de conexión a expirado(loguéese nuevamente)");  
-      this.router.navigate(['']);
-    })
+  onTipoChange(id: number | null): void {
+    this.habilidad.tipoHabilidadId = id ?? undefined;
   }
 
+  onCreate(): void {
+    this.habilidadesS.save(this.habilidad).subscribe({
+      next: () => {
+        alert('Habilidad añadida');
+        this.router.navigate(['']);
+      },
+      error: () => {
+        alert('ERROR ---> Verifique nombre, tipo, imagen y que esté logueado.');
+        this.router.navigate(['']);
+      }
+    });
+  }
 }

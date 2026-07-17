@@ -102,8 +102,8 @@ export class ComponentesDemoComponent implements OnInit {
 
     this.habilidadesService.lista().subscribe({
       next: data => {
-        this.habilidades = data as unknown as HabilidadDto[];
-        this.apiStatus.habilidades = `${data.length} registros (modelo legacy)`;
+        this.habilidades = data;
+        this.apiStatus.habilidades = `${data.length} registros`;
       },
       error: () => { this.apiStatus.habilidades = 'error'; }
     });

@@ -1,8 +1,37 @@
 
-
 .mas {
     font-size: 2em;
   }
+
+.skill-group-title {
+    padding-left: 20px;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+.skill-card {
+    margin-bottom: 1rem;
+}
+
+.skill-icon-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90px;
+    margin-bottom: 0.5rem;
+}
+
+.skill-icon,
+.skill-icon-wrap .base64-image-wrapper img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.skill-name-badge {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
   
 .row{
     /*background-color: #C3E5AE;*/
