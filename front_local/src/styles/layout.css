@@ -261,6 +261,45 @@
 .profile-section__info {
   flex: 1;
   min-width: 0;
+  width: 100%;
+}
+
+.profile-section__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.profile-section__identity {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 767px) {
+  .profile-section__header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile-section__identity {
+    flex: none;
+    width: 100%;
+    text-align: center;
+  }
+
+  .profile-section__header .admin-actions {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .profile-section__identity {
+    text-align: left;
+  }
 }
 
 .profile-section__name {
