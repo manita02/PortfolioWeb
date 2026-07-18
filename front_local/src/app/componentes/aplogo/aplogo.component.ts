@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Redsocial } from 'src/app/modelo/redsocial';
 import { RedsocialService } from 'src/app/servicio/redsocial.service';
@@ -8,29 +8,40 @@ import { TokenService } from 'src/app/servicio/token.service';
   selector: 'app-aplogo',
   templateUrl: './aplogo.component.html',
 })
-
-
-export class APlogoComponent implements OnInit {
+export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   isLogged = false;
   redsocial: Redsocial[] = [];
+  private resizeObserver?: ResizeObserver;
 
-  constructor(private router: Router, private tokenService: TokenService, private proyectoS: RedsocialService) { }
+  constructor(
+    private router: Router,
+    private tokenService: TokenService,
+    private proyectoS: RedsocialService,
+    private el: ElementRef<HTMLElement>
+  ) {}
 
   ngOnInit(): void {
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-    } else {
-      this.isLogged = false;
-    }
-
-
+    this.isLogged = !!this.tokenService.getToken();
     this.cargarRedSocial();
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-    } else {
-      this.isLogged = false;
-    }
+  }
 
+  ngAfterViewInit(): void {
+    const bar = this.getNavBarElement();
+    if (bar && typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(() => this.syncNavBarHeight());
+      this.resizeObserver.observe(bar);
+    }
+    this.syncNavBarHeight();
+  }
+
+  ngOnDestroy(): void {
+    this.resizeObserver?.disconnect();
+    document.documentElement.style.removeProperty('--nav-bar-height');
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.syncNavBarHeight();
   }
 
   isUrl(img: string | undefined): boolean {
@@ -42,36 +53,45 @@ export class APlogoComponent implements OnInit {
     window.location.reload();
   }
 
-  login() {
-    this.router.navigate(['/login'])
+  login(): void {
+    this.router.navigate(['/login']);
   }
-
-
-
 
   cargarRedSocial(): void {
-    this.proyectoS.lista().subscribe(
-      data => {
-        this.redsocial = data;
-      }
-    )
+    this.proyectoS.lista().subscribe(data => {
+      this.redsocial = data;
+      setTimeout(() => this.syncNavBarHeight(), 0);
+    });
   }
 
-
-  delete(id?: number) {
+  delete(id?: number): void {
     if (confirm('¿Está seguro que desea eliminar esta red social?')) {
       if (id != undefined) {
         this.proyectoS.delete(id).subscribe(
-          data => {
+          () => {
             this.cargarRedSocial();
-          }, err => {
-            alert("No se pudo borrar la red social");
+          },
+          () => {
+            alert('No se pudo borrar la red social');
           }
-        )
+        );
       }
-
     }
   }
 
+  private getNavBarElement(): HTMLElement | null {
+    return this.el.nativeElement.querySelector('.hero-bar');
+  }
 
+  private syncNavBarHeight(): void {
+    const bar = this.getNavBarElement();
+    if (!bar) {
+      return;
+    }
+
+    const height = bar.offsetHeight;
+    if (height > 0) {
+      document.documentElement.style.setProperty('--nav-bar-height', `${height}px`);
+    }
+  }
 }
