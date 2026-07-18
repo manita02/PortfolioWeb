@@ -35,10 +35,11 @@
   --shadow-hero-overlay: 0 4px 30px rgba(0, 0, 0, 0.25);
 
   /* Espaciado */
-  --section-padding-y: clamp(3rem, 6vw, 5rem);
+  --section-padding-y: clamp(2rem, 3.5vw, 3.25rem);
   --section-padding-x: clamp(1rem, 4vw, 2rem);
-  --section-gap: 1.5rem;
+  --section-gap: 1.1rem;
   --container-max: 1200px;
+  --nav-bar-height: 3.75rem;
 
   /* Tipografía */
   --font-family-base: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -54,7 +55,7 @@
 
   /* Componentes */
   --profile-photo-size: clamp(140px, 22vw, 260px);
-  --banner-height: clamp(220px, 40vh, 420px);
+  --banner-height: clamp(280px, 46vh, 480px);
   --card-max-width: 22rem;
   --card-max-width-wide: 28rem;
 
@@ -77,6 +78,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-bar-height);
   margin: 0;
   padding: 0;
   width: 100%;
