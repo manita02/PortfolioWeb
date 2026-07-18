@@ -73,6 +73,65 @@
   align-items: center;
 }
 
+.badge-pf--employment {
+  padding: 0.45rem 0.95rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  box-shadow: 0 1px 4px rgba(50, 30, 72, 0.08);
+}
+
+.badge-pf--employment .bi {
+  font-size: 0.9rem;
+}
+
+.badge-pf--employment-formal {
+  background: rgba(67, 99, 126, 0.16);
+  color: var(--color-secondary);
+  border-color: rgba(67, 99, 126, 0.28);
+}
+
+.badge-pf--employment-independent {
+  background: rgba(101, 220, 213, 0.28);
+  color: var(--color-primary-dark);
+  border-color: rgba(101, 220, 213, 0.5);
+}
+
+.badge-pf--employment-training {
+  background: rgba(139, 111, 191, 0.16);
+  color: #5c4694;
+  border-color: rgba(139, 111, 191, 0.32);
+}
+
+.badge-pf--employment-default {
+  background: rgba(50, 30, 72, 0.1);
+  color: var(--color-primary);
+  border-color: rgba(50, 30, 72, 0.18);
+}
+
+.badge-pf--actual {
+  background: var(--color-primary);
+  color: var(--text-on-primary);
+  border-color: var(--color-primary);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.65rem;
+}
+
+.badge-pf--location {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.badge-pf--location .bi {
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
 .org-badge {
   display: inline-flex;
   align-items: center;
