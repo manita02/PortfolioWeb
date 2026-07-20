@@ -1,13 +1,13 @@
-<div class="skill-chips d-flex flex-wrap gap-1">
-  <span *ngFor="let h of visible" class="badge bg-secondary d-inline-flex align-items-center gap-1">
+<div class="skill-chips d-flex flex-wrap">
+  <span *ngFor="let h of visible" class="badge-pf badge-pf--skill">
     <app-base64-image
       *ngIf="h.img"
       [src]="h.img"
       [alt]="h.nombre"
-      maxHeight="16px"
-      cssClass="skill-chip-icon"
+      maxHeight="14px"
+      cssClass="badge-pf__icon"
     ></app-base64-image>
     {{ h.nombre }}
   </span>
-  <span *ngIf="hiddenCount > 0" class="badge bg-light text-dark">+{{ hiddenCount }}</span>
+  <span *ngIf="hiddenCount > 0" class="badge-pf badge-pf--more">+{{ hiddenCount }}</span>
 </div>

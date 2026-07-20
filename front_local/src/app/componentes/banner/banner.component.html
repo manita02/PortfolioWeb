@@ -1,24 +1,32 @@
-<div class="row">
-  <div class="card text-bg-dark banner-card" *ngFor="let Banner of banner">
+<div class="hero-banner" *ngFor="let Banner of banner">
+  <div class="hero-banner__image">
     <img
       *ngIf="isUrl(Banner.img)"
       [src]="Banner.img"
-      class="card-img banner-slide-img"
+      class="hero-banner__img"
       [alt]="Banner.titulo"
     />
     <app-base64-image
       *ngIf="!isUrl(Banner.img)"
       [src]="Banner.img"
       [alt]="Banner.titulo"
-      cssClass="card-img banner-slide-img"
+      cssClass="hero-banner__img"
       maxHeight="100%"
     ></app-base64-image>
+  </div>
 
-    <div class="card-img-overlay">
-      <h1 class="card-title text-center abajo">{{ Banner.titulo }}</h1>
-
-      <button *ngIf="isLogged" class="btn btn-secondary boton" routerLink="/editbanner/{{ Banner.id }}">
-        <i class="bi bi-pen-fill"></i>
+  <div class="hero-banner__overlay">
+    <h1 class="hero-banner__title">{{ Banner.titulo }}</h1>
+    <div class="hero-banner__actions" *ngIf="isLogged">
+      <button
+        class="btn-pf btn-pf--surface btn-pf--icon-sm"
+        routerLink="/editbanner/{{ Banner.id }}"
+        data-tip="Editar banner"
+        data-tip-pos="bottom"
+        data-tip-align="end"
+        aria-label="Editar banner"
+      >
+        <i class="bi bi-pencil-square"></i>
       </button>
     </div>
   </div>

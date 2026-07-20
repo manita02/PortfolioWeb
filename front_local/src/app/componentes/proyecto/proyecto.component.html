@@ -1,72 +1,172 @@
-<div class="row">
-    <h1 class="display-4">Proyectos</h1>
-
-    <div class="col-lg-2">
-        <button type="button" class="btn btn-dark" routerLink="/nuevoproyecto" *ngIf="isLogged">
-            <i class="bi bi-plus-circle-fill mas"></i>
-        </button>
-    </div>
-</div>
-
-<div class="row proy-list">
-    <div
-        class="card text-start col-sm-12 col-md-6 col-lg-4 carta color"
-        *ngFor="let p of proyecto"
+<section class="section section--default">
+  <div class="section__header">
+    <h2 class="section__title">Proyectos</h2>
+    <button
+      type="button"
+      class="btn-pf btn-pf--add"
+      routerLink="/nuevoproyecto"
+      *ngIf="isLogged"
+      data-tip="Agregar proyecto"
+      data-tip-align="end"
+      aria-label="Agregar proyecto"
     >
-        <div class="proy-image" *ngIf="p.imagen">
-            <img
-                *ngIf="isUrl(p.imagen)"
-                [src]="p.imagen"
-                [alt]="p.nombreE"
-                class="card-img-top proy-img"
-            />
-            <app-base64-image
-                *ngIf="!isUrl(p.imagen)"
-                [src]="p.imagen"
-                [alt]="p.nombreE"
-                cssClass="card-img-top proy-img"
-                maxHeight="220px"
-            ></app-base64-image>
+      <i class="bi bi-plus-lg"></i>
+    </button>
+  </div>
+
+  <div class="proy-carousel" *ngIf="proyecto.length > 0">
+    <div class="proy-carousel__wrapper">
+      <button
+        type="button"
+        class="proy-carousel__nav proy-carousel__nav--prev"
+        *ngIf="showNav"
+        [disabled]="!canGoPrev"
+        (click)="prevPage()"
+        aria-label="Proyectos anteriores"
+      >
+        <i class="bi bi-chevron-left" aria-hidden="true"></i>
+      </button>
+
+      <div
+        #carousel
+        class="proy-carousel__viewport"
+        [style.height.px]="viewportHeight"
+        tabindex="0"
+        role="region"
+        aria-label="Carrusel de proyectos"
+        aria-live="polite"
+      >
+        <div
+          class="proy-carousel__track"
+          [style.--total-pages]="totalPages"
+          [style.transform]="trackTransform"
+        >
+          <div
+            #carouselPage
+            class="proy-carousel__page"
+            [class.proy-carousel__page--desktop]="isDesktop"
+            *ngFor="let page of pages; let pageIndex = index"
+            [attr.aria-hidden]="pageIndex !== currentPage"
+          >
+            <article class="card-portfolio proy-card" *ngFor="let p of page">
+              <div class="card-portfolio__body">
+                <div class="proy-card__row proy-card__row--image" *ngIf="p.imagen">
+                  <img
+                    *ngIf="isUrl(p.imagen)"
+                    [src]="p.imagen"
+                    [alt]="p.nombreE"
+                    class="proy-card__img"
+                  />
+                  <app-base64-image
+                    *ngIf="!isUrl(p.imagen)"
+                    [src]="p.imagen"
+                    [alt]="p.nombreE"
+                    cssClass="proy-card__img"
+                    maxHeight="160px"
+                  ></app-base64-image>
+                </div>
+
+                <h3 class="card-portfolio__title proy-card__row proy-card__row--title">{{ p.nombreE }}</h3>
+
+                <div class="proy-card__row proy-card__row--org" *ngIf="p.organizacion">
+                  <app-org-badge [organizacion]="p.organizacion" size="md"></app-org-badge>
+                </div>
+
+                <div class="proy-card__row proy-card__row--meta">
+                  <div class="proy-card__meta-item">
+                    <app-periodo-display
+                      [fechaInicio]="p.fechaInicio"
+                      [fechaFin]="p.fechaFin"
+                      [esActual]="p.esActual"
+                    ></app-periodo-display>
+                  </div>
+                  <span
+                    class="badge-pf badge-pf--actual proy-card__badge proy-card__badge--compact"
+                    *ngIf="p.esActual"
+                  >
+                    Actual
+                  </span>
+                </div>
+
+                <p class="card-portfolio__text">{{ p.descripcionE }}</p>
+
+                <app-skill-chips
+                  *ngIf="p.habilidades?.length"
+                  [habilidades]="p.habilidades"
+                  [maxVisible]="4"
+                ></app-skill-chips>
+
+                <div class="admin-actions">
+                  <button
+                    class="btn-pf btn-pf--view btn-pf--icon-sm"
+                    type="button"
+                    (click)="goProject(p.link)"
+                    [attr.data-tip]="p.link || 'Ver proyecto'"
+                    data-tip-wide
+                    data-tip-pos="right"
+                    aria-label="Ver proyecto"
+                  >
+                    <i class="bi bi-box-arrow-up-right"></i>
+                  </button>
+                  <button
+                    *ngIf="isLogged"
+                    class="btn-pf btn-pf--edit btn-pf--icon-sm"
+                    routerLink="/editproyect/{{ p.id }}"
+                    data-tip="Editar"
+                    data-tip-pos="right"
+                    aria-label="Editar"
+                  >
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button
+                    *ngIf="isLogged"
+                    class="btn-pf btn-pf--delete btn-pf--icon-sm"
+                    (click)="delete(p.id)"
+                    data-tip="Eliminar"
+                    data-tip-pos="right"
+                    aria-label="Eliminar"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
+      </div>
 
-        <div class="card-body color">
-            <div class="mb-2" *ngIf="p.organizacion">
-                <app-org-badge [organizacion]="p.organizacion" size="sm"></app-org-badge>
-            </div>
-
-            <h2 class="card-title h4">{{ p.nombreE }}</h2>
-
-            <app-periodo-display
-                [fechaInicio]="p.fechaInicio"
-                [fechaFin]="p.fechaFin"
-                [esActual]="p.esActual"
-            ></app-periodo-display>
-
-            <p class="card-text mt-2">{{ p.descripcionE }}</p>
-
-            <app-skill-chips
-                *ngIf="p.habilidades?.length"
-                [habilidades]="p.habilidades"
-                [maxVisible]="4"
-            ></app-skill-chips>
-
-            <div class="mt-3">
-                <button class="btn btn-success boton" type="button" (click)="goProject(p.link)" [title]="p.link">
-                    <i class="bi bi-eyeglasses"></i>
-                </button>
-
-                <button *ngIf="isLogged" class="btn btn-secondary boton" routerLink="/editproyect/{{ p.id }}">
-                    <i class="bi bi-pen-fill"></i>
-                </button>
-
-                <button *ngIf="isLogged" class="btn btn-danger boton" (click)="delete(p.id)">
-                    <i class="bi bi-trash3-fill"></i>
-                </button>
-            </div>
-        </div>
+      <button
+        type="button"
+        class="proy-carousel__nav proy-carousel__nav--next"
+        *ngIf="showNav"
+        [disabled]="!canGoNext"
+        (click)="nextPage()"
+        aria-label="Proyectos siguientes"
+      >
+        <i class="bi bi-chevron-right" aria-hidden="true"></i>
+      </button>
     </div>
-</div>
 
-<div *ngIf="proyecto.length === 0" class="text-muted py-3 px-3">
+    <div class="proy-carousel__footer" *ngIf="showNav">
+      <p class="proy-carousel__counter" aria-live="polite">
+        {{ currentPage + 1 }} / {{ totalPages }}
+      </p>
+      <div class="proy-carousel__dots" role="tablist" aria-label="Páginas del carrusel">
+        <button
+          type="button"
+          class="proy-carousel__dot"
+          *ngFor="let page of pages; let i = index"
+          [class.proy-carousel__dot--active]="i === currentPage"
+          [attr.aria-label]="'Ir a la página ' + (i + 1)"
+          [attr.aria-selected]="i === currentPage"
+          role="tab"
+          (click)="goToPage(i)"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="proyecto.length === 0" class="empty-state">
     No hay proyectos cargados.
-</div>
+  </div>
+</section>

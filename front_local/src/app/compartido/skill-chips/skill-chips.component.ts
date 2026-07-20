@@ -8,7 +8,6 @@ import { HabilidadDto } from '../../modelo/habilidad.dto';
 @Component({
   selector: 'app-skill-chips',
   templateUrl: './skill-chips.component.html',
-  styleUrls: ['./skill-chips.component.css']
 })
 export class SkillChipsComponent implements OnChanges {
   @Input() habilidades: HabilidadDto[] = [];

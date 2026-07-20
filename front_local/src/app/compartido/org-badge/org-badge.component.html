@@ -1,11 +1,11 @@
-<div *ngIf="organizacion" class="org-badge d-flex align-items-center gap-2" [class.org-badge-sm]="size === 'sm'">
+<div *ngIf="organizacion" class="org-badge" [class.org-badge-sm]="size === 'sm'">
   <app-base64-image
     [src]="organizacion.logoImg"
     [alt]="organizacion.nombre"
     [maxHeight]="logoHeight"
   ></app-base64-image>
   <div>
-    <div class="fw-semibold" [class.small]="size === 'sm'">
+    <div class="org-badge__name" [class.small]="size === 'sm'">
       <a
         *ngIf="showLink && organizacion.urlWeb; else plainName"
         [href]="organizacion.urlWeb"
@@ -14,6 +14,6 @@
       >{{ organizacion.nombre }}</a>
       <ng-template #plainName>{{ organizacion.nombre }}</ng-template>
     </div>
-    <small class="text-muted" *ngIf="organizacion.ubicacion">{{ organizacion.ubicacion }}</small>
+    <span class="org-badge__location" *ngIf="organizacion.ubicacion">{{ organizacion.ubicacion }}</span>
   </div>
 </div>

@@ -1,69 +1,98 @@
-<div class="row">
-
-
-    <div class="contenedor">
-        <div class="logoAP">
-
-            <dfn title="#Yo Programo"><a href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa" target="_blank"><img src="../../../assets/Logo ArgentinaP.png" id="APlogo" alt="#Yo programo"></a></dfn>
-
-        </div>
-
-
-
-
-
-        <div class="redSocial">
-            <button type="button" class="btn btn-dark mas" routerLink="/nuevaredsocial" *ngIf="isLogged">
-                <i class="bi bi-plus-circle-fill mas"></i>
-            </button>
-
-            <div>
-
-                <a
-                    *ngFor="let Redsocial of redsocial"
-                    [href]="Redsocial.link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="red-social-link"
-                    [title]="Redsocial.nombreRedS"
-                >
-                    <img
-                        *ngIf="isUrl(Redsocial.img)"
-                        [src]="Redsocial.img"
-                        [alt]="Redsocial.nombreRedS"
-                        class="red-social-icon"
-                    />
-                    <app-base64-image
-                        *ngIf="!isUrl(Redsocial.img)"
-                        [src]="Redsocial.img"
-                        [alt]="Redsocial.nombreRedS"
-                        cssClass="red-social-icon"
-                        maxHeight="3em"
-                    ></app-base64-image>
-                </a>
-
-                <button type="button" class="btn btn-outline-light" (click)="login()" *ngIf="!isLogged" >Ingresar</button>
-                <button type="button" class="btn btn-outline-light" (click)="onLogOut()" *ngIf="isLogged" >Cerrar Sesión</button>
-
-
-            </div>
-
-
-            <div *ngFor="let Redsocial of redsocial" class="botones">
-
-                <button *ngIf="isLogged" class="btn btn-secondary boton" routerLink="/editred/{{Redsocial.id}}">
-                    <i class="bi bi-pen-fill"></i>
-                </button>
-
-                <button *ngIf="isLogged" class="btn btn-danger boton" (click)="delete(Redsocial.id)" >
-                    <i class="bi bi-trash3-fill"></i>
-                </button>
-
-            </div>
-
-        </div>
-
+<div class="hero-bar">
+  <div class="hero-bar__inner">
+    <div class="hero-bar__logo">
+      <a
+        href="https://www.argentina.gob.ar/produccion/transformacion-digital-y-economia-del-conocimiento/argentina-programa"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="#Yo Programo"
+      >
+        <img src="../../../assets/Logo ArgentinaP.png" class="hero-bar__logo-img" alt="#Yo programo">
+      </a>
     </div>
 
+    <div class="hero-bar__actions">
+      <button
+        type="button"
+        class="btn-pf btn-pf--add"
+        routerLink="/nuevaredsocial"
+        *ngIf="isLogged"
+        data-tip="Agregar red social"
+        data-tip-pos="left"
+        aria-label="Agregar red social"
+      >
+        <i class="bi bi-plus-lg"></i>
+      </button>
 
+      <div class="social-links">
+        <div class="social-item" *ngFor="let Redsocial of redsocial">
+          <a
+            [href]="Redsocial.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-links__link"
+            [title]="Redsocial.nombreRedS"
+          >
+            <img
+              *ngIf="isUrl(Redsocial.img)"
+              [src]="Redsocial.img"
+              [alt]="Redsocial.nombreRedS"
+              class="social-links__icon"
+            />
+            <app-base64-image
+              *ngIf="!isUrl(Redsocial.img)"
+              [src]="Redsocial.img"
+              [alt]="Redsocial.nombreRedS"
+              cssClass="social-links__icon"
+              maxHeight="2.5rem"
+            ></app-base64-image>
+          </a>
+
+          <div class="social-item__admin" *ngIf="isLogged">
+            <button
+              class="btn-pf btn-pf--edit btn-pf--icon-sm"
+              routerLink="/editred/{{ Redsocial.id }}"
+              data-tip="Editar red social"
+              data-tip-pos="bottom"
+              aria-label="Editar red social"
+            >
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button
+              class="btn-pf btn-pf--delete btn-pf--icon-sm"
+              (click)="delete(Redsocial.id)"
+              data-tip="Eliminar red social"
+              data-tip-pos="bottom"
+              aria-label="Eliminar red social"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="btn-pf btn-pf--ghost btn-pf--auth"
+        (click)="login()"
+        *ngIf="!isLogged"
+        data-tip="Ingresar"
+        data-tip-pos="bottom"
+        aria-label="Ingresar"
+      >
+        <i class="bi bi-box-arrow-in-right"></i>
+      </button>
+      <button
+        type="button"
+        class="btn-pf btn-pf--ghost btn-pf--auth"
+        (click)="onLogOut()"
+        *ngIf="isLogged"
+        data-tip="Cerrar sesión"
+        data-tip-pos="bottom"
+        aria-label="Cerrar sesión"
+      >
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+    </div>
+  </div>
 </div>

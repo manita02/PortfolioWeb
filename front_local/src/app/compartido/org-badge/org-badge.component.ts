@@ -8,7 +8,6 @@ import { Organizacion } from '../../modelo/organizacion';
 @Component({
   selector: 'app-org-badge',
   templateUrl: './org-badge.component.html',
-  styleUrls: ['./org-badge.component.css']
 })
 export class OrgBadgeComponent {
   @Input() organizacion: Organizacion | null = null;

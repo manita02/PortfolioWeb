@@ -5,7 +5,6 @@ import { formatPeriodo } from '../../util/periodo.util';
 @Component({
   selector: 'app-periodo-display',
   templateUrl: './periodo-display.component.html',
-  styleUrls: ['./periodo-display.component.css']
 })
 export class PeriodoDisplayComponent {
   @Input() fechaInicio = '';

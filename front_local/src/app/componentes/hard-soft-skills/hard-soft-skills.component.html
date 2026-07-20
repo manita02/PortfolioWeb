@@ -1,45 +1,263 @@
-<div class="row">
-    <h1 class="display-4">Hard & Soft Skills</h1>
-    <div class="col-lg-2">
-        <button type="button" class="btn btn-dark" routerLink="/nuevahabilidad" *ngIf="isLogged">
-            <i class="bi bi-plus-circle-fill mas"></i>
-        </button>
-    </div>
-</div>
+<section class="section section--alt">
+  <div class="section__header">
+    <h2 class="section__title">Hard &amp; Soft Skills</h2>
+    <button
+      type="button"
+      class="btn-pf btn-pf--add"
+      routerLink="/nuevahabilidad"
+      *ngIf="isLogged"
+      data-tip="Agregar habilidad"
+      data-tip-align="end"
+      aria-label="Agregar habilidad"
+    >
+      <i class="bi bi-plus-lg"></i>
+    </button>
+  </div>
 
-<div *ngFor="let grupo of grupos" class="mb-4">
-    <h5 class="skill-group-title">{{ grupo.tipo }}</h5>
-    <div class="row">
-        <div class="text-center col-sm-4 col-md-4 col-lg-4 skill-card" *ngFor="let h of grupo.habilidades">
-            <div class="skill-icon-wrap" [title]="h.nombre">
-                <img
-                    *ngIf="isUrl(h.img)"
-                    [src]="h.img"
-                    [alt]="h.nombre"
-                    class="skill-icon"
-                />
-                <app-base64-image
-                    *ngIf="!isUrl(h.img)"
-                    [src]="h.img"
-                    [alt]="h.nombre"
-                    cssClass="skill-icon"
-                    maxHeight="80px"
-                ></app-base64-image>
-            </div>
-            <span class="badge bg-primary skill-name-badge">{{ h.nombre }}</span>
+  <div class="skills-filters" *ngIf="showFilters" role="radiogroup" aria-label="Filtrar por tipo de habilidad">
+    <button
+      type="button"
+      class="skills-filter"
+      [class.skills-filter--active]="selectedTipoId === null"
+      role="radio"
+      [attr.aria-checked]="selectedTipoId === null"
+      (click)="selectFilter(null)"
+    >
+      Todas
+    </button>
+    <button
+      type="button"
+      class="skills-filter"
+      *ngFor="let tipo of tiposHabilidad"
+      [class.skills-filter--active]="selectedTipoId === tipo.id"
+      role="radio"
+      [attr.aria-checked]="selectedTipoId === tipo.id"
+      (click)="selectFilter(tipo.id)"
+    >
+      {{ tipo.nombre }}
+    </button>
+  </div>
 
-            <div class="botones" *ngIf="isLogged">
-                <button class="btn btn-secondary" routerLink="/edithabilidad/{{ h.id }}">
-                    <i class="bi bi-pen-fill"></i>
-                </button>
-                <button class="btn btn-danger" (click)="delete(h.id)">
-                    <i class="bi bi-trash3-fill"></i>
-                </button>
+  <div
+    class="skills-panel"
+    *ngIf="filteredHabilidades.length > 0"
+    [attr.data-filter]="selectedTipoId ?? 'all'"
+    aria-live="polite"
+  >
+    <ng-container *ngIf="showGroupedView; else flatCarousel">
+      <div
+        class="skills-group"
+        *ngFor="let grupo of gruposVisibles; let gi = index"
+        [ngClass]="getGroupAccentClass(grupo)"
+      >
+        <h3 class="skills-group__title">
+          <span class="skills-group__dot" aria-hidden="true"></span>
+          {{ grupo.tipo }}
+          <span class="skills-group__count">{{ grupo.habilidades.length }}</span>
+        </h3>
+
+        <div class="skills-carousel">
+          <div class="skills-carousel__wrapper">
+            <button
+              type="button"
+              class="skills-carousel__nav skills-carousel__nav--prev"
+              *ngIf="showNavForGroup(grupo)"
+              [disabled]="!canGoPrevGroup(grupo)"
+              (click)="prevGroupPage(grupo)"
+              [attr.aria-label]="'Habilidades anteriores de ' + grupo.tipo"
+            >
+              <i class="bi bi-chevron-left" aria-hidden="true"></i>
+            </button>
+
+            <div
+              class="skills-carousel__viewport"
+              [style.height.px]="getViewportHeight(grupo.tipo)"
+              tabindex="0"
+              role="region"
+              [attr.aria-label]="'Carrusel de habilidades: ' + grupo.tipo"
+              (keydown)="onCarouselKeydown($event, grupo)"
+            >
+              <div
+                class="skills-carousel__track"
+                [style.--total-pages]="getGroupTotalPages(grupo)"
+                [style.transform]="getGroupTrackTransform(grupo)"
+              >
+                <div
+                  #carouselPage
+                  class="skills-carousel__page"
+                  [attr.data-carousel-key]="grupo.tipo"
+                  *ngFor="let page of getGroupPages(grupo); let pageIndex = index"
+                  [attr.aria-hidden]="pageIndex !== getGroupCurrentPage(grupo)"
+                >
+                  <ng-container
+                    *ngFor="let h of page; let i = index"
+                    [ngTemplateOutlet]="skillPill"
+                    [ngTemplateOutletContext]="{ $implicit: h, stagger: gi * 8 + i }"
+                  ></ng-container>
+                </div>
+              </div>
             </div>
+
+            <button
+              type="button"
+              class="skills-carousel__nav skills-carousel__nav--next"
+              *ngIf="showNavForGroup(grupo)"
+              [disabled]="!canGoNextGroup(grupo)"
+              (click)="nextGroupPage(grupo)"
+              [attr.aria-label]="'Habilidades siguientes de ' + grupo.tipo"
+            >
+              <i class="bi bi-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="skills-carousel__footer" *ngIf="showNavForGroup(grupo)">
+            <p class="skills-carousel__counter" aria-live="polite">
+              {{ getGroupCurrentPage(grupo) + 1 }} / {{ getGroupTotalPages(grupo) }}
+            </p>
+            <div class="skills-carousel__dots" role="tablist" [attr.aria-label]="'Páginas de ' + grupo.tipo">
+              <button
+                type="button"
+                class="skills-carousel__dot"
+                *ngFor="let page of getGroupPages(grupo); let i = index"
+                [class.skills-carousel__dot--active]="i === getGroupCurrentPage(grupo)"
+                [attr.aria-label]="'Ir a la página ' + (i + 1)"
+                [attr.aria-selected]="i === getGroupCurrentPage(grupo)"
+                role="tab"
+                (click)="goToGroupPage(grupo, i)"
+              ></button>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
+    </ng-container>
 
-<div *ngIf="grupos.length === 0" class="text-muted py-3">
+    <ng-template #flatCarousel>
+      <div class="skills-carousel skills-carousel--flat">
+        <div class="skills-carousel__wrapper">
+          <button
+            type="button"
+            class="skills-carousel__nav skills-carousel__nav--prev"
+            *ngIf="flatShowNav"
+            [disabled]="!flatCanGoPrev"
+            (click)="prevFlatPage()"
+            aria-label="Habilidades anteriores"
+          >
+            <i class="bi bi-chevron-left" aria-hidden="true"></i>
+          </button>
+
+          <div
+            class="skills-carousel__viewport"
+            [style.height.px]="getViewportHeight('flat')"
+            tabindex="0"
+            role="region"
+            aria-label="Carrusel de habilidades"
+            (keydown)="onCarouselKeydown($event, 'flat')"
+          >
+            <div
+              class="skills-carousel__track"
+              [style.--total-pages]="flatTotalPages"
+              [style.transform]="flatTrackTransform"
+            >
+              <div
+                #carouselPage
+                class="skills-carousel__page"
+                data-carousel-key="flat"
+                *ngFor="let page of flatPages; let pageIndex = index"
+                [attr.aria-hidden]="pageIndex !== flatCurrentPage"
+              >
+                <ng-container
+                  *ngFor="let h of page; let i = index"
+                  [ngTemplateOutlet]="skillPill"
+                  [ngTemplateOutletContext]="{ $implicit: h, stagger: i }"
+                ></ng-container>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="skills-carousel__nav skills-carousel__nav--next"
+            *ngIf="flatShowNav"
+            [disabled]="!flatCanGoNext"
+            (click)="nextFlatPage()"
+            aria-label="Habilidades siguientes"
+          >
+            <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="skills-carousel__footer" *ngIf="flatShowNav">
+          <p class="skills-carousel__counter" aria-live="polite">
+            {{ flatCurrentPage + 1 }} / {{ flatTotalPages }}
+          </p>
+          <div class="skills-carousel__dots" role="tablist" aria-label="Páginas del carrusel">
+            <button
+              type="button"
+              class="skills-carousel__dot"
+              *ngFor="let page of flatPages; let i = index"
+              [class.skills-carousel__dot--active]="i === flatCurrentPage"
+              [attr.aria-label]="'Ir a la página ' + (i + 1)"
+              [attr.aria-selected]="i === flatCurrentPage"
+              role="tab"
+              (click)="goToFlatPage(i)"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <div *ngIf="habilidades.length === 0" class="empty-state">
     No hay habilidades cargadas.
-</div>
+  </div>
+
+  <div *ngIf="habilidades.length > 0 && filteredHabilidades.length === 0" class="empty-state">
+    No hay habilidades para el filtro seleccionado.
+  </div>
+</section>
+
+<ng-template #skillPill let-h let-stagger="stagger">
+  <div
+    class="skill-pill"
+    [ngClass]="getPillAccentClass(h)"
+    [style.--stagger]="stagger"
+  >
+    <span class="skill-pill__icon-wrap" aria-hidden="true">
+      <img
+        *ngIf="isUrl(h.img)"
+        [src]="h.img"
+        [alt]=""
+        class="skill-pill__icon"
+      />
+      <app-base64-image
+        *ngIf="!isUrl(h.img)"
+        [src]="h.img"
+        [alt]=""
+        cssClass="skill-pill__icon"
+        maxHeight="36px"
+      ></app-base64-image>
+    </span>
+    <span class="skill-pill__name">{{ h.nombre }}</span>
+
+    <div class="skill-pill__admin" *ngIf="isLogged">
+      <button
+        class="btn-pf btn-pf--edit btn-pf--icon-sm skill-pill__btn"
+        routerLink="/edithabilidad/{{ h.id }}"
+        data-tip="Editar"
+        data-tip-pos="bottom"
+        [attr.aria-label]="'Editar ' + h.nombre"
+      >
+        <i class="bi bi-pencil-square"></i>
+      </button>
+      <button
+        class="btn-pf btn-pf--delete btn-pf--icon-sm skill-pill__btn"
+        (click)="delete(h.id)"
+        data-tip="Eliminar"
+        data-tip-pos="bottom"
+        [attr.aria-label]="'Eliminar ' + h.nombre"
+      >
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+  </div>
+</ng-template>
