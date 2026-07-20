@@ -17,8 +17,8 @@
   border: 1px solid var(--color-accent);
   border-radius: 0.4rem;
   box-shadow:
-    0 4px 14px rgba(50, 30, 72, 0.35),
-    0 0 8px rgba(101, 220, 213, 0.15);
+    0 4px 14px var(--overlay-primary-35),
+    0 0 8px var(--overlay-accent-15);
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;

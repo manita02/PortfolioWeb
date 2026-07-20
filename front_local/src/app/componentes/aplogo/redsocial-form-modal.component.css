@@ -110,8 +110,8 @@
 
 .social-form-modal ::ng-deep app-image-upload .form-control:focus {
   outline: none;
-  border-color: rgba(101, 220, 213, 0.75);
-  box-shadow: 0 0 0 3px rgba(101, 220, 213, 0.18);
+  border-color: var(--overlay-accent-75);
+  box-shadow: 0 0 0 3px var(--overlay-accent-18);
 }
 
 .social-form-modal ::ng-deep app-image-upload .text-white-50,
@@ -138,7 +138,7 @@
   overflow: hidden;
   border-radius: var(--border-radius-sm);
   border: 1px solid var(--border-color);
-  background: rgba(245, 242, 248, 0.55);
+  background: var(--overlay-muted-55);
 }
 
 .social-form-modal ::ng-deep app-image-upload .base64-image-wrapper img,

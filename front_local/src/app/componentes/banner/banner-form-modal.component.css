@@ -110,8 +110,8 @@
 
 .banner-form-modal ::ng-deep app-image-upload .form-control:focus {
   outline: none;
-  border-color: rgba(101, 220, 213, 0.75);
-  box-shadow: 0 0 0 3px rgba(101, 220, 213, 0.18);
+  border-color: var(--overlay-accent-75);
+  box-shadow: 0 0 0 3px var(--overlay-accent-18);
 }
 
 .banner-form-modal ::ng-deep app-image-upload .text-white-50 {

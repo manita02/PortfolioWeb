@@ -27,7 +27,7 @@
 }
 
 .proy-carousel__viewport:focus-visible {
-  outline: 2px solid rgba(101, 220, 213, 0.75);
+  outline: 2px solid var(--overlay-accent-75);
   outline-offset: 3px;
   border-radius: var(--border-radius-sm);
 }
@@ -100,7 +100,7 @@
 
 .proy-carousel__nav:hover:not(:disabled) {
   background: var(--color-accent-soft);
-  border-color: rgba(101, 220, 213, 0.45);
+  border-color: var(--overlay-accent-45);
   box-shadow: var(--btn-shadow-hover);
   transform: translateY(-1px);
 }
@@ -145,14 +145,14 @@
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(50, 30, 72, 0.2);
+  background: var(--overlay-primary-20);
   cursor: pointer;
   transition: transform var(--transition-fast), background var(--transition-fast);
 }
 
 .proy-carousel__dot:hover {
   transform: scale(1.15);
-  background: rgba(50, 30, 72, 0.35);
+  background: var(--overlay-primary-35);
 }
 
 .proy-carousel__dot--active {
@@ -161,7 +161,7 @@
 }
 
 .proy-carousel__dot:focus-visible {
-  outline: 2px solid rgba(101, 220, 213, 0.75);
+  outline: 2px solid var(--overlay-accent-75);
   outline-offset: 2px;
 }
 

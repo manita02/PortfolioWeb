@@ -27,7 +27,7 @@
   overflow: hidden;
   border-radius: var(--border-radius-sm);
   border: 1px solid var(--border-color);
-  background: rgba(245, 242, 248, 0.55);
+  background: var(--overlay-muted-55);
 }
 
 .image-upload-preview--full ::ng-deep .base64-image-wrapper img,

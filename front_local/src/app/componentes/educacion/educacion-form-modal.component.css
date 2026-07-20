@@ -124,8 +124,8 @@
 
 .edu-form-modal ::ng-deep .periodo-input .form-control:focus {
   outline: none;
-  border-color: rgba(101, 220, 213, 0.75);
-  box-shadow: 0 0 0 3px rgba(101, 220, 213, 0.18);
+  border-color: var(--overlay-accent-75);
+  box-shadow: 0 0 0 3px var(--overlay-accent-18);
 }
 
 .edu-form-modal ::ng-deep app-catalog-select .form-label,
@@ -162,8 +162,8 @@
 .edu-form-modal ::ng-deep app-image-upload .form-control:focus,
 .edu-form-modal ::ng-deep app-file-upload .form-control:focus {
   outline: none;
-  border-color: rgba(101, 220, 213, 0.75);
-  box-shadow: 0 0 0 3px rgba(101, 220, 213, 0.18);
+  border-color: var(--overlay-accent-75);
+  box-shadow: 0 0 0 3px var(--overlay-accent-18);
 }
 
 .edu-form-modal ::ng-deep app-org-select .btn {
@@ -172,7 +172,7 @@
   font-size: 0.78rem;
   font-weight: 600;
   padding: 0.45rem 0.65rem;
-  border-color: rgba(101, 220, 213, 0.45);
+  border-color: var(--overlay-accent-45);
   color: var(--color-secondary);
 }
 
@@ -187,7 +187,7 @@
   overflow-y: auto;
   padding: 0.55rem 0.65rem !important;
   border-color: var(--border-color) !important;
-  background: rgba(245, 242, 248, 0.55);
+  background: var(--overlay-muted-55);
 }
 
 .edu-form-modal ::ng-deep .skill-multi-select .form-check {
@@ -236,7 +236,7 @@
 }
 
 .edu-form-modal ::ng-deep app-file-upload .btn-outline-primary {
-  border-color: rgba(101, 220, 213, 0.45);
+  border-color: var(--overlay-accent-45);
   color: var(--color-secondary);
   background: transparent;
 }
@@ -248,7 +248,7 @@
 }
 
 .edu-form-modal ::ng-deep app-file-upload .btn-outline-secondary {
-  border-color: rgba(67, 99, 126, 0.28);
+  border-color: var(--overlay-secondary-28);
   color: var(--color-secondary);
   background: transparent;
 }
