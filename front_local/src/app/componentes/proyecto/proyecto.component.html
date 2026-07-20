@@ -50,10 +50,6 @@
           >
             <article class="card-portfolio proy-card" *ngFor="let p of page">
               <div class="card-portfolio__body">
-                <div class="proy-card__row proy-card__row--org" *ngIf="p.organizacion">
-                  <app-org-badge [organizacion]="p.organizacion" size="md"></app-org-badge>
-                </div>
-
                 <div class="proy-card__row proy-card__row--image" *ngIf="p.imagen">
                   <img
                     *ngIf="isUrl(p.imagen)"
@@ -71,6 +67,10 @@
                 </div>
 
                 <h3 class="card-portfolio__title proy-card__row proy-card__row--title">{{ p.nombreE }}</h3>
+
+                <div class="proy-card__row proy-card__row--org" *ngIf="p.organizacion">
+                  <app-org-badge [organizacion]="p.organizacion" size="md"></app-org-badge>
+                </div>
 
                 <div class="proy-card__row proy-card__row--meta">
                   <div class="proy-card__meta-item">
