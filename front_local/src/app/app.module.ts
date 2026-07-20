@@ -24,6 +24,7 @@ import { EditeducacionComponent } from './componentes/educacion/editeducacion.co
 import { EducacionFormModalComponent } from './componentes/educacion/educacion-form-modal.component';
 import { NewproyectoComponent } from './componentes/proyecto/newproyecto.component';
 import { EditproyectoComponent } from './componentes/proyecto/editproyecto.component';
+import { ProyectoFormModalComponent } from './componentes/proyecto/proyecto-form-modal.component';
 import { InfopComponent } from './componentes/acerca-de/infop.component';
 import { PersonaFormModalComponent } from './componentes/acerca-de/persona-form-modal.component';
 import { NewhabilidadComponent } from './componentes/hard-soft-skills/newhabilidad.component';
@@ -64,6 +65,7 @@ import { ComponentesDemoComponent } from './compartido/componentes-demo/componen
     EducacionFormModalComponent,
     NewproyectoComponent,
     EditproyectoComponent,
+    ProyectoFormModalComponent,
     InfopComponent,
     PersonaFormModalComponent,
     NewhabilidadComponent,
