@@ -18,6 +18,12 @@ export class ImageUploadComponent implements OnChanges {
   @Input() maxSizeMb = 2;
   /** Tamaño máximo en KB; prioridad sobre maxSizeMb. */
   @Input() maxSizeKb: number | null = null;
+  /** Altura máxima del preview (se ignora si previewFullWidth es true). */
+  @Input() previewMaxHeight = '150px';
+  /** Preview a ancho completo con recorte tipo banner. */
+  @Input() previewFullWidth = false;
+  /** Botón de quitar como ícono con tooltip en lugar de texto. */
+  @Input() iconClearButton = false;
   @Input() value = '';
   @Output() valueChange = new EventEmitter<string>();
   @Output() error = new EventEmitter<string | null>();
