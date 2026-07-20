@@ -21,6 +21,7 @@ import { NewExperienciaComponent } from './componentes/experiencia-laboral/new-e
 import { EditExperienciaComponent } from './componentes/experiencia-laboral/edit-experiencia.component';
 import { NeweducacionComponent } from './componentes/educacion/neweducacion.component';
 import { EditeducacionComponent } from './componentes/educacion/editeducacion.component';
+import { EducacionFormModalComponent } from './componentes/educacion/educacion-form-modal.component';
 import { NewproyectoComponent } from './componentes/proyecto/newproyecto.component';
 import { EditproyectoComponent } from './componentes/proyecto/editproyecto.component';
 import { InfopComponent } from './componentes/acerca-de/infop.component';
@@ -59,6 +60,7 @@ import { ComponentesDemoComponent } from './compartido/componentes-demo/componen
     EditExperienciaComponent,
     NeweducacionComponent,
     EditeducacionComponent,
+    EducacionFormModalComponent,
     NewproyectoComponent,
     EditproyectoComponent,
     InfopComponent,
