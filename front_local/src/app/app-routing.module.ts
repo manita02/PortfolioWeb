@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditredComponent } from './componentes/aplogo/editred.component';
 import { NewredComponent } from './componentes/aplogo/newred.component';
-import { EdithabilidadComponent } from './componentes/hard-soft-skills/edithabilidad.component';
-import { NewhabilidadComponent } from './componentes/hard-soft-skills/newhabilidad.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginRedirectGuard } from './servicio/login-redirect.guard';
 import {
@@ -16,6 +14,10 @@ import {
   EducacionCreateGuard,
   EducacionEditGuard,
 } from './servicio/educacion-modal.guard';
+import {
+  HabilidadCreateGuard,
+  HabilidadEditGuard,
+} from './servicio/habilidad-modal.guard';
 import { EditproyectoComponent } from './componentes/proyecto/editproyecto.component';
 import { NewproyectoComponent } from './componentes/proyecto/newproyecto.component';
 import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
@@ -30,8 +32,8 @@ const routes: Routes = [
   {path: 'nuevoproyecto', component: NewproyectoComponent},
   {path: 'editproyect/:id', component: EditproyectoComponent},
   { path: 'editinfop/:id', canActivate: [PersonaEditGuard], component: HomeComponent },
-  {path: 'nuevahabilidad', component: NewhabilidadComponent},
-  {path: 'edithabilidad/:id', component: EdithabilidadComponent},
+  { path: 'nuevahabilidad', canActivate: [HabilidadCreateGuard], component: HomeComponent },
+  { path: 'edithabilidad/:id', canActivate: [HabilidadEditGuard], component: HomeComponent },
   { path: 'editbanner/:id', canActivate: [BannerEditGuard], component: HomeComponent },
   {path: 'nuevaredsocial', component: NewredComponent},
   {path: 'editred/:id', component: EditredComponent},
