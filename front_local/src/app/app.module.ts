@@ -27,6 +27,7 @@ import { InfopComponent } from './componentes/acerca-de/infop.component';
 import { NewhabilidadComponent } from './componentes/hard-soft-skills/newhabilidad.component';
 import { EdithabilidadComponent } from './componentes/hard-soft-skills/edithabilidad.component';
 import { EditbannerComponent } from './componentes/banner/editbanner.component';
+import { BannerFormModalComponent } from './componentes/banner/banner-form-modal.component';
 import { NewredComponent } from './componentes/aplogo/newred.component';
 import { EditredComponent } from './componentes/aplogo/editred.component';
 import { SharedModule } from './compartido/shared.module';
@@ -63,6 +64,7 @@ import { ComponentesDemoComponent } from './compartido/componentes-demo/componen
     NewhabilidadComponent,
     EdithabilidadComponent,
     EditbannerComponent,
+    BannerFormModalComponent,
     NewredComponent,
     EditredComponent,
     ComponentesDemoComponent,
