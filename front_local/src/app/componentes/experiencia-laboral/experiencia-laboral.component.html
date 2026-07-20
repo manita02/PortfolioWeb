@@ -4,7 +4,7 @@
     <button
       type="button"
       class="btn-pf btn-pf--add"
-      routerLink="/nuevaexp"
+      (click)="openCreateModal()"
       *ngIf="isLogged"
       data-tip="Agregar experiencia"
       data-tip-align="end"
@@ -100,7 +100,8 @@
                 <div class="admin-actions" *ngIf="isLogged">
                   <button
                     class="btn-pf btn-pf--edit btn-pf--icon-sm"
-                    routerLink="/editexp/{{ exp.id }}"
+                    type="button"
+                    (click)="openEditModal(exp.id)"
                     data-tip="Editar"
                     aria-label="Editar"
                   >

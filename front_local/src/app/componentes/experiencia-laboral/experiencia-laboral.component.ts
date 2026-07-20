@@ -11,7 +11,9 @@ import {
 } from '@angular/core';
 import { ExperienciaDto } from 'src/app/modelo/experiencia.dto';
 import { SExperienciaService } from 'src/app/servicio/s-experiencia.service';
+import { ExperienciaModalService } from 'src/app/servicio/experiencia-modal.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { Subscription } from 'rxjs';
 
 type EmploymentCategory = 'formal' | 'independent' | 'training' | 'default';
 
@@ -39,15 +41,21 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
   private readonly viewportHoverBuffer = 28;
   private readonly viewportPaddingBlock = 32;
 
+  private modalSavedSub?: Subscription;
+
   constructor(
     private sExperiencia: SExperienciaService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private experienciaModal: ExperienciaModalService
   ) {}
 
   ngOnInit(): void {
     this.isLogged = !!this.tokenService.getToken();
     this.setupPageSize();
     this.cargarExperiencia();
+    this.modalSavedSub = this.experienciaModal.saved$.subscribe(() => {
+      this.cargarExperiencia();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -60,6 +68,7 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
   }
 
   ngOnDestroy(): void {
+    this.modalSavedSub?.unsubscribe();
     if (this.viewportHeightFrame != null) {
       cancelAnimationFrame(this.viewportHeightFrame);
     }
@@ -72,6 +81,16 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
   @HostListener('window:resize')
   onWindowResize(): void {
     this.scheduleViewportHeightUpdate();
+  }
+
+  openCreateModal(): void {
+    this.experienciaModal.openCreate();
+  }
+
+  openEditModal(id?: number): void {
+    if (id != null) {
+      this.experienciaModal.openEdit(id);
+    }
   }
 
   cargarExperiencia(): void {
