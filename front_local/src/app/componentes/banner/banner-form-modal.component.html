@@ -1,0 +1,108 @@
+<div
+  class="pf-modal banner-form-modal"
+  *ngIf="isOpen"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'banner-form-modal-title'"
+>
+  <div class="pf-modal__backdrop" aria-hidden="true" (click)="close()"></div>
+
+  <div class="pf-modal__panel banner-form-modal__panel">
+    <button
+      type="button"
+      class="pf-modal__close btn-pf btn-pf--icon-sm"
+      (click)="close()"
+      [disabled]="guardando || loading"
+      data-tip="Cerrar"
+      data-tip-pos="left"
+      aria-label="Cerrar"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+
+    <div class="pf-modal__header banner-form-modal__header">
+      <div class="banner-form-modal__heading">
+        <span class="pf-modal__icon banner-form-modal__icon" aria-hidden="true">
+          <i class="bi bi-image"></i>
+        </span>
+        <h2 id="banner-form-modal-title" class="pf-modal__title">Editar banner</h2>
+      </div>
+    </div>
+
+    <div class="pf-modal__body">
+      <div class="pf-modal__loading-overlay" *ngIf="loading">
+        <span>
+          <i class="bi bi-arrow-repeat banner-form-modal__spinner" aria-hidden="true"></i>
+          Cargando…
+        </span>
+      </div>
+
+      <form
+        *ngIf="banner && !loading"
+        #bannerForm="ngForm"
+        (ngSubmit)="onSubmit(bannerForm)"
+        class="banner-form-modal__form"
+        novalidate
+      >
+        <p class="pf-modal__error" *ngIf="errorMessage" role="alert">
+          <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+          {{ errorMessage }}
+        </p>
+
+        <div class="banner-form-modal__fields">
+          <div class="form-pf">
+            <label class="form-pf__label" for="banner-titulo">Título</label>
+            <input
+              type="text"
+              id="banner-titulo"
+              name="titulo"
+              class="form-pf__input"
+              [(ngModel)]="banner.titulo"
+              required
+              [disabled]="guardando"
+            />
+          </div>
+
+          <div class="banner-form-modal__upload">
+            <app-image-upload
+              [(value)]="banner.img"
+              label="Imagen del banner"
+              [required]="true"
+              [maxSizeKb]="750"
+              [previewFullWidth]="true"
+              [iconClearButton]="true"
+            ></app-image-upload>
+            <p class="pf-modal__hint banner-form-modal__hint">
+              JPEG o PNG de hasta <strong>750 KB</strong>. Imágenes más pesadas pueden fallar al guardar en MySQL/XAMPP.
+            </p>
+          </div>
+        </div>
+
+        <div class="pf-modal__actions">
+          <button
+            type="button"
+            class="btn-pf btn-pf--edit"
+            (click)="close()"
+            [disabled]="guardando"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="btn-pf btn-pf--view"
+            [disabled]="!formValido || guardando"
+          >
+            <span *ngIf="!guardando">
+              <i class="bi bi-check2-lg" aria-hidden="true"></i>
+              Guardar cambios
+            </span>
+            <span *ngIf="guardando" class="banner-form-modal__saving">
+              <i class="bi bi-arrow-repeat banner-form-modal__spinner" aria-hidden="true"></i>
+              Guardando…
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
