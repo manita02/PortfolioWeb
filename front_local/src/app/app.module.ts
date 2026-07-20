@@ -34,6 +34,7 @@ import { EditbannerComponent } from './componentes/banner/editbanner.component';
 import { BannerFormModalComponent } from './componentes/banner/banner-form-modal.component';
 import { NewredComponent } from './componentes/aplogo/newred.component';
 import { EditredComponent } from './componentes/aplogo/editred.component';
+import { RedsocialFormModalComponent } from './componentes/aplogo/redsocial-form-modal.component';
 import { SharedModule } from './compartido/shared.module';
 import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
 
@@ -75,6 +76,7 @@ import { ComponentesDemoComponent } from './compartido/componentes-demo/componen
     BannerFormModalComponent,
     NewredComponent,
     EditredComponent,
+    RedsocialFormModalComponent,
     ComponentesDemoComponent,
   ],
   imports: [
