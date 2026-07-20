@@ -28,6 +28,7 @@ import { InfopComponent } from './componentes/acerca-de/infop.component';
 import { PersonaFormModalComponent } from './componentes/acerca-de/persona-form-modal.component';
 import { NewhabilidadComponent } from './componentes/hard-soft-skills/newhabilidad.component';
 import { EdithabilidadComponent } from './componentes/hard-soft-skills/edithabilidad.component';
+import { HabilidadFormModalComponent } from './componentes/hard-soft-skills/habilidad-form-modal.component';
 import { EditbannerComponent } from './componentes/banner/editbanner.component';
 import { BannerFormModalComponent } from './componentes/banner/banner-form-modal.component';
 import { NewredComponent } from './componentes/aplogo/newred.component';
@@ -67,6 +68,7 @@ import { ComponentesDemoComponent } from './compartido/componentes-demo/componen
     PersonaFormModalComponent,
     NewhabilidadComponent,
     EdithabilidadComponent,
+    HabilidadFormModalComponent,
     EditbannerComponent,
     BannerFormModalComponent,
     NewredComponent,
