@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { InfopComponent } from './componentes/acerca-de/infop.component';
 import { EditredComponent } from './componentes/aplogo/editred.component';
 import { NewredComponent } from './componentes/aplogo/newred.component';
-import { EditbannerComponent } from './componentes/banner/editbanner.component';
 import { EditeducacionComponent } from './componentes/educacion/editeducacion.component';
 import { NeweducacionComponent } from './componentes/educacion/neweducacion.component';
 import { EdithabilidadComponent } from './componentes/hard-soft-skills/edithabilidad.component';
@@ -14,6 +13,7 @@ import {
   ExperienciaCreateGuard,
   ExperienciaEditGuard,
 } from './servicio/experiencia-modal.guard';
+import { BannerEditGuard } from './servicio/banner-modal.guard';
 import { EditproyectoComponent } from './componentes/proyecto/editproyecto.component';
 import { NewproyectoComponent } from './componentes/proyecto/newproyecto.component';
 import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
@@ -30,7 +30,7 @@ const routes: Routes = [
   {path: 'editinfop/:id', component: InfopComponent},
   {path: 'nuevahabilidad', component: NewhabilidadComponent},
   {path: 'edithabilidad/:id', component: EdithabilidadComponent},
-  {path: 'editbanner/:id', component: EditbannerComponent},
+  { path: 'editbanner/:id', canActivate: [BannerEditGuard], component: HomeComponent },
   {path: 'nuevaredsocial', component: NewredComponent},
   {path: 'editred/:id', component: EditredComponent},
   {path: 'dev/componentes', component: ComponentesDemoComponent}
