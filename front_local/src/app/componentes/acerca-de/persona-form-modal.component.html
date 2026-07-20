@@ -1,0 +1,147 @@
+<div
+  class="pf-modal persona-form-modal"
+  *ngIf="isOpen"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'persona-form-modal-title'"
+>
+  <div class="pf-modal__backdrop" aria-hidden="true" (click)="close()"></div>
+
+  <div class="pf-modal__panel pf-modal__panel--wide persona-form-modal__panel">
+    <button
+      type="button"
+      class="pf-modal__close btn-pf btn-pf--icon-sm"
+      (click)="close()"
+      [disabled]="guardando || loading"
+      data-tip="Cerrar"
+      data-tip-pos="left"
+      aria-label="Cerrar"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+
+    <div class="pf-modal__header persona-form-modal__header">
+      <div class="persona-form-modal__heading">
+        <span class="pf-modal__icon persona-form-modal__icon" aria-hidden="true">
+          <i class="bi bi-person-badge"></i>
+        </span>
+        <h2 id="persona-form-modal-title" class="pf-modal__title">Editar información personal</h2>
+      </div>
+    </div>
+
+    <div class="pf-modal__body">
+      <div class="pf-modal__loading-overlay" *ngIf="loading">
+        <span>
+          <i class="bi bi-arrow-repeat persona-form-modal__spinner" aria-hidden="true"></i>
+          Cargando…
+        </span>
+      </div>
+
+      <form
+        *ngIf="persona && !loading"
+        #personaForm="ngForm"
+        (ngSubmit)="onSubmit(personaForm)"
+        class="persona-form-modal__form"
+        novalidate
+      >
+        <p class="pf-modal__error" *ngIf="errorMessage" role="alert">
+          <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+          {{ errorMessage }}
+        </p>
+
+        <div class="persona-form-modal__grid">
+          <div class="persona-form-modal__col persona-form-modal__col--fields">
+            <div class="form-pf">
+              <label class="form-pf__label" for="persona-nombre">Nombre</label>
+              <input
+                type="text"
+                id="persona-nombre"
+                name="nombre"
+                class="form-pf__input"
+                [(ngModel)]="persona.nombre"
+                required
+                [disabled]="guardando"
+              />
+            </div>
+
+            <div class="form-pf">
+              <label class="form-pf__label" for="persona-apellido">Apellido</label>
+              <input
+                type="text"
+                id="persona-apellido"
+                name="apellido"
+                class="form-pf__input"
+                [(ngModel)]="persona.apellido"
+                required
+                [disabled]="guardando"
+              />
+            </div>
+
+            <div class="form-pf">
+              <label class="form-pf__label" for="persona-profesion">Profesión</label>
+              <input
+                type="text"
+                id="persona-profesion"
+                name="profesion"
+                class="form-pf__input"
+                [(ngModel)]="persona.profesion"
+                required
+                [disabled]="guardando"
+              />
+            </div>
+
+            <div class="form-pf persona-form-modal__bio">
+              <label class="form-pf__label" for="persona-acercaDe">Acerca de mí</label>
+              <textarea
+                id="persona-acercaDe"
+                name="acercaDe"
+                class="form-pf__textarea"
+                rows="4"
+                [(ngModel)]="persona.acercaDe"
+                required
+                [disabled]="guardando"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="persona-form-modal__col persona-form-modal__col--photo">
+            <app-image-upload
+              [(value)]="persona.img"
+              label="Foto de perfil"
+              [required]="true"
+              [iconClearButton]="true"
+            ></app-image-upload>
+            <p class="pf-modal__hint persona-form-modal__hint">
+              JPEG o PNG, máximo <strong>2 MB</strong>.
+            </p>
+          </div>
+        </div>
+
+        <div class="pf-modal__actions">
+          <button
+            type="button"
+            class="btn-pf btn-pf--edit"
+            (click)="close()"
+            [disabled]="guardando"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="btn-pf btn-pf--view"
+            [disabled]="!formValido || guardando"
+          >
+            <span *ngIf="!guardando">
+              <i class="bi bi-check2-lg" aria-hidden="true"></i>
+              Guardar cambios
+            </span>
+            <span *ngIf="guardando" class="persona-form-modal__saving">
+              <i class="bi bi-arrow-repeat persona-form-modal__spinner" aria-hidden="true"></i>
+              Guardando…
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
