@@ -29,6 +29,10 @@
   line-height: 1.2;
 }
 
+.exp-form-modal__form {
+  min-width: 0;
+}
+
 .exp-form-modal__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -92,6 +96,11 @@
 .exp-form-modal ::ng-deep .periodo-input .row {
   --bs-gutter-y: 0.45rem;
   --bs-gutter-x: 0.45rem;
+  margin-inline: 0;
+}
+
+.exp-form-modal ::ng-deep .periodo-input .row > * {
+  padding-inline: calc(var(--bs-gutter-x) * 0.5);
 }
 
 .exp-form-modal ::ng-deep .periodo-input .form-label {
@@ -139,6 +148,7 @@
 .exp-form-modal ::ng-deep app-catalog-select .form-select,
 .exp-form-modal ::ng-deep app-org-select .form-select {
   width: 100%;
+  min-width: 0;
   padding: 0.52rem 0.75rem;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-sm);
@@ -146,6 +156,10 @@
   color: var(--text-primary);
   font-family: var(--font-family-base);
   font-size: 0.88rem;
+}
+
+.exp-form-modal ::ng-deep app-org-select .d-flex {
+  min-width: 0;
 }
 
 .exp-form-modal ::ng-deep app-catalog-select .form-select:focus,
