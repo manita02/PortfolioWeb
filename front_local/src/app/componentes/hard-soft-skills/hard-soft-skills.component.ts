@@ -11,8 +11,10 @@ import {
 import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
 import { TipoHabilidad } from 'src/app/modelo/tipo-habilidad';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
+import { HabilidadModalService } from 'src/app/servicio/habilidad-modal.service';
 import { TipoHabilidadService } from 'src/app/servicio/tipo-habilidad.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { Subscription } from 'rxjs';
 
 export interface GrupoHabilidades {
   tipo: string;
@@ -47,10 +49,13 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
   private readonly viewportHoverBuffer = 12;
   private readonly viewportPaddingBlock = 56;
 
+  private modalSavedSub?: Subscription;
+
   constructor(
     private habilidadesS: HabilidadesService,
     private tipoHabilidadS: TipoHabilidadService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private habilidadModal: HabilidadModalService
   ) {}
 
   ngOnInit(): void {
@@ -58,9 +63,13 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     this.setupPageSize();
     this.cargarTiposHabilidad();
     this.cargarHabilidad();
+    this.modalSavedSub = this.habilidadModal.saved$.subscribe(() => {
+      this.cargarHabilidad();
+    });
   }
 
   ngOnDestroy(): void {
+    this.modalSavedSub?.unsubscribe();
     if (this.viewportHeightFrame != null) {
       cancelAnimationFrame(this.viewportHeightFrame);
     }
@@ -279,6 +288,14 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
       next: () => this.cargarHabilidad(),
       error: () => alert('No se pudo borrar la habilidad.'),
     });
+  }
+
+  openCreate(): void {
+    this.habilidadModal.openCreate();
+  }
+
+  openEdit(id: number): void {
+    this.habilidadModal.openEdit(id);
   }
 
   private cargarTiposHabilidad(): void {
