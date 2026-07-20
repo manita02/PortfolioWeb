@@ -4,7 +4,7 @@
     <button
       type="button"
       class="btn-pf btn-pf--add"
-      routerLink="/nuevaedu"
+      (click)="openCreate()"
       *ngIf="isLogged"
       data-tip="Agregar educación"
       data-tip-align="end"
@@ -140,8 +140,9 @@
                   </a>
                   <button
                     *ngIf="isLogged"
+                    type="button"
                     class="btn-pf btn-pf--edit btn-pf--icon-sm"
-                    routerLink="/editedu/{{ edu.id }}"
+                    (click)="openEdit(edu.id!)"
                     data-tip="Editar"
                     aria-label="Editar"
                   >
