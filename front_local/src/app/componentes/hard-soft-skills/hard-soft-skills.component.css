@@ -142,8 +142,13 @@
   overflow: hidden;
   outline: none;
   transition: height 0.35s ease;
-  padding-block: 12px;
+  padding: 0.75rem 8px 2.25rem;
   box-sizing: border-box;
+}
+
+.skills-carousel .skill-pill__admin [data-tip]::after,
+.skills-carousel .skill-pill__admin [data-tip]::before {
+  z-index: 1060;
 }
 
 .skills-carousel__viewport:focus-visible {
@@ -337,12 +342,13 @@
 
 .skill-pill__admin {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 0.2rem;
   margin-left: 0.15rem;
   flex-shrink: 0;
+  overflow: visible;
 }
 
 .skill-pill__btn {

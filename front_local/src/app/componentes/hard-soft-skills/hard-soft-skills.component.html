@@ -244,6 +244,7 @@
         class="btn-pf btn-pf--edit btn-pf--icon-sm skill-pill__btn"
         routerLink="/edithabilidad/{{ h.id }}"
         data-tip="Editar"
+        data-tip-pos="bottom"
         [attr.aria-label]="'Editar ' + h.nombre"
       >
         <i class="bi bi-pencil-square"></i>
@@ -252,6 +253,7 @@
         class="btn-pf btn-pf--delete btn-pf--icon-sm skill-pill__btn"
         (click)="delete(h.id)"
         data-tip="Eliminar"
+        data-tip-pos="bottom"
         [attr.aria-label]="'Eliminar ' + h.nombre"
       >
         <i class="bi bi-trash"></i>
