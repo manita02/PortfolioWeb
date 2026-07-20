@@ -17,6 +17,8 @@ export class PeriodoInputComponent {
   @Input() showEsActual = true;
   @Input() required = false;
   @Input() placeholder = 'MM/yyyy';
+  /** Muestra la línea "Vista previa: …" debajo de los campos. */
+  @Input() showPreview = true;
   checkboxId = `esActualCheck-${Math.random().toString(36).slice(2, 9)}`;
 
   @Output() fechaInicioChange = new EventEmitter<string>();
