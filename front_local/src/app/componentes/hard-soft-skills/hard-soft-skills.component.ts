@@ -144,8 +144,11 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     return !!img && (img.startsWith('http://') || img.startsWith('https://'));
   }
 
-  selectFilter(tipoId: number): void {
-    this.selectedTipoId = this.selectedTipoId === tipoId ? null : tipoId;
+  selectFilter(tipoId: number | null): void {
+    if (this.selectedTipoId === tipoId) {
+      return;
+    }
+    this.selectedTipoId = tipoId;
     this.resetPagination();
     this.scheduleViewportHeightUpdate();
   }

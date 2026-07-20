@@ -18,6 +18,16 @@
     <button
       type="button"
       class="skills-filter"
+      [class.skills-filter--active]="selectedTipoId === null"
+      role="radio"
+      [attr.aria-checked]="selectedTipoId === null"
+      (click)="selectFilter(null)"
+    >
+      Todas
+    </button>
+    <button
+      type="button"
+      class="skills-filter"
       *ngFor="let tipo of tiposHabilidad"
       [class.skills-filter--active]="selectedTipoId === tipo.id"
       role="radio"
