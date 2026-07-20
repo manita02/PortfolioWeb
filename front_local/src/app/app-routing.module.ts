@@ -6,21 +6,23 @@ import { NewredComponent } from './componentes/aplogo/newred.component';
 import { EditbannerComponent } from './componentes/banner/editbanner.component';
 import { EditeducacionComponent } from './componentes/educacion/editeducacion.component';
 import { NeweducacionComponent } from './componentes/educacion/neweducacion.component';
-import { EditExperienciaComponent } from './componentes/experiencia-laboral/edit-experiencia.component';
-import { NewExperienciaComponent } from './componentes/experiencia-laboral/new-experiencia.component';
 import { EdithabilidadComponent } from './componentes/hard-soft-skills/edithabilidad.component';
 import { NewhabilidadComponent } from './componentes/hard-soft-skills/newhabilidad.component';
 import { HomeComponent } from './componentes/home/home.component';
-import { LoginComponent } from './componentes/login/login.component';
+import { LoginRedirectGuard } from './servicio/login-redirect.guard';
+import {
+  ExperienciaCreateGuard,
+  ExperienciaEditGuard,
+} from './servicio/experiencia-modal.guard';
 import { EditproyectoComponent } from './componentes/proyecto/editproyecto.component';
 import { NewproyectoComponent } from './componentes/proyecto/newproyecto.component';
 import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
 
 const routes: Routes = [
   {path:'',component: HomeComponent},
-  {path:'login',component: LoginComponent},
-  {path: 'nuevaexp', component: NewExperienciaComponent},
-  {path: 'editexp/:id', component: EditExperienciaComponent},
+  { path: 'login', canActivate: [LoginRedirectGuard], component: HomeComponent },
+  { path: 'nuevaexp', canActivate: [ExperienciaCreateGuard], component: HomeComponent },
+  { path: 'editexp/:id', canActivate: [ExperienciaEditGuard], component: HomeComponent },
   {path: 'nuevaedu', component: NeweducacionComponent},
   {path: 'editedu/:id', component: EditeducacionComponent},
   {path: 'nuevoproyecto', component: NewproyectoComponent},
