@@ -17,6 +17,8 @@
   overflow: hidden;
   outline: none;
   transition: height 0.45s ease;
+  padding-block: 16px;
+  box-sizing: border-box;
 }
 
 .exp-carousel__viewport:focus-visible {
@@ -43,6 +45,7 @@
   gap: 1.15rem;
   min-width: 0;
   align-content: start;
+  padding: 4px 8px;
 }
 
 .exp-carousel__page--desktop {
@@ -59,6 +62,10 @@
   align-self: start;
   margin-left: 0;
   margin-right: 0;
+}
+
+.exp-carousel .card-portfolio:hover {
+  transform: translateY(-4px);
 }
 
 .exp-carousel__nav {
