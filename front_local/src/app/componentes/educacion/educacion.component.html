@@ -78,10 +78,6 @@
               *ngFor="let edu of page"
             >
               <div class="card-portfolio__body">
-                <div class="edu-card__row edu-card__row--org" *ngIf="edu.organizacion">
-                  <app-org-badge [organizacion]="edu.organizacion" size="md"></app-org-badge>
-                </div>
-
                 <div class="edu-card__row edu-card__row--image" *ngIf="edu.archivoImagen">
                   <img
                     *ngIf="isUrl(edu.archivoImagen)"
@@ -99,6 +95,10 @@
                 </div>
 
                 <h3 class="card-portfolio__title edu-card__row edu-card__row--title">{{ edu.nombreE }}</h3>
+
+                <div class="edu-card__row edu-card__row--org" *ngIf="edu.organizacion">
+                  <app-org-badge [organizacion]="edu.organizacion" size="md"></app-org-badge>
+                </div>
 
                 <div class="edu-card__row edu-card__row--meta">
                   <div class="edu-card__meta-item">
