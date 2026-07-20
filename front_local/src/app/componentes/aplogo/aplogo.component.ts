@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { LoginModalService } from 'src/app/servicio/login-modal.service';
 import { Redsocial } from 'src/app/modelo/redsocial';
 import { RedsocialService } from 'src/app/servicio/redsocial.service';
 import { TokenService } from 'src/app/servicio/token.service';
@@ -14,7 +14,7 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   private resizeObserver?: ResizeObserver;
 
   constructor(
-    private router: Router,
+    private loginModal: LoginModalService,
     private tokenService: TokenService,
     private proyectoS: RedsocialService,
     private el: ElementRef<HTMLElement>
@@ -54,7 +54,7 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   login(): void {
-    this.router.navigate(['/login']);
+    this.loginModal.open();
   }
 
   cargarRedSocial(): void {
