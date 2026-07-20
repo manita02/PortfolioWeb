@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditredComponent } from './componentes/aplogo/editred.component';
-import { NewredComponent } from './componentes/aplogo/newred.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginRedirectGuard } from './servicio/login-redirect.guard';
 import {
@@ -22,6 +20,10 @@ import {
   ProyectoCreateGuard,
   ProyectoEditGuard,
 } from './servicio/proyecto-modal.guard';
+import {
+  RedsocialCreateGuard,
+  RedsocialEditGuard,
+} from './servicio/redsocial-modal.guard';
 import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
 
 const routes: Routes = [
@@ -37,8 +39,8 @@ const routes: Routes = [
   { path: 'nuevahabilidad', canActivate: [HabilidadCreateGuard], component: HomeComponent },
   { path: 'edithabilidad/:id', canActivate: [HabilidadEditGuard], component: HomeComponent },
   { path: 'editbanner/:id', canActivate: [BannerEditGuard], component: HomeComponent },
-  {path: 'nuevaredsocial', component: NewredComponent},
-  {path: 'editred/:id', component: EditredComponent},
+  { path: 'nuevaredsocial', canActivate: [RedsocialCreateGuard], component: HomeComponent },
+  { path: 'editred/:id', canActivate: [RedsocialEditGuard], component: HomeComponent },
   {path: 'dev/componentes', component: ComponentesDemoComponent}
 ];
 
