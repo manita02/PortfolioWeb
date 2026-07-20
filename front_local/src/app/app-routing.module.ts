@@ -18,8 +18,10 @@ import {
   HabilidadCreateGuard,
   HabilidadEditGuard,
 } from './servicio/habilidad-modal.guard';
-import { EditproyectoComponent } from './componentes/proyecto/editproyecto.component';
-import { NewproyectoComponent } from './componentes/proyecto/newproyecto.component';
+import {
+  ProyectoCreateGuard,
+  ProyectoEditGuard,
+} from './servicio/proyecto-modal.guard';
 import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
 
 const routes: Routes = [
@@ -29,8 +31,8 @@ const routes: Routes = [
   { path: 'editexp/:id', canActivate: [ExperienciaEditGuard], component: HomeComponent },
   { path: 'nuevaedu', canActivate: [EducacionCreateGuard], component: HomeComponent },
   { path: 'editedu/:id', canActivate: [EducacionEditGuard], component: HomeComponent },
-  {path: 'nuevoproyecto', component: NewproyectoComponent},
-  {path: 'editproyect/:id', component: EditproyectoComponent},
+  { path: 'nuevoproyecto', canActivate: [ProyectoCreateGuard], component: HomeComponent },
+  { path: 'editproyect/:id', canActivate: [ProyectoEditGuard], component: HomeComponent },
   { path: 'editinfop/:id', canActivate: [PersonaEditGuard], component: HomeComponent },
   { path: 'nuevahabilidad', canActivate: [HabilidadCreateGuard], component: HomeComponent },
   { path: 'edithabilidad/:id', canActivate: [HabilidadEditGuard], component: HomeComponent },
