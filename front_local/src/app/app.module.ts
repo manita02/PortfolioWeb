@@ -16,6 +16,7 @@ import { LoginComponent } from './componentes/login/login.component'
 import { FormsModule } from '@angular/forms';
 import { interceptorProvider } from './servicio/interceptor-service';
 import { ExperienciaLaboralComponent } from './componentes/experiencia-laboral/experiencia-laboral.component';
+import { ExperienciaFormModalComponent } from './componentes/experiencia-laboral/experiencia-form-modal.component';
 import { NewExperienciaComponent } from './componentes/experiencia-laboral/new-experiencia.component';
 import { EditExperienciaComponent } from './componentes/experiencia-laboral/edit-experiencia.component';
 import { NeweducacionComponent } from './componentes/educacion/neweducacion.component';
@@ -51,6 +52,7 @@ import { ComponentesDemoComponent } from './compartido/componentes-demo/componen
     HomeComponent,
     LoginComponent,
     ExperienciaLaboralComponent,
+    ExperienciaFormModalComponent,
     NewExperienciaComponent,
     EditExperienciaComponent,
     NeweducacionComponent,
