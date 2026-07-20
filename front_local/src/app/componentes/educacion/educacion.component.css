@@ -66,6 +66,8 @@
   overflow: hidden;
   outline: none;
   transition: height 0.45s ease;
+  padding-block: 16px;
+  box-sizing: border-box;
 }
 
 .edu-carousel .admin-actions [data-tip-pos='right']::after,
@@ -97,6 +99,7 @@
   gap: 1.15rem;
   min-width: 0;
   align-content: start;
+  padding: 4px 8px;
 }
 
 .edu-carousel__page--desktop {
@@ -113,6 +116,10 @@
   align-self: start;
   margin-left: 0;
   margin-right: 0;
+}
+
+.edu-carousel .card-portfolio:hover {
+  transform: translateY(-4px);
 }
 
 .edu-carousel__nav {

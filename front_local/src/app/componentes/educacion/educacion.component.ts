@@ -41,6 +41,8 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   private mediaListener?: (event: MediaQueryListEvent) => void;
   private resizeObserver?: ResizeObserver;
   private viewportHeightFrame?: number;
+  private readonly viewportHoverBuffer = 28;
+  private readonly viewportPaddingBlock = 32;
 
   constructor(
     private educacionS: EducacionService,
@@ -265,7 +267,8 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     const height = Math.ceil(activePage.getBoundingClientRect().height);
-    this.viewportHeight = height > 0 ? height : null;
+    this.viewportHeight =
+      height > 0 ? height + this.viewportPaddingBlock + this.viewportHoverBuffer : null;
   }
 
   private observePages(): void {
