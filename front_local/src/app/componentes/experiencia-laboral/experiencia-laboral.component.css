@@ -156,6 +156,7 @@
 }
 
 .exp-card {
+  border: 1px solid var(--border-color);
   border-left-width: 4px;
   border-left-style: solid;
 }
@@ -174,18 +175,6 @@
 
 .exp-card--default {
   border-left-color: rgba(50, 30, 72, 0.25);
-}
-
-.exp-card--current {
-  box-shadow:
-    0 0 0 2px rgba(101, 220, 213, 0.4),
-    var(--shadow-card);
-}
-
-.exp-card--current:hover {
-  box-shadow:
-    0 0 0 2px rgba(101, 220, 213, 0.55),
-    var(--shadow-card-hover);
 }
 
 .exp-card__row {
