@@ -21,7 +21,10 @@
   z-index: 1;
   width: min(100%, 24rem);
   max-height: calc(100dvh - 2rem);
-  overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
   padding: 1.75rem 1.5rem 1.5rem;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-card);
@@ -30,6 +33,19 @@
     0 24px 48px rgba(50, 30, 72, 0.22),
     0 0 0 1px rgba(101, 220, 213, 0.12);
   animation: pfModalSlideIn 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.pf-modal__body {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.pf-modal__header {
+  flex-shrink: 0;
 }
 
 .pf-modal__panel--wide {
@@ -41,9 +57,16 @@
   position: absolute;
   top: 0.85rem;
   right: 0.85rem;
+  z-index: 4;
+  overflow: visible;
   background: rgba(67, 99, 126, 0.08);
   color: var(--color-secondary);
   border-color: rgba(67, 99, 126, 0.18);
+}
+
+.pf-modal .pf-modal__close[data-tip]::after,
+.pf-modal .pf-modal__close[data-tip]::before {
+  z-index: 2100;
 }
 
 .pf-modal__close:hover:not(:disabled) {
