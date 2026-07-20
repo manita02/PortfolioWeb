@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InfopComponent } from './componentes/acerca-de/infop.component';
 import { EditredComponent } from './componentes/aplogo/editred.component';
 import { NewredComponent } from './componentes/aplogo/newred.component';
 import { EditeducacionComponent } from './componentes/educacion/editeducacion.component';
@@ -14,6 +13,7 @@ import {
   ExperienciaEditGuard,
 } from './servicio/experiencia-modal.guard';
 import { BannerEditGuard } from './servicio/banner-modal.guard';
+import { PersonaEditGuard } from './servicio/persona-modal.guard';
 import { EditproyectoComponent } from './componentes/proyecto/editproyecto.component';
 import { NewproyectoComponent } from './componentes/proyecto/newproyecto.component';
 import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: 'editedu/:id', component: EditeducacionComponent},
   {path: 'nuevoproyecto', component: NewproyectoComponent},
   {path: 'editproyect/:id', component: EditproyectoComponent},
-  {path: 'editinfop/:id', component: InfopComponent},
+  { path: 'editinfop/:id', canActivate: [PersonaEditGuard], component: HomeComponent },
   {path: 'nuevahabilidad', component: NewhabilidadComponent},
   {path: 'edithabilidad/:id', component: EdithabilidadComponent},
   { path: 'editbanner/:id', canActivate: [BannerEditGuard], component: HomeComponent },
