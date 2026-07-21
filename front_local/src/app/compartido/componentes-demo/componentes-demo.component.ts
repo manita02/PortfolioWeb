@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { HabilidadDto } from '../../modelo/habilidad.dto';
 import { Organizacion } from '../../modelo/organizacion';
 import { TipoCatalogo } from '../../modelo/tipo-catalogo';
 import { HabilidadesService } from '../../servicio/habilidades.service';
+import {
+  OrganizacionModalService,
+  OrganizacionSavedEvent,
+} from '../../servicio/organizacion-modal.service';
 import { OrganizacionService } from '../../servicio/organizacion.service';
 import { TipoEducacionService } from '../../servicio/tipo-educacion.service';
 import { TipoEmpleoService } from '../../servicio/tipo-empleo.service';
@@ -15,7 +20,7 @@ import { TipoUbicacionService } from '../../servicio/tipo-ubicacion.service';
   templateUrl: './componentes-demo.component.html',
   styleUrls: ['./componentes-demo.component.css']
 })
-export class ComponentesDemoComponent implements OnInit {
+export class ComponentesDemoComponent implements OnInit, OnDestroy {
   // Mock base64: 1x1 PNG transparente
   mockImageBase64 =
     'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
@@ -63,8 +68,11 @@ export class ComponentesDemoComponent implements OnInit {
     tiposHabilidad: 'no probado'
   };
 
+  private orgSavedSub?: Subscription;
+
   constructor(
     private organizacionService: OrganizacionService,
+    private organizacionModal: OrganizacionModalService,
     private tipoEmpleoService: TipoEmpleoService,
     private tipoUbicacionService: TipoUbicacionService,
     private tipoEducacionService: TipoEducacionService,
@@ -117,9 +125,37 @@ export class ComponentesDemoComponent implements OnInit {
       next: data => { this.apiStatus.tiposHabilidad = `${data.length} registros`; },
       error: err => { this.apiStatus.tiposHabilidad = err.message || 'sin endpoint'; }
     });
+
+    this.orgSavedSub = this.organizacionModal.saved$.subscribe(event =>
+      this.refreshOrganizacionesFromModal(event)
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.orgSavedSub?.unsubscribe();
   }
 
   onCreateOrg(): void {
-    alert('createRequested — la pantalla de alta de organización se implementará en un chat posterior.');
+    this.organizacionModal.open();
+  }
+
+  private refreshOrganizacionesFromModal(event: OrganizacionSavedEvent): void {
+    this.organizacionService.lista().subscribe({
+      next: data => {
+        this.organizaciones = data;
+        this.apiStatus.organizaciones = `${data.length} registros`;
+
+        if (event.action === 'delete') {
+          if (this.selectedOrgId === event.deletedId) {
+            this.selectedOrgId = null;
+          }
+          return;
+        }
+
+        if (event.id != null) {
+          this.selectedOrgId = event.id;
+        }
+      },
+    });
   }
 }
