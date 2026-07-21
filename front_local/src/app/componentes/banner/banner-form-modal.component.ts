@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { Banner } from 'src/app/modelo/banner';
 import { BannerModalService } from 'src/app/servicio/banner-modal.service';
 import { BannerService } from 'src/app/servicio/banner.service';
+import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 
 @Component({
   selector: 'app-banner-form-modal',
@@ -26,9 +27,11 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
   errorMessage = '';
 
   private modalSub?: Subscription;
+  private loadSub?: Subscription;
 
   constructor(
     private modal: BannerModalService,
+    private modalLoading: ModalLoadingService,
     private sBanner: BannerService
   ) {}
 
@@ -37,9 +40,11 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
       this.isOpen = state.open;
       this.bannerId = state.bannerId;
 
+      this.loadSub?.unsubscribe();
+
       if (state.open && state.bannerId != null) {
         this.errorMessage = '';
-        this.loadBanner(state.bannerId);
+        this.openEditModal(state.bannerId);
       } else {
         this.banner = null;
         this.loading = false;
@@ -50,6 +55,7 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
+    this.loadSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -100,20 +106,16 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private loadBanner(id: number): void {
-    this.loading = true;
+  private openEditModal(id: number): void {
     this.banner = null;
-
-    this.sBanner.detail(id).subscribe({
-      next: data => {
+    this.loadSub = this.modalLoading.runLoad(
+      this,
+      this.sBanner.detail(id),
+      data => {
         this.banner = { ...data };
-        this.loading = false;
       },
-      error: err => {
-        this.loading = false;
-        this.errorMessage = this.mensajeError(err, 'No se pudo cargar el banner.');
-      },
-    });
+      'No se pudo cargar el banner.'
+    );
   }
 
   private mensajeError(err: unknown, fallback: string): string {
