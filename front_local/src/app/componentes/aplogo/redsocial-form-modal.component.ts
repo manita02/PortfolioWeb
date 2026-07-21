@@ -5,8 +5,9 @@ import {
   OnInit,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { Redsocial } from 'src/app/modelo/redsocial';
+import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 import {
   RedsocialModalMode,
   RedsocialModalService,
@@ -29,9 +30,11 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
   errorMessage = '';
 
   private modalSub?: Subscription;
+  private loadSub?: Subscription;
 
   constructor(
     private modal: RedsocialModalService,
+    private modalLoading: ModalLoadingService,
     private redsocialS: RedsocialService
   ) {}
 
@@ -41,12 +44,14 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
       this.mode = state.mode;
       this.redsocialId = state.redsocialId;
 
+      this.loadSub?.unsubscribe();
+
       if (state.open) {
         this.errorMessage = '';
         if (state.mode === 'create') {
-          this.initCreateForm();
+          this.openCreateModal();
         } else if (state.redsocialId != null) {
-          this.loadRedsocial(state.redsocialId);
+          this.openEditModal(state.redsocialId);
         }
       } else {
         this.redsocial = null;
@@ -58,6 +63,7 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
+    this.loadSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -133,31 +139,36 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
+  private openCreateModal(): void {
+    this.redsocial = null;
+    this.loadSub = this.modalLoading.runLoad(
+      this,
+      of(null),
+      () => this.initCreateForm(),
+      'No se pudo preparar el formulario.'
+    );
+  }
+
+  private openEditModal(id: number): void {
+    this.redsocial = null;
+    this.loadSub = this.modalLoading.runLoad(
+      this,
+      this.redsocialS.detail(id),
+      data => {
+        this.redsocial = {
+          ...data,
+          img: data.img ?? '',
+        };
+      },
+      'No se pudo cargar la red social o la sesión expiró.'
+    );
+  }
+
   private initCreateForm(): void {
-    this.loading = false;
     this.redsocial = {
       nombreRedS: '',
       link: '',
       img: '',
     };
-  }
-
-  private loadRedsocial(id: number): void {
-    this.loading = true;
-    this.redsocial = null;
-
-    this.redsocialS.detail(id).subscribe({
-      next: data => {
-        this.redsocial = {
-          ...data,
-          img: data.img ?? '',
-        };
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-        this.errorMessage = 'No se pudo cargar la red social o la sesión expiró.';
-      },
-    });
   }
 }
