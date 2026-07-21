@@ -5,6 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { forkJoin, Observable, of, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { ExperienciaDto } from 'src/app/modelo/experiencia.dto';
 import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
 import { Organizacion } from 'src/app/modelo/organizacion';
@@ -14,11 +16,11 @@ import {
   ExperienciaModalService,
 } from 'src/app/servicio/experiencia-modal.service';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
+import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import { SExperienciaService } from 'src/app/servicio/s-experiencia.service';
 import { TipoEmpleoService } from 'src/app/servicio/tipo-empleo.service';
 import { TipoUbicacionService } from 'src/app/servicio/tipo-ubicacion.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-experiencia-form-modal',
@@ -41,10 +43,12 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
   errorMessage = '';
 
   private modalSub?: Subscription;
+  private loadSub?: Subscription;
   private catalogsLoaded = false;
 
   constructor(
     private modal: ExperienciaModalService,
+    private modalLoading: ModalLoadingService,
     private sExperiencia: SExperienciaService,
     private tipoEmpleoS: TipoEmpleoService,
     private tipoUbicacionS: TipoUbicacionService,
@@ -58,13 +62,14 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
       this.mode = state.mode;
       this.experienciaId = state.experienciaId;
 
+      this.loadSub?.unsubscribe();
+
       if (state.open) {
         this.errorMessage = '';
-        this.loadCatalogs();
         if (state.mode === 'create') {
-          this.initCreateForm();
+          this.openCreateModal();
         } else if (state.experienciaId != null) {
-          this.loadExperiencia(state.experienciaId);
+          this.openEditModal(state.experienciaId);
         }
       } else {
         this.experiencia = null;
@@ -76,6 +81,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
+    this.loadSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -160,8 +166,36 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
+  private openCreateModal(): void {
+    this.experiencia = null;
+    this.loadSub = this.modalLoading.runLoad(
+      this,
+      this.getCatalogs$(),
+      () => this.initCreateForm(),
+      'No se pudieron cargar los datos del formulario.'
+    );
+  }
+
+  private openEditModal(id: number): void {
+    this.experiencia = null;
+    this.loadSub = this.modalLoading.runLoad(
+      this,
+      forkJoin({
+        catalogs: this.getCatalogs$(),
+        entity: this.sExperiencia.detail(id),
+      }),
+      ({ entity }) => {
+        this.experiencia = {
+          ...entity,
+          habilidadesIds: entity.habilidadesIds ?? [],
+          fechaFin: entity.fechaFin ?? null,
+        };
+      },
+      'No se pudo cargar la experiencia o la sesión expiró.'
+    );
+  }
+
   private initCreateForm(): void {
-    this.loading = false;
     this.experiencia = {
       nombreE: '',
       descripcionE: '',
@@ -175,66 +209,25 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
     };
   }
 
-  private loadExperiencia(id: number): void {
-    this.loading = true;
-    this.experiencia = null;
-
-    this.sExperiencia.detail(id).subscribe({
-      next: data => {
-        this.experiencia = {
-          ...data,
-          habilidadesIds: data.habilidadesIds ?? [],
-          fechaFin: data.fechaFin ?? null,
-        };
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-        this.errorMessage = 'No se pudo cargar la experiencia o la sesión expiró.';
-      },
-    });
-  }
-
-  private loadCatalogs(): void {
+  private getCatalogs$(): Observable<void> {
     if (this.catalogsLoaded) {
-      return;
+      return of(undefined);
     }
 
-    this.tipoEmpleoS.lista().subscribe({
-      next: data => {
-        this.tiposEmpleo = data;
-      },
-      error: () => {
-        this.errorMessage = 'No se pudieron cargar los tipos de empleo.';
-      },
-    });
-
-    this.tipoUbicacionS.lista().subscribe({
-      next: data => {
-        this.tiposUbicacion = data;
-      },
-      error: () => {
-        this.errorMessage = 'No se pudieron cargar los tipos de ubicación.';
-      },
-    });
-
-    this.organizacionS.lista().subscribe({
-      next: data => {
-        this.organizaciones = data;
-      },
-      error: () => {
-        this.errorMessage = 'No se pudieron cargar las organizaciones.';
-      },
-    });
-
-    this.habilidadesS.lista().subscribe({
-      next: data => {
-        this.habilidades = data;
+    return forkJoin({
+      tiposEmpleo: this.tipoEmpleoS.lista(),
+      tiposUbicacion: this.tipoUbicacionS.lista(),
+      organizaciones: this.organizacionS.lista(),
+      habilidades: this.habilidadesS.lista(),
+    }).pipe(
+      tap(({ tiposEmpleo, tiposUbicacion, organizaciones, habilidades }) => {
+        this.tiposEmpleo = tiposEmpleo;
+        this.tiposUbicacion = tiposUbicacion;
+        this.organizaciones = organizaciones;
+        this.habilidades = habilidades;
         this.catalogsLoaded = true;
-      },
-      error: () => {
-        this.errorMessage = 'No se pudieron cargar las habilidades.';
-      },
-    });
+      }),
+      map(() => undefined)
+    );
   }
 }
