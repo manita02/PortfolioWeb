@@ -170,6 +170,7 @@
 }
 
 .exp-form-modal ::ng-deep app-org-select .btn {
+  flex-shrink: 0;
   border-radius: var(--border-radius-sm);
   font-family: var(--font-family-base);
   font-size: 0.78rem;

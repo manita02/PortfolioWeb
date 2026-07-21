@@ -18,6 +18,10 @@ import {
 import { EducacionService } from 'src/app/servicio/educacion.service';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
+import {
+  OrganizacionModalService,
+  OrganizacionSavedEvent,
+} from 'src/app/servicio/organizacion-modal.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 
@@ -42,6 +46,7 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
 
   private modalSub?: Subscription;
   private loadSub?: Subscription;
+  private orgSavedSub?: Subscription;
   private catalogsLoaded = false;
 
   constructor(
@@ -50,6 +55,7 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
     private educacionS: EducacionService,
     private tipoEducacionS: TipoEducacionService,
     private organizacionS: OrganizacionService,
+    private organizacionModal: OrganizacionModalService,
     private habilidadesS: HabilidadesService
   ) {}
 
@@ -74,11 +80,16 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
         this.guardando = false;
       }
     });
+
+    this.orgSavedSub = this.organizacionModal.saved$.subscribe(event =>
+      this.refreshOrganizacionesFromModal(event)
+    );
   }
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
     this.loadSub?.unsubscribe();
+    this.orgSavedSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -110,6 +121,9 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
+    if (this.organizacionModal.state.open) {
+      return;
+    }
     if (this.isOpen && !this.guardando && !this.loading) {
       this.close();
     }
@@ -123,9 +137,7 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
   }
 
   onCreateOrg(): void {
-    alert(
-      'Alta de organización: se implementará en un chat posterior. Creá la org desde el API o la base de datos por ahora.'
-    );
+    this.organizacionModal.open();
   }
 
   onSubmit(form: NgForm): void {
@@ -227,5 +239,29 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
       }),
       map(() => undefined)
     );
+  }
+
+  private refreshOrganizacionesFromModal(event: OrganizacionSavedEvent): void {
+    this.organizacionS.lista().subscribe({
+      next: organizaciones => {
+        this.organizaciones = organizaciones;
+        this.catalogsLoaded = true;
+
+        if (!this.educacion) {
+          return;
+        }
+
+        if (event.action === 'delete') {
+          if (this.educacion.organizacionId === event.deletedId) {
+            this.educacion.organizacionId = null;
+          }
+          return;
+        }
+
+        if (event.id != null) {
+          this.educacion.organizacionId = event.id;
+        }
+      },
+    });
   }
 }

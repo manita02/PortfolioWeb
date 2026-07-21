@@ -17,6 +17,10 @@ import {
 } from 'src/app/servicio/experiencia-modal.service';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
+import {
+  OrganizacionModalService,
+  OrganizacionSavedEvent,
+} from 'src/app/servicio/organizacion-modal.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import { SExperienciaService } from 'src/app/servicio/s-experiencia.service';
 import { TipoEmpleoService } from 'src/app/servicio/tipo-empleo.service';
@@ -44,6 +48,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
 
   private modalSub?: Subscription;
   private loadSub?: Subscription;
+  private orgSavedSub?: Subscription;
   private catalogsLoaded = false;
 
   constructor(
@@ -53,6 +58,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
     private tipoEmpleoS: TipoEmpleoService,
     private tipoUbicacionS: TipoUbicacionService,
     private organizacionS: OrganizacionService,
+    private organizacionModal: OrganizacionModalService,
     private habilidadesS: HabilidadesService
   ) {}
 
@@ -77,11 +83,16 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
         this.guardando = false;
       }
     });
+
+    this.orgSavedSub = this.organizacionModal.saved$.subscribe(event =>
+      this.refreshOrganizacionesFromModal(event)
+    );
   }
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
     this.loadSub?.unsubscribe();
+    this.orgSavedSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -114,6 +125,9 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
+    if (this.organizacionModal.state.open) {
+      return;
+    }
     if (this.isOpen && !this.guardando && !this.loading) {
       this.close();
     }
@@ -127,9 +141,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
   }
 
   onCreateOrg(): void {
-    alert(
-      'Alta de organización: se implementará en un chat posterior. Creá la org desde el API o la base de datos por ahora.'
-    );
+    this.organizacionModal.open();
   }
 
   onSubmit(form: NgForm): void {
@@ -229,5 +241,29 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
       }),
       map(() => undefined)
     );
+  }
+
+  private refreshOrganizacionesFromModal(event: OrganizacionSavedEvent): void {
+    this.organizacionS.lista().subscribe({
+      next: organizaciones => {
+        this.organizaciones = organizaciones;
+        this.catalogsLoaded = true;
+
+        if (!this.experiencia) {
+          return;
+        }
+
+        if (event.action === 'delete') {
+          if (this.experiencia.organizacionId === event.deletedId) {
+            this.experiencia.organizacionId = null;
+          }
+          return;
+        }
+
+        if (event.id != null) {
+          this.experiencia.organizacionId = event.id;
+        }
+      },
+    });
   }
 }
