@@ -5,11 +5,13 @@ import {
   OnInit,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { forkJoin, Observable, of, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
 import { Organizacion } from 'src/app/modelo/organizacion';
 import { ProyectoDto } from 'src/app/modelo/proyecto.dto';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
+import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import {
   ProyectoModalMode,
@@ -36,10 +38,12 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
   errorMessage = '';
 
   private modalSub?: Subscription;
+  private loadSub?: Subscription;
   private catalogsLoaded = false;
 
   constructor(
     private modal: ProyectoModalService,
+    private modalLoading: ModalLoadingService,
     private proyectoS: ProyectoService,
     private organizacionS: OrganizacionService,
     private habilidadesS: HabilidadesService
@@ -51,13 +55,14 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
       this.mode = state.mode;
       this.proyectoId = state.proyectoId;
 
+      this.loadSub?.unsubscribe();
+
       if (state.open) {
         this.errorMessage = '';
-        this.loadCatalogs();
         if (state.mode === 'create') {
-          this.initCreateForm();
+          this.openCreateModal();
         } else if (state.proyectoId != null) {
-          this.loadProyecto(state.proyectoId);
+          this.openEditModal(state.proyectoId);
         }
       } else {
         this.proyecto = null;
@@ -69,6 +74,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
+    this.loadSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -154,8 +160,37 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
+  private openCreateModal(): void {
+    this.proyecto = null;
+    this.loadSub = this.modalLoading.runLoad(
+      this,
+      this.getCatalogs$(),
+      () => this.initCreateForm(),
+      'No se pudieron cargar los datos del formulario.'
+    );
+  }
+
+  private openEditModal(id: number): void {
+    this.proyecto = null;
+    this.loadSub = this.modalLoading.runLoad(
+      this,
+      forkJoin({
+        catalogs: this.getCatalogs$(),
+        entity: this.proyectoS.detail(id),
+      }),
+      ({ entity }) => {
+        this.proyecto = {
+          ...entity,
+          habilidadesIds: entity.habilidadesIds ?? [],
+          fechaFin: entity.fechaFin ?? null,
+          imagen: entity.imagen ?? '',
+        };
+      },
+      'No se pudo cargar el proyecto o la sesión expiró.'
+    );
+  }
+
   private initCreateForm(): void {
-    this.loading = false;
     this.proyecto = {
       nombreE: '',
       descripcionE: '',
@@ -169,49 +204,21 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
     };
   }
 
-  private loadProyecto(id: number): void {
-    this.loading = true;
-    this.proyecto = null;
-
-    this.proyectoS.detail(id).subscribe({
-      next: data => {
-        this.proyecto = {
-          ...data,
-          habilidadesIds: data.habilidadesIds ?? [],
-          fechaFin: data.fechaFin ?? null,
-          imagen: data.imagen ?? '',
-        };
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-        this.errorMessage = 'No se pudo cargar el proyecto o la sesión expiró.';
-      },
-    });
-  }
-
-  private loadCatalogs(): void {
+  private getCatalogs$(): Observable<void> {
     if (this.catalogsLoaded) {
-      return;
+      return of(undefined);
     }
 
-    this.organizacionS.lista().subscribe({
-      next: data => {
-        this.organizaciones = data;
-      },
-      error: () => {
-        this.errorMessage = 'No se pudieron cargar las organizaciones.';
-      },
-    });
-
-    this.habilidadesS.lista().subscribe({
-      next: data => {
-        this.habilidades = data;
+    return forkJoin({
+      organizaciones: this.organizacionS.lista(),
+      habilidades: this.habilidadesS.lista(),
+    }).pipe(
+      tap(({ organizaciones, habilidades }) => {
+        this.organizaciones = organizaciones;
+        this.habilidades = habilidades;
         this.catalogsLoaded = true;
-      },
-      error: () => {
-        this.errorMessage = 'No se pudieron cargar las habilidades.';
-      },
-    });
+      }),
+      map(() => undefined)
+    );
   }
 }
