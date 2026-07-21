@@ -11,7 +11,9 @@ import {
 } from '@angular/core';
 import { ProyectoDto } from 'src/app/modelo/proyecto.dto';
 import { ProyectoService } from 'src/app/servicio/proyecto.service';
+import { ProyectoModalService } from 'src/app/servicio/proyecto-modal.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-proyecto',
@@ -37,15 +39,21 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly viewportHoverBuffer = 28;
   private readonly viewportPaddingBlock = 32;
 
+  private modalSavedSub?: Subscription;
+
   constructor(
     private proyectoS: ProyectoService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private proyectoModal: ProyectoModalService
   ) {}
 
   ngOnInit(): void {
     this.isLogged = !!this.tokenService.getToken();
     this.setupPageSize();
     this.cargarProyecto();
+    this.modalSavedSub = this.proyectoModal.saved$.subscribe(() => {
+      this.cargarProyecto();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -58,6 +66,7 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.modalSavedSub?.unsubscribe();
     if (this.viewportHeightFrame != null) {
       cancelAnimationFrame(this.viewportHeightFrame);
     }
@@ -167,6 +176,14 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
       next: () => this.cargarProyecto(),
       error: () => alert('No se pudo borrar el proyecto'),
     });
+  }
+
+  openCreate(): void {
+    this.proyectoModal.openCreate();
+  }
+
+  openEdit(id: number): void {
+    this.proyectoModal.openEdit(id);
   }
 
   goProject(link: string): void {

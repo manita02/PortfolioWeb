@@ -1,24 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Persona } from 'src/app/modelo/persona';
+import { PersonaModalService } from 'src/app/servicio/persona-modal.service';
 import { PersonaService } from 'src/app/servicio/persona.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-acerca-de',
   templateUrl: './acerca-de.component.html',
 })
-export class AcercaDeComponent implements OnInit {
+export class AcercaDeComponent implements OnInit, OnDestroy {
 
   persona: Persona[] = [];
-  constructor(private personaS: PersonaService, private tokenService: TokenService) { }
   isLogged = false;
+
+  private modalSavedSub?: Subscription;
+
+  constructor(
+    private personaS: PersonaService,
+    private tokenService: TokenService,
+    private personaModal: PersonaModalService
+  ) {}
+
   ngOnInit(): void {
     this.cargarPersona();
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-    } else {
-      this.isLogged = false;
-    }
+    this.isLogged = !!this.tokenService.getToken();
+    this.modalSavedSub = this.personaModal.saved$.subscribe(() => {
+      this.cargarPersona();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.modalSavedSub?.unsubscribe();
+  }
+
+  openEdit(id: number): void {
+    this.personaModal.openEdit(id);
   }
 
   cargarPersona(): void {

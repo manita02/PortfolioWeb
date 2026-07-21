@@ -19,8 +19,9 @@
     <h1 class="hero-banner__title">{{ Banner.titulo }}</h1>
     <div class="hero-banner__actions" *ngIf="isLogged">
       <button
+        type="button"
         class="btn-pf btn-pf--surface btn-pf--icon-sm"
-        routerLink="/editbanner/{{ Banner.id }}"
+        (click)="openEdit(Banner.id!)"
         data-tip="Editar banner"
         data-tip-pos="bottom"
         data-tip-align="end"

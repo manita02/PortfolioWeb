@@ -1,2 +1,10 @@
-
+<app-splash-screen *ngIf="showSplash" (complete)="onSplashComplete()"></app-splash-screen>
 <router-outlet></router-outlet>
+<app-login></app-login>
+<app-experiencia-form-modal></app-experiencia-form-modal>
+<app-banner-form-modal></app-banner-form-modal>
+<app-persona-form-modal></app-persona-form-modal>
+<app-educacion-form-modal></app-educacion-form-modal>
+<app-habilidad-form-modal></app-habilidad-form-modal>
+<app-proyecto-form-modal></app-proyecto-form-modal>
+<app-redsocial-form-modal></app-redsocial-form-modal>

@@ -30,20 +30,20 @@
 }
 
 .edu-filter:hover {
-  border-color: rgba(101, 220, 213, 0.45);
+  border-color: var(--overlay-accent-45);
   color: var(--color-primary);
   transform: translateY(-1px);
 }
 
 .edu-filter--active {
   background: var(--color-accent-soft);
-  border-color: rgba(101, 220, 213, 0.55);
+  border-color: var(--overlay-accent-55);
   color: var(--color-primary);
   box-shadow: var(--btn-shadow);
 }
 
 .edu-filter:focus-visible {
-  outline: 2px solid rgba(101, 220, 213, 0.75);
+  outline: 2px solid var(--overlay-accent-75);
   outline-offset: 2px;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .edu-carousel__viewport:focus-visible {
-  outline: 2px solid rgba(101, 220, 213, 0.75);
+  outline: 2px solid var(--overlay-accent-75);
   outline-offset: 3px;
   border-radius: var(--border-radius-sm);
 }
@@ -149,7 +149,7 @@
 
 .edu-carousel__nav:hover:not(:disabled) {
   background: var(--color-accent-soft);
-  border-color: rgba(101, 220, 213, 0.45);
+  border-color: var(--overlay-accent-45);
   box-shadow: var(--btn-shadow-hover);
   transform: translateY(-1px);
 }
@@ -194,14 +194,14 @@
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(50, 30, 72, 0.2);
+  background: var(--overlay-primary-20);
   cursor: pointer;
   transition: transform var(--transition-fast), background var(--transition-fast);
 }
 
 .edu-carousel__dot:hover {
   transform: scale(1.15);
-  background: rgba(50, 30, 72, 0.35);
+  background: var(--overlay-primary-35);
 }
 
 .edu-carousel__dot--active {
@@ -224,7 +224,7 @@
 }
 
 .edu-card--default {
-  border-left-color: rgba(50, 30, 72, 0.25);
+  border-left-color: var(--overlay-primary-25);
 }
 
 .edu-card__row {

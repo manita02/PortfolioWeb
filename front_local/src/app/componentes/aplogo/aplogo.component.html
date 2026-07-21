@@ -15,7 +15,7 @@
       <button
         type="button"
         class="btn-pf btn-pf--add"
-        routerLink="/nuevaredsocial"
+        (click)="openCreate()"
         *ngIf="isLogged"
         data-tip="Agregar red social"
         data-tip-pos="left"
@@ -50,8 +50,9 @@
 
           <div class="social-item__admin" *ngIf="isLogged">
             <button
+              type="button"
               class="btn-pf btn-pf--edit btn-pf--icon-sm"
-              routerLink="/editred/{{ Redsocial.id }}"
+              (click)="openEdit(Redsocial.id!)"
               data-tip="Editar red social"
               data-tip-pos="bottom"
               aria-label="Editar red social"

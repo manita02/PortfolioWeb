@@ -1,36 +1,46 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InfopComponent } from './componentes/acerca-de/infop.component';
-import { EditredComponent } from './componentes/aplogo/editred.component';
-import { NewredComponent } from './componentes/aplogo/newred.component';
-import { EditbannerComponent } from './componentes/banner/editbanner.component';
-import { EditeducacionComponent } from './componentes/educacion/editeducacion.component';
-import { NeweducacionComponent } from './componentes/educacion/neweducacion.component';
-import { EditExperienciaComponent } from './componentes/experiencia-laboral/edit-experiencia.component';
-import { NewExperienciaComponent } from './componentes/experiencia-laboral/new-experiencia.component';
-import { EdithabilidadComponent } from './componentes/hard-soft-skills/edithabilidad.component';
-import { NewhabilidadComponent } from './componentes/hard-soft-skills/newhabilidad.component';
 import { HomeComponent } from './componentes/home/home.component';
-import { LoginComponent } from './componentes/login/login.component';
-import { EditproyectoComponent } from './componentes/proyecto/editproyecto.component';
-import { NewproyectoComponent } from './componentes/proyecto/newproyecto.component';
+import { LoginRedirectGuard } from './servicio/login-redirect.guard';
+import {
+  ExperienciaCreateGuard,
+  ExperienciaEditGuard,
+} from './servicio/experiencia-modal.guard';
+import { BannerEditGuard } from './servicio/banner-modal.guard';
+import { PersonaEditGuard } from './servicio/persona-modal.guard';
+import {
+  EducacionCreateGuard,
+  EducacionEditGuard,
+} from './servicio/educacion-modal.guard';
+import {
+  HabilidadCreateGuard,
+  HabilidadEditGuard,
+} from './servicio/habilidad-modal.guard';
+import {
+  ProyectoCreateGuard,
+  ProyectoEditGuard,
+} from './servicio/proyecto-modal.guard';
+import {
+  RedsocialCreateGuard,
+  RedsocialEditGuard,
+} from './servicio/redsocial-modal.guard';
 import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
 
 const routes: Routes = [
   {path:'',component: HomeComponent},
-  {path:'login',component: LoginComponent},
-  {path: 'nuevaexp', component: NewExperienciaComponent},
-  {path: 'editexp/:id', component: EditExperienciaComponent},
-  {path: 'nuevaedu', component: NeweducacionComponent},
-  {path: 'editedu/:id', component: EditeducacionComponent},
-  {path: 'nuevoproyecto', component: NewproyectoComponent},
-  {path: 'editproyect/:id', component: EditproyectoComponent},
-  {path: 'editinfop/:id', component: InfopComponent},
-  {path: 'nuevahabilidad', component: NewhabilidadComponent},
-  {path: 'edithabilidad/:id', component: EdithabilidadComponent},
-  {path: 'editbanner/:id', component: EditbannerComponent},
-  {path: 'nuevaredsocial', component: NewredComponent},
-  {path: 'editred/:id', component: EditredComponent},
+  { path: 'login', canActivate: [LoginRedirectGuard], component: HomeComponent },
+  { path: 'nuevaexp', canActivate: [ExperienciaCreateGuard], component: HomeComponent },
+  { path: 'editexp/:id', canActivate: [ExperienciaEditGuard], component: HomeComponent },
+  { path: 'nuevaedu', canActivate: [EducacionCreateGuard], component: HomeComponent },
+  { path: 'editedu/:id', canActivate: [EducacionEditGuard], component: HomeComponent },
+  { path: 'nuevoproyecto', canActivate: [ProyectoCreateGuard], component: HomeComponent },
+  { path: 'editproyect/:id', canActivate: [ProyectoEditGuard], component: HomeComponent },
+  { path: 'editinfop/:id', canActivate: [PersonaEditGuard], component: HomeComponent },
+  { path: 'nuevahabilidad', canActivate: [HabilidadCreateGuard], component: HomeComponent },
+  { path: 'edithabilidad/:id', canActivate: [HabilidadEditGuard], component: HomeComponent },
+  { path: 'editbanner/:id', canActivate: [BannerEditGuard], component: HomeComponent },
+  { path: 'nuevaredsocial', canActivate: [RedsocialCreateGuard], component: HomeComponent },
+  { path: 'editred/:id', canActivate: [RedsocialEditGuard], component: HomeComponent },
   {path: 'dev/componentes', component: ComponentesDemoComponent}
 ];
 

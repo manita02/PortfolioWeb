@@ -1,0 +1,162 @@
+<div
+  class="pf-modal proj-form-modal"
+  *ngIf="isOpen"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'proj-form-modal-title'"
+>
+  <div class="pf-modal__backdrop" aria-hidden="true" (click)="close()"></div>
+
+  <div class="pf-modal__panel pf-modal__panel--wide proj-form-modal__panel">
+    <button
+      type="button"
+      class="pf-modal__close btn-pf btn-pf--icon-sm"
+      (click)="close()"
+      [disabled]="guardando || loading"
+      data-tip="Cerrar"
+      data-tip-pos="left"
+      aria-label="Cerrar"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+
+    <div class="pf-modal__header proj-form-modal__header">
+      <div class="proj-form-modal__heading">
+        <span class="pf-modal__icon proj-form-modal__icon" aria-hidden="true">
+          <i class="bi bi-folder2-open"></i>
+        </span>
+        <h2 id="proj-form-modal-title" class="pf-modal__title">{{ title }}</h2>
+      </div>
+    </div>
+
+    <div class="pf-modal__body">
+      <div class="pf-modal__loading-overlay" *ngIf="loading">
+        <span>
+          <i class="bi bi-arrow-repeat proj-form-modal__spinner" aria-hidden="true"></i>
+          Cargando…
+        </span>
+      </div>
+
+      <form
+        *ngIf="proyecto && !loading"
+        #projForm="ngForm"
+        (ngSubmit)="onSubmit(projForm)"
+        class="proj-form-modal__form"
+        novalidate
+      >
+        <p class="pf-modal__error" *ngIf="errorMessage" role="alert">
+          <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+          {{ errorMessage }}
+        </p>
+
+        <div class="proj-form-modal__grid">
+          <div class="proj-form-modal__col proj-form-modal__col--primary">
+            <div class="form-pf">
+              <label class="form-pf__label" for="proj-nombreE">Nombre</label>
+              <input
+                type="text"
+                id="proj-nombreE"
+                name="nombreE"
+                class="form-pf__input"
+                [(ngModel)]="proyecto.nombreE"
+                required
+                [disabled]="guardando"
+              />
+            </div>
+
+            <div class="form-pf">
+              <label class="form-pf__label" for="proj-descripcionE">Descripción</label>
+              <textarea
+                id="proj-descripcionE"
+                name="descripcionE"
+                class="form-pf__textarea"
+                rows="4"
+                [(ngModel)]="proyecto.descripcionE"
+                required
+                [disabled]="guardando"
+              ></textarea>
+            </div>
+
+            <div class="form-pf">
+              <label class="form-pf__label" for="proj-link">URL del proyecto</label>
+              <input
+                type="url"
+                id="proj-link"
+                name="link"
+                class="form-pf__input"
+                [(ngModel)]="proyecto.link"
+                required
+                [disabled]="guardando"
+              />
+            </div>
+          </div>
+
+          <div class="proj-form-modal__col proj-form-modal__col--secondary">
+            <app-periodo-input
+              [fechaInicio]="proyecto.fechaInicio"
+              [fechaFin]="proyecto.fechaFin"
+              [esActual]="proyecto.esActual"
+              [required]="true"
+              [showPreview]="false"
+              placeholder="MM/yyyy"
+              (fechaInicioChange)="proyecto.fechaInicio = $event"
+              (fechaFinChange)="proyecto.fechaFin = $event"
+              (esActualChange)="proyecto.esActual = $event"
+            ></app-periodo-input>
+
+            <app-org-select
+              [organizaciones]="organizaciones"
+              [(selectedId)]="proyecto.organizacionId"
+              [required]="false"
+              [allowCreate]="true"
+              (createRequested)="onCreateOrg()"
+            ></app-org-select>
+
+            <app-image-upload
+              [(value)]="proyecto.imagen"
+              label="Imagen del proyecto"
+              [required]="true"
+              [iconClearButton]="true"
+            ></app-image-upload>
+            <p class="pf-modal__hint proj-form-modal__hint">
+              JPEG o PNG, máximo <strong>2 MB</strong>.
+            </p>
+          </div>
+
+          <div class="proj-form-modal__full">
+            <label class="form-pf__label">Habilidades relacionadas</label>
+            <app-skill-multi-select
+              [options]="habilidades"
+              [(selectedIds)]="proyecto.habilidadesIds"
+            ></app-skill-multi-select>
+          </div>
+        </div>
+
+        <div class="pf-modal__actions">
+          <button
+            type="button"
+            class="btn-pf btn-pf--edit"
+            (click)="close()"
+            [disabled]="guardando"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="btn-pf btn-pf--view"
+            [disabled]="!formValido || guardando"
+          >
+            <span *ngIf="!guardando">
+              <i class="bi bi-check2-lg" aria-hidden="true"></i>
+              {{ submitLabel }}
+            </span>
+            <span *ngIf="guardando" class="proj-form-modal__saving">
+              <i class="bi bi-arrow-repeat proj-form-modal__spinner" aria-hidden="true"></i>
+              Guardando…
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

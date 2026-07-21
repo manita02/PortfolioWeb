@@ -1,0 +1,111 @@
+<div
+  class="pf-modal skill-form-modal"
+  *ngIf="isOpen"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'skill-form-modal-title'"
+>
+  <div class="pf-modal__backdrop" aria-hidden="true" (click)="close()"></div>
+
+  <div class="pf-modal__panel skill-form-modal__panel">
+    <button
+      type="button"
+      class="pf-modal__close btn-pf btn-pf--icon-sm"
+      (click)="close()"
+      [disabled]="guardando || loading"
+      data-tip="Cerrar"
+      data-tip-pos="left"
+      aria-label="Cerrar"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+
+    <div class="pf-modal__header skill-form-modal__header">
+      <div class="skill-form-modal__heading">
+        <span class="pf-modal__icon skill-form-modal__icon" aria-hidden="true">
+          <i class="bi bi-stars"></i>
+        </span>
+        <h2 id="skill-form-modal-title" class="pf-modal__title">{{ title }}</h2>
+      </div>
+    </div>
+
+    <div class="pf-modal__body">
+      <div class="pf-modal__loading-overlay" *ngIf="loading">
+        <span>
+          <i class="bi bi-arrow-repeat skill-form-modal__spinner" aria-hidden="true"></i>
+          Cargando…
+        </span>
+      </div>
+
+      <form
+        *ngIf="habilidad && !loading"
+        #skillForm="ngForm"
+        (ngSubmit)="onSubmit(skillForm)"
+        class="skill-form-modal__form"
+        novalidate
+      >
+        <p class="pf-modal__error" *ngIf="errorMessage" role="alert">
+          <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+          {{ errorMessage }}
+        </p>
+
+        <div class="skill-form-modal__fields">
+          <div class="form-pf">
+            <label class="form-pf__label" for="skill-nombre">Nombre</label>
+            <input
+              type="text"
+              id="skill-nombre"
+              name="nombre"
+              class="form-pf__input"
+              [(ngModel)]="habilidad.nombre"
+              required
+              [disabled]="guardando"
+            />
+          </div>
+
+          <app-catalog-select
+            label="Tipo de habilidad"
+            [options]="tiposHabilidad"
+            [(selectedId)]="habilidad.tipoHabilidadId"
+            [required]="true"
+          ></app-catalog-select>
+
+          <app-image-upload
+            [(value)]="habilidad.img"
+            label="Ícono de la habilidad"
+            [required]="true"
+            [iconClearButton]="true"
+          ></app-image-upload>
+          <p class="pf-modal__hint skill-form-modal__hint">
+            PNG o JPEG, máximo <strong>2 MB</strong>.
+          </p>
+        </div>
+
+        <div class="pf-modal__actions">
+          <button
+            type="button"
+            class="btn-pf btn-pf--edit"
+            (click)="close()"
+            [disabled]="guardando"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            class="btn-pf btn-pf--view"
+            [disabled]="!formValido || guardando"
+          >
+            <span *ngIf="!guardando">
+              <i class="bi bi-check2-lg" aria-hidden="true"></i>
+              {{ submitLabel }}
+            </span>
+            <span *ngIf="guardando" class="skill-form-modal__saving">
+              <i class="bi bi-arrow-repeat skill-form-modal__spinner" aria-hidden="true"></i>
+              Guardando…
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

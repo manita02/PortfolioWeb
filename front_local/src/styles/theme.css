@@ -33,6 +33,7 @@
   --shadow-card: 0 2px 8px rgba(50, 30, 72, 0.08);
   --shadow-card-hover: 0 12px 28px rgba(50, 30, 72, 0.14);
   --shadow-hero-overlay: 0 4px 30px rgba(0, 0, 0, 0.25);
+  --shadow-text-on-image: 0 2px 8px rgba(0, 0, 0, 0.3);
 
   /* Espaciado */
   --section-padding-y: clamp(2rem, 3.5vw, 3.25rem);
@@ -61,6 +62,98 @@
 
   /* Admin / estados */
   --color-danger: #C75C5C;
+  --color-accent-hover: #AAF0DA;
+  --color-violet: #8B6FBF;
+  --color-violet-dark: #5C4694;
+
+  /* Categorías de skills */
+  --color-skill-database: #5B8DEF;
+  --color-skill-tools: #7B6FD4;
+  --color-skill-methodology: #E8A54B;
+  --color-skill-language: #4DB6AC;
+
+  /* Overlays (transparencias sobre la paleta) */
+  --overlay-backdrop: rgba(38, 23, 51, 0.62);
+  --overlay-primary-04: rgba(50, 30, 72, 0.04);
+  --overlay-primary-06: rgba(50, 30, 72, 0.06);
+  --overlay-primary-07: rgba(50, 30, 72, 0.07);
+  --overlay-primary-08: rgba(50, 30, 72, 0.08);
+  --overlay-primary-10: rgba(50, 30, 72, 0.10);
+  --overlay-primary-11: rgba(50, 30, 72, 0.11);
+  --overlay-primary-14: rgba(50, 30, 72, 0.14);
+  --overlay-primary-18: rgba(50, 30, 72, 0.18);
+  --overlay-primary-20: rgba(50, 30, 72, 0.20);
+  --overlay-primary-22: rgba(50, 30, 72, 0.22);
+  --overlay-primary-25: rgba(50, 30, 72, 0.25);
+  --overlay-primary-35: rgba(50, 30, 72, 0.35);
+  --overlay-secondary-08: rgba(67, 99, 126, 0.08);
+  --overlay-secondary-10: rgba(67, 99, 126, 0.10);
+  --overlay-secondary-12: rgba(67, 99, 126, 0.12);
+  --overlay-secondary-15: rgba(67, 99, 126, 0.15);
+  --overlay-secondary-16: rgba(67, 99, 126, 0.16);
+  --overlay-secondary-18: rgba(67, 99, 126, 0.18);
+  --overlay-secondary-22: rgba(67, 99, 126, 0.22);
+  --overlay-primary-75: rgba(50, 30, 72, 0.75);
+  --overlay-secondary-20: rgba(67, 99, 126, 0.20);
+  --overlay-white-72: rgba(255, 255, 255, 0.72);
+  --overlay-accent-15: rgba(101, 220, 213, 0.15);
+  --overlay-accent-08: rgba(101, 220, 213, 0.08);
+  --overlay-accent-12: rgba(101, 220, 213, 0.12);
+  --overlay-accent-18: rgba(101, 220, 213, 0.18);
+  --overlay-accent-22: rgba(101, 220, 213, 0.22);
+  --overlay-accent-25: rgba(101, 220, 213, 0.25);
+  --overlay-accent-28: rgba(101, 220, 213, 0.28);
+  --overlay-accent-35: rgba(101, 220, 213, 0.35);
+  --overlay-accent-40: rgba(101, 220, 213, 0.40);
+  --overlay-accent-45: rgba(101, 220, 213, 0.45);
+  --overlay-accent-50: rgba(101, 220, 213, 0.50);
+  --overlay-accent-55: rgba(101, 220, 213, 0.55);
+  --overlay-accent-75: rgba(101, 220, 213, 0.75);
+  --overlay-soft-08: rgba(217, 255, 244, 0.08);
+  --overlay-soft-20: rgba(217, 255, 244, 0.20);
+  --overlay-soft-28: rgba(217, 255, 244, 0.28);
+  --overlay-soft-35: rgba(217, 255, 244, 0.35);
+  --overlay-soft-40: rgba(217, 255, 244, 0.40);
+  --overlay-soft-55: rgba(217, 255, 244, 0.55);
+  --overlay-soft-70: rgba(217, 255, 244, 0.70);
+  --overlay-soft-82: rgba(217, 255, 244, 0.82);
+  --overlay-danger-10: rgba(199, 92, 92, 0.10);
+  --overlay-danger-15: rgba(199, 92, 92, 0.15);
+  --overlay-danger-25: rgba(199, 92, 92, 0.25);
+  --overlay-danger-42: rgba(199, 92, 92, 0.42);
+  --overlay-danger-55: rgba(199, 92, 92, 0.55);
+  --overlay-danger-border: rgba(255, 200, 200, 0.50);
+  --overlay-violet-16: rgba(139, 111, 191, 0.16);
+  --overlay-violet-32: rgba(139, 111, 191, 0.32);
+  --overlay-white-12: rgba(255, 255, 255, 0.12);
+  --overlay-white-22: rgba(255, 255, 255, 0.22);
+  --overlay-white-28: rgba(255, 255, 255, 0.28);
+  --overlay-white-45: rgba(255, 255, 255, 0.45);
+  --overlay-muted-55: rgba(245, 242, 248, 0.55);
+  --overlay-muted-85: rgba(245, 242, 248, 0.85);
+  --overlay-text-muted-75: rgba(107, 130, 148, 0.75);
+  --overlay-skill-database-10: rgba(91, 141, 239, 0.10);
+  --overlay-skill-database-16: rgba(91, 141, 239, 0.16);
+  --overlay-skill-database-22: rgba(91, 141, 239, 0.22);
+  --overlay-skill-tools-10: rgba(123, 111, 212, 0.10);
+  --overlay-skill-tools-16: rgba(123, 111, 212, 0.16);
+  --overlay-skill-tools-22: rgba(123, 111, 212, 0.22);
+  --overlay-skill-methodology-12: rgba(232, 165, 75, 0.12);
+  --overlay-skill-methodology-20: rgba(232, 165, 75, 0.20);
+  --overlay-skill-methodology-24: rgba(232, 165, 75, 0.24);
+  --overlay-skill-methodology-28: rgba(232, 165, 75, 0.28);
+  --overlay-skill-language-10: rgba(77, 182, 172, 0.10);
+  --overlay-skill-language-16: rgba(77, 182, 172, 0.16);
+  --overlay-skill-language-22: rgba(77, 182, 172, 0.22);
+
+  /* Sombras y gradientes compuestos */
+  --shadow-modal: 0 24px 48px var(--overlay-primary-22), 0 0 0 1px var(--overlay-accent-12);
+  --shadow-focus-accent: 0 0 0 3px var(--overlay-accent-18);
+  --shadow-focus-danger: 0 0 0 3px var(--overlay-danger-15);
+  --shadow-inset-input: inset 0 1px 2px var(--overlay-primary-04);
+  --shadow-focus-input: var(--shadow-focus-accent), var(--shadow-inset-input);
+  --shadow-focus-input-danger: var(--shadow-focus-danger), var(--shadow-inset-input);
+  --gradient-modal-icon: linear-gradient(135deg, var(--overlay-accent-22) 0%, var(--overlay-secondary-12) 100%);
 
   /* Botones */
   --btn-radius: 0.75rem;

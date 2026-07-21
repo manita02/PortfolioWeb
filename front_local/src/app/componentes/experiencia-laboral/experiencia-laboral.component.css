@@ -22,7 +22,7 @@
 }
 
 .exp-carousel__viewport:focus-visible {
-  outline: 2px solid rgba(101, 220, 213, 0.75);
+  outline: 2px solid var(--overlay-accent-75);
   outline-offset: 3px;
   border-radius: var(--border-radius-sm);
 }
@@ -95,7 +95,7 @@
 
 .exp-carousel__nav:hover:not(:disabled) {
   background: var(--color-accent-soft);
-  border-color: rgba(101, 220, 213, 0.45);
+  border-color: var(--overlay-accent-45);
   box-shadow: var(--btn-shadow-hover);
   transform: translateY(-1px);
 }
@@ -140,14 +140,14 @@
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(50, 30, 72, 0.2);
+  background: var(--overlay-primary-20);
   cursor: pointer;
   transition: transform var(--transition-fast), background var(--transition-fast);
 }
 
 .exp-carousel__dot:hover {
   transform: scale(1.15);
-  background: rgba(50, 30, 72, 0.35);
+  background: var(--overlay-primary-35);
 }
 
 .exp-carousel__dot--active {
@@ -170,11 +170,11 @@
 }
 
 .exp-card--training {
-  border-left-color: #8b6fbf;
+  border-left-color: var(--color-violet);
 }
 
 .exp-card--default {
-  border-left-color: rgba(50, 30, 72, 0.25);
+  border-left-color: var(--overlay-primary-25);
 }
 
 .exp-card__row {

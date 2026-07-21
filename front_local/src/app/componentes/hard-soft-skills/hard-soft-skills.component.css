@@ -34,20 +34,20 @@
 }
 
 .skills-filter:hover {
-  border-color: rgba(101, 220, 213, 0.45);
+  border-color: var(--overlay-accent-45);
   color: var(--color-primary);
   transform: translateY(-1px);
 }
 
 .skills-filter--active {
   background: var(--color-accent-soft);
-  border-color: rgba(101, 220, 213, 0.55);
+  border-color: var(--overlay-accent-55);
   color: var(--color-primary);
   box-shadow: var(--btn-shadow);
 }
 
 .skills-filter:focus-visible {
-  outline: 2px solid rgba(101, 220, 213, 0.75);
+  outline: 2px solid var(--overlay-accent-75);
   outline-offset: 2px;
 }
 
@@ -100,7 +100,7 @@
   margin-left: auto;
   padding: 0.15rem 0.55rem;
   border-radius: 999px;
-  background: rgba(50, 30, 72, 0.08);
+  background: var(--overlay-primary-08);
   color: var(--text-muted);
   font-size: 0.72rem;
   font-weight: 600;
@@ -112,14 +112,14 @@
 .skills-group--frontend .skills-group__title { border-bottom-color: var(--color-accent); }
 .skills-group--frameworks .skills-group__dot { background: var(--color-primary); }
 .skills-group--frameworks .skills-group__title { border-bottom-color: var(--color-primary); }
-.skills-group--database .skills-group__dot { background: #5B8DEF; }
-.skills-group--database .skills-group__title { border-bottom-color: #5B8DEF; }
-.skills-group--tools .skills-group__dot { background: #7B6FD4; }
-.skills-group--tools .skills-group__title { border-bottom-color: #7B6FD4; }
-.skills-group--methodology .skills-group__dot { background: #E8A54B; }
-.skills-group--methodology .skills-group__title { border-bottom-color: #E8A54B; }
-.skills-group--language .skills-group__dot { background: #4DB6AC; }
-.skills-group--language .skills-group__title { border-bottom-color: #4DB6AC; }
+.skills-group--database .skills-group__dot { background: var(--color-skill-database); }
+.skills-group--database .skills-group__title { border-bottom-color: var(--color-skill-database); }
+.skills-group--tools .skills-group__dot { background: var(--color-skill-tools); }
+.skills-group--tools .skills-group__title { border-bottom-color: var(--color-skill-tools); }
+.skills-group--methodology .skills-group__dot { background: var(--color-skill-methodology); }
+.skills-group--methodology .skills-group__title { border-bottom-color: var(--color-skill-methodology); }
+.skills-group--language .skills-group__dot { background: var(--color-skill-language); }
+.skills-group--language .skills-group__title { border-bottom-color: var(--color-skill-language); }
 
 /* ── Carrusel ── */
 .skills-carousel {
@@ -152,7 +152,7 @@
 }
 
 .skills-carousel__viewport:focus-visible {
-  outline: 2px solid rgba(101, 220, 213, 0.75);
+  outline: 2px solid var(--overlay-accent-75);
   outline-offset: 3px;
   border-radius: var(--border-radius-sm);
 }
@@ -203,7 +203,7 @@
 
 .skills-carousel__nav:hover:not(:disabled) {
   background: var(--color-accent-soft);
-  border-color: rgba(101, 220, 213, 0.45);
+  border-color: var(--overlay-accent-45);
   box-shadow: var(--btn-shadow-hover);
   transform: translateY(-1px);
 }
@@ -248,14 +248,14 @@
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(50, 30, 72, 0.2);
+  background: var(--overlay-primary-20);
   cursor: pointer;
   transition: transform var(--transition-fast), background var(--transition-fast);
 }
 
 .skills-carousel__dot:hover {
   transform: scale(1.15);
-  background: rgba(50, 30, 72, 0.35);
+  background: var(--overlay-primary-35);
 }
 
 .skills-carousel__dot--active {
@@ -264,17 +264,17 @@
 }
 
 .skills-carousel__dot:focus-visible {
-  outline: 2px solid rgba(101, 220, 213, 0.75);
+  outline: 2px solid var(--overlay-accent-75);
   outline-offset: 2px;
 }
 
 /* ── Pill / chip de habilidad ── */
 .skill-pill {
   --pill-accent: var(--color-accent);
-  --pill-bg: rgba(217, 255, 244, 0.55);
-  --pill-bg-hover: rgba(217, 255, 244, 0.82);
-  --pill-border: rgba(101, 220, 213, 0.35);
-  --pill-inset-glow: rgba(101, 220, 213, 0.22);
+  --pill-bg: var(--overlay-soft-55);
+  --pill-bg-hover: var(--overlay-soft-82);
+  --pill-border: var(--overlay-accent-35);
+  --pill-inset-glow: var(--overlay-accent-22);
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -302,7 +302,7 @@
   border-color: var(--pill-accent);
   background: var(--pill-bg-hover, var(--pill-bg));
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.45),
+    inset 0 0 0 1px var(--overlay-white-45),
     inset 0 0 14px -2px var(--pill-inset-glow);
 }
 
@@ -364,66 +364,66 @@
 /* Acentos por categoría */
 .skill-pill--backend {
   --pill-accent: var(--color-secondary);
-  --pill-bg: rgba(67, 99, 126, 0.1);
-  --pill-bg-hover: rgba(67, 99, 126, 0.16);
-  --pill-border: rgba(67, 99, 126, 0.22);
-  --pill-inset-glow: rgba(67, 99, 126, 0.2);
+  --pill-bg: var(--overlay-secondary-10);
+  --pill-bg-hover: var(--overlay-secondary-16);
+  --pill-border: var(--overlay-secondary-22);
+  --pill-inset-glow: var(--overlay-secondary-20);
 }
 
 .skill-pill--frontend {
   --pill-accent: var(--color-accent);
-  --pill-bg: rgba(217, 255, 244, 0.55);
-  --pill-bg-hover: rgba(217, 255, 244, 0.82);
-  --pill-border: rgba(101, 220, 213, 0.35);
-  --pill-inset-glow: rgba(101, 220, 213, 0.28);
+  --pill-bg: var(--overlay-soft-55);
+  --pill-bg-hover: var(--overlay-soft-82);
+  --pill-border: var(--overlay-accent-35);
+  --pill-inset-glow: var(--overlay-accent-28);
 }
 
 .skill-pill--frameworks {
   --pill-accent: var(--color-primary);
-  --pill-bg: rgba(50, 30, 72, 0.07);
-  --pill-bg-hover: rgba(50, 30, 72, 0.11);
-  --pill-border: rgba(50, 30, 72, 0.14);
-  --pill-inset-glow: rgba(50, 30, 72, 0.14);
+  --pill-bg: var(--overlay-primary-07);
+  --pill-bg-hover: var(--overlay-primary-11);
+  --pill-border: var(--overlay-primary-14);
+  --pill-inset-glow: var(--overlay-primary-14);
 }
 
 .skill-pill--database {
-  --pill-accent: #5B8DEF;
-  --pill-bg: rgba(91, 141, 239, 0.1);
-  --pill-bg-hover: rgba(91, 141, 239, 0.16);
-  --pill-border: rgba(91, 141, 239, 0.22);
-  --pill-inset-glow: rgba(91, 141, 239, 0.22);
+  --pill-accent: var(--color-skill-database);
+  --pill-bg: var(--overlay-skill-database-10);
+  --pill-bg-hover: var(--overlay-skill-database-16);
+  --pill-border: var(--overlay-skill-database-22);
+  --pill-inset-glow: var(--overlay-skill-database-22);
 }
 
 .skill-pill--tools {
-  --pill-accent: #7B6FD4;
-  --pill-bg: rgba(123, 111, 212, 0.1);
-  --pill-bg-hover: rgba(123, 111, 212, 0.16);
-  --pill-border: rgba(123, 111, 212, 0.22);
-  --pill-inset-glow: rgba(123, 111, 212, 0.22);
+  --pill-accent: var(--color-skill-tools);
+  --pill-bg: var(--overlay-skill-tools-10);
+  --pill-bg-hover: var(--overlay-skill-tools-16);
+  --pill-border: var(--overlay-skill-tools-22);
+  --pill-inset-glow: var(--overlay-skill-tools-22);
 }
 
 .skill-pill--methodology {
-  --pill-accent: #E8A54B;
-  --pill-bg: rgba(232, 165, 75, 0.12);
-  --pill-bg-hover: rgba(232, 165, 75, 0.2);
-  --pill-border: rgba(232, 165, 75, 0.28);
-  --pill-inset-glow: rgba(232, 165, 75, 0.24);
+  --pill-accent: var(--color-skill-methodology);
+  --pill-bg: var(--overlay-skill-methodology-12);
+  --pill-bg-hover: var(--overlay-skill-methodology-20);
+  --pill-border: var(--overlay-skill-methodology-28);
+  --pill-inset-glow: var(--overlay-skill-methodology-24);
 }
 
 .skill-pill--language {
-  --pill-accent: #4DB6AC;
-  --pill-bg: rgba(77, 182, 172, 0.1);
-  --pill-bg-hover: rgba(77, 182, 172, 0.16);
-  --pill-border: rgba(77, 182, 172, 0.22);
-  --pill-inset-glow: rgba(77, 182, 172, 0.22);
+  --pill-accent: var(--color-skill-language);
+  --pill-bg: var(--overlay-skill-language-10);
+  --pill-bg-hover: var(--overlay-skill-language-16);
+  --pill-border: var(--overlay-skill-language-22);
+  --pill-inset-glow: var(--overlay-skill-language-22);
 }
 
 .skill-pill--default {
   --pill-accent: var(--color-accent);
-  --pill-bg: rgba(217, 255, 244, 0.55);
-  --pill-bg-hover: rgba(217, 255, 244, 0.82);
-  --pill-border: rgba(101, 220, 213, 0.35);
-  --pill-inset-glow: rgba(101, 220, 213, 0.28);
+  --pill-bg: var(--overlay-soft-55);
+  --pill-bg-hover: var(--overlay-soft-82);
+  --pill-border: var(--overlay-accent-35);
+  --pill-inset-glow: var(--overlay-accent-28);
 }
 
 @keyframes skillPillIn {

@@ -1,0 +1,150 @@
+<div
+  class="pf-modal exp-form-modal"
+  *ngIf="isOpen"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'exp-form-modal-title'"
+>
+  <div class="pf-modal__backdrop" aria-hidden="true" (click)="close()"></div>
+
+  <div class="pf-modal__panel pf-modal__panel--wide exp-form-modal__panel">
+    <button
+      type="button"
+      class="pf-modal__close btn-pf btn-pf--icon-sm"
+      (click)="close()"
+      [disabled]="guardando || loading"
+      data-tip="Cerrar"
+      data-tip-pos="left"
+      aria-label="Cerrar"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+
+    <div class="pf-modal__header exp-form-modal__header">
+      <div class="exp-form-modal__heading">
+        <span class="pf-modal__icon exp-form-modal__icon" aria-hidden="true">
+          <i class="bi bi-briefcase"></i>
+        </span>
+        <h2 id="exp-form-modal-title" class="pf-modal__title">{{ title }}</h2>
+      </div>
+    </div>
+
+    <div class="pf-modal__body">
+      <div class="pf-modal__loading-overlay" *ngIf="loading">
+        <span><i class="bi bi-arrow-repeat exp-form-modal__spinner" aria-hidden="true"></i> Cargando…</span>
+      </div>
+
+      <form
+        *ngIf="experiencia && !loading"
+        #expForm="ngForm"
+        (ngSubmit)="onSubmit(expForm)"
+        class="exp-form-modal__form"
+        novalidate
+      >
+      <p class="pf-modal__error" *ngIf="errorMessage" role="alert">
+        <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+        {{ errorMessage }}
+      </p>
+
+      <div class="exp-form-modal__grid">
+        <div class="exp-form-modal__col exp-form-modal__col--primary">
+          <div class="form-pf">
+            <label class="form-pf__label" for="exp-nombreE">Puesto / cargo</label>
+            <input
+              type="text"
+              id="exp-nombreE"
+              name="nombreE"
+              class="form-pf__input"
+              [(ngModel)]="experiencia.nombreE"
+              required
+              [disabled]="guardando"
+            />
+          </div>
+
+          <div class="form-pf">
+            <label class="form-pf__label" for="exp-descripcionE">Descripción</label>
+            <textarea
+              id="exp-descripcionE"
+              name="descripcionE"
+              class="form-pf__textarea"
+              rows="4"
+              [(ngModel)]="experiencia.descripcionE"
+              required
+              [disabled]="guardando"
+            ></textarea>
+          </div>
+
+          <app-catalog-select
+            label="Tipo de empleo"
+            [options]="tiposEmpleo"
+            [(selectedId)]="experiencia.tipoEmpleoId"
+            [required]="true"
+          ></app-catalog-select>
+        </div>
+
+        <div class="exp-form-modal__col exp-form-modal__col--secondary">
+          <app-periodo-input
+            [fechaInicio]="experiencia.fechaInicio"
+            [fechaFin]="experiencia.fechaFin"
+            [esActual]="experiencia.esActual"
+            [required]="true"
+            [showPreview]="false"
+            placeholder=""
+            (fechaInicioChange)="experiencia.fechaInicio = $event"
+            (fechaFinChange)="experiencia.fechaFin = $event"
+            (esActualChange)="experiencia.esActual = $event"
+          ></app-periodo-input>
+
+          <app-org-select
+            [organizaciones]="organizaciones"
+            [(selectedId)]="experiencia.organizacionId"
+            [required]="true"
+            [allowCreate]="true"
+            (createRequested)="onCreateOrg()"
+          ></app-org-select>
+
+          <app-catalog-select
+            label="Tipo de ubicación"
+            [options]="tiposUbicacion"
+            [(selectedId)]="experiencia.tipoUbicacionId"
+            [required]="true"
+          ></app-catalog-select>
+        </div>
+
+        <div class="exp-form-modal__full">
+          <label class="form-pf__label">Habilidades relacionadas</label>
+          <app-skill-multi-select
+            [options]="habilidades"
+            [(selectedIds)]="experiencia.habilidadesIds"
+          ></app-skill-multi-select>
+        </div>
+      </div>
+
+      <div class="pf-modal__actions">
+        <button
+          type="button"
+          class="btn-pf btn-pf--edit"
+          (click)="close()"
+          [disabled]="guardando"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="btn-pf btn-pf--view"
+          [disabled]="!formValido || guardando"
+        >
+          <span *ngIf="!guardando">
+            <i class="bi bi-check2-lg" aria-hidden="true"></i>
+            {{ submitLabel }}
+          </span>
+          <span *ngIf="guardando" class="exp-form-modal__saving">
+            <i class="bi bi-arrow-repeat exp-form-modal__spinner" aria-hidden="true"></i>
+            Guardando…
+          </span>
+        </button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>

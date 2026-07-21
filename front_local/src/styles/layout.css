@@ -125,7 +125,7 @@
   background: var(--bg-header);
   color: var(--text-on-dark);
   padding: 0.45rem var(--section-padding-x);
-  box-shadow: 0 2px 12px rgba(50, 30, 72, 0.2);
+  box-shadow: 0 2px 12px var(--overlay-primary-20);
 }
 
 .hero-bar__inner {
@@ -213,8 +213,8 @@
   padding: 2rem var(--section-padding-x);
   background: linear-gradient(
     to top,
-    rgba(50, 30, 72, 0.75) 0%,
-    rgba(50, 30, 72, 0.2) 50%,
+    var(--overlay-primary-75) 0%,
+    var(--overlay-primary-20) 50%,
     transparent 100%
   );
 }
@@ -225,7 +225,7 @@
   color: var(--text-on-dark);
   text-align: center;
   margin: 0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: var(--shadow-text-on-image);
 }
 
 .hero-banner__actions {
@@ -372,7 +372,7 @@
   padding: 2rem 1rem;
   color: var(--text-muted);
   font-style: italic;
-  background: rgba(101, 220, 213, 0.08);
+  background: var(--overlay-accent-08);
   border: 1px dashed var(--border-color);
   border-radius: var(--border-radius-card);
   max-width: var(--container-max);
@@ -387,9 +387,9 @@
   text-align: center;
   padding: 1rem var(--section-padding-x);
   box-shadow:
-    2px -3px 8px rgba(217, 255, 244, 0.28),
-    0 -6px 18px rgba(101, 220, 213, 0.12),
-    0 -2px 6px rgba(50, 30, 72, 0.2);
+    2px -3px 8px var(--overlay-soft-28),
+    0 -6px 18px var(--overlay-accent-12),
+    0 -2px 6px var(--overlay-primary-20);
 }
 
 .site-footer::before {
@@ -402,9 +402,9 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(101, 220, 213, 0.35) 15%,
-    rgba(217, 255, 244, 0.7) 50%,
-    rgba(101, 220, 213, 0.35) 85%,
+    var(--overlay-accent-35) 15%,
+    var(--overlay-soft-70) 50%,
+    var(--overlay-accent-35) 85%,
     transparent 100%
   );
 }

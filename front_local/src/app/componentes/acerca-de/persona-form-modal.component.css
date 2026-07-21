@@ -1,0 +1,207 @@
+.persona-form-modal__panel {
+  position: relative;
+  padding: 1.1rem 1.15rem 1rem;
+}
+
+.persona-form-modal__header {
+  margin-bottom: 0.65rem;
+  padding-right: 2.25rem;
+}
+
+.persona-form-modal__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.persona-form-modal__icon {
+  flex-shrink: 0;
+  width: 2.45rem;
+  height: 2.45rem;
+  margin-bottom: 0;
+  font-size: 1.05rem;
+}
+
+.persona-form-modal__header .pf-modal__title {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.persona-form-modal__form {
+  min-width: 0;
+}
+
+.persona-form-modal__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.persona-form-modal__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.persona-form-modal__bio {
+  flex: 1;
+  min-height: 0;
+}
+
+.persona-form-modal .form-pf {
+  gap: 0.28rem;
+}
+
+.persona-form-modal .form-pf__input,
+.persona-form-modal .form-pf__textarea {
+  padding: 0.52rem 0.75rem;
+  font-size: 0.88rem;
+}
+
+.persona-form-modal .form-pf__label {
+  font-size: 0.78rem;
+}
+
+.persona-form-modal .pf-modal__error {
+  margin-bottom: 0.6rem;
+}
+
+.persona-form-modal .pf-modal__actions {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+}
+
+.persona-form-modal__hint {
+  margin-top: 0;
+  line-height: 1.45;
+}
+
+.persona-form-modal__saving {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.persona-form-modal__spinner {
+  animation: personaFormModalSpin 0.85s linear infinite;
+}
+
+.persona-form-modal ::ng-deep app-image-upload .mb-3 {
+  margin-bottom: 0 !important;
+}
+
+.persona-form-modal ::ng-deep app-image-upload .form-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.2rem;
+}
+
+.persona-form-modal ::ng-deep app-image-upload .form-control {
+  width: 100%;
+  min-width: 0;
+  padding: 0.52rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: var(--font-family-base);
+  font-size: 0.88rem;
+}
+
+.persona-form-modal ::ng-deep app-image-upload .form-control:focus {
+  outline: none;
+  border-color: var(--overlay-accent-75);
+  box-shadow: 0 0 0 3px var(--overlay-accent-18);
+}
+
+.persona-form-modal ::ng-deep app-image-upload .text-white-50 {
+  color: var(--text-muted) !important;
+  font-size: 0.78rem;
+}
+
+.persona-form-modal ::ng-deep app-image-upload .text-danger {
+  font-size: 0.78rem;
+}
+
+.persona-form-modal ::ng-deep app-image-upload .image-upload-preview {
+  width: 100%;
+  margin-top: 0.35rem;
+}
+
+.persona-form-modal ::ng-deep app-image-upload .base64-image-wrapper {
+  display: block;
+  width: 100%;
+  height: 15rem;
+  max-height: 15rem !important;
+  overflow: hidden;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--overlay-muted-55);
+}
+
+.persona-form-modal ::ng-deep app-image-upload .base64-image-wrapper img,
+.persona-form-modal ::ng-deep app-image-upload .image-upload-preview__img {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.persona-form-modal ::ng-deep app-image-upload .image-upload-preview__clear[data-tip]::after,
+.persona-form-modal ::ng-deep app-image-upload .image-upload-preview__clear[data-tip]::before {
+  z-index: 2100;
+}
+
+.persona-form-modal .pf-modal__close {
+  top: 0.65rem;
+  right: 0.65rem;
+}
+
+@keyframes personaFormModalSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .persona-form-modal__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.6rem 1rem;
+    align-items: stretch;
+  }
+
+  .persona-form-modal__col--fields {
+    height: 100%;
+  }
+
+  .persona-form-modal__bio .form-pf__textarea {
+    flex: 1;
+    min-height: 6.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .persona-form-modal .pf-modal__panel--wide {
+    width: min(100%, 52rem);
+  }
+}
+
+@media (max-width: 575px) {
+  .persona-form-modal__panel {
+    padding: 1rem 0.95rem 0.9rem;
+  }
+
+  .persona-form-modal .pf-modal__panel--wide {
+    width: min(100%, 100%);
+  }
+}

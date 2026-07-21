@@ -12,9 +12,36 @@
   <div *ngIf="loading" class="text-white-50 small mt-1">Cargando imagen…</div>
   <div *ngIf="validationError" class="text-danger small mt-1">{{ validationError }}</div>
 
-  <div *ngIf="value" class="mt-2">
-    <app-base64-image [src]="value" [alt]="label" maxHeight="150px"></app-base64-image>
-    <button type="button" class="btn btn-sm btn-outline-secondary mt-2" (click)="clearImage()">
+  <div
+    *ngIf="value"
+    class="image-upload-preview"
+    [class.image-upload-preview--full]="previewFullWidth"
+  >
+    <app-base64-image
+      [src]="value"
+      [alt]="label"
+      [maxHeight]="previewFullWidth ? '' : previewMaxHeight"
+      cssClass="image-upload-preview__img"
+    ></app-base64-image>
+
+    <button
+      *ngIf="iconClearButton"
+      type="button"
+      class="btn-pf btn-pf--delete btn-pf--icon-sm image-upload-preview__clear"
+      (click)="clearImage()"
+      data-tip="Quitar imagen"
+      data-tip-pos="left"
+      aria-label="Quitar imagen"
+    >
+      <i class="bi bi-trash" aria-hidden="true"></i>
+    </button>
+
+    <button
+      *ngIf="!iconClearButton"
+      type="button"
+      class="btn btn-sm btn-outline-secondary image-upload-preview__clear-text"
+      (click)="clearImage()"
+    >
       Quitar imagen
     </button>
   </div>

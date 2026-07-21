@@ -1,0 +1,154 @@
+.banner-form-modal__panel {
+  position: relative;
+  padding: 1.1rem 1.15rem 1rem;
+  width: min(100%, 28rem);
+}
+
+.banner-form-modal__header {
+  margin-bottom: 0.65rem;
+  padding-right: 2.25rem;
+}
+
+.banner-form-modal__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.banner-form-modal__icon {
+  flex-shrink: 0;
+  width: 2.45rem;
+  height: 2.45rem;
+  margin-bottom: 0;
+  font-size: 1.05rem;
+}
+
+.banner-form-modal__header .pf-modal__title {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.banner-form-modal__form {
+  min-width: 0;
+}
+
+.banner-form-modal__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.banner-form-modal__upload {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.banner-form-modal .form-pf {
+  gap: 0.28rem;
+}
+
+.banner-form-modal .form-pf__input {
+  padding: 0.52rem 0.75rem;
+  font-size: 0.88rem;
+}
+
+.banner-form-modal .form-pf__label {
+  font-size: 0.78rem;
+}
+
+.banner-form-modal .pf-modal__error {
+  margin-bottom: 0.6rem;
+}
+
+.banner-form-modal .pf-modal__actions {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+}
+
+.banner-form-modal__hint {
+  margin-top: 0.15rem;
+  line-height: 1.45;
+}
+
+.banner-form-modal__saving {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.banner-form-modal__spinner {
+  animation: bannerFormModalSpin 0.85s linear infinite;
+}
+
+.banner-form-modal ::ng-deep app-image-upload .mb-3 {
+  margin-bottom: 0 !important;
+}
+
+.banner-form-modal ::ng-deep app-image-upload .form-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.2rem;
+}
+
+.banner-form-modal ::ng-deep app-image-upload .form-control {
+  width: 100%;
+  min-width: 0;
+  padding: 0.52rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: var(--font-family-base);
+  font-size: 0.88rem;
+}
+
+.banner-form-modal ::ng-deep app-image-upload .form-control:focus {
+  outline: none;
+  border-color: var(--overlay-accent-75);
+  box-shadow: 0 0 0 3px var(--overlay-accent-18);
+}
+
+.banner-form-modal ::ng-deep app-image-upload .text-white-50 {
+  color: var(--text-muted) !important;
+  font-size: 0.78rem;
+}
+
+.banner-form-modal ::ng-deep app-image-upload .text-danger {
+  font-size: 0.78rem;
+}
+
+.banner-form-modal ::ng-deep app-image-upload .image-upload-preview {
+  margin-top: 0.35rem;
+}
+
+.banner-form-modal ::ng-deep app-image-upload .image-upload-preview__clear[data-tip]::after,
+.banner-form-modal ::ng-deep app-image-upload .image-upload-preview__clear[data-tip]::before {
+  z-index: 2100;
+}
+
+.banner-form-modal .pf-modal__close {
+  top: 0.65rem;
+  right: 0.65rem;
+}
+
+@keyframes bannerFormModalSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 575px) {
+  .banner-form-modal__panel {
+    padding: 1rem 0.95rem 0.9rem;
+    width: min(100%, 100%);
+  }
+}

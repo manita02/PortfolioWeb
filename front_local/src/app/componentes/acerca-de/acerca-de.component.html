@@ -25,8 +25,9 @@
           </div>
           <div class="admin-actions admin-actions--inline" *ngIf="isLogged">
             <button
+              type="button"
               class="btn-pf btn-pf--edit btn-pf--icon-sm"
-              routerLink="/editinfop/{{ Persona.id }}"
+              (click)="openEdit(Persona.id!)"
               data-tip="Editar perfil"
               aria-label="Editar perfil"
             >

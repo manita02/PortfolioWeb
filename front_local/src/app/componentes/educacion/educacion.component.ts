@@ -12,9 +12,11 @@ import {
 import { EducacionDto } from 'src/app/modelo/educacion.dto';
 import { TipoEducacion } from 'src/app/modelo/tipo-educacion';
 import { EducacionService } from 'src/app/servicio/educacion.service';
+import { EducacionModalService } from 'src/app/servicio/educacion-modal.service';
 import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 import { TokenService } from 'src/app/servicio/token.service';
 import { toPdfDataUri } from 'src/app/util/archivo.util';
+import { Subscription } from 'rxjs';
 
 type EducationCategory = 'academic' | 'courses' | 'default';
 
@@ -44,10 +46,13 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly viewportHoverBuffer = 28;
   private readonly viewportPaddingBlock = 32;
 
+  private modalSavedSub?: Subscription;
+
   constructor(
     private educacionS: EducacionService,
     private tipoEducacionS: TipoEducacionService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private educacionModal: EducacionModalService
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +60,9 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     this.setupPageSize();
     this.cargarTiposEducacion();
     this.cargarEducacion();
+    this.modalSavedSub = this.educacionModal.saved$.subscribe(() => {
+      this.cargarEducacion();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -67,6 +75,7 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.modalSavedSub?.unsubscribe();
     if (this.viewportHeightFrame != null) {
       cancelAnimationFrame(this.viewportHeightFrame);
     }
@@ -234,6 +243,14 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
       next: () => this.cargarEducacion(),
       error: () => alert('No se pudo borrar la educación'),
     });
+  }
+
+  openCreate(): void {
+    this.educacionModal.openCreate();
+  }
+
+  openEdit(id: number): void {
+    this.educacionModal.openEdit(id);
   }
 
   private cargarTiposEducacion(): void {

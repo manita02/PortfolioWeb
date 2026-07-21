@@ -1,0 +1,16 @@
+<div class="splash" [class.splash--hiding]="hiding" role="status" aria-live="polite" aria-label="Cargando portfolio">
+  <div class="splash__content">
+    <p class="splash__title">Cargando portfolio, por favor espere</p>
+
+    <div class="splash__track">
+      <div
+        class="splash__bar"
+        [style.width.%]="progress"
+        [attr.aria-valuenow]="progress | number:'1.0-0'"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        role="progressbar"
+      ></div>
+    </div>
+  </div>
+</div>

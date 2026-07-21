@@ -1,0 +1,48 @@
+.image-upload-preview {
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.image-upload-preview__clear-text {
+  margin-top: 0.5rem;
+}
+
+.image-upload-preview__clear {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  overflow: visible;
+}
+
+.image-upload-preview--full {
+  width: 100%;
+}
+
+.image-upload-preview--full ::ng-deep .base64-image-wrapper {
+  display: block;
+  width: 100%;
+  max-height: none !important;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--overlay-muted-55);
+}
+
+.image-upload-preview--full ::ng-deep .base64-image-wrapper img,
+.image-upload-preview--full ::ng-deep .image-upload-preview__img {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.image-upload-preview:not(.image-upload-preview--full) ::ng-deep .base64-image-wrapper img,
+.image-upload-preview:not(.image-upload-preview--full) ::ng-deep .image-upload-preview__img {
+  max-width: 100%;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+}
