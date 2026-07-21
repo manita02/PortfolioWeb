@@ -48,6 +48,8 @@ import { BannerFormModalComponent } from './componentes/banner/banner-form-modal
 
 import { RedsocialFormModalComponent } from './componentes/aplogo/redsocial-form-modal.component';
 
+import { OrganizacionFormModalComponent } from './componentes/organizacion/organizacion-form-modal.component';
+
 import { SharedModule } from './compartido/shared.module';
 
 import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
@@ -97,6 +99,8 @@ import { SplashScreenComponent } from './compartido/splash-screen/splash-screen.
     BannerFormModalComponent,
 
     RedsocialFormModalComponent,
+
+    OrganizacionFormModalComponent,
 
     ComponentesDemoComponent,
 
