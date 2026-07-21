@@ -156,11 +156,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 14rem;
   border-radius: inherit;
   background: var(--overlay-white-72);
   color: var(--color-secondary);
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+.pf-modal__loading-overlay span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pf-modal__loading-overlay .bi {
+  display: inline-block;
+  font-size: 1.75rem;
+  color: var(--color-primary);
+  line-height: 1;
+  animation: pfModalSpin 0.85s linear infinite;
+}
+
+.pf-modal__body:has(.pf-modal__loading-overlay) {
+  min-height: 14rem;
+}
+
+@keyframes pfModalSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pfModalFadeIn {
