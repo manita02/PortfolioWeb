@@ -12,6 +12,10 @@ import { Organizacion } from 'src/app/modelo/organizacion';
 import { ProyectoDto } from 'src/app/modelo/proyecto.dto';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
+import {
+  OrganizacionModalService,
+  OrganizacionSavedEvent,
+} from 'src/app/servicio/organizacion-modal.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import {
   ProyectoModalMode,
@@ -39,6 +43,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
 
   private modalSub?: Subscription;
   private loadSub?: Subscription;
+  private orgSavedSub?: Subscription;
   private catalogsLoaded = false;
 
   constructor(
@@ -46,6 +51,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
     private modalLoading: ModalLoadingService,
     private proyectoS: ProyectoService,
     private organizacionS: OrganizacionService,
+    private organizacionModal: OrganizacionModalService,
     private habilidadesS: HabilidadesService
   ) {}
 
@@ -70,11 +76,16 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
         this.guardando = false;
       }
     });
+
+    this.orgSavedSub = this.organizacionModal.saved$.subscribe(event =>
+      this.refreshOrganizacionesFromModal(event)
+    );
   }
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
     this.loadSub?.unsubscribe();
+    this.orgSavedSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -107,6 +118,9 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
+    if (this.organizacionModal.state.open) {
+      return;
+    }
     if (this.isOpen && !this.guardando && !this.loading) {
       this.close();
     }
@@ -120,9 +134,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
   }
 
   onCreateOrg(): void {
-    alert(
-      'Alta de organización: se implementará en un chat posterior. Creá la org desde el API o la base de datos por ahora.'
-    );
+    this.organizacionModal.open();
   }
 
   onSubmit(form: NgForm): void {
@@ -220,5 +232,29 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
       }),
       map(() => undefined)
     );
+  }
+
+  private refreshOrganizacionesFromModal(event: OrganizacionSavedEvent): void {
+    this.organizacionS.lista().subscribe({
+      next: organizaciones => {
+        this.organizaciones = organizaciones;
+        this.catalogsLoaded = true;
+
+        if (!this.proyecto) {
+          return;
+        }
+
+        if (event.action === 'delete') {
+          if (this.proyecto.organizacionId === event.deletedId) {
+            this.proyecto.organizacionId = null;
+          }
+          return;
+        }
+
+        if (event.id != null) {
+          this.proyecto.organizacionId = event.id;
+        }
+      },
+    });
   }
 }
