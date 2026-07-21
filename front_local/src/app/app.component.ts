@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'JuarezAna';
+  showSplash = true;
+
+  onSplashComplete(): void {
+    this.showSplash = false;
+  }
 }
