@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { Persona } from 'src/app/modelo/persona';
+import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 import { PersonaModalService } from 'src/app/servicio/persona-modal.service';
 import { PersonaService } from 'src/app/servicio/persona.service';
 
@@ -26,9 +27,11 @@ export class PersonaFormModalComponent implements OnInit, OnDestroy {
   errorMessage = '';
 
   private modalSub?: Subscription;
+  private loadSub?: Subscription;
 
   constructor(
     private modal: PersonaModalService,
+    private modalLoading: ModalLoadingService,
     private personaS: PersonaService
   ) {}
 
@@ -37,9 +40,11 @@ export class PersonaFormModalComponent implements OnInit, OnDestroy {
       this.isOpen = state.open;
       this.personaId = state.personaId;
 
+      this.loadSub?.unsubscribe();
+
       if (state.open && state.personaId != null) {
         this.errorMessage = '';
-        this.loadPersona(state.personaId);
+        this.openEditModal(state.personaId);
       } else {
         this.persona = null;
         this.loading = false;
@@ -50,6 +55,7 @@ export class PersonaFormModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
+    this.loadSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -113,23 +119,16 @@ export class PersonaFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private loadPersona(id: number): void {
-    this.loading = true;
+  private openEditModal(id: number): void {
     this.persona = null;
-
-    this.personaS.detail(id).subscribe({
-      next: data => {
+    this.loadSub = this.modalLoading.runLoad(
+      this,
+      this.personaS.detail(id),
+      data => {
         this.persona = { ...data };
-        this.loading = false;
       },
-      error: err => {
-        this.loading = false;
-        this.errorMessage = this.mensajeError(
-          err,
-          'No se pudo cargar la información personal.'
-        );
-      },
-    });
+      'No se pudo cargar la información personal.'
+    );
   }
 
   private mensajeError(err: unknown, fallback: string): string {
