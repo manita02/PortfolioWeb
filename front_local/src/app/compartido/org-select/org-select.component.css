@@ -1,0 +1,17 @@
+.org-select__row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.org-select__row .form-select {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.org-select__create-btn {
+  flex: 0 0 auto;
+  align-self: center;
+  white-space: nowrap;
+}

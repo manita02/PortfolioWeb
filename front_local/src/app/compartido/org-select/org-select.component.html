@@ -3,7 +3,7 @@
     Organización
     <span *ngIf="required" class="text-danger">*</span>
   </label>
-  <div class="d-flex gap-2">
+  <div class="d-flex gap-2 org-select__row">
     <select
       class="form-select"
       [ngModel]="selectedId"
@@ -15,7 +15,7 @@
     <button
       *ngIf="allowCreate"
       type="button"
-      class="btn btn-outline-primary btn-sm text-nowrap"
+      class="btn btn-outline-primary btn-sm org-select__create-btn"
       (click)="onCreate()"
     >
       Nueva
