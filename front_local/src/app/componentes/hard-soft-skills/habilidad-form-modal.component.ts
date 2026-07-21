@@ -5,7 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { forkJoin, Observable, of, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
 import { TipoCatalogo } from 'src/app/modelo/tipo-catalogo';
 import {
@@ -13,6 +14,7 @@ import {
   HabilidadModalService,
 } from 'src/app/servicio/habilidad-modal.service';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
+import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 import { TipoHabilidadService } from 'src/app/servicio/tipo-habilidad.service';
 
 @Component({
@@ -33,10 +35,12 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
   errorMessage = '';
 
   private modalSub?: Subscription;
+  private loadSub?: Subscription;
   private catalogsLoaded = false;
 
   constructor(
     private modal: HabilidadModalService,
+    private modalLoading: ModalLoadingService,
     private habilidadesS: HabilidadesService,
     private tipoHabilidadS: TipoHabilidadService
   ) {}
@@ -47,13 +51,14 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
       this.mode = state.mode;
       this.habilidadId = state.habilidadId;
 
+      this.loadSub?.unsubscribe();
+
       if (state.open) {
         this.errorMessage = '';
-        this.loadCatalogs();
         if (state.mode === 'create') {
-          this.initCreateForm();
+          this.openCreateModal();
         } else if (state.habilidadId != null) {
-          this.loadHabilidad(state.habilidadId);
+          this.openEditModal(state.habilidadId);
         }
       } else {
         this.habilidad = null;
@@ -65,6 +70,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
+    this.loadSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -140,8 +146,35 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
+  private openCreateModal(): void {
+    this.habilidad = null;
+    this.loadSub = this.modalLoading.runLoad(
+      this,
+      this.getCatalogs$(),
+      () => this.initCreateForm(),
+      'No se pudieron cargar los datos del formulario.'
+    );
+  }
+
+  private openEditModal(id: number): void {
+    this.habilidad = null;
+    this.loadSub = this.modalLoading.runLoad(
+      this,
+      forkJoin({
+        catalogs: this.getCatalogs$(),
+        entity: this.habilidadesS.detail(id),
+      }),
+      ({ entity }) => {
+        this.habilidad = {
+          ...entity,
+          img: entity.img ?? '',
+        };
+      },
+      'No se pudo cargar la habilidad o la sesión expiró.'
+    );
+  }
+
   private initCreateForm(): void {
-    this.loading = false;
     this.habilidad = {
       nombre: '',
       img: '',
@@ -149,38 +182,17 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
     };
   }
 
-  private loadHabilidad(id: number): void {
-    this.loading = true;
-    this.habilidad = null;
-
-    this.habilidadesS.detail(id).subscribe({
-      next: data => {
-        this.habilidad = {
-          ...data,
-          img: data.img ?? '',
-        };
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-        this.errorMessage = 'No se pudo cargar la habilidad o la sesión expiró.';
-      },
-    });
-  }
-
-  private loadCatalogs(): void {
+  private getCatalogs$(): Observable<void> {
     if (this.catalogsLoaded) {
-      return;
+      return of(undefined);
     }
 
-    this.tipoHabilidadS.lista().subscribe({
-      next: data => {
+    return this.tipoHabilidadS.lista().pipe(
+      tap(data => {
         this.tiposHabilidad = data;
         this.catalogsLoaded = true;
-      },
-      error: () => {
-        this.errorMessage = 'No se pudieron cargar los tipos de habilidad.';
-      },
-    });
+      }),
+      map(() => undefined)
+    );
   }
 }
