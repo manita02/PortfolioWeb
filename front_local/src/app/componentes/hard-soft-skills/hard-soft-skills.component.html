@@ -4,7 +4,7 @@
     <button
       type="button"
       class="btn-pf btn-pf--add"
-      (click)="openCreate()"
+      (click)="openForm('create')"
       *ngIf="isLogged"
       data-tip="Agregar habilidad"
       data-tip-align="end"
@@ -243,7 +243,7 @@
       <button
         type="button"
         class="btn-pf btn-pf--edit btn-pf--icon-sm skill-pill__btn"
-        (click)="openEdit(h.id!)"
+        (click)="openForm('edit', h.id!)"
         data-tip="Editar"
         data-tip-pos="bottom"
         [attr.aria-label]="'Editar ' + h.nombre"

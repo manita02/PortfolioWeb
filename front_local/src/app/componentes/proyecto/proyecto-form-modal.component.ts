@@ -18,9 +18,10 @@ import {
 } from 'src/app/servicio/organizacion-modal.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import {
-  ProyectoModalMode,
   ProyectoModalService,
 } from 'src/app/servicio/proyecto-modal.service';
+import { runFormModalOpenLoad } from 'src/app/servicio/form-modal-load.helper';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { ProyectoService } from 'src/app/servicio/proyecto.service';
 
 @Component({
@@ -30,8 +31,8 @@ import { ProyectoService } from 'src/app/servicio/proyecto.service';
 })
 export class ProyectoFormModalComponent implements OnInit, OnDestroy {
   isOpen = false;
-  mode: ProyectoModalMode = 'create';
-  proyectoId?: number;
+  mode: FormModalMode = 'create';
+  entityId?: number;
   proyecto: ProyectoDto | null = null;
 
   organizaciones: Organizacion[] = [];
@@ -59,16 +60,17 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
     this.modalSub = this.modal.state$.subscribe(state => {
       this.isOpen = state.open;
       this.mode = state.mode;
-      this.proyectoId = state.proyectoId;
+      this.entityId = state.entityId;
 
       this.loadSub?.unsubscribe();
 
       if (state.open) {
         this.errorMessage = '';
-        if (state.mode === 'create') {
-          this.openCreateModal();
-        } else if (state.proyectoId != null) {
-          this.openEditModal(state.proyectoId);
+        if (
+          state.mode === 'create' ||
+          (state.mode === 'edit' && state.entityId != null)
+        ) {
+          this.openForm();
         }
       } else {
         this.proyecto = null;
@@ -157,7 +159,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
     };
 
     const request$ = this.isEdit
-      ? this.proyectoS.update(this.proyectoId!, payload)
+      ? this.proyectoS.update(this.entityId!, payload)
       : this.proyectoS.save(payload);
 
     request$.subscribe({
@@ -172,25 +174,19 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private openCreateModal(): void {
-    this.proyecto = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      this.getCatalogs$(),
-      () => this.initCreateForm(),
-      'No se pudieron cargar los datos del formulario.'
-    );
-  }
-
-  private openEditModal(id: number): void {
-    this.proyecto = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      forkJoin({
-        catalogs: this.getCatalogs$(),
-        entity: this.proyectoS.detail(id),
-      }),
-      ({ entity }) => {
+  private openForm(): void {
+    this.loadSub = runFormModalOpenLoad<ProyectoDto>({
+      host: this,
+      modalLoading: this.modalLoading,
+      mode: this.mode,
+      entityId: this.entityId,
+      clearEntity: () => {
+        this.proyecto = null;
+      },
+      getCatalogs$: () => this.getCatalogs$(),
+      loadEntity$: id => this.proyectoS.detail(id),
+      onCreateReady: () => this.initCreateForm(),
+      onEditReady: entity => {
         this.proyecto = {
           ...entity,
           habilidadesIds: entity.habilidadesIds ?? [],
@@ -198,8 +194,9 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
           imagen: entity.imagen ?? '',
         };
       },
-      'No se pudo cargar el proyecto o la sesión expiró.'
-    );
+      createErrorMessage: 'No se pudieron cargar los datos del formulario.',
+      editErrorMessage: 'No se pudo cargar el proyecto o la sesión expiró.',
+    });
   }
 
   private initCreateForm(): void {

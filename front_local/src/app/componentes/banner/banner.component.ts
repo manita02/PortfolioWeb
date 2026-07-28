@@ -34,8 +34,8 @@ export class BannerComponent implements OnInit, OnDestroy {
     this.modalSavedSub?.unsubscribe();
   }
 
-  openEdit(id: number): void {
-    this.bannerModal.openEdit(id);
+  openForm(mode: 'edit', id: number): void {
+    this.bannerModal.open(mode, id);
   }
 
   cargarBanner(): void{

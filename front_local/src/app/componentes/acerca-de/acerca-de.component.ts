@@ -34,8 +34,8 @@ export class AcercaDeComponent implements OnInit, OnDestroy {
     this.modalSavedSub?.unsubscribe();
   }
 
-  openEdit(id: number): void {
-    this.personaModal.openEdit(id);
+  openForm(mode: 'edit', id: number): void {
+    this.personaModal.open(mode, id);
   }
 
   cargarPersona(): void {

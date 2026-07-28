@@ -6,9 +6,11 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { Banner } from 'src/app/modelo/banner';
 import { BannerModalService } from 'src/app/servicio/banner-modal.service';
+import { runFormModalOpenLoad } from 'src/app/servicio/form-modal-load.helper';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { BannerService } from 'src/app/servicio/banner.service';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 
@@ -19,7 +21,8 @@ import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 })
 export class BannerFormModalComponent implements OnInit, OnDestroy {
   isOpen = false;
-  bannerId?: number;
+  mode: FormModalMode = 'edit';
+  entityId?: number;
   banner: Banner | null = null;
 
   loading = false;
@@ -38,13 +41,18 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.modalSub = this.modal.state$.subscribe(state => {
       this.isOpen = state.open;
-      this.bannerId = state.bannerId;
+      this.mode = state.mode;
+      this.entityId = state.entityId;
 
       this.loadSub?.unsubscribe();
 
-      if (state.open && state.bannerId != null) {
+      if (
+        state.open &&
+        state.mode === 'edit' &&
+        state.entityId != null
+      ) {
         this.errorMessage = '';
-        this.openEditModal(state.bannerId);
+        this.openForm();
       } else {
         this.banner = null;
         this.loading = false;
@@ -57,6 +65,14 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
     this.modalSub?.unsubscribe();
     this.loadSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
+  }
+
+  get title(): string {
+    return 'Editar banner';
+  }
+
+  get submitLabel(): string {
+    return 'Guardar cambios';
   }
 
   get formValido(): boolean {
@@ -81,7 +97,7 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm): void {
-    if (!this.banner || !this.formValido || this.guardando || this.bannerId == null) {
+    if (!this.banner || !this.formValido || this.guardando || this.entityId == null) {
       return;
     }
 
@@ -97,7 +113,7 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
       img: this.banner.img.trim(),
     };
 
-    this.sBanner.update(this.bannerId, payload).subscribe({
+    this.sBanner.update(this.entityId, payload).subscribe({
       next: () => this.modal.notifySaved(),
       error: err => {
         this.guardando = false;
@@ -106,16 +122,24 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private openEditModal(id: number): void {
-    this.banner = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      this.sBanner.detail(id),
-      data => {
+  private openForm(): void {
+    this.loadSub = runFormModalOpenLoad<Banner>({
+      host: this,
+      modalLoading: this.modalLoading,
+      mode: 'edit',
+      entityId: this.entityId,
+      clearEntity: () => {
+        this.banner = null;
+      },
+      getCatalogs$: () => of(null),
+      loadEntity$: id => this.sBanner.detail(id),
+      onCreateReady: () => {},
+      onEditReady: data => {
         this.banner = { ...data };
       },
-      'No se pudo cargar el banner.'
-    );
+      createErrorMessage: '',
+      editErrorMessage: 'No se pudo cargar el banner.',
+    });
   }
 
   private mensajeError(err: unknown, fallback: string): string {

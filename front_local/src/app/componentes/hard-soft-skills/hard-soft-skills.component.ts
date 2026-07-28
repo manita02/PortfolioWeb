@@ -13,6 +13,7 @@ import {
 import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
 import { TipoHabilidad } from 'src/app/modelo/tipo-habilidad';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { HabilidadModalService } from 'src/app/servicio/habilidad-modal.service';
 import { TipoHabilidadService } from 'src/app/servicio/tipo-habilidad.service';
 import { TokenService } from 'src/app/servicio/token.service';
@@ -302,6 +303,10 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     });
   }
 
+  openForm(mode: FormModalMode, id?: number): void {
+    this.habilidadModal.open(mode, id);
+  }
+
   delete(id?: number): void {
     if (!confirm('¿Está seguro que desea eliminar esta habilidad?') || id == null) {
       return;
@@ -310,14 +315,6 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
       next: () => this.cargarHabilidad(),
       error: () => alert('No se pudo borrar la habilidad.'),
     });
-  }
-
-  openCreate(): void {
-    this.habilidadModal.openCreate();
-  }
-
-  openEdit(id: number): void {
-    this.habilidadModal.openEdit(id);
   }
 
   private cargarTiposHabilidad(): void {

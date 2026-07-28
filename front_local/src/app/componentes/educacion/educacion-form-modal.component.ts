@@ -12,9 +12,10 @@ import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
 import { Organizacion } from 'src/app/modelo/organizacion';
 import { TipoCatalogo } from 'src/app/modelo/tipo-catalogo';
 import {
-  EducacionModalMode,
   EducacionModalService,
 } from 'src/app/servicio/educacion-modal.service';
+import { runFormModalOpenLoad } from 'src/app/servicio/form-modal-load.helper';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { EducacionService } from 'src/app/servicio/educacion.service';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
@@ -32,8 +33,8 @@ import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 })
 export class EducacionFormModalComponent implements OnInit, OnDestroy {
   isOpen = false;
-  mode: EducacionModalMode = 'create';
-  educacionId?: number;
+  mode: FormModalMode = 'create';
+  entityId?: number;
   educacion: EducacionDto | null = null;
 
   tiposEducacion: TipoCatalogo[] = [];
@@ -63,16 +64,17 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
     this.modalSub = this.modal.state$.subscribe(state => {
       this.isOpen = state.open;
       this.mode = state.mode;
-      this.educacionId = state.educacionId;
+      this.entityId = state.entityId;
 
       this.loadSub?.unsubscribe();
 
       if (state.open) {
         this.errorMessage = '';
-        if (state.mode === 'create') {
-          this.openCreateModal();
-        } else if (state.educacionId != null) {
-          this.openEditModal(state.educacionId);
+        if (
+          state.mode === 'create' ||
+          (state.mode === 'edit' && state.entityId != null)
+        ) {
+          this.openForm();
         }
       } else {
         this.educacion = null;
@@ -161,7 +163,7 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
     };
 
     const request$ = this.isEdit
-      ? this.educacionS.update(this.educacionId!, payload)
+      ? this.educacionS.update(this.entityId!, payload)
       : this.educacionS.save(payload);
 
     request$.subscribe({
@@ -176,25 +178,19 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private openCreateModal(): void {
-    this.educacion = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      this.getCatalogs$(),
-      () => this.initCreateForm(),
-      'No se pudieron cargar los datos del formulario.'
-    );
-  }
-
-  private openEditModal(id: number): void {
-    this.educacion = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      forkJoin({
-        catalogs: this.getCatalogs$(),
-        entity: this.educacionS.detail(id),
-      }),
-      ({ entity }) => {
+  private openForm(): void {
+    this.loadSub = runFormModalOpenLoad<EducacionDto>({
+      host: this,
+      modalLoading: this.modalLoading,
+      mode: this.mode,
+      entityId: this.entityId,
+      clearEntity: () => {
+        this.educacion = null;
+      },
+      getCatalogs$: () => this.getCatalogs$(),
+      loadEntity$: id => this.educacionS.detail(id),
+      onCreateReady: () => this.initCreateForm(),
+      onEditReady: entity => {
         this.educacion = {
           ...entity,
           habilidadesIds: entity.habilidadesIds ?? [],
@@ -203,8 +199,9 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
           archivoPdf: entity.archivoPdf ?? '',
         };
       },
-      'No se pudo cargar la educación o la sesión expiró.'
-    );
+      createErrorMessage: 'No se pudieron cargar los datos del formulario.',
+      editErrorMessage: 'No se pudo cargar la educación o la sesión expiró.',
+    });
   }
 
   private initCreateForm(): void {
