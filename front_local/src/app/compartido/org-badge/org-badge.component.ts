@@ -19,4 +19,22 @@ export class OrgBadgeComponent {
   get showLocationRow(): boolean {
     return !!(this.organizacion?.ubicacion?.trim() || this.tipoUbicacion?.trim());
   }
+
+  /** URL lista para abrir en nueva pestaña; null si no hay link. */
+  get externalUrl(): string | null {
+    if (!this.showLink) {
+      return null;
+    }
+    const raw = this.organizacion?.urlWeb?.trim();
+    if (!raw) {
+      return null;
+    }
+    if (/^https?:\/\//i.test(raw)) {
+      return raw;
+    }
+    if (raw.startsWith('//')) {
+      return `https:${raw}`;
+    }
+    return `https://${raw}`;
+  }
 }

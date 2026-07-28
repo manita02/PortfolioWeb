@@ -171,6 +171,27 @@
   box-shadow: var(--shadow-card);
   max-width: 100%;
   transition: box-shadow var(--transition-base), border-color var(--transition-base);
+  text-decoration: none;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+a.org-badge.org-badge--link {
+  cursor: pointer;
+}
+
+a.org-badge.org-badge--link:hover {
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--overlay-accent-35);
+}
+
+a.org-badge.org-badge--link:hover .org-badge__name {
+  color: var(--color-secondary);
+}
+
+a.org-badge.org-badge--link:focus-visible {
+  outline: 2px solid var(--overlay-accent-75);
+  outline-offset: 2px;
 }
 
 .org-badge:hover {
@@ -224,16 +245,17 @@
   font-size: 0.875rem;
   color: var(--color-primary);
   line-height: 1.25;
-}
-
-.org-badge__name a {
-  color: inherit;
-  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   transition: color var(--transition-fast);
 }
 
-.org-badge__name a:hover {
-  color: var(--color-secondary);
+.org-badge__external {
+  font-size: 0.7rem;
+  opacity: 0.65;
+  flex-shrink: 0;
+  line-height: 1;
 }
 
 .org-badge__location {
