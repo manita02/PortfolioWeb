@@ -4,7 +4,7 @@
     <button
       type="button"
       class="btn-pf btn-pf--add"
-      (click)="openCreate()"
+      (click)="openForm('create')"
       *ngIf="isLogged"
       data-tip="Agregar educación"
       data-tip-align="end"
@@ -142,7 +142,7 @@
                     *ngIf="isLogged"
                     type="button"
                     class="btn-pf btn-pf--edit btn-pf--icon-sm"
-                    (click)="openEdit(edu.id!)"
+                    (click)="openForm('edit', edu.id!)"
                     data-tip="Editar"
                     aria-label="Editar"
                   >

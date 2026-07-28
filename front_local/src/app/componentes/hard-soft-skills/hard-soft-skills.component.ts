@@ -1,5 +1,7 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -11,6 +13,7 @@ import {
 import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
 import { TipoHabilidad } from 'src/app/modelo/tipo-habilidad';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { HabilidadModalService } from 'src/app/servicio/habilidad-modal.service';
 import { TipoHabilidadService } from 'src/app/servicio/tipo-habilidad.service';
 import { TokenService } from 'src/app/servicio/token.service';
@@ -28,6 +31,7 @@ type SkillAccent = 'backend' | 'frontend' | 'frameworks' | 'database' | 'tools' 
   selector: 'app-hard-soft-skills',
   templateUrl: './hard-soft-skills.component.html',
   styleUrls: ['./hard-soft-skills.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy {
   habilidades: HabilidadDto[] = [];
@@ -55,7 +59,8 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     private habilidadesS: HabilidadesService,
     private tipoHabilidadS: TipoHabilidadService,
     private tokenService: TokenService,
-    private habilidadModal: HabilidadModalService
+    private habilidadModal: HabilidadModalService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -160,6 +165,23 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     this.selectedTipoId = tipoId;
     this.resetPagination();
     this.scheduleViewportHeightUpdate();
+    this.cdr.markForCheck();
+  }
+
+  trackByTipoId(_: number, tipo: TipoHabilidad): number {
+    return tipo.id;
+  }
+
+  trackByGrupoTipo(_: number, grupo: GrupoHabilidades): string {
+    return grupo.tipo;
+  }
+
+  trackByHabilidadId(_: number, h: HabilidadDto): number {
+    return h.id!;
+  }
+
+  trackByPageIndex(index: number): number {
+    return index;
   }
 
   getAccentForHabilidad(h: HabilidadDto): SkillAccent {
@@ -276,8 +298,13 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
         this.habilidades = data;
         this.clampAllPages();
         this.scheduleViewportHeightUpdate();
+        this.cdr.markForCheck();
       },
     });
+  }
+
+  openForm(mode: FormModalMode, id?: number): void {
+    this.habilidadModal.open(mode, id);
   }
 
   delete(id?: number): void {
@@ -290,18 +317,11 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     });
   }
 
-  openCreate(): void {
-    this.habilidadModal.openCreate();
-  }
-
-  openEdit(id: number): void {
-    this.habilidadModal.openEdit(id);
-  }
-
   private cargarTiposHabilidad(): void {
     this.tipoHabilidadS.lista().subscribe({
       next: data => {
         this.tiposHabilidad = data;
+        this.cdr.markForCheck();
       },
     });
   }
@@ -377,6 +397,7 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
       this.pageSize = newPageSize;
       this.clampAllPages();
       this.scheduleViewportHeightUpdate();
+      this.cdr.markForCheck();
     }
   }
 
@@ -387,6 +408,7 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     this.viewportHeightFrame = requestAnimationFrame(() => {
       this.viewportHeightFrame = undefined;
       this.updateAllViewportHeights();
+      this.cdr.markForCheck();
     });
   }
 
@@ -450,17 +472,33 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
       map.get(tipo)!.habilidades.push(h);
     }
 
-    return Array.from(map.values());
+    for (const grupo of map.values()) {
+      grupo.habilidades.sort((a, b) =>
+        a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' })
+      );
+    }
+
+    return Array.from(map.values()).sort((a, b) => {
+      const idA = a.tipoId ?? Number.MAX_SAFE_INTEGER;
+      const idB = b.tipoId ?? Number.MAX_SAFE_INTEGER;
+      return idA - idB;
+    });
   }
 
   private getAccentForTipoName(nombre: string): SkillAccent {
     const key = this.normalize(nombre);
 
+    if (key.includes('lenguaje')) {
+      return 'backend';
+    }
     if (key.includes('backend')) {
       return 'backend';
     }
     if (key.includes('frontend')) {
       return 'frontend';
+    }
+    if (key.includes('servicio')) {
+      return 'tools';
     }
     if (key.includes('framework') || key.includes('librer')) {
       return 'frameworks';

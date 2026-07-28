@@ -1,19 +1,47 @@
-<div *ngIf="organizacion" class="org-badge" [class.org-badge-sm]="size === 'sm'">
-  <app-base64-image
-    [src]="organizacion.logoImg"
-    [alt]="organizacion.nombre"
-    [maxHeight]="logoHeight"
-  ></app-base64-image>
-  <div>
-    <div class="org-badge__name" [class.small]="size === 'sm'">
-      <a
-        *ngIf="showLink && organizacion.urlWeb; else plainName"
-        [href]="organizacion.urlWeb"
-        target="_blank"
-        rel="noopener noreferrer"
-      >{{ organizacion.nombre }}</a>
-      <ng-template #plainName>{{ organizacion.nombre }}</ng-template>
+<ng-container *ngIf="organizacion as org">
+  <a
+    *ngIf="externalUrl as url; else plainBadge"
+    class="org-badge org-badge--link"
+    [class.org-badge-sm]="size === 'sm'"
+    [href]="url"
+    target="_blank"
+    rel="noopener noreferrer"
+    [attr.title]="'Abrir ' + org.nombre"
+  >
+    <ng-container *ngTemplateOutlet="badgeContent; context: { $implicit: org }"></ng-container>
+  </a>
+
+  <ng-template #plainBadge>
+    <div class="org-badge" [class.org-badge-sm]="size === 'sm'">
+      <ng-container *ngTemplateOutlet="badgeContent; context: { $implicit: org }"></ng-container>
     </div>
-    <span class="org-badge__location" *ngIf="organizacion.ubicacion">{{ organizacion.ubicacion }}</span>
-  </div>
-</div>
+  </ng-template>
+
+  <ng-template #badgeContent let-org>
+    <app-base64-image
+      [src]="org.logoImg"
+      [alt]="org.nombre"
+      [maxHeight]="size === 'sm' ? '1.75rem' : '2.25rem'"
+    ></app-base64-image>
+    <div class="org-badge__text">
+      <div class="org-badge__name" [class.small]="size === 'sm'">
+        {{ org.nombre }}
+        <i
+          *ngIf="externalUrl"
+          class="bi bi-box-arrow-up-right org-badge__external"
+          aria-hidden="true"
+        ></i>
+      </div>
+      <span class="org-badge__location" *ngIf="showLocationRow">
+        <ng-container *ngIf="org.ubicacion">{{ org.ubicacion }}</ng-container>
+        <ng-container *ngIf="org.ubicacion && tipoUbicacion">
+          <span class="org-badge__sep" aria-hidden="true">|</span>
+        </ng-container>
+        <ng-container *ngIf="tipoUbicacion">
+          <i class="bi bi-geo-alt org-badge__ubicacion-icon" aria-hidden="true"></i>
+          {{ tipoUbicacion }}
+        </ng-container>
+      </span>
+    </div>
+  </ng-template>
+</ng-container>

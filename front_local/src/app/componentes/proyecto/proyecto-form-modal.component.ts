@@ -12,11 +12,16 @@ import { Organizacion } from 'src/app/modelo/organizacion';
 import { ProyectoDto } from 'src/app/modelo/proyecto.dto';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
+import {
+  OrganizacionModalService,
+  OrganizacionSavedEvent,
+} from 'src/app/servicio/organizacion-modal.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import {
-  ProyectoModalMode,
   ProyectoModalService,
 } from 'src/app/servicio/proyecto-modal.service';
+import { runFormModalOpenLoad } from 'src/app/servicio/form-modal-load.helper';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { ProyectoService } from 'src/app/servicio/proyecto.service';
 
 @Component({
@@ -26,8 +31,8 @@ import { ProyectoService } from 'src/app/servicio/proyecto.service';
 })
 export class ProyectoFormModalComponent implements OnInit, OnDestroy {
   isOpen = false;
-  mode: ProyectoModalMode = 'create';
-  proyectoId?: number;
+  mode: FormModalMode = 'create';
+  entityId?: number;
   proyecto: ProyectoDto | null = null;
 
   organizaciones: Organizacion[] = [];
@@ -39,6 +44,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
 
   private modalSub?: Subscription;
   private loadSub?: Subscription;
+  private orgSavedSub?: Subscription;
   private catalogsLoaded = false;
 
   constructor(
@@ -46,6 +52,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
     private modalLoading: ModalLoadingService,
     private proyectoS: ProyectoService,
     private organizacionS: OrganizacionService,
+    private organizacionModal: OrganizacionModalService,
     private habilidadesS: HabilidadesService
   ) {}
 
@@ -53,16 +60,17 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
     this.modalSub = this.modal.state$.subscribe(state => {
       this.isOpen = state.open;
       this.mode = state.mode;
-      this.proyectoId = state.proyectoId;
+      this.entityId = state.entityId;
 
       this.loadSub?.unsubscribe();
 
       if (state.open) {
         this.errorMessage = '';
-        if (state.mode === 'create') {
-          this.openCreateModal();
-        } else if (state.proyectoId != null) {
-          this.openEditModal(state.proyectoId);
+        if (
+          state.mode === 'create' ||
+          (state.mode === 'edit' && state.entityId != null)
+        ) {
+          this.openForm();
         }
       } else {
         this.proyecto = null;
@@ -70,11 +78,16 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
         this.guardando = false;
       }
     });
+
+    this.orgSavedSub = this.organizacionModal.saved$.subscribe(event =>
+      this.refreshOrganizacionesFromModal(event)
+    );
   }
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
     this.loadSub?.unsubscribe();
+    this.orgSavedSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -107,6 +120,9 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
+    if (this.organizacionModal.state.open) {
+      return;
+    }
     if (this.isOpen && !this.guardando && !this.loading) {
       this.close();
     }
@@ -120,9 +136,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
   }
 
   onCreateOrg(): void {
-    alert(
-      'Alta de organización: se implementará en un chat posterior. Creá la org desde el API o la base de datos por ahora.'
-    );
+    this.organizacionModal.open();
   }
 
   onSubmit(form: NgForm): void {
@@ -145,7 +159,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
     };
 
     const request$ = this.isEdit
-      ? this.proyectoS.update(this.proyectoId!, payload)
+      ? this.proyectoS.update(this.entityId!, payload)
       : this.proyectoS.save(payload);
 
     request$.subscribe({
@@ -160,25 +174,19 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private openCreateModal(): void {
-    this.proyecto = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      this.getCatalogs$(),
-      () => this.initCreateForm(),
-      'No se pudieron cargar los datos del formulario.'
-    );
-  }
-
-  private openEditModal(id: number): void {
-    this.proyecto = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      forkJoin({
-        catalogs: this.getCatalogs$(),
-        entity: this.proyectoS.detail(id),
-      }),
-      ({ entity }) => {
+  private openForm(): void {
+    this.loadSub = runFormModalOpenLoad<ProyectoDto>({
+      host: this,
+      modalLoading: this.modalLoading,
+      mode: this.mode,
+      entityId: this.entityId,
+      clearEntity: () => {
+        this.proyecto = null;
+      },
+      getCatalogs$: () => this.getCatalogs$(),
+      loadEntity$: id => this.proyectoS.detail(id),
+      onCreateReady: () => this.initCreateForm(),
+      onEditReady: entity => {
         this.proyecto = {
           ...entity,
           habilidadesIds: entity.habilidadesIds ?? [],
@@ -186,8 +194,9 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
           imagen: entity.imagen ?? '',
         };
       },
-      'No se pudo cargar el proyecto o la sesión expiró.'
-    );
+      createErrorMessage: 'No se pudieron cargar los datos del formulario.',
+      editErrorMessage: 'No se pudo cargar el proyecto o la sesión expiró.',
+    });
   }
 
   private initCreateForm(): void {
@@ -220,5 +229,29 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
       }),
       map(() => undefined)
     );
+  }
+
+  private refreshOrganizacionesFromModal(event: OrganizacionSavedEvent): void {
+    this.organizacionS.lista().subscribe({
+      next: organizaciones => {
+        this.organizaciones = organizaciones;
+        this.catalogsLoaded = true;
+
+        if (!this.proyecto) {
+          return;
+        }
+
+        if (event.action === 'delete') {
+          if (this.proyecto.organizacionId === event.deletedId) {
+            this.proyecto.organizacionId = null;
+          }
+          return;
+        }
+
+        if (event.id != null) {
+          this.proyecto.organizacionId = event.id;
+        }
+      },
+    });
   }
 }

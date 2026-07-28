@@ -27,7 +27,7 @@ public class SHabilidad {
     private RTipoHabilidad rTipoHabilidad;
 
     public List<dtoHabilidad> list() {
-        return rHabilidad.findAllByOrderByIdDesc().stream()
+        return rHabilidad.findAllByOrderByNombreAsc().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }

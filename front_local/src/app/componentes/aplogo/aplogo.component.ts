@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { LoginModalService } from 'src/app/servicio/login-modal.service';
 import { RedsocialModalService } from 'src/app/servicio/redsocial-modal.service';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { Redsocial } from 'src/app/modelo/redsocial';
 import { RedsocialService } from 'src/app/servicio/redsocial.service';
 import { TokenService } from 'src/app/servicio/token.service';
@@ -86,12 +87,8 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  openCreate(): void {
-    this.redsocialModal.openCreate();
-  }
-
-  openEdit(id: number): void {
-    this.redsocialModal.openEdit(id);
+  openForm(mode: FormModalMode, id?: number): void {
+    this.redsocialModal.open(mode, id);
   }
 
   private getNavBarElement(): HTMLElement | null {

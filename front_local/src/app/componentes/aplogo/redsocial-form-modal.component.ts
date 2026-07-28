@@ -8,10 +8,9 @@ import { NgForm } from '@angular/forms';
 import { of, Subscription } from 'rxjs';
 import { Redsocial } from 'src/app/modelo/redsocial';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
-import {
-  RedsocialModalMode,
-  RedsocialModalService,
-} from 'src/app/servicio/redsocial-modal.service';
+import { runFormModalOpenLoad } from 'src/app/servicio/form-modal-load.helper';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
+import { RedsocialModalService } from 'src/app/servicio/redsocial-modal.service';
 import { RedsocialService } from 'src/app/servicio/redsocial.service';
 
 @Component({
@@ -21,8 +20,8 @@ import { RedsocialService } from 'src/app/servicio/redsocial.service';
 })
 export class RedsocialFormModalComponent implements OnInit, OnDestroy {
   isOpen = false;
-  mode: RedsocialModalMode = 'create';
-  redsocialId?: number;
+  mode: FormModalMode = 'create';
+  entityId?: number;
   redsocial: Redsocial | null = null;
 
   loading = false;
@@ -42,16 +41,17 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
     this.modalSub = this.modal.state$.subscribe(state => {
       this.isOpen = state.open;
       this.mode = state.mode;
-      this.redsocialId = state.redsocialId;
+      this.entityId = state.entityId;
 
       this.loadSub?.unsubscribe();
 
       if (state.open) {
         this.errorMessage = '';
-        if (state.mode === 'create') {
-          this.openCreateModal();
-        } else if (state.redsocialId != null) {
-          this.openEditModal(state.redsocialId);
+        if (
+          state.mode === 'create' ||
+          (state.mode === 'edit' && state.entityId != null)
+        ) {
+          this.openForm();
         }
       } else {
         this.redsocial = null;
@@ -124,7 +124,7 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
     };
 
     const request$ = this.isEdit
-      ? this.redsocialS.update(this.redsocialId!, payload)
+      ? this.redsocialS.update(this.entityId!, payload)
       : this.redsocialS.save(payload);
 
     request$.subscribe({
@@ -139,29 +139,27 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private openCreateModal(): void {
-    this.redsocial = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      of(null),
-      () => this.initCreateForm(),
-      'No se pudo preparar el formulario.'
-    );
-  }
-
-  private openEditModal(id: number): void {
-    this.redsocial = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      this.redsocialS.detail(id),
-      data => {
+  private openForm(): void {
+    this.loadSub = runFormModalOpenLoad<Redsocial>({
+      host: this,
+      modalLoading: this.modalLoading,
+      mode: this.mode,
+      entityId: this.entityId,
+      clearEntity: () => {
+        this.redsocial = null;
+      },
+      getCatalogs$: () => of(null),
+      loadEntity$: id => this.redsocialS.detail(id),
+      onCreateReady: () => this.initCreateForm(),
+      onEditReady: data => {
         this.redsocial = {
           ...data,
           img: data.img ?? '',
         };
       },
-      'No se pudo cargar la red social o la sesión expiró.'
-    );
+      createErrorMessage: 'No se pudo preparar el formulario.',
+      editErrorMessage: 'No se pudo cargar la red social o la sesión expiró.',
+    });
   }
 
   private initCreateForm(): void {

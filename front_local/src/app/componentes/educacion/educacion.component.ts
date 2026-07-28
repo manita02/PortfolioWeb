@@ -13,6 +13,7 @@ import { EducacionDto } from 'src/app/modelo/educacion.dto';
 import { TipoEducacion } from 'src/app/modelo/tipo-educacion';
 import { EducacionService } from 'src/app/servicio/educacion.service';
 import { EducacionModalService } from 'src/app/servicio/educacion-modal.service';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 import { TokenService } from 'src/app/servicio/token.service';
 import { toPdfDataUri } from 'src/app/util/archivo.util';
@@ -245,12 +246,8 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  openCreate(): void {
-    this.educacionModal.openCreate();
-  }
-
-  openEdit(id: number): void {
-    this.educacionModal.openEdit(id);
+  openForm(mode: FormModalMode, id?: number): void {
+    this.educacionModal.open(mode, id);
   }
 
   private cargarTiposEducacion(): void {

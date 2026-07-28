@@ -25,7 +25,7 @@
         <span class="pf-modal__icon banner-form-modal__icon" aria-hidden="true">
           <i class="bi bi-image"></i>
         </span>
-        <h2 id="banner-form-modal-title" class="pf-modal__title">Editar banner</h2>
+        <h2 id="banner-form-modal-title" class="pf-modal__title">{{ title }}</h2>
       </div>
     </div>
 
@@ -94,7 +94,7 @@
           >
             <span *ngIf="!guardando">
               <i class="bi bi-check2-lg" aria-hidden="true"></i>
-              Guardar cambios
+              {{ submitLabel }}
             </span>
             <span *ngIf="guardando" class="banner-form-modal__saving">
               <i class="bi bi-arrow-repeat banner-form-modal__spinner" aria-hidden="true"></i>

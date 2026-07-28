@@ -12,7 +12,7 @@ export class ProyectoCreateGuard implements CanActivate {
   ) {}
 
   canActivate(): UrlTree {
-    this.modal.openCreate();
+    this.modal.open('create');
     return this.router.createUrlTree(['']);
   }
 }
@@ -29,7 +29,7 @@ export class ProyectoEditGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): UrlTree {
     const id = Number(route.paramMap.get('id'));
     if (!Number.isNaN(id) && id > 0) {
-      this.modal.openEdit(id);
+      this.modal.open('edit', id);
     }
     return this.router.createUrlTree(['']);
   }

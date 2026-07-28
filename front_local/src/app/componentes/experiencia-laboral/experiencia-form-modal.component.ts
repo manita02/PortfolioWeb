@@ -12,11 +12,16 @@ import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
 import { Organizacion } from 'src/app/modelo/organizacion';
 import { TipoCatalogo } from 'src/app/modelo/tipo-catalogo';
 import {
-  ExperienciaModalMode,
   ExperienciaModalService,
 } from 'src/app/servicio/experiencia-modal.service';
+import { runFormModalOpenLoad } from 'src/app/servicio/form-modal-load.helper';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
+import {
+  OrganizacionModalService,
+  OrganizacionSavedEvent,
+} from 'src/app/servicio/organizacion-modal.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import { SExperienciaService } from 'src/app/servicio/s-experiencia.service';
 import { TipoEmpleoService } from 'src/app/servicio/tipo-empleo.service';
@@ -29,8 +34,8 @@ import { TipoUbicacionService } from 'src/app/servicio/tipo-ubicacion.service';
 })
 export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
   isOpen = false;
-  mode: ExperienciaModalMode = 'create';
-  experienciaId?: number;
+  mode: FormModalMode = 'create';
+  entityId?: number;
   experiencia: ExperienciaDto | null = null;
 
   tiposEmpleo: TipoCatalogo[] = [];
@@ -44,6 +49,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
 
   private modalSub?: Subscription;
   private loadSub?: Subscription;
+  private orgSavedSub?: Subscription;
   private catalogsLoaded = false;
 
   constructor(
@@ -53,6 +59,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
     private tipoEmpleoS: TipoEmpleoService,
     private tipoUbicacionS: TipoUbicacionService,
     private organizacionS: OrganizacionService,
+    private organizacionModal: OrganizacionModalService,
     private habilidadesS: HabilidadesService
   ) {}
 
@@ -60,16 +67,17 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
     this.modalSub = this.modal.state$.subscribe(state => {
       this.isOpen = state.open;
       this.mode = state.mode;
-      this.experienciaId = state.experienciaId;
+      this.entityId = state.entityId;
 
       this.loadSub?.unsubscribe();
 
       if (state.open) {
         this.errorMessage = '';
-        if (state.mode === 'create') {
-          this.openCreateModal();
-        } else if (state.experienciaId != null) {
-          this.openEditModal(state.experienciaId);
+        if (
+          state.mode === 'create' ||
+          (state.mode === 'edit' && state.entityId != null)
+        ) {
+          this.openForm();
         }
       } else {
         this.experiencia = null;
@@ -77,11 +85,16 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
         this.guardando = false;
       }
     });
+
+    this.orgSavedSub = this.organizacionModal.saved$.subscribe(event =>
+      this.refreshOrganizacionesFromModal(event)
+    );
   }
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
     this.loadSub?.unsubscribe();
+    this.orgSavedSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -114,6 +127,9 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
+    if (this.organizacionModal.state.open) {
+      return;
+    }
     if (this.isOpen && !this.guardando && !this.loading) {
       this.close();
     }
@@ -127,9 +143,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
   }
 
   onCreateOrg(): void {
-    alert(
-      'Alta de organización: se implementará en un chat posterior. Creá la org desde el API o la base de datos por ahora.'
-    );
+    this.organizacionModal.open();
   }
 
   onSubmit(form: NgForm): void {
@@ -151,7 +165,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
     };
 
     const request$ = this.isEdit
-      ? this.sExperiencia.update(this.experienciaId!, payload)
+      ? this.sExperiencia.update(this.entityId!, payload)
       : this.sExperiencia.save(payload);
 
     request$.subscribe({
@@ -166,33 +180,28 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private openCreateModal(): void {
-    this.experiencia = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      this.getCatalogs$(),
-      () => this.initCreateForm(),
-      'No se pudieron cargar los datos del formulario.'
-    );
-  }
-
-  private openEditModal(id: number): void {
-    this.experiencia = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      forkJoin({
-        catalogs: this.getCatalogs$(),
-        entity: this.sExperiencia.detail(id),
-      }),
-      ({ entity }) => {
+  private openForm(): void {
+    this.loadSub = runFormModalOpenLoad<ExperienciaDto>({
+      host: this,
+      modalLoading: this.modalLoading,
+      mode: this.mode,
+      entityId: this.entityId,
+      clearEntity: () => {
+        this.experiencia = null;
+      },
+      getCatalogs$: () => this.getCatalogs$(),
+      loadEntity$: id => this.sExperiencia.detail(id),
+      onCreateReady: () => this.initCreateForm(),
+      onEditReady: entity => {
         this.experiencia = {
           ...entity,
           habilidadesIds: entity.habilidadesIds ?? [],
           fechaFin: entity.fechaFin ?? null,
         };
       },
-      'No se pudo cargar la experiencia o la sesión expiró.'
-    );
+      createErrorMessage: 'No se pudieron cargar los datos del formulario.',
+      editErrorMessage: 'No se pudo cargar la experiencia o la sesión expiró.',
+    });
   }
 
   private initCreateForm(): void {
@@ -229,5 +238,29 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
       }),
       map(() => undefined)
     );
+  }
+
+  private refreshOrganizacionesFromModal(event: OrganizacionSavedEvent): void {
+    this.organizacionS.lista().subscribe({
+      next: organizaciones => {
+        this.organizaciones = organizaciones;
+        this.catalogsLoaded = true;
+
+        if (!this.experiencia) {
+          return;
+        }
+
+        if (event.action === 'delete') {
+          if (this.experiencia.organizacionId === event.deletedId) {
+            this.experiencia.organizacionId = null;
+          }
+          return;
+        }
+
+        if (event.id != null) {
+          this.experiencia.organizacionId = event.id;
+        }
+      },
+    });
   }
 }

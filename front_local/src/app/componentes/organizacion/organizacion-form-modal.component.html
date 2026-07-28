@@ -1,0 +1,216 @@
+<div
+  class="pf-modal org-form-modal"
+  *ngIf="isOpen"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'org-form-modal-title'"
+>
+  <div class="pf-modal__backdrop org-form-modal__backdrop" aria-hidden="true" (click)="close()"></div>
+
+  <div class="pf-modal__panel pf-modal__panel--wide org-form-modal__panel">
+    <button
+      type="button"
+      class="pf-modal__close btn-pf btn-pf--icon-sm org-form-modal__close"
+      (click)="close()"
+      [disabled]="isBusy"
+      data-tip="Cerrar"
+      data-tip-pos="left"
+      aria-label="Cerrar"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+
+    <div class="pf-modal__header org-form-modal__header">
+      <div class="org-form-modal__heading">
+        <span class="pf-modal__icon org-form-modal__icon" aria-hidden="true">
+          <i class="bi bi-building"></i>
+        </span>
+        <div>
+          <h2 id="org-form-modal-title" class="pf-modal__title">Organizaciones</h2>
+          <p class="pf-modal__subtitle org-form-modal__subtitle">
+            Alta, edición y eliminación de instituciones
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pf-modal__body">
+      <div class="pf-modal__loading-overlay org-form-modal__loading-overlay" *ngIf="loading">
+        <span>
+          <i class="bi bi-arrow-repeat org-form-modal__spinner" aria-hidden="true"></i>
+          Cargando…
+        </span>
+      </div>
+
+      <div *ngIf="form && !loading" class="org-form-modal__layout">
+        <form
+          #orgForm="ngForm"
+          (ngSubmit)="onSubmit(orgForm)"
+          class="org-form-modal__form"
+          novalidate
+        >
+          <div class="org-form-modal__form-header">
+            <h3 class="org-form-modal__form-title">
+              {{ isEdit ? 'Editar organización' : 'Nueva organización' }}
+            </h3>
+            <button
+              *ngIf="isEdit"
+              type="button"
+              class="btn-pf org-form-modal__new-btn"
+              (click)="startCreate()"
+              [disabled]="isBusy"
+            >
+              <i class="bi bi-plus-lg" aria-hidden="true"></i>
+              Nueva
+            </button>
+          </div>
+
+          <p class="pf-modal__error" *ngIf="errorMessage" role="alert">
+            <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
+            {{ errorMessage }}
+          </p>
+
+          <div class="form-pf">
+            <label class="form-pf__label" for="org-nombre">Nombre</label>
+            <input
+              type="text"
+              id="org-nombre"
+              name="nombre"
+              class="form-pf__input"
+              [(ngModel)]="form.nombre"
+              required
+              [disabled]="guardando"
+              placeholder="Ej. Universidad Nacional"
+            />
+          </div>
+
+          <div class="form-pf">
+            <label class="form-pf__label" for="org-ubicacion">Ubicación (opcional)</label>
+            <input
+              type="text"
+              id="org-ubicacion"
+              name="ubicacion"
+              class="form-pf__input"
+              [(ngModel)]="form.ubicacion"
+              [disabled]="guardando"
+              placeholder="Ej. Buenos Aires, Argentina"
+            />
+          </div>
+
+          <div class="form-pf">
+            <label class="form-pf__label" for="org-urlWeb">Sitio web (opcional)</label>
+            <input
+              type="url"
+              id="org-urlWeb"
+              name="urlWeb"
+              class="form-pf__input"
+              [(ngModel)]="form.urlWeb"
+              [disabled]="guardando"
+              placeholder="https://..."
+            />
+          </div>
+
+          <app-image-upload
+            [(value)]="form.logoImg"
+            label="Logo (opcional)"
+            [iconClearButton]="true"
+          ></app-image-upload>
+
+          <div class="pf-modal__actions org-form-modal__actions">
+            <button
+              type="button"
+              class="btn-pf btn-pf--edit"
+              (click)="close()"
+              [disabled]="guardando"
+            >
+              Cerrar
+            </button>
+            <button
+              type="submit"
+              class="btn-pf btn-pf--view org-form-modal__submit"
+              [disabled]="!formValido || guardando"
+            >
+              <span *ngIf="!guardando">
+                <i class="bi bi-check2-lg" aria-hidden="true"></i>
+                {{ submitLabel }}
+              </span>
+              <span *ngIf="guardando" class="org-form-modal__saving">
+                <i class="bi bi-arrow-repeat org-form-modal__spinner" aria-hidden="true"></i>
+                Guardando…
+              </span>
+            </button>
+          </div>
+        </form>
+
+        <aside class="org-form-modal__list-panel">
+          <div class="org-form-modal__list-header">
+            <h3 class="org-form-modal__list-title">Registradas</h3>
+            <span class="org-form-modal__list-count">{{ organizaciones.length }}</span>
+          </div>
+
+          <p class="org-form-modal__list-empty" *ngIf="organizaciones.length === 0">
+            No hay organizaciones cargadas todavía.
+          </p>
+
+          <ul class="org-form-modal__list" *ngIf="organizaciones.length > 0">
+            <li
+              *ngFor="let org of organizaciones"
+              class="org-form-modal__list-item"
+              [class.org-form-modal__list-item--selected]="isSelected(org)"
+              [class.org-form-modal__list-item--deleting]="isDeleting(org)"
+              (click)="selectOrg(org)"
+              role="button"
+              tabindex="0"
+              (keydown.enter)="selectOrg(org)"
+            >
+              <div class="org-form-modal__list-item-main">
+                <app-base64-image
+                  [src]="org.logoImg"
+                  [alt]="org.nombre"
+                  maxHeight="36px"
+                ></app-base64-image>
+                <div class="org-form-modal__list-item-text">
+                  <span class="org-form-modal__list-item-name">{{ org.nombre }}</span>
+                  <span class="org-form-modal__list-item-location" *ngIf="org.ubicacion">
+                    {{ org.ubicacion }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="org-form-modal__list-item-actions">
+                <button
+                  type="button"
+                  class="btn-pf btn-pf--icon-sm org-form-modal__action-btn org-form-modal__action-btn--edit"
+                  (click)="onEdit(org, $event)"
+                  [disabled]="isBusy"
+                  data-tip="Editar"
+                  data-tip-pos="left"
+                  [attr.aria-label]="'Editar ' + org.nombre"
+                >
+                  <i class="bi bi-pencil" aria-hidden="true"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn-pf btn-pf--icon-sm org-form-modal__action-btn org-form-modal__action-btn--delete"
+                  (click)="onDelete(org, $event)"
+                  [disabled]="isBusy"
+                  data-tip="Eliminar"
+                  data-tip-pos="left"
+                  [attr.aria-label]="'Eliminar ' + org.nombre"
+                >
+                  <i
+                    class="bi"
+                    [class.bi-trash]="!isDeleting(org)"
+                    [class.bi-arrow-repeat]="isDeleting(org)"
+                    [class.org-form-modal__spinner]="isDeleting(org)"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>

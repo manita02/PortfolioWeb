@@ -12,12 +12,17 @@ import { HabilidadDto } from 'src/app/modelo/habilidad.dto';
 import { Organizacion } from 'src/app/modelo/organizacion';
 import { TipoCatalogo } from 'src/app/modelo/tipo-catalogo';
 import {
-  EducacionModalMode,
   EducacionModalService,
 } from 'src/app/servicio/educacion-modal.service';
+import { runFormModalOpenLoad } from 'src/app/servicio/form-modal-load.helper';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { EducacionService } from 'src/app/servicio/educacion.service';
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
+import {
+  OrganizacionModalService,
+  OrganizacionSavedEvent,
+} from 'src/app/servicio/organizacion-modal.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 
@@ -28,8 +33,8 @@ import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 })
 export class EducacionFormModalComponent implements OnInit, OnDestroy {
   isOpen = false;
-  mode: EducacionModalMode = 'create';
-  educacionId?: number;
+  mode: FormModalMode = 'create';
+  entityId?: number;
   educacion: EducacionDto | null = null;
 
   tiposEducacion: TipoCatalogo[] = [];
@@ -42,6 +47,7 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
 
   private modalSub?: Subscription;
   private loadSub?: Subscription;
+  private orgSavedSub?: Subscription;
   private catalogsLoaded = false;
 
   constructor(
@@ -50,6 +56,7 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
     private educacionS: EducacionService,
     private tipoEducacionS: TipoEducacionService,
     private organizacionS: OrganizacionService,
+    private organizacionModal: OrganizacionModalService,
     private habilidadesS: HabilidadesService
   ) {}
 
@@ -57,16 +64,17 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
     this.modalSub = this.modal.state$.subscribe(state => {
       this.isOpen = state.open;
       this.mode = state.mode;
-      this.educacionId = state.educacionId;
+      this.entityId = state.entityId;
 
       this.loadSub?.unsubscribe();
 
       if (state.open) {
         this.errorMessage = '';
-        if (state.mode === 'create') {
-          this.openCreateModal();
-        } else if (state.educacionId != null) {
-          this.openEditModal(state.educacionId);
+        if (
+          state.mode === 'create' ||
+          (state.mode === 'edit' && state.entityId != null)
+        ) {
+          this.openForm();
         }
       } else {
         this.educacion = null;
@@ -74,11 +82,16 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
         this.guardando = false;
       }
     });
+
+    this.orgSavedSub = this.organizacionModal.saved$.subscribe(event =>
+      this.refreshOrganizacionesFromModal(event)
+    );
   }
 
   ngOnDestroy(): void {
     this.modalSub?.unsubscribe();
     this.loadSub?.unsubscribe();
+    this.orgSavedSub?.unsubscribe();
     document.body.classList.remove('pf-modal-open');
   }
 
@@ -110,6 +123,9 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
+    if (this.organizacionModal.state.open) {
+      return;
+    }
     if (this.isOpen && !this.guardando && !this.loading) {
       this.close();
     }
@@ -123,9 +139,7 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
   }
 
   onCreateOrg(): void {
-    alert(
-      'Alta de organización: se implementará en un chat posterior. Creá la org desde el API o la base de datos por ahora.'
-    );
+    this.organizacionModal.open();
   }
 
   onSubmit(form: NgForm): void {
@@ -149,7 +163,7 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
     };
 
     const request$ = this.isEdit
-      ? this.educacionS.update(this.educacionId!, payload)
+      ? this.educacionS.update(this.entityId!, payload)
       : this.educacionS.save(payload);
 
     request$.subscribe({
@@ -164,25 +178,19 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  private openCreateModal(): void {
-    this.educacion = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      this.getCatalogs$(),
-      () => this.initCreateForm(),
-      'No se pudieron cargar los datos del formulario.'
-    );
-  }
-
-  private openEditModal(id: number): void {
-    this.educacion = null;
-    this.loadSub = this.modalLoading.runLoad(
-      this,
-      forkJoin({
-        catalogs: this.getCatalogs$(),
-        entity: this.educacionS.detail(id),
-      }),
-      ({ entity }) => {
+  private openForm(): void {
+    this.loadSub = runFormModalOpenLoad<EducacionDto>({
+      host: this,
+      modalLoading: this.modalLoading,
+      mode: this.mode,
+      entityId: this.entityId,
+      clearEntity: () => {
+        this.educacion = null;
+      },
+      getCatalogs$: () => this.getCatalogs$(),
+      loadEntity$: id => this.educacionS.detail(id),
+      onCreateReady: () => this.initCreateForm(),
+      onEditReady: entity => {
         this.educacion = {
           ...entity,
           habilidadesIds: entity.habilidadesIds ?? [],
@@ -191,8 +199,9 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
           archivoPdf: entity.archivoPdf ?? '',
         };
       },
-      'No se pudo cargar la educación o la sesión expiró.'
-    );
+      createErrorMessage: 'No se pudieron cargar los datos del formulario.',
+      editErrorMessage: 'No se pudo cargar la educación o la sesión expiró.',
+    });
   }
 
   private initCreateForm(): void {
@@ -227,5 +236,29 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
       }),
       map(() => undefined)
     );
+  }
+
+  private refreshOrganizacionesFromModal(event: OrganizacionSavedEvent): void {
+    this.organizacionS.lista().subscribe({
+      next: organizaciones => {
+        this.organizaciones = organizaciones;
+        this.catalogsLoaded = true;
+
+        if (!this.educacion) {
+          return;
+        }
+
+        if (event.action === 'delete') {
+          if (this.educacion.organizacionId === event.deletedId) {
+            this.educacion.organizacionId = null;
+          }
+          return;
+        }
+
+        if (event.id != null) {
+          this.educacion.organizacionId = event.id;
+        }
+      },
+    });
   }
 }

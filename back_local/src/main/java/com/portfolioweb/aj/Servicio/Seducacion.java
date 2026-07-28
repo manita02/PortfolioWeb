@@ -49,7 +49,10 @@ public class SEducacion {
 
     public List<dtoEducacion> list() {
         return rEducacion.findAllWithRelations().stream()
-                .sorted(Comparator.comparing(Educacion::getFechaInicio, OrdenFechaUtil.mesAnioDesc()))
+                .sorted(OrdenFechaUtil.periodoCvDesc(
+                        educacion -> StringUtils.isBlank(educacion.getFechaFin()),
+                        Educacion::getFechaFin,
+                        Educacion::getFechaInicio))
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }

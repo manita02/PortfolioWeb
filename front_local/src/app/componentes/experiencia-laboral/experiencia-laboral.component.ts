@@ -12,6 +12,7 @@ import {
 import { ExperienciaDto } from 'src/app/modelo/experiencia.dto';
 import { SExperienciaService } from 'src/app/servicio/s-experiencia.service';
 import { ExperienciaModalService } from 'src/app/servicio/experiencia-modal.service';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TokenService } from 'src/app/servicio/token.service';
 import { Subscription } from 'rxjs';
 
@@ -83,14 +84,11 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
     this.scheduleViewportHeightUpdate();
   }
 
-  openCreateModal(): void {
-    this.experienciaModal.openCreate();
-  }
-
-  openEditModal(id?: number): void {
-    if (id != null) {
-      this.experienciaModal.openEdit(id);
+  openForm(mode: FormModalMode, id?: number): void {
+    if (mode === 'edit' && id == null) {
+      return;
     }
+    this.experienciaModal.open(mode, id);
   }
 
   cargarExperiencia(): void {
@@ -279,7 +277,8 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
 
   private updatePageSize(isDesktop: boolean): void {
     this.isDesktop = isDesktop;
-    const newSize = isDesktop ? 6 : 1;
+    /* Cards más anchas para el layout org+meta / descripción+skills */
+    const newSize = isDesktop ? 2 : 1;
 
     if (newSize !== this.pageSize) {
       this.pageSize = newSize;

@@ -25,7 +25,7 @@
         <span class="pf-modal__icon persona-form-modal__icon" aria-hidden="true">
           <i class="bi bi-person-badge"></i>
         </span>
-        <h2 id="persona-form-modal-title" class="pf-modal__title">Editar información personal</h2>
+        <h2 id="persona-form-modal-title" class="pf-modal__title">{{ title }}</h2>
       </div>
     </div>
 
@@ -133,7 +133,7 @@
           >
             <span *ngIf="!guardando">
               <i class="bi bi-check2-lg" aria-hidden="true"></i>
-              Guardar cambios
+              {{ submitLabel }}
             </span>
             <span *ngIf="guardando" class="persona-form-modal__saving">
               <i class="bi bi-arrow-repeat persona-form-modal__spinner" aria-hidden="true"></i>

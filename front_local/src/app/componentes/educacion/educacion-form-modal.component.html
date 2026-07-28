@@ -7,7 +7,7 @@
 >
   <div class="pf-modal__backdrop" aria-hidden="true" (click)="close()"></div>
 
-  <div class="pf-modal__panel pf-modal__panel--wide edu-form-modal__panel">
+  <div class="pf-modal__panel pf-modal__panel--wide pf-modal__panel--wide-skills edu-form-modal__panel">
     <button
       type="button"
       class="pf-modal__close btn-pf btn-pf--icon-sm"
@@ -49,78 +49,80 @@
           {{ errorMessage }}
         </p>
 
-        <div class="edu-form-modal__grid">
-          <div class="edu-form-modal__col edu-form-modal__col--primary">
-            <div class="form-pf">
-              <label class="form-pf__label" for="edu-nombreE">Título / curso</label>
-              <input
-                type="text"
-                id="edu-nombreE"
-                name="nombreE"
-                class="form-pf__input"
-                [(ngModel)]="educacion.nombreE"
-                required
-                [disabled]="guardando"
-              />
+        <div class="pf-skills-form-layout">
+          <div class="pf-skills-form-layout__fields">
+            <div class="pf-skills-form-layout__col">
+              <div class="form-pf">
+                <label class="form-pf__label" for="edu-nombreE">Título / curso</label>
+                <input
+                  type="text"
+                  id="edu-nombreE"
+                  name="nombreE"
+                  class="form-pf__input"
+                  [(ngModel)]="educacion.nombreE"
+                  required
+                  [disabled]="guardando"
+                />
+              </div>
+
+              <div class="form-pf">
+                <label class="form-pf__label" for="edu-descripcionE">Descripción</label>
+                <textarea
+                  id="edu-descripcionE"
+                  name="descripcionE"
+                  class="form-pf__textarea"
+                  rows="3"
+                  [(ngModel)]="educacion.descripcionE"
+                  required
+                  [disabled]="guardando"
+                ></textarea>
+              </div>
             </div>
 
-            <div class="form-pf">
-              <label class="form-pf__label" for="edu-descripcionE">Descripción</label>
-              <textarea
-                id="edu-descripcionE"
-                name="descripcionE"
-                class="form-pf__textarea"
-                rows="4"
-                [(ngModel)]="educacion.descripcionE"
-                required
-                [disabled]="guardando"
-              ></textarea>
+            <div class="pf-skills-form-layout__col">
+              <app-catalog-select
+                label="Tipo de educación"
+                [options]="tiposEducacion"
+                [(selectedId)]="educacion.tipoEducacionId"
+                [required]="true"
+              ></app-catalog-select>
+
+              <app-periodo-input
+                [fechaInicio]="educacion.fechaInicio"
+                [fechaFin]="educacion.fechaFin"
+                [showEsActual]="false"
+                [required]="true"
+                [showPreview]="false"
+                placeholder="MM/yyyy"
+                (fechaInicioChange)="educacion.fechaInicio = $event"
+                (fechaFinChange)="educacion.fechaFin = $event"
+              ></app-periodo-input>
+
+              <app-org-select
+                [organizaciones]="organizaciones"
+                [(selectedId)]="educacion.organizacionId"
+                [required]="true"
+                [allowCreate]="true"
+                (createRequested)="onCreateOrg()"
+              ></app-org-select>
+            </div>
+
+            <div class="pf-skills-form-layout__col edu-form-modal__col-attachments">
+              <app-image-upload
+                [(value)]="educacion.archivoImagen"
+                label="Imagen (opcional)"
+                [iconClearButton]="true"
+              ></app-image-upload>
+
+              <app-file-upload
+                mode="pdf"
+                [(value)]="educacion.archivoPdf"
+                label="Certificado PDF (opcional)"
+              ></app-file-upload>
             </div>
           </div>
 
-          <div class="edu-form-modal__col edu-form-modal__col--secondary">
-            <app-catalog-select
-              label="Tipo de educación"
-              [options]="tiposEducacion"
-              [(selectedId)]="educacion.tipoEducacionId"
-              [required]="true"
-            ></app-catalog-select>
-
-            <app-periodo-input
-              [fechaInicio]="educacion.fechaInicio"
-              [fechaFin]="educacion.fechaFin"
-              [showEsActual]="false"
-              [required]="true"
-              [showPreview]="false"
-              placeholder="MM/yyyy"
-              (fechaInicioChange)="educacion.fechaInicio = $event"
-              (fechaFinChange)="educacion.fechaFin = $event"
-            ></app-periodo-input>
-
-            <app-org-select
-              [organizaciones]="organizaciones"
-              [(selectedId)]="educacion.organizacionId"
-              [required]="true"
-              [allowCreate]="true"
-              (createRequested)="onCreateOrg()"
-            ></app-org-select>
-          </div>
-
-          <div class="edu-form-modal__col edu-form-modal__col--attachments">
-            <app-image-upload
-              [(value)]="educacion.archivoImagen"
-              label="Imagen (opcional)"
-              [iconClearButton]="true"
-            ></app-image-upload>
-
-            <app-file-upload
-              mode="pdf"
-              [(value)]="educacion.archivoPdf"
-              label="Certificado PDF (opcional)"
-            ></app-file-upload>
-          </div>
-
-          <div class="edu-form-modal__full">
+          <div class="pf-skills-form-layout__skills">
             <label class="form-pf__label">Habilidades relacionadas</label>
             <app-skill-multi-select
               [options]="habilidades"

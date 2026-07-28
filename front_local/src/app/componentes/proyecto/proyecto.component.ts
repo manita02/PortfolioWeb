@@ -12,6 +12,7 @@ import {
 import { ProyectoDto } from 'src/app/modelo/proyecto.dto';
 import { ProyectoService } from 'src/app/servicio/proyecto.service';
 import { ProyectoModalService } from 'src/app/servicio/proyecto-modal.service';
+import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TokenService } from 'src/app/servicio/token.service';
 import { Subscription } from 'rxjs';
 
@@ -178,12 +179,8 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  openCreate(): void {
-    this.proyectoModal.openCreate();
-  }
-
-  openEdit(id: number): void {
-    this.proyectoModal.openEdit(id);
+  openForm(mode: FormModalMode, id?: number): void {
+    this.proyectoModal.open(mode, id);
   }
 
   goProject(link: string): void {

@@ -1,4 +1,7 @@
-<span class="badge-pf badge-pf--period" *ngIf="texto">
+<span class="badge-pf badge-pf--period badge-pf--period-stack" *ngIf="rango">
   <i class="bi bi-calendar3" aria-hidden="true"></i>
-  {{ texto }}
+  <span class="badge-pf__period-text">
+    <span class="badge-pf__period-range">{{ rango }}</span>
+    <span class="badge-pf__period-duration" *ngIf="duracion">{{ duracion }}</span>
+  </span>
 </span>

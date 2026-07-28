@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,7 @@ public class STipoHabilidad {
     private RTipoHabilidad rTipoHabilidad;
 
     public List<TipoHabilidad> list() {
-        return rTipoHabilidad.findAll();
+        return rTipoHabilidad.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public Optional<TipoHabilidad> getOne(int id) {

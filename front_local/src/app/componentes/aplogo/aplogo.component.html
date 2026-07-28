@@ -15,7 +15,7 @@
       <button
         type="button"
         class="btn-pf btn-pf--add"
-        (click)="openCreate()"
+        (click)="openForm('create')"
         *ngIf="isLogged"
         data-tip="Agregar red social"
         data-tip-pos="left"
@@ -52,7 +52,7 @@
             <button
               type="button"
               class="btn-pf btn-pf--edit btn-pf--icon-sm"
-              (click)="openEdit(Redsocial.id!)"
+              (click)="openForm('edit', Redsocial.id!)"
               data-tip="Editar red social"
               data-tip-pos="bottom"
               aria-label="Editar red social"

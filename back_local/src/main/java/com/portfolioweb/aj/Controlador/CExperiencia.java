@@ -52,10 +52,6 @@ public class CExperiencia {
             return new ResponseEntity(new Mensaje(validationError.get()), HttpStatus.BAD_REQUEST);
         }
 
-        if (sExperiencia.existsByNombreE(dtoexp.getNombreE())) {
-            return new ResponseEntity(new Mensaje("Esa experiencia existe"), HttpStatus.BAD_REQUEST);
-        }
-
         dtoExperiencia created = sExperiencia.save(dtoexp);
         return new ResponseEntity(created, HttpStatus.CREATED);
     }
@@ -70,11 +66,6 @@ public class CExperiencia {
         Optional<String> validationError = sExperiencia.validateDto(dtoexp);
         if (validationError.isPresent()) {
             return new ResponseEntity(new Mensaje(validationError.get()), HttpStatus.BAD_REQUEST);
-        }
-
-        if (sExperiencia.existsByNombreE(dtoexp.getNombreE())
-                && sExperiencia.getByNombreE(dtoexp.getNombreE()).get().getId() != id) {
-            return new ResponseEntity(new Mensaje("Esa experiencia ya existe"), HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(sExperiencia.update(id, dtoexp).get(), HttpStatus.OK);
