@@ -2,9 +2,9 @@
   <app-base64-image
     [src]="organizacion.logoImg"
     [alt]="organizacion.nombre"
-    [maxHeight]="logoHeight"
+    [maxHeight]="size === 'sm' ? '1.75rem' : '2.25rem'"
   ></app-base64-image>
-  <div>
+  <div class="org-badge__text">
     <div class="org-badge__name" [class.small]="size === 'sm'">
       <a
         *ngIf="showLink && organizacion.urlWeb; else plainName"
@@ -14,6 +14,15 @@
       >{{ organizacion.nombre }}</a>
       <ng-template #plainName>{{ organizacion.nombre }}</ng-template>
     </div>
-    <span class="org-badge__location" *ngIf="organizacion.ubicacion">{{ organizacion.ubicacion }}</span>
+    <span class="org-badge__location" *ngIf="showLocationRow">
+      <ng-container *ngIf="organizacion.ubicacion">{{ organizacion.ubicacion }}</ng-container>
+      <ng-container *ngIf="organizacion.ubicacion && tipoUbicacion">
+        <span class="org-badge__sep" aria-hidden="true">|</span>
+      </ng-container>
+      <ng-container *ngIf="tipoUbicacion">
+        <i class="bi bi-geo-alt org-badge__ubicacion-icon" aria-hidden="true"></i>
+        {{ tipoUbicacion }}
+      </ng-container>
+    </span>
   </div>
 </div>

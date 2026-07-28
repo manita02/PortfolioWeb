@@ -3,7 +3,7 @@ import { Organizacion } from '../../modelo/organizacion';
 
 /**
  * Badge de organización con logo, nombre y ubicación (solo lectura).
- * Inputs: organizacion, showLink, size
+ * Inputs: organizacion, showLink, size, tipoUbicacion
  */
 @Component({
   selector: 'app-org-badge',
@@ -13,8 +13,10 @@ export class OrgBadgeComponent {
   @Input() organizacion: Organizacion | null = null;
   @Input() showLink = true;
   @Input() size: 'sm' | 'md' = 'md';
+  /** Si viene, se muestra junto a la ubicación: "Ciudad | 📍 Remoto". */
+  @Input() tipoUbicacion: string | null = null;
 
-  get logoHeight(): string {
-    return this.size === 'sm' ? '24px' : '40px';
+  get showLocationRow(): boolean {
+    return !!(this.organizacion?.ubicacion?.trim() || this.tipoUbicacion?.trim());
   }
 }
