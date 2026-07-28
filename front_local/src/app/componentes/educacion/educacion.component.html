@@ -96,7 +96,7 @@
                 </header>
 
                 <div class="edu-card__main">
-                  <div class="edu-card__desc">
+                  <div class="edu-card__intro">
                     <h3 class="card-portfolio__title edu-card__title">{{ edu.nombreE }}</h3>
 
                     <div
@@ -113,7 +113,14 @@
                       </span>
                       <span class="badge-pf badge-pf--actual" *ngIf="isEnCurso(edu)">En curso</span>
                     </div>
+                  </div>
 
+                  <div
+                    class="edu-card__media"
+                    *ngIf="edu.archivoImagen || edu.habilidades?.length"
+                    [class.edu-card__media--with-image]="!!edu.archivoImagen"
+                    [class.edu-card__media--with-skills]="!!edu.habilidades?.length"
+                  >
                     <div class="edu-card__image" *ngIf="edu.archivoImagen">
                       <img
                         *ngIf="isUrl(edu.archivoImagen)"
@@ -126,19 +133,19 @@
                         [src]="edu.archivoImagen"
                         [alt]="edu.nombreE"
                         cssClass="edu-cert-img"
-                        maxHeight="140px"
+                        maxHeight="220px"
                       ></app-base64-image>
                     </div>
 
-                    <p class="card-portfolio__text edu-card__text">{{ edu.descripcionE }}</p>
+                    <aside class="edu-card__skills" *ngIf="edu.habilidades?.length">
+                      <div class="edu-card__skills-head">Habilidades</div>
+                      <div class="edu-card__skills-body">
+                        <app-skill-chips [habilidades]="edu.habilidades"></app-skill-chips>
+                      </div>
+                    </aside>
                   </div>
 
-                  <aside class="edu-card__skills" *ngIf="edu.habilidades?.length">
-                    <div class="edu-card__skills-head">Habilidades</div>
-                    <div class="edu-card__skills-body">
-                      <app-skill-chips [habilidades]="edu.habilidades"></app-skill-chips>
-                    </div>
-                  </aside>
+                  <p class="card-portfolio__text edu-card__text">{{ edu.descripcionE }}</p>
                 </div>
 
                 <footer class="edu-card__footer" *ngIf="showCardActions(edu)">
