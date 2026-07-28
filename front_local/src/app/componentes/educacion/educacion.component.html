@@ -77,87 +77,106 @@
               [ngClass]="getCardCategoryClass(edu)"
               *ngFor="let edu of page"
             >
-              <div class="card-portfolio__body">
-                <div class="edu-card__row edu-card__row--image" *ngIf="edu.archivoImagen">
-                  <img
-                    *ngIf="isUrl(edu.archivoImagen)"
-                    [src]="edu.archivoImagen"
-                    [alt]="edu.nombreE"
-                    class="edu-cert-img"
-                  />
-                  <app-base64-image
-                    *ngIf="!isUrl(edu.archivoImagen)"
-                    [src]="edu.archivoImagen"
-                    [alt]="edu.nombreE"
-                    cssClass="edu-cert-img"
-                    maxHeight="160px"
-                  ></app-base64-image>
-                </div>
+              <div class="card-portfolio__body edu-card__body">
+                <header class="edu-card__header">
+                  <div class="edu-card__org" *ngIf="edu.organizacion">
+                    <app-org-badge
+                      [organizacion]="edu.organizacion"
+                      size="md"
+                    ></app-org-badge>
+                  </div>
 
-                <h3 class="card-portfolio__title edu-card__row edu-card__row--title">{{ edu.nombreE }}</h3>
-
-                <div class="edu-card__row edu-card__row--org" *ngIf="edu.organizacion">
-                  <app-org-badge [organizacion]="edu.organizacion" size="md"></app-org-badge>
-                </div>
-
-                <div class="edu-card__row edu-card__row--meta">
-                  <div class="edu-card__meta-item">
+                  <div class="edu-card__meta-box" aria-label="Período">
                     <app-periodo-display
                       [fechaInicio]="edu.fechaInicio"
                       [fechaFin]="edu.fechaFin"
+                      [esActual]="isEnCurso(edu)"
                     ></app-periodo-display>
                   </div>
-                  <span
-                    class="badge-pf badge-pf--secondary edu-card__badge edu-card__badge--compact"
-                    *ngIf="edu.tipoEducacion"
-                  >
-                    <i class="bi" [ngClass]="getEducationIcon(edu)" aria-hidden="true"></i>
-                    {{ edu.tipoEducacion.nombre }}
-                  </span>
+                </header>
+
+                <div class="edu-card__main">
+                  <div class="edu-card__desc">
+                    <h3 class="card-portfolio__title edu-card__title">{{ edu.nombreE }}</h3>
+
+                    <div
+                      class="edu-card__role-badges"
+                      *ngIf="edu.tipoEducacion || isEnCurso(edu)"
+                    >
+                      <span
+                        class="badge-pf badge-pf--education edu-card__meta-badge"
+                        [ngClass]="getEducationBadgeClass(edu)"
+                        *ngIf="edu.tipoEducacion"
+                      >
+                        <i class="bi" [ngClass]="getEducationIcon(edu)" aria-hidden="true"></i>
+                        {{ edu.tipoEducacion.nombre }}
+                      </span>
+                      <span class="badge-pf badge-pf--actual" *ngIf="isEnCurso(edu)">En curso</span>
+                    </div>
+
+                    <div class="edu-card__image" *ngIf="edu.archivoImagen">
+                      <img
+                        *ngIf="isUrl(edu.archivoImagen)"
+                        [src]="edu.archivoImagen"
+                        [alt]="edu.nombreE"
+                        class="edu-cert-img"
+                      />
+                      <app-base64-image
+                        *ngIf="!isUrl(edu.archivoImagen)"
+                        [src]="edu.archivoImagen"
+                        [alt]="edu.nombreE"
+                        cssClass="edu-cert-img"
+                        maxHeight="140px"
+                      ></app-base64-image>
+                    </div>
+
+                    <p class="card-portfolio__text edu-card__text">{{ edu.descripcionE }}</p>
+                  </div>
+
+                  <aside class="edu-card__skills" *ngIf="edu.habilidades?.length">
+                    <div class="edu-card__skills-head">Habilidades</div>
+                    <div class="edu-card__skills-body">
+                      <app-skill-chips [habilidades]="edu.habilidades"></app-skill-chips>
+                    </div>
+                  </aside>
                 </div>
 
-                <p class="card-portfolio__text">{{ edu.descripcionE }}</p>
-
-                <app-skill-chips
-                  *ngIf="edu.habilidades?.length"
-                  [habilidades]="edu.habilidades"
-                  [maxVisible]="4"
-                ></app-skill-chips>
-
-                <div class="admin-actions" *ngIf="showCardActions(edu)">
-                  <a
-                    *ngIf="getPdfUri(edu) as pdfUri"
-                    [href]="pdfUri"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-pf btn-pf--view btn-pf--icon-sm"
-                    download="certificado.pdf"
-                    data-tip="Ver certificado"
-                    data-tip-pos="right"
-                    aria-label="Ver certificado"
-                  >
-                    <i class="bi bi-file-earmark-pdf"></i>
-                  </a>
-                  <button
-                    *ngIf="isLogged"
-                    type="button"
-                    class="btn-pf btn-pf--edit btn-pf--icon-sm"
-                    (click)="openForm('edit', edu.id!)"
-                    data-tip="Editar"
-                    aria-label="Editar"
-                  >
-                    <i class="bi bi-pencil-square"></i>
-                  </button>
-                  <button
-                    *ngIf="isLogged"
-                    class="btn-pf btn-pf--delete btn-pf--icon-sm"
-                    (click)="delete(edu.id)"
-                    data-tip="Eliminar"
-                    aria-label="Eliminar"
-                  >
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
+                <footer class="edu-card__footer" *ngIf="showCardActions(edu)">
+                  <div class="edu-card__actions">
+                    <a
+                      *ngIf="getPdfUri(edu) as pdfUri"
+                      [href]="pdfUri"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn-pf btn-pf--view btn-pf--icon-sm"
+                      download="certificado.pdf"
+                      data-tip="Ver certificado"
+                      aria-label="Ver certificado"
+                    >
+                      <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
+                    </a>
+                    <button
+                      *ngIf="isLogged"
+                      type="button"
+                      class="btn-pf btn-pf--edit btn-pf--icon-sm"
+                      (click)="openForm('edit', edu.id!)"
+                      data-tip="Editar"
+                      aria-label="Editar educación"
+                    >
+                      <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                    </button>
+                    <button
+                      *ngIf="isLogged"
+                      type="button"
+                      class="btn-pf btn-pf--delete btn-pf--icon-sm"
+                      (click)="delete(edu.id)"
+                      data-tip="Eliminar"
+                      aria-label="Eliminar educación"
+                    >
+                      <i class="bi bi-trash" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </footer>
               </div>
             </article>
           </div>

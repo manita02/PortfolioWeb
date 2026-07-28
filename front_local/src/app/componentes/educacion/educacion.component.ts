@@ -197,6 +197,10 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     return `edu-card--${this.getEducationCategory(edu)}`;
   }
 
+  getEducationBadgeClass(edu: EducacionDto): string {
+    return `badge-pf--education-${this.getEducationCategory(edu)}`;
+  }
+
   getEducationIcon(edu: EducacionDto): string {
     const category = this.getEducationCategory(edu);
     switch (category) {
@@ -207,6 +211,11 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
       default:
         return 'bi-book';
     }
+  }
+
+  /** Sin fechaFin = formación en curso (educación no tiene esActual). */
+  isEnCurso(edu: EducacionDto): boolean {
+    return !edu.fechaFin?.trim();
   }
 
   @HostListener('keydown', ['$event'])
@@ -306,7 +315,8 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private updatePageSize(isDesktop: boolean): void {
     this.isDesktop = isDesktop;
-    const newSize = isDesktop ? 6 : 1;
+    /* Misma densidad que experiencia: 2 cards anchas en desktop */
+    const newSize = isDesktop ? 2 : 1;
 
     if (newSize !== this.pageSize) {
       this.pageSize = newSize;
