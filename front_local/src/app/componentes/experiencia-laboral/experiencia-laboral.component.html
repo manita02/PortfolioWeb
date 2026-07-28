@@ -53,69 +53,77 @@
               [ngClass]="getCardCategoryClass(exp)"
               *ngFor="let exp of page"
             >
-              <div class="card-portfolio__body">
-                <div class="exp-card__row exp-card__row--org" *ngIf="exp.organizacion">
-                  <app-org-badge [organizacion]="exp.organizacion" size="md"></app-org-badge>
-                </div>
+              <div class="card-portfolio__body exp-card__body">
+                <header class="exp-card__header">
+                  <div class="exp-card__org" *ngIf="exp.organizacion">
+                    <app-org-badge
+                      [organizacion]="exp.organizacion"
+                      [tipoUbicacion]="exp.tipoUbicacion?.nombre || null"
+                      size="md"
+                    ></app-org-badge>
+                  </div>
 
-                <div class="exp-card__row exp-card__row--employment">
-                  <span
-                    class="badge-pf badge-pf--employment exp-card__badge exp-card__badge--wide"
-                    [ngClass]="getEmploymentBadgeClass(exp)"
-                    *ngIf="exp.tipoEmpleo"
-                  >
-                    <i class="bi" [ngClass]="getEmploymentIcon(exp)" aria-hidden="true"></i>
-                    {{ exp.tipoEmpleo.nombre }}
-                  </span>
-                  <span class="badge-pf badge-pf--actual" *ngIf="exp.esActual">Actual</span>
-                </div>
-
-                <h3 class="card-portfolio__title exp-card__row exp-card__row--title">{{ exp.nombreE }}</h3>
-
-                <div class="exp-card__row exp-card__row--meta">
-                  <div class="exp-card__meta-item">
+                  <div class="exp-card__meta-box" aria-label="Período">
                     <app-periodo-display
                       [fechaInicio]="exp.fechaInicio"
                       [fechaFin]="exp.fechaFin"
                       [esActual]="exp.esActual"
                     ></app-periodo-display>
                   </div>
-                  <span
-                    class="badge-pf badge-pf--secondary badge-pf--location exp-card__badge exp-card__badge--compact"
-                    *ngIf="exp.tipoUbicacion"
-                  >
-                    <i class="bi bi-geo-alt" aria-hidden="true"></i>
-                    {{ exp.tipoUbicacion.nombre }}
-                  </span>
+                </header>
+
+                <div class="exp-card__main">
+                  <div class="exp-card__desc">
+                    <h3 class="card-portfolio__title exp-card__title">{{ exp.nombreE }}</h3>
+
+                    <div
+                      class="exp-card__role-badges"
+                      *ngIf="exp.tipoEmpleo || exp.esActual"
+                    >
+                      <span
+                        class="badge-pf badge-pf--employment exp-card__meta-badge"
+                        [ngClass]="getEmploymentBadgeClass(exp)"
+                        *ngIf="exp.tipoEmpleo"
+                      >
+                        <i class="bi" [ngClass]="getEmploymentIcon(exp)" aria-hidden="true"></i>
+                        {{ exp.tipoEmpleo.nombre }}
+                      </span>
+                      <span class="badge-pf badge-pf--actual" *ngIf="exp.esActual">Actual</span>
+                    </div>
+
+                    <p class="card-portfolio__text exp-card__text">{{ exp.descripcionE }}</p>
+                  </div>
+
+                  <aside class="exp-card__skills" *ngIf="exp.habilidades?.length">
+                    <div class="exp-card__skills-head">Habilidades Clave</div>
+                    <div class="exp-card__skills-body">
+                      <app-skill-chips [habilidades]="exp.habilidades"></app-skill-chips>
+                    </div>
+                  </aside>
                 </div>
 
-                <p class="card-portfolio__text">{{ exp.descripcionE }}</p>
-
-                <app-skill-chips
-                  *ngIf="exp.habilidades?.length"
-                  [habilidades]="exp.habilidades"
-                  [maxVisible]="4"
-                ></app-skill-chips>
-
-                <div class="admin-actions" *ngIf="isLogged">
-                  <button
-                    class="btn-pf btn-pf--edit btn-pf--icon-sm"
-                    type="button"
-                    (click)="openForm('edit', exp.id)"
-                    data-tip="Editar"
-                    aria-label="Editar"
-                  >
-                    <i class="bi bi-pencil-square"></i>
-                  </button>
-                  <button
-                    class="btn-pf btn-pf--delete btn-pf--icon-sm"
-                    (click)="delete(exp.id)"
-                    data-tip="Eliminar"
-                    aria-label="Eliminar"
-                  >
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
+                <footer class="exp-card__footer" *ngIf="isLogged">
+                  <div class="exp-card__actions">
+                    <button
+                      class="btn-pf btn-pf--edit btn-pf--icon-sm"
+                      type="button"
+                      (click)="openForm('edit', exp.id)"
+                      data-tip="Editar"
+                      aria-label="Editar experiencia"
+                    >
+                      <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                    </button>
+                    <button
+                      class="btn-pf btn-pf--delete btn-pf--icon-sm"
+                      type="button"
+                      (click)="delete(exp.id)"
+                      data-tip="Eliminar"
+                      aria-label="Eliminar experiencia"
+                    >
+                      <i class="bi bi-trash" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </footer>
               </div>
             </article>
           </div>

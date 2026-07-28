@@ -49,17 +49,17 @@
 }
 
 .exp-carousel__page--desktop {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: auto;
-  align-items: start;
+  align-items: stretch;
 }
 
 .exp-carousel .card-portfolio {
   max-width: none;
   width: 100%;
   min-width: 0;
-  height: auto;
-  align-self: start;
+  height: 100%;
+  align-self: stretch;
   margin-left: 0;
   margin-right: 0;
 }
@@ -155,10 +155,12 @@
   transform: scale(1.2);
 }
 
+/* —— Card layout —— */
 .exp-card {
   border: 1px solid var(--border-color);
   border-left-width: 4px;
   border-left-style: solid;
+  height: 100%;
 }
 
 .exp-card--formal {
@@ -177,97 +179,203 @@
   border-left-color: var(--overlay-primary-25);
 }
 
-.exp-card__row {
-  margin-bottom: 0.65rem;
-}
-
-.exp-card__row--org {
-  margin-bottom: 0.75rem;
-}
-
-.exp-card__row--org app-org-badge {
-  display: block;
-  width: 100%;
-}
-
-.exp-card__row--org ::ng-deep .org-badge {
-  width: 100%;
-  max-width: none;
-  box-sizing: border-box;
-}
-
-.exp-card__row--employment {
+.exp-card__body {
   display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  gap: 0.45rem;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem 0.85rem;
+  height: 100%;
+  min-height: 0;
 }
 
-.exp-card__row--employment .badge-pf--employment {
-  flex: 1 1 8rem;
+.exp-card__header {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.55rem 0.75rem;
+  flex-shrink: 0;
 }
 
-.exp-card__row--employment .badge-pf--actual {
-  flex: 0 0 auto;
-  align-self: center;
+.exp-card__org {
+  flex: 1 1 55%;
+  min-width: 0;
+  max-width: 55%;
 }
 
-.exp-card__badge--wide {
-  justify-content: center;
+.exp-card__org ::ng-deep .org-badge {
+  max-width: 100%;
   width: 100%;
   box-sizing: border-box;
-  padding-left: 0.85rem;
   padding-right: 0.85rem;
 }
 
-.exp-card__row--title {
-  margin-bottom: 0.5rem;
+.exp-card__org ::ng-deep .org-badge__text {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
-.exp-card__row--meta {
+.exp-card__meta-box {
+  flex: 0 0 auto;
   display: flex;
   flex-wrap: nowrap;
-  align-items: stretch;
-  gap: 0.45rem;
-  width: 100%;
-  margin-bottom: 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  max-width: 42%;
+  padding: 0;
+  border: none;
+  background: transparent;
 }
 
-.exp-card__meta-item {
-  flex: 1 1 0;
+.exp-card__meta-box ::ng-deep .badge-pf--period-stack {
+  margin: 0;
+  max-width: 100%;
+}
+
+.exp-card__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(11rem, 0.9fr);
+  gap: 0.85rem 1rem;
+  align-items: start;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.exp-card__desc {
   min-width: 0;
   display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
 }
 
-.exp-card__meta-item app-periodo-display {
+.exp-card__title {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+.exp-card__role-badges {
   display: flex;
-  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
 }
 
-.exp-card__meta-item ::ng-deep .badge-pf {
-  width: 100%;
-  justify-content: center;
-  box-sizing: border-box;
-  padding: 0.4rem 0.9rem;
+.exp-card__meta-badge {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.7rem;
+  box-shadow: none;
+}
+
+.exp-card__role-badges .badge-pf--employment {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.7rem;
+  box-shadow: none;
+}
+
+.exp-card__role-badges .badge-pf--actual {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.62rem;
+}
+
+.exp-card__text {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.exp-card__skills {
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  max-height: 20rem;
+  align-self: start;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.exp-card__skills-head {
+  flex-shrink: 0;
+  padding: 0.4rem 0.65rem;
   font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--overlay-muted-55, rgba(0, 0, 0, 0.04));
+  border-bottom: 1px solid var(--border-color);
 }
 
-.exp-card__badge--compact {
-  flex: 0 0 auto;
-  width: auto;
-  align-self: stretch;
-  justify-content: center;
-  min-width: 5.75rem;
-  padding: 0.4rem 0.85rem;
-  font-size: 0.72rem;
+.exp-card__skills-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.55rem 0.6rem;
+  scrollbar-width: thin;
 }
 
-.exp-card__row--meta .badge-pf--location {
-  align-self: stretch;
+.exp-card__skills-body ::ng-deep .skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 
-.exp-card__row--meta .badge-pf--location .bi {
-  font-size: 0.78rem;
+.exp-card__skills-body ::ng-deep .badge-pf--skill {
+  white-space: normal;
+  max-width: 100%;
+  line-height: 1.25;
+}
+
+.exp-card__footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.exp-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: flex-end;
+}
+
+@media (max-width: 1100px) {
+  .exp-carousel__page--desktop {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-card__main {
+    grid-template-columns: minmax(0, 1.2fr) minmax(10rem, 0.85fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .exp-card__header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .exp-card__meta-box {
+    justify-content: flex-start;
+  }
+
+  .exp-card__main {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-card__skills {
+    height: auto;
+    max-height: 10rem;
+  }
 }
 
 @media (max-width: 575px) {
@@ -280,15 +388,7 @@
     height: 2.5rem;
   }
 
-  .exp-card__row--meta {
-    flex-wrap: wrap;
-  }
-
-  .exp-card__meta-item {
-    flex: 1 1 100%;
-  }
-
-  .exp-card__badge--compact {
-    min-width: 5.25rem;
+  .exp-card__body {
+    padding: 0.85rem 0.9rem 0.75rem;
   }
 }

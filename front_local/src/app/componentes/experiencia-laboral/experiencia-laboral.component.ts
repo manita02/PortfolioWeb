@@ -277,7 +277,8 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
 
   private updatePageSize(isDesktop: boolean): void {
     this.isDesktop = isDesktop;
-    const newSize = isDesktop ? 6 : 1;
+    /* Cards más anchas para el layout org+meta / descripción+skills */
+    const newSize = isDesktop ? 2 : 1;
 
     if (newSize !== this.pageSize) {
       this.pageSize = newSize;
