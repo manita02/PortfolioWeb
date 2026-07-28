@@ -51,7 +51,7 @@
   padding: 1.5rem 1.35rem 1.25rem;
 }
 
-/** Modales con grilla de habilidades (experiencia, educación, proyectos). */
+
 .pf-modal__panel--wide-skills {
   width: min(calc(100vw - 2rem), 72rem);
   overflow: hidden;
