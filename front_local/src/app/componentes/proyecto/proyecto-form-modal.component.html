@@ -7,7 +7,7 @@
 >
   <div class="pf-modal__backdrop" aria-hidden="true" (click)="close()"></div>
 
-  <div class="pf-modal__panel pf-modal__panel--wide proj-form-modal__panel">
+  <div class="pf-modal__panel pf-modal__panel--wide pf-modal__panel--wide-skills proj-form-modal__panel">
     <button
       type="button"
       class="pf-modal__close btn-pf btn-pf--icon-sm"
@@ -49,81 +49,85 @@
           {{ errorMessage }}
         </p>
 
-        <div class="proj-form-modal__grid">
-          <div class="proj-form-modal__col proj-form-modal__col--primary">
-            <div class="form-pf">
-              <label class="form-pf__label" for="proj-nombreE">Nombre</label>
-              <input
-                type="text"
-                id="proj-nombreE"
-                name="nombreE"
-                class="form-pf__input"
-                [(ngModel)]="proyecto.nombreE"
-                required
-                [disabled]="guardando"
-              />
+        <div class="pf-skills-form-layout">
+          <div class="pf-skills-form-layout__fields">
+            <div class="pf-skills-form-layout__col">
+              <div class="form-pf">
+                <label class="form-pf__label" for="proj-nombreE">Nombre</label>
+                <input
+                  type="text"
+                  id="proj-nombreE"
+                  name="nombreE"
+                  class="form-pf__input"
+                  [(ngModel)]="proyecto.nombreE"
+                  required
+                  [disabled]="guardando"
+                />
+              </div>
+
+              <div class="form-pf">
+                <label class="form-pf__label" for="proj-descripcionE">Descripción</label>
+                <textarea
+                  id="proj-descripcionE"
+                  name="descripcionE"
+                  class="form-pf__textarea"
+                  rows="3"
+                  [(ngModel)]="proyecto.descripcionE"
+                  required
+                  [disabled]="guardando"
+                ></textarea>
+              </div>
             </div>
 
-            <div class="form-pf">
-              <label class="form-pf__label" for="proj-descripcionE">Descripción</label>
-              <textarea
-                id="proj-descripcionE"
-                name="descripcionE"
-                class="form-pf__textarea"
-                rows="4"
-                [(ngModel)]="proyecto.descripcionE"
-                required
-                [disabled]="guardando"
-              ></textarea>
+            <div class="pf-skills-form-layout__col">
+              <div class="form-pf">
+                <label class="form-pf__label" for="proj-link">URL del proyecto</label>
+                <input
+                  type="url"
+                  id="proj-link"
+                  name="link"
+                  class="form-pf__input"
+                  [(ngModel)]="proyecto.link"
+                  required
+                  [disabled]="guardando"
+                />
+              </div>
+
+              <app-periodo-input
+                [fechaInicio]="proyecto.fechaInicio"
+                [fechaFin]="proyecto.fechaFin"
+                [esActual]="proyecto.esActual"
+                [required]="true"
+                [showPreview]="false"
+                placeholder="MM/yyyy"
+                (fechaInicioChange)="proyecto.fechaInicio = $event"
+                (fechaFinChange)="proyecto.fechaFin = $event"
+                (esActualChange)="proyecto.esActual = $event"
+              ></app-periodo-input>
+
+              <app-org-select
+                [organizaciones]="organizaciones"
+                [(selectedId)]="proyecto.organizacionId"
+                [required]="false"
+                [allowCreate]="true"
+                (createRequested)="onCreateOrg()"
+              ></app-org-select>
             </div>
 
-            <div class="form-pf">
-              <label class="form-pf__label" for="proj-link">URL del proyecto</label>
-              <input
-                type="url"
-                id="proj-link"
-                name="link"
-                class="form-pf__input"
-                [(ngModel)]="proyecto.link"
-                required
-                [disabled]="guardando"
-              />
+            <div class="pf-skills-form-layout__col proj-form-modal__col-media">
+              <app-image-upload
+                [(value)]="proyecto.imagen"
+                label="Imagen del proyecto"
+                [required]="true"
+                [iconClearButton]="true"
+              ></app-image-upload>
+              <p class="pf-modal__hint proj-form-modal__hint">
+                JPEG o PNG, máximo <strong>2 MB</strong>.
+              </p>
             </div>
           </div>
 
-          <div class="proj-form-modal__col proj-form-modal__col--secondary">
-            <app-periodo-input
-              [fechaInicio]="proyecto.fechaInicio"
-              [fechaFin]="proyecto.fechaFin"
-              [esActual]="proyecto.esActual"
-              [required]="true"
-              [showPreview]="false"
-              placeholder="MM/yyyy"
-              (fechaInicioChange)="proyecto.fechaInicio = $event"
-              (fechaFinChange)="proyecto.fechaFin = $event"
-              (esActualChange)="proyecto.esActual = $event"
-            ></app-periodo-input>
-
-            <app-org-select
-              [organizaciones]="organizaciones"
-              [(selectedId)]="proyecto.organizacionId"
-              [required]="false"
-              [allowCreate]="true"
-              (createRequested)="onCreateOrg()"
-            ></app-org-select>
-
-            <app-image-upload
-              [(value)]="proyecto.imagen"
-              label="Imagen del proyecto"
-              [required]="true"
-              [iconClearButton]="true"
-            ></app-image-upload>
-            <p class="pf-modal__hint proj-form-modal__hint">
-              JPEG o PNG, máximo <strong>2 MB</strong>.
-            </p>
-          </div>
-
-          <div class="proj-form-modal__full">
+          <div class="pf-skills-form-layout__skills">
             <label class="form-pf__label">Habilidades relacionadas</label>
             <app-skill-multi-select
               [options]="habilidades"
