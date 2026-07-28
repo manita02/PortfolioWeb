@@ -43,7 +43,10 @@ public class SProyecto {
 
     public List<dtoProyecto> list() {
         return rProyecto.findAllWithRelations().stream()
-                .sorted(Comparator.comparing(Proyecto::getFechaInicio, OrdenFechaUtil.mesAnioDesc()))
+                .sorted(OrdenFechaUtil.periodoCvDesc(
+                        Proyecto::isEsActual,
+                        Proyecto::getFechaFin,
+                        Proyecto::getFechaInicio))
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
@@ -82,7 +85,10 @@ public class SProyecto {
 
     public List<dtoProyecto> listActuales() {
         return rProyecto.findByEsActualTrue().stream()
-                .sorted(Comparator.comparing(Proyecto::getFechaInicio, OrdenFechaUtil.mesAnioDesc()))
+                .sorted(OrdenFechaUtil.periodoCvDesc(
+                        Proyecto::isEsActual,
+                        Proyecto::getFechaFin,
+                        Proyecto::getFechaInicio))
                 .map(proyecto -> rProyecto.findByIdWithRelations(proyecto.getId()).orElse(proyecto))
                 .map(this::toDto)
                 .collect(Collectors.toList());

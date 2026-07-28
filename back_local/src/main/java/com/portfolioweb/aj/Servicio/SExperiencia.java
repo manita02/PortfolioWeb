@@ -54,17 +54,16 @@ public class SExperiencia {
 
     public List<dtoExperiencia> list() {
         return rExperiencia.findAllWithRelations().stream()
-                .sorted(Comparator.comparing(Experiencia::getFechaInicio, OrdenFechaUtil.mesAnioDesc()))
+                .sorted(OrdenFechaUtil.periodoCvDesc(
+                        Experiencia::isEsActual,
+                        Experiencia::getFechaFin,
+                        Experiencia::getFechaInicio))
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     public Optional<dtoExperiencia> getOne(int id) {
         return rExperiencia.findByIdWithRelations(id).map(this::toDto);
-    }
-
-    public Optional<Experiencia> getByNombreE(String nombreE) {
-        return rExperiencia.findByNombreE(nombreE);
     }
 
     public dtoExperiencia save(dtoExperiencia dto) {
@@ -87,13 +86,12 @@ public class SExperiencia {
         return rExperiencia.existsById(id);
     }
 
-    public boolean existsByNombreE(String nombreE) {
-        return rExperiencia.existsByNombreE(nombreE);
-    }
-
     public List<dtoExperiencia> listActuales() {
         return rExperiencia.findByEsActualTrue().stream()
-                .sorted(Comparator.comparing(Experiencia::getFechaInicio, OrdenFechaUtil.mesAnioDesc()))
+                .sorted(OrdenFechaUtil.periodoCvDesc(
+                        Experiencia::isEsActual,
+                        Experiencia::getFechaFin,
+                        Experiencia::getFechaInicio))
                 .map(experiencia -> rExperiencia.findByIdWithRelations(experiencia.getId()).orElse(experiencia))
                 .map(this::toDto)
                 .collect(Collectors.toList());
