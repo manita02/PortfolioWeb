@@ -13,5 +13,5 @@ public interface RHabilidad extends JpaRepository<Habilidad, Integer> {
 
     boolean existsByNombre(String nombre);
 
-    List<Habilidad> findAllByOrderByIdDesc();
+    List<Habilidad> findAllByOrderByNombreAsc();
 }
