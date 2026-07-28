@@ -28,7 +28,7 @@
     <button
       type="button"
       class="skills-filter"
-      *ngFor="let tipo of tiposHabilidad"
+      *ngFor="let tipo of tiposHabilidad; trackBy: trackByTipoId"
       [class.skills-filter--active]="selectedTipoId === tipo.id"
       role="radio"
       [attr.aria-checked]="selectedTipoId === tipo.id"
@@ -47,7 +47,7 @@
     <ng-container *ngIf="showGroupedView; else flatCarousel">
       <div
         class="skills-group"
-        *ngFor="let grupo of gruposVisibles; let gi = index"
+        *ngFor="let grupo of gruposVisibles; let gi = index; trackBy: trackByGrupoTipo"
         [ngClass]="getGroupAccentClass(grupo)"
       >
         <h3 class="skills-group__title">
@@ -86,11 +86,11 @@
                   #carouselPage
                   class="skills-carousel__page"
                   [attr.data-carousel-key]="grupo.tipo"
-                  *ngFor="let page of getGroupPages(grupo); let pageIndex = index"
+                  *ngFor="let page of getGroupPages(grupo); let pageIndex = index; trackBy: trackByPageIndex"
                   [attr.aria-hidden]="pageIndex !== getGroupCurrentPage(grupo)"
                 >
                   <ng-container
-                    *ngFor="let h of page; let i = index"
+                    *ngFor="let h of page; let i = index; trackBy: trackByHabilidadId"
                     [ngTemplateOutlet]="skillPill"
                     [ngTemplateOutletContext]="{ $implicit: h, stagger: gi * 8 + i }"
                   ></ng-container>
@@ -118,7 +118,7 @@
               <button
                 type="button"
                 class="skills-carousel__dot"
-                *ngFor="let page of getGroupPages(grupo); let i = index"
+                *ngFor="let page of getGroupPages(grupo); let i = index; trackBy: trackByPageIndex"
                 [class.skills-carousel__dot--active]="i === getGroupCurrentPage(grupo)"
                 [attr.aria-label]="'Ir a la página ' + (i + 1)"
                 [attr.aria-selected]="i === getGroupCurrentPage(grupo)"
@@ -162,11 +162,11 @@
                 #carouselPage
                 class="skills-carousel__page"
                 data-carousel-key="flat"
-                *ngFor="let page of flatPages; let pageIndex = index"
+                *ngFor="let page of flatPages; let pageIndex = index; trackBy: trackByPageIndex"
                 [attr.aria-hidden]="pageIndex !== flatCurrentPage"
               >
                 <ng-container
-                  *ngFor="let h of page; let i = index"
+                  *ngFor="let h of page; let i = index; trackBy: trackByHabilidadId"
                   [ngTemplateOutlet]="skillPill"
                   [ngTemplateOutletContext]="{ $implicit: h, stagger: i }"
                 ></ng-container>
@@ -194,7 +194,7 @@
             <button
               type="button"
               class="skills-carousel__dot"
-              *ngFor="let page of flatPages; let i = index"
+              *ngFor="let page of flatPages; let i = index; trackBy: trackByPageIndex"
               [class.skills-carousel__dot--active]="i === flatCurrentPage"
               [attr.aria-label]="'Ir a la página ' + (i + 1)"
               [attr.aria-selected]="i === flatCurrentPage"
