@@ -54,9 +54,9 @@ export class ComponentesDemoComponent implements OnInit, OnDestroy {
   };
 
   mockSkills: HabilidadDto[] = [
-    { id: 1, nombre: 'Angular', tipoHabilidad: { id: 1, nombre: 'Frontend' } },
-    { id: 2, nombre: 'Java', tipoHabilidad: { id: 2, nombre: 'Backend' } },
-    { id: 3, nombre: 'MySQL', tipoHabilidad: { id: 2, nombre: 'Backend' } }
+    { id: 1, nombre: 'Angular', tipoHabilidad: { id: 1, nombre: 'Lenguajes' } },
+    { id: 2, nombre: 'Java', tipoHabilidad: { id: 1, nombre: 'Lenguajes' } },
+    { id: 3, nombre: 'MySQL', tipoHabilidad: { id: 4, nombre: 'Bases de Datos' } }
   ];
 
   apiStatus = {

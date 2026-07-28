@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   HostListener,
   OnDestroy,
@@ -21,6 +23,7 @@ import { TipoHabilidadService } from 'src/app/servicio/tipo-habilidad.service';
   selector: 'app-habilidad-form-modal',
   templateUrl: './habilidad-form-modal.component.html',
   styleUrls: ['./habilidad-form-modal.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabilidadFormModalComponent implements OnInit, OnDestroy {
   isOpen = false;
@@ -42,7 +45,8 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
     private modal: HabilidadModalService,
     private modalLoading: ModalLoadingService,
     private habilidadesS: HabilidadesService,
-    private tipoHabilidadS: TipoHabilidadService
+    private tipoHabilidadS: TipoHabilidadService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -65,6 +69,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.guardando = false;
       }
+      this.cdr.markForCheck();
     });
   }
 
@@ -123,6 +128,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
 
     this.guardando = true;
     this.errorMessage = '';
+    this.cdr.markForCheck();
 
     const payload: HabilidadDto = {
       nombre: this.habilidad.nombre.trim(),
@@ -142,6 +148,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
           err?.error?.mensaje ||
           err?.error?.message ||
           'Verifique nombre, tipo, imagen y que esté logueado.';
+        this.cdr.markForCheck();
       },
     });
   }
@@ -169,6 +176,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
           ...entity,
           img: entity.img ?? '',
         };
+        this.cdr.markForCheck();
       },
       'No se pudo cargar la habilidad o la sesión expiró.'
     );
@@ -180,6 +188,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
       img: '',
       tipoHabilidadId: undefined,
     };
+    this.cdr.markForCheck();
   }
 
   private getCatalogs$(): Observable<void> {
