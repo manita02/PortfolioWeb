@@ -77,7 +77,24 @@ export function validatePdfFile(file: File): string | null {
   return null;
 }
 
-/** Data URI para PDF a partir de base64 puro o con prefijo. */
 export function toPdfDataUri(base64: string | null | undefined): string | null {
   return toDataUri(base64, 'application/pdf');
 }
+
+export function pdfToObjectUrl(base64: string | null | undefined): string | null {
+  const pure = stripDataUriPrefix(base64 ?? '');
+  if (!pure) {
+    return null;
+  }
+  try {
+    const binary = atob(pure);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    return URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+  } catch {
+    return null;
+  }
+}
+
