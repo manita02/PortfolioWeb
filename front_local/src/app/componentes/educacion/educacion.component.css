@@ -250,9 +250,9 @@
 }
 
 .edu-card__org {
-  flex: 1 1 40%;
+  flex: 1 1 46%;
   min-width: 0;
-  max-width: 40%;
+  max-width: 46%;
 }
 
 .edu-card__org ::ng-deep .org-badge {
@@ -280,7 +280,7 @@
   justify-content: flex-start;
   gap: 0.35rem;
   min-width: 0;
-  max-width: 58%;
+  max-width: 52%;
   padding: 0;
   border: none;
   background: transparent;

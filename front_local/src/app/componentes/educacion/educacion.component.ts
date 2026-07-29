@@ -98,10 +98,16 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get filteredEducacion(): EducacionDto[] {
-    if (this.selectedTipoId == null) {
-      return this.educacion;
+    if (this.selectedTipoId != null) {
+      return this.educacion.filter(edu => edu.tipoEducacionId === this.selectedTipoId);
     }
-    return this.educacion.filter(edu => edu.tipoEducacionId === this.selectedTipoId);
+
+    /* Todas: Formación Académica primero; dentro de cada grupo se mantiene el orden por fechas del backend */
+    return [...this.educacion].sort((a, b) => {
+      const aAcademic = this.getEducationCategory(a) === 'academic' ? 0 : 1;
+      const bAcademic = this.getEducationCategory(b) === 'academic' ? 0 : 1;
+      return aAcademic - bAcademic;
+    });
   }
 
   get pages(): EducacionDto[][] {
