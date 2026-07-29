@@ -139,11 +139,14 @@
 .skills-carousel__viewport {
   flex: 1;
   min-width: 0;
+  width: 100%;
   overflow: hidden;
   outline: none;
   transition: height 0.35s ease;
-  padding: 0.75rem 8px 2.25rem;
+  /* Sin padding horizontal: evita que se filtre la página siguiente */
+  padding: 0.75rem 0 2.25rem;
   box-sizing: border-box;
+  contain: paint;
 }
 
 .skills-carousel .skill-pill__admin [data-tip]::after,
@@ -159,21 +162,28 @@
 
 .skills-carousel__track {
   display: flex;
+  flex-wrap: nowrap;
   align-items: flex-start;
-  width: calc(100% * var(--total-pages, 1));
+  /* Ancho fijo al viewport: translate3d(-100%) mueve exactamente una página */
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   transition: transform 0.45s ease;
   will-change: transform;
 }
 
 .skills-carousel__page {
-  flex: 0 0 calc(100% / var(--total-pages, 1));
-  width: calc(100% / var(--total-pages, 1));
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
+  padding-inline: 8px;
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem 0.75rem;
   align-content: flex-start;
-  min-width: 0;
+  overflow: hidden;
 }
 
 .skills-carousel__nav {
@@ -482,6 +492,15 @@
 
   .skills-carousel__wrapper {
     gap: 0.4rem;
+  }
+
+  .skills-carousel__viewport {
+    padding-top: 0.65rem;
+    padding-bottom: 2rem;
+  }
+
+  .skills-carousel__page {
+    padding-inline: 0.25rem;
   }
 
   .skills-carousel__nav {

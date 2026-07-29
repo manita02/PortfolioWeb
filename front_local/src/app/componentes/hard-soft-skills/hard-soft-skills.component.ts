@@ -321,9 +321,25 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     this.tipoHabilidadS.lista().subscribe({
       next: data => {
         this.tiposHabilidad = data;
+        this.applyDefaultLenguajesFilter();
         this.cdr.markForCheck();
       },
     });
+  }
+
+  private applyDefaultLenguajesFilter(): void {
+    if (this.selectedTipoId != null) {
+      return;
+    }
+    const lenguajes = this.tiposHabilidad.find(tipo =>
+      this.normalize(tipo.nombre ?? '').includes('lenguaje')
+    );
+    if (lenguajes?.id == null) {
+      return;
+    }
+    this.selectedTipoId = lenguajes.id;
+    this.resetPagination();
+    this.scheduleViewportHeightUpdate();
   }
 
   private paginateItems(items: HabilidadDto[]): HabilidadDto[][] {
@@ -342,11 +358,10 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private getTrackTransform(currentPage: number, totalPages: number): string {
-    if (totalPages <= 1) {
-      return 'translateX(0)';
+    if (totalPages <= 1 || currentPage <= 0) {
+      return 'translate3d(0, 0, 0)';
     }
-    const offset = (currentPage * 100) / totalPages;
-    return `translateX(-${offset}%)`;
+    return `translate3d(-${currentPage * 100}%, 0, 0)`;
   }
 
   private resetPagination(): void {
