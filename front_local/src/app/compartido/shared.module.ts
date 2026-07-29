@@ -12,6 +12,7 @@ import { SkillMultiSelectComponent } from './skill-multi-select/skill-multi-sele
 import { OrgBadgeComponent } from './org-badge/org-badge.component';
 import { OrgSelectComponent } from './org-select/org-select.component';
 import { PdfLinkComponent } from './pdf-link/pdf-link.component';
+import { PdfViewerModalComponent } from './pdf-viewer-modal/pdf-viewer-modal.component';
 
 const SHARED_COMPONENTS = [
   Base64ImageComponent,
@@ -24,7 +25,8 @@ const SHARED_COMPONENTS = [
   SkillMultiSelectComponent,
   OrgBadgeComponent,
   OrgSelectComponent,
-  PdfLinkComponent
+  PdfLinkComponent,
+  PdfViewerModalComponent
 ];
 
 @NgModule({
