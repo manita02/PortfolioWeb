@@ -70,8 +70,10 @@
   box-sizing: border-box;
 }
 
-.edu-carousel .admin-actions [data-tip-pos='right']::after,
-.edu-carousel .admin-actions [data-tip-pos='right']::before {
+.edu-carousel__actions [data-tip]::after,
+.edu-carousel__actions [data-tip]::before,
+.edu-card__actions [data-tip]::after,
+.edu-card__actions [data-tip]::before {
   z-index: 1060;
 }
 
@@ -103,17 +105,17 @@
 }
 
 .edu-carousel__page--desktop {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: auto;
-  align-items: start;
+  align-items: stretch;
 }
 
 .edu-carousel .card-portfolio {
   max-width: none;
   width: 100%;
   min-width: 0;
-  height: auto;
-  align-self: start;
+  height: 100%;
+  align-self: stretch;
   margin-left: 0;
   margin-right: 0;
 }
@@ -209,10 +211,12 @@
   transform: scale(1.2);
 }
 
+/* —— Card layout (alineado a experiencia) —— */
 .edu-card {
   border: 1px solid var(--border-color);
   border-left-width: 4px;
   border-left-style: solid;
+  height: 100%;
 }
 
 .edu-card--academic {
@@ -227,81 +231,308 @@
   border-left-color: var(--overlay-primary-25);
 }
 
-.edu-card__row {
-  margin-bottom: 0.65rem;
+.edu-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem 0.85rem;
+  height: 100%;
+  min-height: 0;
 }
 
-.edu-card__row--org {
-  margin-bottom: 0.75rem;
-}
-
-.edu-card__row--org app-org-badge {
-  display: block;
-  width: 100%;
-}
-
-.edu-card__row--org ::ng-deep .org-badge {
-  width: 100%;
-  max-width: none;
-  box-sizing: border-box;
-}
-
-.edu-card__row--title {
-  margin-bottom: 0.5rem;
-}
-
-.edu-card__row--meta {
+.edu-card__header {
   display: flex;
   flex-wrap: nowrap;
-  align-items: stretch;
-  gap: 0.45rem;
-  width: 100%;
-  margin-bottom: 0.75rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.55rem 0.75rem;
+  flex-shrink: 0;
 }
 
-.edu-card__meta-item {
-  flex: 1 1 0;
+.edu-card__org {
+  flex: 1 1 46%;
+  min-width: 0;
+  max-width: 46%;
+}
+
+.edu-card__org ::ng-deep .org-badge {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 0.65rem;
+}
+
+.edu-card__org ::ng-deep .org-badge__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.edu-card__org ::ng-deep .org-badge__name {
+  font-size: 0.8rem;
+}
+
+.edu-card__meta-box {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 0.35rem;
+  min-width: 0;
+  max-width: 52%;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.edu-card__meta-box ::ng-deep .badge-pf--period-stack {
+  margin: 0;
+  max-width: 100%;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0.3rem 0.65rem;
+}
+
+.edu-card__meta-box ::ng-deep .badge-pf__period-text {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.edu-card__meta-box ::ng-deep .badge-pf__period-duration {
+  font-size: 0.65rem;
+}
+
+.edu-card__meta-box ::ng-deep .badge-pf__period-duration::before {
+  content: '·';
+  margin-right: 0.35rem;
+  opacity: 0.55;
+}
+
+.edu-card__type-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  max-width: 100%;
+}
+
+.edu-card__type-badges .badge-pf--education,
+.edu-card__meta-badge {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.7rem;
+  box-shadow: none;
+}
+
+.edu-card__type-badges .badge-pf--actual {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.62rem;
+}
+
+.edu-card__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.edu-card__intro {
   min-width: 0;
   display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
 }
 
-.edu-card__meta-item app-periodo-display {
+.edu-card__title {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+/* Imagen usa todo el ancho libre al lado de habilidades */
+.edu-card__media {
+  display: grid;
+  gap: 0.75rem 0.85rem;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.edu-card__media--with-image.edu-card__media--with-skills {
+  grid-template-columns: minmax(0, 1fr) minmax(10.5rem, 13.5rem);
+}
+
+.edu-card__media--with-image:not(.edu-card__media--with-skills),
+.edu-card__media--with-skills:not(.edu-card__media--with-image) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.edu-card__image {
+  min-width: 0;
+  width: 100%;
   display: flex;
-  width: 100%;
-}
-
-.edu-card__meta-item ::ng-deep .badge-pf {
-  width: 100%;
+  align-items: center;
   justify-content: center;
-  box-sizing: border-box;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.72rem;
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-section-default);
+  overflow: hidden;
 }
 
-.edu-card__badge--compact {
-  flex: 0 0 auto;
-  width: auto;
-  align-self: stretch;
-  justify-content: center;
-  min-width: 5.75rem;
-  padding: 0.4rem 0.85rem;
-  font-size: 0.72rem;
-}
-
-.edu-card__badge--compact .bi {
-  font-size: 0.78rem;
-}
-
-.edu-card__row--image {
-  margin-bottom: 0.75rem;
+.edu-card__image ::ng-deep .base64-image-wrapper {
+  display: block;
+  width: 100%;
+  max-height: none !important;
+  line-height: 0;
 }
 
 .edu-cert-img,
-.edu-card__row--image .base64-image-wrapper img {
+.edu-card__image .base64-image-wrapper img,
+.edu-card__image ::ng-deep img {
+  display: block;
   width: 100%;
-  max-height: 160px;
+  height: auto;
+  max-height: 220px;
   object-fit: contain;
+  object-position: center;
   border-radius: var(--border-radius-sm);
+  background: transparent;
+}
+
+.edu-card__text {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.edu-card__skills {
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  max-height: 14rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.edu-card__skills-head {
+  flex-shrink: 0;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--overlay-muted-55, rgba(0, 0, 0, 0.04));
+  border-bottom: 1px solid var(--border-color);
+}
+
+.edu-card__skills-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.55rem 0.6rem;
+  scrollbar-width: thin;
+}
+
+.edu-card__skills-body ::ng-deep .skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.edu-card__skills-body ::ng-deep .badge-pf--skill {
+  white-space: normal;
+  max-width: 100%;
+  line-height: 1.25;
+}
+
+.edu-card__footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.edu-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: flex-end;
+}
+
+@media (max-width: 1100px) {
+  .edu-carousel__page--desktop {
+    grid-template-columns: 1fr;
+  }
+
+  .edu-card__media--with-image.edu-card__media--with-skills {
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, 12.5rem);
+  }
+
+  .edu-card__skills {
+    max-height: 11rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .edu-card__header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .edu-card__org {
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .edu-card__meta-box {
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .edu-card__type-badges {
+    justify-content: flex-start;
+  }
+
+  .edu-card__meta-box ::ng-deep .badge-pf--period-stack {
+    width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+  }
+
+  .edu-card__meta-box ::ng-deep .badge-pf__period-text {
+    flex-wrap: wrap;
+  }
+
+  .edu-card__org ::ng-deep .org-badge {
+    width: 100%;
+  }
+
+  .edu-card__media--with-image.edu-card__media--with-skills {
+    grid-template-columns: 1fr;
+  }
+
+  .edu-card__skills {
+    height: auto;
+    max-height: 7.5rem;
+  }
+
+  .edu-cert-img,
+  .edu-card__image .base64-image-wrapper img,
+  .edu-card__image ::ng-deep img {
+    max-height: 160px;
+  }
 }
 
 @media (max-width: 575px) {
@@ -323,15 +554,11 @@
     height: 2.5rem;
   }
 
-  .edu-card__row--meta {
-    flex-wrap: wrap;
+  .edu-card__body {
+    padding: 0.85rem 0.9rem 0.75rem;
   }
 
-  .edu-card__meta-item {
-    flex: 1 1 100%;
-  }
-
-  .edu-card__badge--compact {
-    min-width: 5.25rem;
+  .edu-card__skills {
+    max-height: 6.5rem;
   }
 }

@@ -137,6 +137,36 @@
   border-color: var(--overlay-primary-18);
 }
 
+.badge-pf--education {
+  padding: 0.45rem 0.95rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  box-shadow: 0 1px 4px var(--overlay-primary-08);
+}
+
+.badge-pf--education .bi {
+  font-size: 0.9rem;
+}
+
+.badge-pf--education-academic {
+  background: var(--overlay-secondary-16);
+  color: var(--color-secondary);
+  border-color: var(--overlay-secondary-28);
+}
+
+.badge-pf--education-courses {
+  background: var(--overlay-accent-28);
+  color: var(--color-primary-dark);
+  border-color: var(--overlay-accent-50);
+}
+
+.badge-pf--education-default {
+  background: var(--overlay-primary-10);
+  color: var(--color-primary);
+  border-color: var(--overlay-primary-18);
+}
+
 .badge-pf--actual {
   background: var(--color-primary);
   color: var(--text-on-primary);

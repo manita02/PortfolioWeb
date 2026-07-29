@@ -1,0 +1,80 @@
+<div
+  class="pf-modal pdf-viewer-modal"
+  *ngIf="open"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'pdf-viewer-modal-title'"
+>
+  <div class="pf-modal__backdrop" aria-hidden="true" (click)="close()"></div>
+
+  <div class="pf-modal__panel pdf-viewer-modal__panel">
+    <header class="pdf-viewer-modal__header">
+      <div class="pdf-viewer-modal__heading">
+        <span class="pf-modal__icon pdf-viewer-modal__icon" aria-hidden="true">
+          <i class="bi bi-file-earmark-pdf"></i>
+        </span>
+        <h2 id="pdf-viewer-modal-title" class="pf-modal__title pdf-viewer-modal__title">
+          {{ title }}
+        </h2>
+      </div>
+
+      <div class="pdf-viewer-modal__actions">
+        <button
+          type="button"
+          class="btn-pf btn-pf--view btn-pf--icon-sm"
+          (click)="openInNewTab()"
+          [disabled]="!safeUrl"
+          data-tip="Abrir en pestaña"
+          data-tip-pos="bottom"
+          aria-label="Abrir en pestaña nueva"
+        >
+          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+        </button>
+        <button
+          type="button"
+          class="btn-pf btn-pf--edit btn-pf--icon-sm"
+          (click)="download()"
+          [disabled]="!safeUrl"
+          data-tip="Descargar"
+          data-tip-pos="bottom"
+          aria-label="Descargar PDF"
+        >
+          <i class="bi bi-download" aria-hidden="true"></i>
+        </button>
+        <button
+          type="button"
+          class="pf-modal__close btn-pf btn-pf--icon-sm"
+          (click)="close()"
+          data-tip="Cerrar"
+          data-tip-pos="left"
+          aria-label="Cerrar"
+        >
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="pdf-viewer-modal__body">
+      <div class="pdf-viewer-modal__error" *ngIf="loadError">
+        No se pudo cargar el PDF.
+      </div>
+
+      <iframe
+        *ngIf="safeUrl && !loadError"
+        class="pdf-viewer-modal__frame"
+        [src]="safeUrl"
+        title="Visor de PDF"
+      ></iframe>
+
+      <p class="pdf-viewer-modal__hint" *ngIf="safeUrl && !loadError">
+        <button type="button" class="pdf-viewer-modal__hint-btn" (click)="openInNewTab()">
+          Abrir en nueva pestaña
+        </button>
+        <span class="pdf-viewer-modal__hint-sep" aria-hidden="true">·</span>
+        <button type="button" class="pdf-viewer-modal__hint-btn" (click)="download()">
+          Descargar
+        </button>
+      </p>
+    </div>
+  </div>
+</div>

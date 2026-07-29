@@ -16,7 +16,7 @@ import { EducacionModalService } from 'src/app/servicio/educacion-modal.service'
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 import { TokenService } from 'src/app/servicio/token.service';
-import { toPdfDataUri } from 'src/app/util/archivo.util';
+import { pdfToObjectUrl } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
 
 type EducationCategory = 'academic' | 'courses' | 'default';
@@ -35,6 +35,11 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   currentPage = 0;
   pageSize = 1;
   viewportHeight: number | null = null;
+
+  pdfViewerOpen = false;
+  pdfViewerSrc: string | null = null;
+  pdfViewerTitle = 'Certificado';
+  private mobilePdfObjectUrl: string | null = null;
 
   @ViewChild('carousel') carouselRef?: ElementRef<HTMLElement>;
   @ViewChildren('carouselPage', { read: ElementRef })
@@ -84,6 +89,7 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.mediaQuery && this.mediaListener) {
       this.mediaQuery.removeEventListener('change', this.mediaListener);
     }
+    this.revokeMobilePdfUrl();
   }
 
   @HostListener('window:resize')
@@ -92,10 +98,16 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get filteredEducacion(): EducacionDto[] {
-    if (this.selectedTipoId == null) {
-      return this.educacion;
+    if (this.selectedTipoId != null) {
+      return this.educacion.filter(edu => edu.tipoEducacionId === this.selectedTipoId);
     }
-    return this.educacion.filter(edu => edu.tipoEducacionId === this.selectedTipoId);
+
+    /* Todas: Formación Académica primero; dentro de cada grupo se mantiene el orden por fechas del backend */
+    return [...this.educacion].sort((a, b) => {
+      const aAcademic = this.getEducationCategory(a) === 'academic' ? 0 : 1;
+      const bAcademic = this.getEducationCategory(b) === 'academic' ? 0 : 1;
+      return aAcademic - bAcademic;
+    });
   }
 
   get pages(): EducacionDto[][] {
@@ -143,12 +155,50 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     return !!img && (img.startsWith('http://') || img.startsWith('https://'));
   }
 
-  getPdfUri(edu: EducacionDto): string | null {
-    return toPdfDataUri(edu.archivoPdf);
+  hasPdf(edu: EducacionDto): boolean {
+    return !!edu.archivoPdf?.trim();
   }
 
   showCardActions(edu: EducacionDto): boolean {
-    return this.isLogged || !!this.getPdfUri(edu);
+    return this.isLogged || this.hasPdf(edu);
+  }
+
+  openPdf(edu: EducacionDto): void {
+    if (!edu.archivoPdf?.trim()) {
+      return;
+    }
+
+    /* Mobile: nueva pestaña. Desktop/tablet: modal. */
+    if (this.isMobileViewport()) {
+      this.revokeMobilePdfUrl();
+      const url = pdfToObjectUrl(edu.archivoPdf);
+      if (!url) {
+        return;
+      }
+      this.mobilePdfObjectUrl = url;
+      window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    this.pdfViewerSrc = edu.archivoPdf;
+    this.pdfViewerTitle = edu.nombreE?.trim() || 'Certificado';
+    this.pdfViewerOpen = true;
+  }
+
+  closePdfViewer(): void {
+    this.pdfViewerOpen = false;
+    this.pdfViewerSrc = null;
+  }
+
+  private isMobileViewport(): boolean {
+    return window.matchMedia('(max-width: 767px)').matches;
+  }
+
+  private revokeMobilePdfUrl(): void {
+    if (this.mobilePdfObjectUrl) {
+      URL.revokeObjectURL(this.mobilePdfObjectUrl);
+      this.mobilePdfObjectUrl = null;
+    }
   }
 
   selectFilter(tipoId: number | null): void {
@@ -197,6 +247,10 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     return `edu-card--${this.getEducationCategory(edu)}`;
   }
 
+  getEducationBadgeClass(edu: EducacionDto): string {
+    return `badge-pf--education-${this.getEducationCategory(edu)}`;
+  }
+
   getEducationIcon(edu: EducacionDto): string {
     const category = this.getEducationCategory(edu);
     switch (category) {
@@ -207,6 +261,11 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
       default:
         return 'bi-book';
     }
+  }
+
+  /** Sin fechaFin = formación en curso (educación no tiene esActual). */
+  isEnCurso(edu: EducacionDto): boolean {
+    return !edu.fechaFin?.trim();
   }
 
   @HostListener('keydown', ['$event'])
@@ -306,7 +365,8 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private updatePageSize(isDesktop: boolean): void {
     this.isDesktop = isDesktop;
-    const newSize = isDesktop ? 6 : 1;
+    /* Misma densidad que experiencia: 2 cards anchas en desktop */
+    const newSize = isDesktop ? 2 : 1;
 
     if (newSize !== this.pageSize) {
       this.pageSize = newSize;
