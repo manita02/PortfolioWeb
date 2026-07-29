@@ -86,21 +86,15 @@
                     ></app-org-badge>
                   </div>
 
-                  <div class="edu-card__meta-box" aria-label="Período">
+                  <div class="edu-card__meta-box" aria-label="Período y tipo">
                     <app-periodo-display
                       [fechaInicio]="edu.fechaInicio"
                       [fechaFin]="edu.fechaFin"
                       [esActual]="isEnCurso(edu)"
                     ></app-periodo-display>
-                  </div>
-                </header>
-
-                <div class="edu-card__main">
-                  <div class="edu-card__intro">
-                    <h3 class="card-portfolio__title edu-card__title">{{ edu.nombreE }}</h3>
 
                     <div
-                      class="edu-card__role-badges"
+                      class="edu-card__type-badges"
                       *ngIf="edu.tipoEducacion || isEnCurso(edu)"
                     >
                       <span
@@ -113,6 +107,12 @@
                       </span>
                       <span class="badge-pf badge-pf--actual" *ngIf="isEnCurso(edu)">En curso</span>
                     </div>
+                  </div>
+                </header>
+
+                <div class="edu-card__main">
+                  <div class="edu-card__intro">
+                    <h3 class="card-portfolio__title edu-card__title">{{ edu.nombreE }}</h3>
                   </div>
 
                   <div
@@ -150,18 +150,16 @@
 
                 <footer class="edu-card__footer" *ngIf="showCardActions(edu)">
                   <div class="edu-card__actions">
-                    <a
-                      *ngIf="getPdfUri(edu) as pdfUri"
-                      [href]="pdfUri"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      *ngIf="hasPdf(edu)"
+                      type="button"
                       class="btn-pf btn-pf--view btn-pf--icon-sm"
-                      download="certificado.pdf"
+                      (click)="openPdf(edu)"
                       data-tip="Ver certificado"
                       aria-label="Ver certificado"
                     >
                       <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
-                    </a>
+                    </button>
                     <button
                       *ngIf="isLogged"
                       type="button"
@@ -228,4 +226,11 @@
   <div *ngIf="educacion.length > 0 && filteredEducacion.length === 0" class="empty-state">
     No hay educación para el filtro seleccionado.
   </div>
+
+  <app-pdf-viewer-modal
+    [open]="pdfViewerOpen"
+    [src]="pdfViewerSrc"
+    [title]="pdfViewerTitle"
+    (closed)="closePdfViewer()"
+  ></app-pdf-viewer-modal>
 </section>

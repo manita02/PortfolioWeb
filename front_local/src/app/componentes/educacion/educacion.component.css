@@ -243,7 +243,7 @@
 .edu-card__header {
   display: flex;
   flex-wrap: nowrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 0.55rem 0.75rem;
   flex-shrink: 0;
@@ -274,10 +274,11 @@
 .edu-card__meta-box {
   flex: 1 1 auto;
   display: flex;
+  flex-direction: column;
   flex-wrap: nowrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.3rem;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 0.35rem;
   min-width: 0;
   max-width: 58%;
   padding: 0;
@@ -310,6 +311,27 @@
   opacity: 0.55;
 }
 
+.edu-card__type-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  max-width: 100%;
+}
+
+.edu-card__type-badges .badge-pf--education,
+.edu-card__meta-badge {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.7rem;
+  box-shadow: none;
+}
+
+.edu-card__type-badges .badge-pf--actual {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.62rem;
+}
+
 .edu-card__main {
   display: flex;
   flex-direction: column;
@@ -330,30 +352,6 @@
   margin: 0;
   font-size: 1.2rem;
   line-height: 1.25;
-}
-
-.edu-card__role-badges {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.edu-card__meta-badge {
-  padding: 0.3rem 0.65rem;
-  font-size: 0.7rem;
-  box-shadow: none;
-}
-
-.edu-card__role-badges .badge-pf--education {
-  padding: 0.3rem 0.65rem;
-  font-size: 0.7rem;
-  box-shadow: none;
-}
-
-.edu-card__role-badges .badge-pf--actual {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.62rem;
 }
 
 /* Imagen usa todo el ancho libre al lado de habilidades */
@@ -498,8 +496,13 @@
 
   .edu-card__meta-box {
     justify-content: flex-start;
+    align-items: flex-start;
     max-width: 100%;
     flex: 1 1 100%;
+  }
+
+  .edu-card__type-badges {
+    justify-content: flex-start;
   }
 
   .edu-card__meta-box ::ng-deep .badge-pf--period-stack {

@@ -16,7 +16,7 @@ import { EducacionModalService } from 'src/app/servicio/educacion-modal.service'
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 import { TokenService } from 'src/app/servicio/token.service';
-import { toPdfDataUri } from 'src/app/util/archivo.util';
+import { pdfToObjectUrl } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
 
 type EducationCategory = 'academic' | 'courses' | 'default';
@@ -35,6 +35,11 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   currentPage = 0;
   pageSize = 1;
   viewportHeight: number | null = null;
+
+  pdfViewerOpen = false;
+  pdfViewerSrc: string | null = null;
+  pdfViewerTitle = 'Certificado';
+  private mobilePdfObjectUrl: string | null = null;
 
   @ViewChild('carousel') carouselRef?: ElementRef<HTMLElement>;
   @ViewChildren('carouselPage', { read: ElementRef })
@@ -84,6 +89,7 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.mediaQuery && this.mediaListener) {
       this.mediaQuery.removeEventListener('change', this.mediaListener);
     }
+    this.revokeMobilePdfUrl();
   }
 
   @HostListener('window:resize')
@@ -143,12 +149,50 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     return !!img && (img.startsWith('http://') || img.startsWith('https://'));
   }
 
-  getPdfUri(edu: EducacionDto): string | null {
-    return toPdfDataUri(edu.archivoPdf);
+  hasPdf(edu: EducacionDto): boolean {
+    return !!edu.archivoPdf?.trim();
   }
 
   showCardActions(edu: EducacionDto): boolean {
-    return this.isLogged || !!this.getPdfUri(edu);
+    return this.isLogged || this.hasPdf(edu);
+  }
+
+  openPdf(edu: EducacionDto): void {
+    if (!edu.archivoPdf?.trim()) {
+      return;
+    }
+
+    /* Mobile: nueva pestaña. Desktop/tablet: modal. */
+    if (this.isMobileViewport()) {
+      this.revokeMobilePdfUrl();
+      const url = pdfToObjectUrl(edu.archivoPdf);
+      if (!url) {
+        return;
+      }
+      this.mobilePdfObjectUrl = url;
+      window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    this.pdfViewerSrc = edu.archivoPdf;
+    this.pdfViewerTitle = edu.nombreE?.trim() || 'Certificado';
+    this.pdfViewerOpen = true;
+  }
+
+  closePdfViewer(): void {
+    this.pdfViewerOpen = false;
+    this.pdfViewerSrc = null;
+  }
+
+  private isMobileViewport(): boolean {
+    return window.matchMedia('(max-width: 767px)').matches;
+  }
+
+  private revokeMobilePdfUrl(): void {
+    if (this.mobilePdfObjectUrl) {
+      URL.revokeObjectURL(this.mobilePdfObjectUrl);
+      this.mobilePdfObjectUrl = null;
+    }
   }
 
   selectFilter(tipoId: number | null): void {
