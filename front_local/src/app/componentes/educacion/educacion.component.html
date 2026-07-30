@@ -121,7 +121,13 @@
                     [class.edu-card__media--with-image]="!!edu.archivoImagen"
                     [class.edu-card__media--with-skills]="!!edu.habilidades?.length"
                   >
-                    <div class="edu-card__image" *ngIf="edu.archivoImagen">
+                    <button
+                      type="button"
+                      class="edu-card__image img-zoomable"
+                      *ngIf="edu.archivoImagen"
+                      (click)="openImageViewer(edu)"
+                      [attr.aria-label]="'Ampliar imagen de ' + edu.nombreE"
+                    >
                       <img
                         *ngIf="isUrl(edu.archivoImagen)"
                         [src]="edu.archivoImagen"
@@ -135,7 +141,10 @@
                         cssClass="edu-cert-img"
                         maxHeight="220px"
                       ></app-base64-image>
-                    </div>
+                      <span class="img-zoomable__hint" aria-hidden="true">
+                        <i class="bi bi-zoom-in"></i>
+                      </span>
+                    </button>
 
                     <aside class="edu-card__skills" *ngIf="edu.habilidades?.length">
                       <div class="edu-card__skills-head">Habilidades</div>
@@ -233,4 +242,11 @@
     [title]="pdfViewerTitle"
     (closed)="closePdfViewer()"
   ></app-pdf-viewer-modal>
+
+  <app-image-viewer-modal
+    [open]="imageViewerOpen"
+    [src]="imageViewerSrc"
+    [title]="imageViewerTitle"
+    (closed)="closeImageViewer()"
+  ></app-image-viewer-modal>
 </section>

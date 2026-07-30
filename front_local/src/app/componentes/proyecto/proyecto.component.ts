@@ -29,6 +29,10 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   pageSize = 1;
   viewportHeight: number | null = null;
 
+  imageViewerOpen = false;
+  imageViewerSrc: string | null = null;
+  imageViewerTitle = 'Imagen';
+
   @ViewChild('carousel') carouselRef?: ElementRef<HTMLElement>;
   @ViewChildren('carouselPage', { read: ElementRef })
   private pageElements?: QueryList<ElementRef<HTMLElement>>;
@@ -119,6 +123,20 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isUrl(img: string | null | undefined): boolean {
     return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+  }
+
+  openImageViewer(p: ProyectoDto): void {
+    if (!p.imagen?.trim()) {
+      return;
+    }
+    this.imageViewerSrc = p.imagen;
+    this.imageViewerTitle = p.nombreE?.trim() || 'Imagen';
+    this.imageViewerOpen = true;
+  }
+
+  closeImageViewer(): void {
+    this.imageViewerOpen = false;
+    this.imageViewerSrc = null;
   }
 
   showCardActions(p: ProyectoDto): boolean {

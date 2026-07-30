@@ -41,6 +41,10 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   pdfViewerTitle = 'Certificado';
   private mobilePdfObjectUrl: string | null = null;
 
+  imageViewerOpen = false;
+  imageViewerSrc: string | null = null;
+  imageViewerTitle = 'Imagen';
+
   @ViewChild('carousel') carouselRef?: ElementRef<HTMLElement>;
   @ViewChildren('carouselPage', { read: ElementRef })
   private pageElements?: QueryList<ElementRef<HTMLElement>>;
@@ -188,6 +192,20 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   closePdfViewer(): void {
     this.pdfViewerOpen = false;
     this.pdfViewerSrc = null;
+  }
+
+  openImageViewer(edu: EducacionDto): void {
+    if (!edu.archivoImagen?.trim()) {
+      return;
+    }
+    this.imageViewerSrc = edu.archivoImagen;
+    this.imageViewerTitle = edu.nombreE?.trim() || 'Imagen';
+    this.imageViewerOpen = true;
+  }
+
+  closeImageViewer(): void {
+    this.imageViewerOpen = false;
+    this.imageViewerSrc = null;
   }
 
   private isMobileViewport(): boolean {
