@@ -426,6 +426,11 @@
 }
 
 body.pf-modal-open,
-body.alert-dialog-open {
+body.alert-dialog-open,
+body.backup-busy {
   overflow: hidden;
+}
+
+body.backup-busy {
+  cursor: wait;
 }
