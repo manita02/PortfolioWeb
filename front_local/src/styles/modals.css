@@ -425,6 +425,7 @@
   }
 }
 
-body.pf-modal-open {
+body.pf-modal-open,
+body.alert-dialog-open {
   overflow: hidden;
 }
