@@ -50,8 +50,8 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
   private mediaListeners: Array<(event: MediaQueryListEvent) => void> = [];
   private resizeObserver?: ResizeObserver;
   private viewportHeightFrame?: number;
-  private readonly viewportHoverBuffer = 12;
-  private readonly viewportPaddingBlock = 56;
+  private readonly viewportHoverBuffer = 24;
+  private readonly viewportPaddingBlock = 64;
 
   private modalSavedSub?: Subscription;
 
