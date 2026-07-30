@@ -181,6 +181,7 @@
   padding: 1rem 1.1rem 0.85rem;
   height: 100%;
   min-height: 0;
+  overflow: hidden;
 }
 
 .proy-card__header {
@@ -266,10 +267,12 @@
   flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
+  overflow: hidden;
 }
 
 .proy-card__intro {
   min-width: 0;
+  flex-shrink: 0;
 }
 
 .proy-card__title {
@@ -283,6 +286,7 @@
   gap: 0.75rem 0.85rem;
   align-items: stretch;
   min-width: 0;
+  flex-shrink: 0;
 }
 
 .proy-card__media--with-image.proy-card__media--with-skills {
@@ -336,7 +340,7 @@
   min-width: 0;
   min-height: 0;
   height: auto;
-  max-height: 14rem;
+  max-height: 11rem;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-sm);
   background: var(--bg-card);
@@ -402,7 +406,7 @@
   }
 
   .proy-card__skills {
-    max-height: 11rem;
+    max-height: 9rem;
   }
 }
 
