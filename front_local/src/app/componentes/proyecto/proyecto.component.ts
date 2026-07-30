@@ -121,6 +121,10 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
     return !!img && (img.startsWith('http://') || img.startsWith('https://'));
   }
 
+  showCardActions(p: ProyectoDto): boolean {
+    return this.isLogged || !!p.link?.trim();
+  }
+
   prevPage(): void {
     if (this.canGoPrev) {
       this.currentPage--;
@@ -235,7 +239,8 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private updatePageSize(isDesktop: boolean): void {
     this.isDesktop = isDesktop;
-    const newSize = isDesktop ? 6 : 1;
+    /* Misma densidad que educación / experiencia: 2 cards en desktop */
+    const newSize = isDesktop ? 2 : 1;
 
     if (newSize !== this.pageSize) {
       this.pageSize = newSize;

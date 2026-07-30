@@ -49,87 +49,98 @@
             [attr.aria-hidden]="pageIndex !== currentPage"
           >
             <article class="card-portfolio proy-card" *ngFor="let p of page">
-              <div class="card-portfolio__body">
-                <div class="proy-card__row proy-card__row--image" *ngIf="p.imagen">
-                  <img
-                    *ngIf="isUrl(p.imagen)"
-                    [src]="p.imagen"
-                    [alt]="p.nombreE"
-                    class="proy-card__img"
-                  />
-                  <app-base64-image
-                    *ngIf="!isUrl(p.imagen)"
-                    [src]="p.imagen"
-                    [alt]="p.nombreE"
-                    cssClass="proy-card__img"
-                    maxHeight="160px"
-                  ></app-base64-image>
-                </div>
+              <div class="card-portfolio__body proy-card__body">
+                <header class="proy-card__header">
+                  <div class="proy-card__org" *ngIf="p.organizacion">
+                    <app-org-badge
+                      [organizacion]="p.organizacion"
+                      size="md"
+                    ></app-org-badge>
+                  </div>
 
-                <h3 class="card-portfolio__title proy-card__row proy-card__row--title">{{ p.nombreE }}</h3>
-
-                <div class="proy-card__row proy-card__row--org" *ngIf="p.organizacion">
-                  <app-org-badge [organizacion]="p.organizacion" size="md"></app-org-badge>
-                </div>
-
-                <div class="proy-card__row proy-card__row--meta">
-                  <div class="proy-card__meta-item">
+                  <div class="proy-card__meta-box" aria-label="Período">
                     <app-periodo-display
                       [fechaInicio]="p.fechaInicio"
                       [fechaFin]="p.fechaFin"
                       [esActual]="p.esActual"
                     ></app-periodo-display>
+                    <span class="badge-pf badge-pf--actual" *ngIf="p.esActual">Actual</span>
                   </div>
-                  <span
-                    class="badge-pf badge-pf--actual proy-card__badge proy-card__badge--compact"
-                    *ngIf="p.esActual"
+                </header>
+
+                <div class="proy-card__main">
+                  <div class="proy-card__intro">
+                    <h3 class="card-portfolio__title proy-card__title">{{ p.nombreE }}</h3>
+                  </div>
+
+                  <div
+                    class="proy-card__media"
+                    *ngIf="p.imagen || p.habilidades?.length"
+                    [class.proy-card__media--with-image]="!!p.imagen"
+                    [class.proy-card__media--with-skills]="!!p.habilidades?.length"
                   >
-                    Actual
-                  </span>
+                    <div class="proy-card__image" *ngIf="p.imagen">
+                      <img
+                        *ngIf="isUrl(p.imagen)"
+                        [src]="p.imagen"
+                        [alt]="p.nombreE"
+                        class="proy-card__img"
+                      />
+                      <app-base64-image
+                        *ngIf="!isUrl(p.imagen)"
+                        [src]="p.imagen"
+                        [alt]="p.nombreE"
+                        cssClass="proy-card__img"
+                        maxHeight="220px"
+                      ></app-base64-image>
+                    </div>
+
+                    <aside class="proy-card__skills" *ngIf="p.habilidades?.length">
+                      <div class="proy-card__skills-head">Habilidades</div>
+                      <div class="proy-card__skills-body">
+                        <app-skill-chips [habilidades]="p.habilidades"></app-skill-chips>
+                      </div>
+                    </aside>
+                  </div>
+
+                  <p class="card-portfolio__text proy-card__text">{{ p.descripcionE }}</p>
                 </div>
 
-                <p class="card-portfolio__text">{{ p.descripcionE }}</p>
-
-                <app-skill-chips
-                  *ngIf="p.habilidades?.length"
-                  [habilidades]="p.habilidades"
-                  [maxVisible]="4"
-                ></app-skill-chips>
-
-                <div class="admin-actions">
-                  <button
-                    class="btn-pf btn-pf--view btn-pf--icon-sm"
-                    type="button"
-                    (click)="goProject(p.link)"
-                    [attr.data-tip]="p.link || 'Ver proyecto'"
-                    data-tip-wide
-                    data-tip-pos="right"
-                    aria-label="Ver proyecto"
-                  >
-                    <i class="bi bi-box-arrow-up-right"></i>
-                  </button>
-                  <button
-                    *ngIf="isLogged"
-                    type="button"
-                    class="btn-pf btn-pf--edit btn-pf--icon-sm"
-                    (click)="openForm('edit', p.id!)"
-                    data-tip="Editar"
-                    data-tip-pos="right"
-                    aria-label="Editar"
-                  >
-                    <i class="bi bi-pencil-square"></i>
-                  </button>
-                  <button
-                    *ngIf="isLogged"
-                    class="btn-pf btn-pf--delete btn-pf--icon-sm"
-                    (click)="delete(p.id)"
-                    data-tip="Eliminar"
-                    data-tip-pos="right"
-                    aria-label="Eliminar"
-                  >
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
+                <footer class="proy-card__footer" *ngIf="showCardActions(p)">
+                  <div class="proy-card__actions">
+                    <button
+                      *ngIf="p.link"
+                      class="btn-pf btn-pf--view btn-pf--icon-sm"
+                      type="button"
+                      (click)="goProject(p.link)"
+                      [attr.data-tip]="p.link"
+                      data-tip-wide
+                      aria-label="Ver proyecto"
+                    >
+                      <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+                    </button>
+                    <button
+                      *ngIf="isLogged"
+                      type="button"
+                      class="btn-pf btn-pf--edit btn-pf--icon-sm"
+                      (click)="openForm('edit', p.id!)"
+                      data-tip="Editar"
+                      aria-label="Editar proyecto"
+                    >
+                      <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                    </button>
+                    <button
+                      *ngIf="isLogged"
+                      type="button"
+                      class="btn-pf btn-pf--delete btn-pf--icon-sm"
+                      (click)="delete(p.id)"
+                      data-tip="Eliminar"
+                      aria-label="Eliminar proyecto"
+                    >
+                      <i class="bi bi-trash" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </footer>
               </div>
             </article>
           </div>
