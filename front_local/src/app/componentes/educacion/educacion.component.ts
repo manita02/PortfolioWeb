@@ -16,6 +16,7 @@ import { EducacionModalService } from 'src/app/servicio/educacion-modal.service'
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { pdfToObjectUrl } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
 
@@ -62,7 +63,8 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     private educacionS: EducacionService,
     private tipoEducacionS: TipoEducacionService,
     private tokenService: TokenService,
-    private educacionModal: EducacionModalService
+    private educacionModal: EducacionModalService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -313,13 +315,21 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  delete(id?: number): void {
-    if (!confirm('¿Está seguro que desea eliminar esta educación?') || id == null) {
+  async delete(id?: number): Promise<void> {
+    const ok = await this.alertDialog.confirm(
+      '¿Está seguro que desea eliminar esta educación?',
+      { variant: 'danger', title: 'Eliminar educación', confirmLabel: 'Eliminar' }
+    );
+    if (!ok || id == null) {
       return;
     }
     this.educacionS.delete(id).subscribe({
       next: () => this.cargarEducacion(),
-      error: () => alert('No se pudo borrar la educación'),
+      error: () =>
+        this.alertDialog.alert('No se pudo borrar la educación', {
+          variant: 'danger',
+          title: 'Error',
+        }),
     });
   }
 

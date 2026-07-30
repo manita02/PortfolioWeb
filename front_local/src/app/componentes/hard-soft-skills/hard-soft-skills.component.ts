@@ -17,6 +17,7 @@ import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { HabilidadModalService } from 'src/app/servicio/habilidad-modal.service';
 import { TipoHabilidadService } from 'src/app/servicio/tipo-habilidad.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { Subscription } from 'rxjs';
 
 export interface GrupoHabilidades {
@@ -60,6 +61,7 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     private tipoHabilidadS: TipoHabilidadService,
     private tokenService: TokenService,
     private habilidadModal: HabilidadModalService,
+    private alertDialog: AlertDialogService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -307,13 +309,21 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     this.habilidadModal.open(mode, id);
   }
 
-  delete(id?: number): void {
-    if (!confirm('¿Está seguro que desea eliminar esta habilidad?') || id == null) {
+  async delete(id?: number): Promise<void> {
+    const ok = await this.alertDialog.confirm(
+      '¿Está seguro que desea eliminar esta habilidad?',
+      { variant: 'danger', title: 'Eliminar habilidad', confirmLabel: 'Eliminar' }
+    );
+    if (!ok || id == null) {
       return;
     }
     this.habilidadesS.delete(id).subscribe({
       next: () => this.cargarHabilidad(),
-      error: () => alert('No se pudo borrar la habilidad.'),
+      error: () =>
+        this.alertDialog.alert('No se pudo borrar la habilidad.', {
+          variant: 'danger',
+          title: 'Error',
+        }),
     });
   }
 

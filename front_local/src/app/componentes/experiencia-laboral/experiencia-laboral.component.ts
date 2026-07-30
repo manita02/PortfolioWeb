@@ -14,6 +14,7 @@ import { SExperienciaService } from 'src/app/servicio/s-experiencia.service';
 import { ExperienciaModalService } from 'src/app/servicio/experiencia-modal.service';
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TokenService } from 'src/app/servicio/token.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { Subscription } from 'rxjs';
 
 type EmploymentCategory = 'formal' | 'independent' | 'training' | 'default';
@@ -47,7 +48,8 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
   constructor(
     private sExperiencia: SExperienciaService,
     private tokenService: TokenService,
-    private experienciaModal: ExperienciaModalService
+    private experienciaModal: ExperienciaModalService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -103,13 +105,21 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
     });
   }
 
-  delete(id?: number): void {
-    if (!confirm('¿Está seguro que desea eliminar esta experiencia?') || id == null) {
+  async delete(id?: number): Promise<void> {
+    const ok = await this.alertDialog.confirm(
+      '¿Está seguro que desea eliminar esta experiencia?',
+      { variant: 'danger', title: 'Eliminar experiencia', confirmLabel: 'Eliminar' }
+    );
+    if (!ok || id == null) {
       return;
     }
     this.sExperiencia.delete(id).subscribe({
       next: () => this.cargarExperiencia(),
-      error: () => alert('No se pudo borrar la experiencia'),
+      error: () =>
+        this.alertDialog.alert('No se pudo borrar la experiencia', {
+          variant: 'danger',
+          title: 'Error',
+        }),
     });
   }
 

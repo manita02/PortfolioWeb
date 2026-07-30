@@ -5,6 +5,7 @@ import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { Redsocial } from 'src/app/modelo/redsocial';
 import { RedsocialService } from 'src/app/servicio/redsocial.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { Subscription } from 'rxjs';
 
 interface NavItem {
@@ -39,6 +40,7 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
     private tokenService: TokenService,
     private proyectoS: RedsocialService,
     private redsocialModal: RedsocialModalService,
+    private alertDialog: AlertDialogService,
     private el: ElementRef<HTMLElement>
   ) {}
 
@@ -125,19 +127,22 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  delete(id?: number): void {
-    if (confirm('¿Está seguro que desea eliminar esta red social?')) {
-      if (id != undefined) {
-        this.proyectoS.delete(id).subscribe(
-          () => {
-            this.cargarRedSocial();
-          },
-          () => {
-            alert('No se pudo borrar la red social');
-          }
-        );
-      }
+  async delete(id?: number): Promise<void> {
+    const ok = await this.alertDialog.confirm(
+      '¿Está seguro que desea eliminar esta red social?',
+      { variant: 'danger', title: 'Eliminar red social', confirmLabel: 'Eliminar' }
+    );
+    if (!ok || id == null) {
+      return;
     }
+    this.proyectoS.delete(id).subscribe({
+      next: () => this.cargarRedSocial(),
+      error: () =>
+        this.alertDialog.alert('No se pudo borrar la red social', {
+          variant: 'danger',
+          title: 'Error',
+        }),
+    });
   }
 
   openForm(mode: FormModalMode, id?: number): void {

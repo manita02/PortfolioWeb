@@ -13,6 +13,7 @@ import { PersonaModalService } from 'src/app/servicio/persona-modal.service';
 import { runFormModalOpenLoad } from 'src/app/servicio/form-modal-load.helper';
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { PersonaService } from 'src/app/servicio/persona.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 
 @Component({
   selector: 'app-persona-form-modal',
@@ -35,7 +36,8 @@ export class PersonaFormModalComponent implements OnInit, OnDestroy {
   constructor(
     private modal: PersonaModalService,
     private modalLoading: ModalLoadingService,
-    private personaS: PersonaService
+    private personaS: PersonaService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -103,12 +105,16 @@ export class PersonaFormModalComponent implements OnInit, OnDestroy {
     this.modal.close();
   }
 
-  onSubmit(form: NgForm): void {
+  async onSubmit(form: NgForm): Promise<void> {
     if (!this.persona || !this.formValido || this.guardando || this.entityId == null) {
       return;
     }
 
-    if (!confirm('¿Está seguro que desea guardar los cambios?')) {
+    const ok = await this.alertDialog.confirm(
+      '¿Está seguro que desea guardar los cambios?',
+      { variant: 'warning', title: 'Guardar cambios', confirmLabel: 'Guardar' }
+    );
+    if (!ok) {
       return;
     }
 

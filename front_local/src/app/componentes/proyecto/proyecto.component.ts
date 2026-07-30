@@ -14,6 +14,7 @@ import { ProyectoService } from 'src/app/servicio/proyecto.service';
 import { ProyectoModalService } from 'src/app/servicio/proyecto-modal.service';
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TokenService } from 'src/app/servicio/token.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -49,7 +50,8 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private proyectoS: ProyectoService,
     private tokenService: TokenService,
-    private proyectoModal: ProyectoModalService
+    private proyectoModal: ProyectoModalService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -191,13 +193,21 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  delete(id?: number): void {
-    if (!confirm('¿Está seguro que desea eliminar este proyecto?') || id == null) {
+  async delete(id?: number): Promise<void> {
+    const ok = await this.alertDialog.confirm(
+      '¿Está seguro que desea eliminar este proyecto?',
+      { variant: 'danger', title: 'Eliminar proyecto', confirmLabel: 'Eliminar' }
+    );
+    if (!ok || id == null) {
       return;
     }
     this.proyectoS.delete(id).subscribe({
       next: () => this.cargarProyecto(),
-      error: () => alert('No se pudo borrar el proyecto'),
+      error: () =>
+        this.alertDialog.alert('No se pudo borrar el proyecto', {
+          variant: 'danger',
+          title: 'Error',
+        }),
     });
   }
 

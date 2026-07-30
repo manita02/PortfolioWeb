@@ -12,6 +12,7 @@ import { runFormModalOpenLoad } from 'src/app/servicio/form-modal-load.helper';
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { RedsocialModalService } from 'src/app/servicio/redsocial-modal.service';
 import { RedsocialService } from 'src/app/servicio/redsocial.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 
 @Component({
   selector: 'app-redsocial-form-modal',
@@ -34,7 +35,8 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
   constructor(
     private modal: RedsocialModalService,
     private modalLoading: ModalLoadingService,
-    private redsocialS: RedsocialService
+    private redsocialS: RedsocialService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -105,13 +107,19 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
     this.modal.close();
   }
 
-  onSubmit(form: NgForm): void {
+  async onSubmit(form: NgForm): Promise<void> {
     if (!this.redsocial || !this.formValido || this.guardando) {
       return;
     }
 
-    if (this.isEdit && !confirm('¿Está seguro que desea guardar los cambios?')) {
-      return;
+    if (this.isEdit) {
+      const ok = await this.alertDialog.confirm(
+        '¿Está seguro que desea guardar los cambios?',
+        { variant: 'warning', title: 'Guardar cambios', confirmLabel: 'Guardar' }
+      );
+      if (!ok) {
+        return;
+      }
     }
 
     this.guardando = true;

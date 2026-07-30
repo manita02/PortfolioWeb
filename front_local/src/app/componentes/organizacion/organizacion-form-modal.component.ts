@@ -10,6 +10,7 @@ import { Organizacion } from 'src/app/modelo/organizacion';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 import { OrganizacionModalService } from 'src/app/servicio/organizacion-modal.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 
 @Component({
   selector: 'app-organizacion-form-modal',
@@ -33,7 +34,8 @@ export class OrganizacionFormModalComponent implements OnInit, OnDestroy {
   constructor(
     private modal: OrganizacionModalService,
     private modalLoading: ModalLoadingService,
-    private organizacionS: OrganizacionService
+    private organizacionS: OrganizacionService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -136,17 +138,17 @@ export class OrganizacionFormModalComponent implements OnInit, OnDestroy {
     this.selectOrg(org);
   }
 
-  onDelete(org: Organizacion, event: Event): void {
+  async onDelete(org: Organizacion, event: Event): Promise<void> {
     event.stopPropagation();
     if (this.isBusy || org.id == null) {
       return;
     }
 
-    if (
-      !confirm(
-        `¿Eliminar la organización "${org.nombre}"? Esta acción no se puede deshacer.`
-      )
-    ) {
+    const ok = await this.alertDialog.confirm(
+      `¿Eliminar la organización "${org.nombre}"? Esta acción no se puede deshacer.`,
+      { variant: 'danger', title: 'Eliminar organización', confirmLabel: 'Eliminar' }
+    );
+    if (!ok) {
       return;
     }
 
@@ -172,13 +174,19 @@ export class OrganizacionFormModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmit(form: NgForm): void {
+  async onSubmit(form: NgForm): Promise<void> {
     if (!this.form || !this.formValido || this.guardando) {
       return;
     }
 
-    if (this.isEdit && !confirm('¿Guardar los cambios en esta organización?')) {
-      return;
+    if (this.isEdit) {
+      const ok = await this.alertDialog.confirm(
+        '¿Guardar los cambios en esta organización?',
+        { variant: 'warning', title: 'Guardar cambios', confirmLabel: 'Guardar' }
+      );
+      if (!ok) {
+        return;
+      }
     }
 
     this.guardando = true;

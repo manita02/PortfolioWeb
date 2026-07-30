@@ -25,6 +25,7 @@ import {
 } from 'src/app/servicio/organizacion-modal.service';
 import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 
 @Component({
   selector: 'app-educacion-form-modal',
@@ -57,7 +58,8 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
     private tipoEducacionS: TipoEducacionService,
     private organizacionS: OrganizacionService,
     private organizacionModal: OrganizacionModalService,
-    private habilidadesS: HabilidadesService
+    private habilidadesS: HabilidadesService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -142,13 +144,19 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
     this.organizacionModal.open();
   }
 
-  onSubmit(form: NgForm): void {
+  async onSubmit(form: NgForm): Promise<void> {
     if (!this.educacion || !this.formValido || this.guardando) {
       return;
     }
 
-    if (this.isEdit && !confirm('¿Está seguro que desea guardar los cambios?')) {
-      return;
+    if (this.isEdit) {
+      const ok = await this.alertDialog.confirm(
+        '¿Está seguro que desea guardar los cambios?',
+        { variant: 'warning', title: 'Guardar cambios', confirmLabel: 'Guardar' }
+      );
+      if (!ok) {
+        return;
+      }
     }
 
     this.guardando = true;
