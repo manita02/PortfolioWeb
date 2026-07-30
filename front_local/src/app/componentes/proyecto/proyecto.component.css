@@ -460,8 +460,8 @@
   }
 
   .proy-card__meta-box {
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     max-width: 100%;
     flex: 1 1 100%;
     gap: 0.3rem;
@@ -471,10 +471,16 @@
     width: 100%;
     box-sizing: border-box;
     white-space: normal;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   .proy-card__meta-box ::ng-deep .badge-pf__period-text {
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
   .proy-card__org ::ng-deep .org-badge {
@@ -483,6 +489,7 @@
 
   .proy-card__title {
     font-size: 1.05rem;
+    text-align: center;
   }
 
   /* Mismo alto de habilidades que experiencia (mobile apilado) */
