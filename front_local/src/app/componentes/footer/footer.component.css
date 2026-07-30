@@ -1,0 +1,119 @@
+.footer-backup {
+  position: absolute;
+  right: var(--section-padding-x);
+  bottom: 0.85rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+}
+
+.footer-backup__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  background: transparent;
+}
+
+.footer-backup__toggle {
+  position: relative;
+  z-index: 6;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0;
+  border-radius: var(--btn-radius-pill);
+  background: var(--overlay-soft-20);
+  border-color: var(--overlay-soft-40);
+  color: var(--text-on-dark);
+  box-shadow: 0 4px 14px var(--overlay-primary-25);
+}
+
+.footer-backup__toggle:hover:not(:disabled) {
+  background: var(--overlay-accent-25);
+  border-color: var(--color-accent);
+  color: var(--text-on-dark);
+  transform: translateY(-1px);
+}
+
+.footer-backup__toggle:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.footer-backup__toggle .bi {
+  font-size: 1.15rem;
+}
+
+.footer-backup__panel {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 11.5rem;
+  padding: 0.45rem;
+  border-radius: var(--border-radius-card);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card-hover);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(0.35rem);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base),
+    visibility var(--transition-base);
+}
+
+.footer-backup__panel--open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.footer-backup__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-family-base);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.footer-backup__action .bi {
+  color: var(--color-secondary);
+  font-size: 1rem;
+}
+
+.footer-backup__action:hover:not(:disabled) {
+  background: var(--overlay-primary-06);
+}
+
+.footer-backup__action:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (max-width: 575px) {
+  .footer-backup {
+    right: 0.75rem;
+    bottom: 0.7rem;
+  }
+
+  .footer-backup__toggle {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
