@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -11,17 +11,21 @@ export class BackupService {
 
   constructor(private http: HttpClient) {}
 
-  download(): Observable<HttpResponse<Blob>> {
+  downloadEvents(): Observable<HttpEvent<Blob>> {
     return this.http.get(`${this.url}/download`, {
       responseType: 'blob',
-      observe: 'response',
+      observe: 'events',
+      reportProgress: true,
     });
   }
 
-  upload(file: File): Observable<{ mensaje: string }> {
+  uploadEvents(file: File): Observable<HttpEvent<{ mensaje: string }>> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<{ mensaje: string }>(`${this.url}/upload`, formData);
+    return this.http.post<{ mensaje: string }>(`${this.url}/upload`, formData, {
+      observe: 'events',
+      reportProgress: true,
+    });
   }
 
   filenameFromResponse(response: HttpResponse<Blob>, fallback: string): string {
