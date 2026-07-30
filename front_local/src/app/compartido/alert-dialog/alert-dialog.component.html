@@ -1,0 +1,53 @@
+<div
+  class="alert-dialog"
+  *ngIf="state as dialog"
+  role="alertdialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'alert-dialog-title'"
+  [attr.aria-describedby]="'alert-dialog-message'"
+>
+  <div
+    class="alert-dialog__backdrop"
+    aria-hidden="true"
+    (click)="dialog.mode === 'alert' ? confirm() : cancel()"
+  ></div>
+
+  <div
+    class="alert-dialog__panel"
+    [class.alert-dialog__panel--danger]="dialog.variant === 'danger'"
+    [class.alert-dialog__panel--warning]="dialog.variant === 'warning'"
+    [class.alert-dialog__panel--success]="dialog.variant === 'success'"
+    [class.alert-dialog__panel--info]="dialog.variant === 'info'"
+  >
+    <div class="alert-dialog__header">
+      <span
+        class="alert-dialog__icon"
+        [attr.data-variant]="dialog.variant"
+        aria-hidden="true"
+      >
+        <i class="bi" [ngClass]="iconFor(dialog.variant)"></i>
+      </span>
+      <h2 id="alert-dialog-title" class="alert-dialog__title">{{ dialog.title }}</h2>
+      <p id="alert-dialog-message" class="alert-dialog__message">{{ dialog.message }}</p>
+    </div>
+
+    <div class="alert-dialog__actions">
+      <button
+        *ngIf="dialog.mode === 'confirm'"
+        type="button"
+        class="btn-pf btn-pf--edit alert-dialog__btn"
+        (click)="cancel()"
+      >
+        {{ dialog.cancelLabel }}
+      </button>
+      <button
+        type="button"
+        class="btn-pf alert-dialog__btn"
+        [ngClass]="confirmBtnClass(dialog.variant)"
+        (click)="confirm()"
+      >
+        {{ dialog.confirmLabel }}
+      </button>
+    </div>
+  </div>
+</div>
