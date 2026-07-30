@@ -59,6 +59,9 @@
   --banner-height: clamp(280px, 46vh, 480px);
   --card-max-width: 22rem;
   --card-max-width-wide: 28rem;
+  /* Alto fijo de cards de experiencia / educación / proyectos */
+  --portfolio-card-height: 30rem;
+  --portfolio-card-height-mobile: 34rem;
 
   /* Admin / estados */
   --color-danger: #C75C5C;
