@@ -61,7 +61,8 @@
   --card-max-width-wide: 28rem;
   /* Alto fijo de cards de experiencia / educación / proyectos */
   --portfolio-card-height: 30rem;
-  --portfolio-card-height-mobile: 34rem;
+  /* Más alto en mobile: al apilar header/media sobra espacio para la descripción */
+  --portfolio-card-height-mobile: 40rem;
 
   /* Admin / estados */
   --color-danger: #C75C5C;

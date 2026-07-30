@@ -151,6 +151,32 @@
     height: var(--portfolio-card-height-mobile);
     max-height: var(--portfolio-card-height-mobile);
   }
+
+  /*
+   * Descripción con scroll vertical si es larga (igual que experiencia).
+   * Educación: imagen → descripción → habilidades.
+   */
+  .edu-card__main,
+  .proy-card__main {
+    overflow: hidden;
+  }
+
+  .edu-card__image,
+  .proy-card__media {
+    flex: 0 0 auto;
+  }
+
+  .edu-card__skills {
+    flex: 0 0 auto;
+  }
+
+  .edu-card__text,
+  .proy-card__text {
+    flex: 1 1 auto;
+    min-height: 4.75rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 
 .hero-bar {
