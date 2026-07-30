@@ -5,12 +5,12 @@
   <div class="footer-backup" *ngIf="isLogged">
     <div
       class="footer-backup__backdrop"
-      *ngIf="menuOpen"
+      *ngIf="menuOpen && !busy"
       aria-hidden="true"
       (click)="closeMenu()"
     ></div>
 
-    <div class="footer-backup__panel" [class.footer-backup__panel--open]="menuOpen">
+    <div class="footer-backup__panel" [class.footer-backup__panel--open]="menuOpen && !busy">
       <button
         type="button"
         class="footer-backup__action"
@@ -42,11 +42,7 @@
       data-tip-pos="left"
       aria-label="Opciones de base de datos"
     >
-      <i
-        class="bi"
-        [ngClass]="busy ? 'bi-hourglass-split' : 'bi-hdd-stack'"
-        aria-hidden="true"
-      ></i>
+      <i class="bi bi-hdd-stack" aria-hidden="true"></i>
     </button>
 
     <input
@@ -56,5 +52,40 @@
       hidden
       (change)="onFileSelected($event)"
     />
+  </div>
+
+  <div
+    class="backup-progress"
+    *ngIf="busy"
+    role="alertdialog"
+    aria-modal="true"
+    aria-busy="true"
+    [attr.aria-labelledby]="'backup-progress-title'"
+    [attr.aria-describedby]="'backup-progress-message'"
+  >
+    <div class="backup-progress__backdrop" aria-hidden="true"></div>
+    <div class="backup-progress__panel">
+      <span class="backup-progress__icon" aria-hidden="true">
+        <i class="bi" [ngClass]="operation === 'import' ? 'bi-upload' : 'bi-download'"></i>
+      </span>
+      <h2 id="backup-progress-title" class="backup-progress__title">{{ progressTitle }}</h2>
+      <p id="backup-progress-message" class="backup-progress__message">{{ progressMessage }}</p>
+
+      <div
+        class="backup-progress__track"
+        [class.backup-progress__track--indeterminate]="progressIndeterminate"
+        role="progressbar"
+        [attr.aria-valuemin]="0"
+        [attr.aria-valuemax]="100"
+        [attr.aria-valuenow]="progressIndeterminate ? null : progress"
+        [attr.aria-label]="progressPercentLabel"
+      >
+        <div
+          class="backup-progress__bar"
+          [style.width.%]="progressIndeterminate ? 40 : progress"
+        ></div>
+      </div>
+      <p class="backup-progress__percent">{{ progressPercentLabel }}</p>
+    </div>
   </div>
 </footer>
