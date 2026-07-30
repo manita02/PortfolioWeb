@@ -256,14 +256,17 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
       return;
     }
 
-    const activePage = pages[this.currentPage]?.nativeElement as HTMLElement | undefined;
-    if (!activePage) {
-      return;
+    /* Altura fija del viewport: la mayor de todas las páginas (no la activa). */
+    let maxHeight = 0;
+    for (const pageRef of pages) {
+      const height = Math.ceil(pageRef.nativeElement.getBoundingClientRect().height);
+      if (height > maxHeight) {
+        maxHeight = height;
+      }
     }
 
-    const height = Math.ceil(activePage.getBoundingClientRect().height);
     this.viewportHeight =
-      height > 0 ? height + this.viewportPaddingBlock + this.viewportHoverBuffer : null;
+      maxHeight > 0 ? maxHeight + this.viewportPaddingBlock + this.viewportHoverBuffer : null;
   }
 
   private observePages(): void {

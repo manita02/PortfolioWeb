@@ -447,7 +447,7 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     this.updateViewportHeightForKey('flat', this.currentPage);
   }
 
-  private updateViewportHeightForKey(key: string, currentPage: number): void {
+  private updateViewportHeightForKey(key: string, _currentPage: number): void {
     const pages = this.carouselPages?.toArray().filter(
       ref => ref.nativeElement.dataset['carouselKey'] === key
     );
@@ -457,14 +457,20 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
       return;
     }
 
-    const activePage = pages[currentPage]?.nativeElement as HTMLElement | undefined;
-    if (!activePage) {
-      return;
+    /* Altura fija del viewport: la mayor de todas las páginas del carrusel. */
+    let maxHeight = 0;
+    for (const pageRef of pages) {
+      const height = Math.ceil(pageRef.nativeElement.getBoundingClientRect().height);
+      if (height > maxHeight) {
+        maxHeight = height;
+      }
     }
 
-    const height = Math.ceil(activePage.getBoundingClientRect().height);
-    if (height > 0) {
-      this.viewportHeights.set(key, height + this.viewportPaddingBlock + this.viewportHoverBuffer);
+    if (maxHeight > 0) {
+      this.viewportHeights.set(
+        key,
+        maxHeight + this.viewportPaddingBlock + this.viewportHoverBuffer
+      );
     }
   }
 
