@@ -114,6 +114,9 @@
   color: var(--text-secondary);
   margin-top: 0.5rem;
   flex: 1;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 
 /* Cards de sección con alto fijo + scroll en descripción */
@@ -136,6 +139,9 @@
   overscroll-behavior: contain;
   padding-right: 0.15rem;
   margin-top: 0;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 
 @media (max-width: 767px) {
@@ -394,6 +400,9 @@
   color: var(--text-secondary);
   margin: 0;
   white-space: pre-line;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 
 .admin-actions {
