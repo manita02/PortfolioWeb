@@ -334,16 +334,47 @@
 }
 
 .edu-card__main {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'intro'
+    'image'
+    'text'
+    'skills';
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: 0.65rem;
   flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
   overflow: hidden;
+  align-content: stretch;
+}
+
+/* Desktop: imagen | habilidades, descripción abajo a todo el ancho */
+@media (min-width: 768px) {
+  .edu-card__main--with-image.edu-card__main--with-skills {
+    grid-template-columns: minmax(0, 1fr) minmax(10.5rem, 13.5rem);
+    grid-template-areas:
+      'intro intro'
+      'image skills'
+      'text text';
+    grid-template-rows: auto minmax(0, auto) minmax(4.5rem, 1fr);
+    align-items: stretch;
+  }
+
+  .edu-card__main--with-image.edu-card__main--with-skills .edu-card__skills {
+    height: 100%;
+    max-height: none;
+    align-self: stretch;
+  }
+
+  .edu-card__main--with-image.edu-card__main--with-skills .edu-card__image {
+    align-self: stretch;
+  }
 }
 
 .edu-card__intro {
+  grid-area: intro;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -357,8 +388,8 @@
   line-height: 1.25;
 }
 
-/* Orden: imagen → descripción → habilidades */
 .edu-card__image {
+  grid-area: image;
   min-width: 0;
   width: 100%;
   flex-shrink: 0;
@@ -391,13 +422,16 @@
 }
 
 .edu-card__text {
+  grid-area: text;
   margin: 0;
+  min-height: 0;
   font-size: 0.9rem;
   line-height: 1.55;
   white-space: pre-line;
 }
 
 .edu-card__skills {
+  grid-area: skills;
   min-width: 0;
   min-height: 0;
   flex: 0 0 auto;
@@ -463,8 +497,10 @@
     grid-template-columns: 1fr;
   }
 
-  .edu-card__skills {
-    max-height: 10rem;
+  @media (min-width: 768px) {
+    .edu-card__main--with-image.edu-card__main--with-skills {
+      grid-template-columns: minmax(0, 1fr) minmax(10rem, 12.5rem);
+    }
   }
 }
 
@@ -473,6 +509,23 @@
   .edu-card {
     height: 44rem;
     max-height: 44rem;
+  }
+
+  /* Mobile: imagen → descripción → habilidades */
+  .edu-card__main,
+  .edu-card__main--with-image.edu-card__main--with-skills {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    grid-template-areas: none;
+    align-items: stretch;
+  }
+
+  .edu-card__intro,
+  .edu-card__image,
+  .edu-card__text,
+  .edu-card__skills {
+    grid-area: auto;
   }
 
   .edu-card__body {
@@ -520,9 +573,10 @@
     font-size: 1.05rem;
   }
 
+  /* Mismo alto de habilidades que experiencia (mobile apilado) */
   .edu-card__skills {
     height: auto;
-    max-height: 10rem;
+    max-height: 7.5rem;
   }
 
   .edu-cert-img,
@@ -557,7 +611,7 @@
   }
 
   .edu-card__skills {
-    max-height: 9rem;
+    max-height: 6.5rem;
   }
 
   .edu-cert-img,

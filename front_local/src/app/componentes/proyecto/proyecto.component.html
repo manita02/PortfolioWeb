@@ -68,51 +68,48 @@
                   </div>
                 </header>
 
-                <div class="proy-card__main">
+                <div
+                  class="proy-card__main"
+                  [class.proy-card__main--with-image]="!!p.imagen"
+                  [class.proy-card__main--with-skills]="!!p.habilidades?.length"
+                >
                   <div class="proy-card__intro">
                     <h3 class="card-portfolio__title proy-card__title">{{ p.nombreE }}</h3>
                   </div>
 
-                  <div
-                    class="proy-card__media"
-                    *ngIf="p.imagen || p.habilidades?.length"
-                    [class.proy-card__media--with-image]="!!p.imagen"
-                    [class.proy-card__media--with-skills]="!!p.habilidades?.length"
+                  <button
+                    type="button"
+                    class="proy-card__image img-zoomable"
+                    *ngIf="p.imagen"
+                    (click)="openImageViewer(p)"
+                    [attr.aria-label]="'Ampliar imagen de ' + p.nombreE"
                   >
-                    <button
-                      type="button"
-                      class="proy-card__image img-zoomable"
-                      *ngIf="p.imagen"
-                      (click)="openImageViewer(p)"
-                      [attr.aria-label]="'Ampliar imagen de ' + p.nombreE"
-                    >
-                      <img
-                        *ngIf="isUrl(p.imagen)"
-                        [src]="p.imagen"
-                        [alt]="p.nombreE"
-                        class="proy-card__img"
-                      />
-                      <app-base64-image
-                        *ngIf="!isUrl(p.imagen)"
-                        [src]="p.imagen"
-                        [alt]="p.nombreE"
-                        cssClass="proy-card__img"
-                        maxHeight="220px"
-                      ></app-base64-image>
-                      <span class="img-zoomable__hint" aria-hidden="true">
-                        <i class="bi bi-zoom-in"></i>
-                      </span>
-                    </button>
-
-                    <aside class="proy-card__skills" *ngIf="p.habilidades?.length">
-                      <div class="proy-card__skills-head">Habilidades</div>
-                      <div class="proy-card__skills-body">
-                        <app-skill-chips [habilidades]="p.habilidades"></app-skill-chips>
-                      </div>
-                    </aside>
-                  </div>
+                    <img
+                      *ngIf="isUrl(p.imagen)"
+                      [src]="p.imagen"
+                      [alt]="p.nombreE"
+                      class="proy-card__img"
+                    />
+                    <app-base64-image
+                      *ngIf="!isUrl(p.imagen)"
+                      [src]="p.imagen"
+                      [alt]="p.nombreE"
+                      cssClass="proy-card__img"
+                      maxHeight="220px"
+                    ></app-base64-image>
+                    <span class="img-zoomable__hint" aria-hidden="true">
+                      <i class="bi bi-zoom-in"></i>
+                    </span>
+                  </button>
 
                   <p class="card-portfolio__text proy-card__text">{{ p.descripcionE }}</p>
+
+                  <aside class="proy-card__skills" *ngIf="p.habilidades?.length">
+                    <div class="proy-card__skills-head">Habilidades</div>
+                    <div class="proy-card__skills-body">
+                      <app-skill-chips [habilidades]="p.habilidades"></app-skill-chips>
+                    </div>
+                  </aside>
                 </div>
 
                 <footer class="proy-card__footer" *ngIf="showCardActions(p)">

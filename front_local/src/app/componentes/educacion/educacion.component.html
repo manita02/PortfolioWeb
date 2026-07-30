@@ -110,7 +110,11 @@
                   </div>
                 </header>
 
-                <div class="edu-card__main">
+                <div
+                  class="edu-card__main"
+                  [class.edu-card__main--with-image]="!!edu.archivoImagen"
+                  [class.edu-card__main--with-skills]="!!edu.habilidades?.length"
+                >
                   <div class="edu-card__intro">
                     <h3 class="card-portfolio__title edu-card__title">{{ edu.nombreE }}</h3>
                   </div>

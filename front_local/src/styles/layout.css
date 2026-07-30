@@ -162,11 +162,12 @@
   }
 
   .edu-card__image,
-  .proy-card__media {
+  .proy-card__image {
     flex: 0 0 auto;
   }
 
-  .edu-card__skills {
+  .edu-card__skills,
+  .proy-card__skills {
     flex: 0 0 auto;
   }
 
