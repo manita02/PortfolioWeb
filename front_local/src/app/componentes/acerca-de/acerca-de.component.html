@@ -1,4 +1,8 @@
-<section class="section section--default" *ngFor="let Persona of persona">
+<section
+  class="section section--default"
+  *ngFor="let Persona of persona; let first = first"
+  [attr.id]="first ? 'acerca-de' : null"
+>
   <div class="section__inner">
     <div class="profile-section">
       <div class="profile-section__photo-wrap">

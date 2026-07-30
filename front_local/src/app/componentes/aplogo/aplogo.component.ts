@@ -6,6 +6,13 @@ import { Redsocial } from 'src/app/modelo/redsocial';
 import { RedsocialService } from 'src/app/servicio/redsocial.service';
 import { TokenService } from 'src/app/servicio/token.service';
 import { Subscription } from 'rxjs';
+
+interface NavItem {
+  id: string;
+  label: string;
+  icon: string;
+}
+
 @Component({
   selector: 'app-aplogo',
   templateUrl: './aplogo.component.html',
@@ -13,6 +20,17 @@ import { Subscription } from 'rxjs';
 export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   isLogged = false;
   redsocial: Redsocial[] = [];
+  menuOpen = false;
+
+  readonly navItems: NavItem[] = [
+    { id: 'inicio', label: 'Inicio', icon: 'bi-house-door' },
+    { id: 'acerca-de', label: 'Acerca de', icon: 'bi-person' },
+    { id: 'experiencia', label: 'Experiencia', icon: 'bi-briefcase' },
+    { id: 'educacion', label: 'Educación', icon: 'bi-mortarboard' },
+    { id: 'habilidades', label: 'Habilidades', icon: 'bi-lightning' },
+    { id: 'proyectos', label: 'Proyectos', icon: 'bi-folder2-open' },
+  ];
+
   private resizeObserver?: ResizeObserver;
   private modalSavedSub?: Subscription;
 
@@ -45,6 +63,7 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.modalSavedSub?.unsubscribe();
     this.resizeObserver?.disconnect();
     document.documentElement.style.removeProperty('--nav-bar-height');
+    document.body.classList.remove('hero-nav-open');
   }
 
   @HostListener('window:resize')
@@ -52,8 +71,42 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.syncNavBarHeight();
   }
 
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.menuOpen) {
+      this.closeMenu();
+    }
+  }
+
   isUrl(img: string | undefined): boolean {
     return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+  }
+
+  toggleMenu(event: Event): void {
+    event.stopPropagation();
+    this.menuOpen = !this.menuOpen;
+    document.body.classList.toggle('hero-nav-open', this.menuOpen);
+  }
+
+  closeMenu(): void {
+    this.menuOpen = false;
+    document.body.classList.remove('hero-nav-open');
+  }
+
+  goToSection(event: Event, sectionId: string): void {
+    event.preventDefault();
+    this.closeMenu();
+
+    const target = document.getElementById(sectionId);
+    if (!target) {
+      return;
+    }
+
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    if (history.replaceState) {
+      history.replaceState(null, '', `#${sectionId}`);
+    }
   }
 
   onLogOut(): void {
