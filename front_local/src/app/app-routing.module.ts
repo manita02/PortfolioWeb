@@ -25,6 +25,7 @@ import {
   RedsocialEditGuard,
 } from './servicio/redsocial-modal.guard';
 import { ComponentesDemoComponent } from './compartido/componentes-demo/componentes-demo.component';
+import { AdminGuard } from './servicio/admin.guard';
 
 const routes: Routes = [
   {path:'',component: HomeComponent},
@@ -41,7 +42,7 @@ const routes: Routes = [
   { path: 'editbanner/:id', canActivate: [BannerEditGuard], component: HomeComponent },
   { path: 'nuevaredsocial', canActivate: [RedsocialCreateGuard], component: HomeComponent },
   { path: 'editred/:id', canActivate: [RedsocialEditGuard], component: HomeComponent },
-  {path: 'dev/componentes', component: ComponentesDemoComponent}
+  {path: 'dev/componentes', canActivate: [AdminGuard], component: ComponentesDemoComponent}
 ];
 
 @NgModule({
