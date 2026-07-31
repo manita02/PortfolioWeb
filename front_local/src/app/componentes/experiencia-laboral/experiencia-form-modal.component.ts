@@ -183,7 +183,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
         this.errorMessage =
           err?.error?.mensaje ||
           err?.error?.message ||
-          'Verifique los campos (fechas MM/yyyy) y que esté logueado.';
+          'No se pudo guardar. Revisá fechas (MM/yyyy) y campos.';
       },
     });
   }
@@ -208,7 +208,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
         };
       },
       createErrorMessage: 'No se pudieron cargar los datos del formulario.',
-      editErrorMessage: 'No se pudo cargar la experiencia o la sesión expiró.',
+      editErrorMessage: 'No se pudo cargar la experiencia.',
     });
   }
 

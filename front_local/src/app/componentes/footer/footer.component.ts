@@ -240,7 +240,7 @@ export class FooterComponent implements OnInit, OnDestroy {
         this.alertDialog.alert(
           this.readErrorMessage(
             err,
-            'No se pudo importar el archivo SQL. Verificá el contenido y que estés logueado como admin.'
+            'No se pudo importar el archivo SQL.'
           ),
           { variant: 'danger', title: 'Error' }
         );

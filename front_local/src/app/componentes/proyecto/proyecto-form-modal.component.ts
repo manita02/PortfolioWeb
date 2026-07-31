@@ -177,7 +177,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
         this.errorMessage =
           err?.error?.mensaje ||
           err?.error?.message ||
-          'Verifique los campos y que esté logueado.';
+          'No se pudo guardar. Revisá los campos.';
       },
     });
   }
@@ -203,7 +203,7 @@ export class ProyectoFormModalComponent implements OnInit, OnDestroy {
         };
       },
       createErrorMessage: 'No se pudieron cargar los datos del formulario.',
-      editErrorMessage: 'No se pudo cargar el proyecto o la sesión expiró.',
+      editErrorMessage: 'No se pudo cargar el proyecto.',
     });
   }
 

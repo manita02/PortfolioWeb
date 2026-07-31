@@ -154,7 +154,7 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
     }
 
     if (err.status === 0) {
-      return 'No se pudo conectar con el servidor. Verificá que el backend esté en ejecución.';
+      return 'No se pudo conectar con el servidor.';
     }
 
     if (err.status === 401) {
@@ -162,7 +162,7 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
     }
 
     if (err.status === 413) {
-      return 'La imagen es demasiado grande para enviar al servidor. Elegí un archivo de menos de 750 KB en tu PC.';
+      return 'Imagen demasiado grande (máx. 750 KB).';
     }
 
     const body = err.error;

@@ -181,7 +181,7 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
         this.errorMessage =
           err?.error?.mensaje ||
           err?.error?.message ||
-          'Verifique los campos y que esté logueado.';
+          'No se pudo guardar. Revisá los campos.';
       },
     });
   }
@@ -208,7 +208,7 @@ export class EducacionFormModalComponent implements OnInit, OnDestroy {
         };
       },
       createErrorMessage: 'No se pudieron cargar los datos del formulario.',
-      editErrorMessage: 'No se pudo cargar la educación o la sesión expiró.',
+      editErrorMessage: 'No se pudo cargar la educación.',
     });
   }
 

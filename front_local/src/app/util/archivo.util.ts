@@ -57,22 +57,21 @@ export function formatSizeKb(bytes: number): string {
 
 export function validateImageFile(file: File, maxBytes = MAX_IMAGE_BYTES): string | null {
   if (!IMAGE_TYPES.includes(file.type)) {
-    return 'Tipo de archivo no permitido. Se esperaba JPEG o PNG.';
+    return 'Solo se permiten imágenes JPEG o PNG.';
   }
   if (file.size > maxBytes) {
-    const fileKb = formatSizeKb(file.size);
     const maxKb = formatSizeKb(maxBytes);
-    return `El archivo pesa ${fileKb} KB en tu PC; el máximo permitido es ${maxKb} KB (JPEG o PNG).`;
+    return `La imagen supera el límite de ${maxKb} KB.`;
   }
   return null;
 }
 
 export function validatePdfFile(file: File): string | null {
   if (!PDF_TYPES.includes(file.type)) {
-    return 'Tipo de archivo no permitido. Se esperaba PDF.';
+    return 'Solo se permiten archivos PDF.';
   }
   if (file.size > MAX_PDF_BYTES) {
-    return 'El archivo supera el límite de 5MB.';
+    return 'El PDF supera el límite de 5 MB.';
   }
   return null;
 }

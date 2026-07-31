@@ -169,7 +169,7 @@ export class OrganizacionFormModalComponent implements OnInit, OnDestroy {
         this.errorMessage =
           err?.error?.mensaje ||
           err?.error?.message ||
-          'No se pudo eliminar. Verificá que estés logueado como admin.';
+          'No se pudo eliminar la organización.';
       },
     });
   }
@@ -229,7 +229,7 @@ export class OrganizacionFormModalComponent implements OnInit, OnDestroy {
         this.errorMessage =
           err?.error?.mensaje ||
           err?.error?.message ||
-          'Verificá los campos y que estés logueado como admin.';
+          'No se pudo guardar. Revisá los campos.';
       },
     });
   }

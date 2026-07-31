@@ -135,7 +135,7 @@ export class PersonaFormModalComponent implements OnInit, OnDestroy {
         this.guardando = false;
         this.errorMessage = this.mensajeError(
           err,
-          'No se pudo actualizar la información personal.'
+          'No se pudo actualizar la persona.'
         );
       },
     });
@@ -157,7 +157,7 @@ export class PersonaFormModalComponent implements OnInit, OnDestroy {
         this.persona = { ...data };
       },
       createErrorMessage: '',
-      editErrorMessage: 'No se pudo cargar la información personal.',
+      editErrorMessage: 'No se pudo cargar la persona.',
     });
   }
 
@@ -167,7 +167,7 @@ export class PersonaFormModalComponent implements OnInit, OnDestroy {
     }
 
     if (err.status === 0) {
-      return 'No se pudo conectar con el servidor. Verificá que el backend esté en ejecución.';
+      return 'No se pudo conectar con el servidor.';
     }
 
     if (err.status === 401) {
@@ -175,7 +175,7 @@ export class PersonaFormModalComponent implements OnInit, OnDestroy {
     }
 
     if (err.status === 413) {
-      return 'La imagen es demasiado grande para enviar al servidor. Elegí un archivo de menos de 2 MB.';
+      return 'Imagen demasiado grande (máx. 2 MB).';
     }
 
     const body = err.error;

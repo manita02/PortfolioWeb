@@ -142,7 +142,7 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
         this.errorMessage =
           err?.error?.mensaje ||
           err?.error?.message ||
-          'Verifique nombre, URL, ícono y que esté logueado.';
+          'No se pudo guardar. Revisá los campos.';
       },
     });
   }
@@ -166,7 +166,7 @@ export class RedsocialFormModalComponent implements OnInit, OnDestroy {
         };
       },
       createErrorMessage: 'No se pudo preparar el formulario.',
-      editErrorMessage: 'No se pudo cargar la red social o la sesión expiró.',
+      editErrorMessage: 'No se pudo cargar la red social.',
     });
   }
 

@@ -155,7 +155,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
         this.errorMessage =
           err?.error?.mensaje ||
           err?.error?.message ||
-          'Verifique nombre, tipo, imagen y que esté logueado.';
+          'No se pudo guardar. Revisá los campos.';
         this.cdr.markForCheck();
       },
     });
@@ -181,7 +181,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       },
       createErrorMessage: 'No se pudieron cargar los datos del formulario.',
-      editErrorMessage: 'No se pudo cargar la habilidad o la sesión expiró.',
+      editErrorMessage: 'No se pudo cargar la habilidad.',
     });
   }
 
