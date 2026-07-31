@@ -56,7 +56,7 @@
         type="button"
         class="btn-pf btn-pf--add"
         (click)="openForm('create')"
-        *ngIf="isLogged"
+        *ngIf="isAdmin"
         data-tip="Agregar red social"
         data-tip-pos="left"
         aria-label="Agregar red social"
@@ -88,7 +88,7 @@
             ></app-base64-image>
           </a>
 
-          <div class="social-item__admin" *ngIf="isLogged">
+          <div class="social-item__admin" *ngIf="isAdmin">
             <button
               type="button"
               class="btn-pf btn-pf--edit btn-pf--icon-sm"

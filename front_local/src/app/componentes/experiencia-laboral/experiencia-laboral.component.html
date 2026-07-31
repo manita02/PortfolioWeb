@@ -5,7 +5,7 @@
       type="button"
       class="btn-pf btn-pf--add"
       (click)="openForm('create')"
-      *ngIf="isLogged"
+      *ngIf="isAdmin"
       data-tip="Agregar experiencia"
       data-tip-align="end"
       aria-label="Agregar experiencia"
@@ -102,7 +102,7 @@
                   </aside>
                 </div>
 
-                <footer class="exp-card__footer" *ngIf="isLogged">
+                <footer class="exp-card__footer" *ngIf="isAdmin">
                   <div class="exp-card__actions">
                     <button
                       class="btn-pf btn-pf--edit btn-pf--icon-sm"

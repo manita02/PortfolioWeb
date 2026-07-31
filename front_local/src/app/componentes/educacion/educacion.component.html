@@ -5,7 +5,7 @@
       type="button"
       class="btn-pf btn-pf--add"
       (click)="openForm('create')"
-      *ngIf="isLogged"
+      *ngIf="isAdmin"
       data-tip="Agregar educación"
       data-tip-align="end"
       aria-label="Agregar educación"
@@ -167,7 +167,7 @@
                       <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
                     </button>
                     <button
-                      *ngIf="isLogged"
+                      *ngIf="isAdmin"
                       type="button"
                       class="btn-pf btn-pf--edit btn-pf--icon-sm"
                       (click)="openForm('edit', edu.id!)"
@@ -177,7 +177,7 @@
                       <i class="bi bi-pencil-square" aria-hidden="true"></i>
                     </button>
                     <button
-                      *ngIf="isLogged"
+                      *ngIf="isAdmin"
                       type="button"
                       class="btn-pf btn-pf--delete btn-pf--icon-sm"
                       (click)="delete(edu.id)"

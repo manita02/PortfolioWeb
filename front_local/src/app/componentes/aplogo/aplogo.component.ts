@@ -20,6 +20,7 @@ interface NavItem {
 })
 export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   isLogged = false;
+  isAdmin = false;
   redsocial: Redsocial[] = [];
   menuOpen = false;
 
@@ -45,7 +46,8 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isLogged = !!this.tokenService.getToken();
+    this.isLogged = this.tokenService.isLoggedIn();
+    this.isAdmin = this.tokenService.isAdmin();
     this.cargarRedSocial();
     this.modalSavedSub = this.redsocialModal.saved$.subscribe(() => {
       this.cargarRedSocial();
@@ -128,6 +130,9 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async delete(id?: number): Promise<void> {
+    if (!this.tokenService.isAdmin()) {
+      return;
+    }
     const ok = await this.alertDialog.confirm(
       '¿Está seguro que desea eliminar esta red social?',
       { variant: 'danger', title: 'Eliminar red social', confirmLabel: 'Eliminar' }

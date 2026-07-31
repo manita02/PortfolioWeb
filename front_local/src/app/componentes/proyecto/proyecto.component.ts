@@ -25,6 +25,7 @@ import { Subscription } from 'rxjs';
 export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   proyecto: ProyectoDto[] = [];
   isLogged = false;
+  isAdmin = false;
   isDesktop = false;
   currentPage = 0;
   pageSize = 1;
@@ -55,7 +56,8 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isLogged = !!this.tokenService.getToken();
+    this.isLogged = this.tokenService.isLoggedIn();
+    this.isAdmin = this.tokenService.isAdmin();
     this.setupPageSize();
     this.cargarProyecto();
     this.modalSavedSub = this.proyectoModal.saved$.subscribe(() => {
@@ -142,7 +144,7 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showCardActions(p: ProyectoDto): boolean {
-    return this.isLogged || !!p.link?.trim();
+    return this.isAdmin || !!p.link?.trim();
   }
 
   prevPage(): void {
@@ -194,6 +196,9 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async delete(id?: number): Promise<void> {
+    if (!this.tokenService.isAdmin()) {
+      return;
+    }
     const ok = await this.alertDialog.confirm(
       '¿Está seguro que desea eliminar este proyecto?',
       { variant: 'danger', title: 'Eliminar proyecto', confirmLabel: 'Eliminar' }

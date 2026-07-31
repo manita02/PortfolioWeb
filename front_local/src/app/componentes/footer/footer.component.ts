@@ -12,7 +12,7 @@ type BackupOperation = 'export' | 'import';
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit, OnDestroy {
-  isLogged = false;
+  isAdmin = false;
   menuOpen = false;
   busy = false;
   progress = 0;
@@ -28,7 +28,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isLogged = !!this.tokenService.getToken();
+    this.isAdmin = this.tokenService.isAdmin();
   }
 
   ngOnDestroy(): void {
@@ -83,7 +83,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   async exportar(): Promise<void> {
-    if (this.busy) {
+    if (!this.tokenService.isAdmin() || this.busy) {
       return;
     }
     this.closeMenu();
@@ -169,6 +169,9 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   async onFileSelected(event: Event): Promise<void> {
+    if (!this.tokenService.isAdmin()) {
+      return;
+    }
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     input.value = '';
