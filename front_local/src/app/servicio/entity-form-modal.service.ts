@@ -4,6 +4,7 @@ import {
   EntityFormModalState,
   FormModalMode,
 } from './form-modal.types';
+import { AuthGuardService } from './auth-guard.service';
 
 /**
  * Estado y apertura/cierre compartidos para modales de formulario create/edit.
@@ -19,8 +20,13 @@ export abstract class EntityFormModalService {
   readonly state$ = this.stateSubject.asObservable();
   readonly saved$ = this.savedSubject.asObservable();
 
+  protected constructor(protected authGuard: AuthGuardService) {}
+
   /** Punto único de apertura: create sin id, edit con id válido. */
   open(mode: FormModalMode, entityId?: number): void {
+    if (!this.authGuard.ensureAdmin()) {
+      return;
+    }
     if (mode === 'edit') {
       if (entityId == null || entityId <= 0 || Number.isNaN(entityId)) {
         return;
