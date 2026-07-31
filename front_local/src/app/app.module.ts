@@ -56,6 +56,8 @@ import { ComponentesDemoComponent } from './compartido/componentes-demo/componen
 
 import { SplashScreenComponent } from './compartido/splash-screen/splash-screen.component';
 
+import { AlertDialogComponent } from './compartido/alert-dialog/alert-dialog.component';
+
 
 
 @NgModule({
@@ -105,6 +107,8 @@ import { SplashScreenComponent } from './compartido/splash-screen/splash-screen.
     ComponentesDemoComponent,
 
     SplashScreenComponent,
+
+    AlertDialogComponent,
 
   ],
 

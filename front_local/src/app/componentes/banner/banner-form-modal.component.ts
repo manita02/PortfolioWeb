@@ -12,6 +12,7 @@ import { BannerModalService } from 'src/app/servicio/banner-modal.service';
 import { runFormModalOpenLoad } from 'src/app/servicio/form-modal-load.helper';
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { BannerService } from 'src/app/servicio/banner.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 
 @Component({
@@ -35,7 +36,8 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
   constructor(
     private modal: BannerModalService,
     private modalLoading: ModalLoadingService,
-    private sBanner: BannerService
+    private sBanner: BannerService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -96,12 +98,16 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
     this.modal.close();
   }
 
-  onSubmit(form: NgForm): void {
+  async onSubmit(form: NgForm): Promise<void> {
     if (!this.banner || !this.formValido || this.guardando || this.entityId == null) {
       return;
     }
 
-    if (!confirm('¿Está seguro que desea guardar los cambios?')) {
+    const ok = await this.alertDialog.confirm(
+      '¿Está seguro que desea guardar los cambios?',
+      { variant: 'warning', title: 'Guardar cambios', confirmLabel: 'Guardar' }
+    );
+    if (!ok) {
       return;
     }
 
@@ -148,7 +154,7 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
     }
 
     if (err.status === 0) {
-      return 'No se pudo conectar con el servidor. Verificá que el backend esté en ejecución.';
+      return 'No se pudo conectar con el servidor.';
     }
 
     if (err.status === 401) {
@@ -156,7 +162,7 @@ export class BannerFormModalComponent implements OnInit, OnDestroy {
     }
 
     if (err.status === 413) {
-      return 'La imagen es demasiado grande para enviar al servidor. Elegí un archivo de menos de 750 KB en tu PC.';
+      return 'Imagen demasiado grande (máx. 750 KB).';
     }
 
     const body = err.error;

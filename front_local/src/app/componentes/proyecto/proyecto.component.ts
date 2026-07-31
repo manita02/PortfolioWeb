@@ -14,6 +14,7 @@ import { ProyectoService } from 'src/app/servicio/proyecto.service';
 import { ProyectoModalService } from 'src/app/servicio/proyecto-modal.service';
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TokenService } from 'src/app/servicio/token.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -28,6 +29,10 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   currentPage = 0;
   pageSize = 1;
   viewportHeight: number | null = null;
+
+  imageViewerOpen = false;
+  imageViewerSrc: string | null = null;
+  imageViewerTitle = 'Imagen';
 
   @ViewChild('carousel') carouselRef?: ElementRef<HTMLElement>;
   @ViewChildren('carouselPage', { read: ElementRef })
@@ -45,7 +50,8 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private proyectoS: ProyectoService,
     private tokenService: TokenService,
-    private proyectoModal: ProyectoModalService
+    private proyectoModal: ProyectoModalService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -121,6 +127,24 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
     return !!img && (img.startsWith('http://') || img.startsWith('https://'));
   }
 
+  openImageViewer(p: ProyectoDto): void {
+    if (!p.imagen?.trim()) {
+      return;
+    }
+    this.imageViewerSrc = p.imagen;
+    this.imageViewerTitle = p.nombreE?.trim() || 'Imagen';
+    this.imageViewerOpen = true;
+  }
+
+  closeImageViewer(): void {
+    this.imageViewerOpen = false;
+    this.imageViewerSrc = null;
+  }
+
+  showCardActions(p: ProyectoDto): boolean {
+    return this.isLogged || !!p.link?.trim();
+  }
+
   prevPage(): void {
     if (this.canGoPrev) {
       this.currentPage--;
@@ -169,13 +193,21 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  delete(id?: number): void {
-    if (!confirm('¿Está seguro que desea eliminar este proyecto?') || id == null) {
+  async delete(id?: number): Promise<void> {
+    const ok = await this.alertDialog.confirm(
+      '¿Está seguro que desea eliminar este proyecto?',
+      { variant: 'danger', title: 'Eliminar proyecto', confirmLabel: 'Eliminar' }
+    );
+    if (!ok || id == null) {
       return;
     }
     this.proyectoS.delete(id).subscribe({
       next: () => this.cargarProyecto(),
-      error: () => alert('No se pudo borrar el proyecto'),
+      error: () =>
+        this.alertDialog.alert('No se pudo borrar el proyecto', {
+          variant: 'danger',
+          title: 'Error',
+        }),
     });
   }
 
@@ -204,14 +236,17 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    const activePage = pages[this.currentPage]?.nativeElement as HTMLElement | undefined;
-    if (!activePage) {
-      return;
+    /* Altura fija del viewport: la mayor de todas las páginas (no la activa). */
+    let maxHeight = 0;
+    for (const pageRef of pages) {
+      const height = Math.ceil(pageRef.nativeElement.getBoundingClientRect().height);
+      if (height > maxHeight) {
+        maxHeight = height;
+      }
     }
 
-    const height = Math.ceil(activePage.getBoundingClientRect().height);
     this.viewportHeight =
-      height > 0 ? height + this.viewportPaddingBlock + this.viewportHoverBuffer : null;
+      maxHeight > 0 ? maxHeight + this.viewportPaddingBlock + this.viewportHoverBuffer : null;
   }
 
   private observePages(): void {
@@ -235,7 +270,8 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private updatePageSize(isDesktop: boolean): void {
     this.isDesktop = isDesktop;
-    const newSize = isDesktop ? 6 : 1;
+    /* Misma densidad que educación / experiencia: 2 cards en desktop */
+    const newSize = isDesktop ? 2 : 1;
 
     if (newSize !== this.pageSize) {
       this.pageSize = newSize;

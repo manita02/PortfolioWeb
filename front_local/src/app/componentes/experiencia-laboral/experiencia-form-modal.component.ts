@@ -26,6 +26,7 @@ import { OrganizacionService } from 'src/app/servicio/organizacion.service';
 import { SExperienciaService } from 'src/app/servicio/s-experiencia.service';
 import { TipoEmpleoService } from 'src/app/servicio/tipo-empleo.service';
 import { TipoUbicacionService } from 'src/app/servicio/tipo-ubicacion.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 
 @Component({
   selector: 'app-experiencia-form-modal',
@@ -60,7 +61,8 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
     private tipoUbicacionS: TipoUbicacionService,
     private organizacionS: OrganizacionService,
     private organizacionModal: OrganizacionModalService,
-    private habilidadesS: HabilidadesService
+    private habilidadesS: HabilidadesService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -146,13 +148,19 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
     this.organizacionModal.open();
   }
 
-  onSubmit(form: NgForm): void {
+  async onSubmit(form: NgForm): Promise<void> {
     if (!this.experiencia || !this.formValido || this.guardando) {
       return;
     }
 
-    if (this.isEdit && !confirm('¿Está seguro que desea guardar los cambios?')) {
-      return;
+    if (this.isEdit) {
+      const ok = await this.alertDialog.confirm(
+        '¿Está seguro que desea guardar los cambios?',
+        { variant: 'warning', title: 'Guardar cambios', confirmLabel: 'Guardar' }
+      );
+      if (!ok) {
+        return;
+      }
     }
 
     this.guardando = true;
@@ -175,7 +183,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
         this.errorMessage =
           err?.error?.mensaje ||
           err?.error?.message ||
-          'Verifique los campos (fechas MM/yyyy) y que esté logueado.';
+          'No se pudo guardar. Revisá fechas (MM/yyyy) y campos.';
       },
     });
   }
@@ -200,7 +208,7 @@ export class ExperienciaFormModalComponent implements OnInit, OnDestroy {
         };
       },
       createErrorMessage: 'No se pudieron cargar los datos del formulario.',
-      editErrorMessage: 'No se pudo cargar la experiencia o la sesión expiró.',
+      editErrorMessage: 'No se pudo cargar la experiencia.',
     });
   }
 

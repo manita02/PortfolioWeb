@@ -1,54 +1,69 @@
-/* ── Filtros ── */
+/* ── Filtro combo (reemplaza pills) ── */
 .skills-filters {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.55rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
   max-width: var(--container-max);
   margin: 0 auto 1.35rem;
   width: 100%;
   padding-inline: 0.15rem;
 }
 
-.skills-filter {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0.45rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 999px;
-  background: var(--bg-card);
+.skills-filters__label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--text-muted);
-  font-size: 0.82rem;
+}
+
+.skills-filters__combo {
+  position: relative;
+  width: min(100%, 22rem);
+}
+
+.skills-filters__select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.65rem 2.5rem 0.65rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-pill);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: var(--font-family-base);
+  font-size: 0.92rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  white-space: nowrap;
-  transition:
-    background var(--transition-fast),
-    border-color var(--transition-fast),
-    color var(--transition-fast),
-    box-shadow var(--transition-fast),
-    transform var(--transition-fast);
-}
-
-.skills-filter:hover {
-  border-color: var(--overlay-accent-45);
-  color: var(--color-primary);
-  transform: translateY(-1px);
-}
-
-.skills-filter--active {
-  background: var(--color-accent-soft);
-  border-color: var(--overlay-accent-55);
-  color: var(--color-primary);
+  line-height: 1.3;
   box-shadow: var(--btn-shadow);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
-.skills-filter:focus-visible {
-  outline: 2px solid var(--overlay-accent-75);
-  outline-offset: 2px;
+.skills-filters__select:hover {
+  border-color: var(--overlay-accent-45);
+  box-shadow: var(--btn-shadow-hover);
+}
+
+.skills-filters__select:focus {
+  outline: none;
+  border-color: var(--overlay-accent-75);
+  box-shadow: 0 0 0 3px var(--overlay-accent-22);
+}
+
+.skills-filters__chevron {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--color-secondary);
+  font-size: 0.95rem;
 }
 
 /* ── Panel principal ── */
@@ -140,13 +155,13 @@
   flex: 1;
   min-width: 0;
   width: 100%;
-  overflow: hidden;
+  /* clip solo en X: evita ver la página siguiente sin cortar hover/tooltips en Y */
+  overflow-x: clip;
+  overflow-y: visible;
   outline: none;
   transition: height 0.35s ease;
-  /* Sin padding horizontal: evita que se filtre la página siguiente */
-  padding: 0.75rem 0 2.25rem;
+  padding: 0.9rem 0 2.5rem;
   box-sizing: border-box;
-  contain: paint;
 }
 
 .skills-carousel .skill-pill__admin [data-tip]::after,
@@ -164,12 +179,12 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
-  /* Ancho fijo al viewport: translate3d(-100%) mueve exactamente una página */
   width: 100%;
   max-width: 100%;
   min-width: 0;
   transition: transform 0.45s ease;
   will-change: transform;
+  overflow: visible;
 }
 
 .skills-carousel__page {
@@ -178,12 +193,12 @@
   min-width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  padding-inline: 8px;
+  padding: 0.35rem 8px 0.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem 0.75rem;
   align-content: flex-start;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .skills-carousel__nav {
@@ -308,6 +323,7 @@
 
 .skill-pill:hover,
 .skill-pill:focus-within {
+  z-index: 6;
   transform: translateY(-2px);
   border-color: var(--pill-accent);
   background: var(--pill-bg-hover, var(--pill-bg));
@@ -457,8 +473,7 @@
     transition: none;
   }
 
-  .skill-pill,
-  .skills-filter {
+  .skill-pill {
     transition: none;
   }
 
@@ -470,20 +485,16 @@
 
 @media (max-width: 575px) {
   .skills-filters {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    padding-bottom: 0.35rem;
     margin-bottom: 1.1rem;
   }
 
-  .skills-filter {
-    flex-shrink: 0;
-    font-size: 0.78rem;
-    padding: 0.4rem 0.85rem;
+  .skills-filters__combo {
+    width: min(100%, 20rem);
+  }
+
+  .skills-filters__select {
+    font-size: 0.88rem;
+    min-height: 2.6rem;
   }
 
   .skills-group + .skills-group {

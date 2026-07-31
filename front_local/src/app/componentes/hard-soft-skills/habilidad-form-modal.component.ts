@@ -17,6 +17,7 @@ import { HabilidadModalService } from 'src/app/servicio/habilidad-modal.service'
 import { HabilidadesService } from 'src/app/servicio/habilidades.service';
 import { ModalLoadingService } from 'src/app/servicio/modal-loading.service';
 import { TipoHabilidadService } from 'src/app/servicio/tipo-habilidad.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 
 @Component({
   selector: 'app-habilidad-form-modal',
@@ -45,6 +46,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
     private modalLoading: ModalLoadingService,
     private habilidadesS: HabilidadesService,
     private tipoHabilidadS: TipoHabilidadService,
+    private alertDialog: AlertDialogService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -117,13 +119,19 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
     this.modal.close();
   }
 
-  onSubmit(form: NgForm): void {
+  async onSubmit(form: NgForm): Promise<void> {
     if (!this.habilidad || !this.formValido || this.guardando) {
       return;
     }
 
-    if (this.isEdit && !confirm('¿Está seguro que desea guardar los cambios?')) {
-      return;
+    if (this.isEdit) {
+      const ok = await this.alertDialog.confirm(
+        '¿Está seguro que desea guardar los cambios?',
+        { variant: 'warning', title: 'Guardar cambios', confirmLabel: 'Guardar' }
+      );
+      if (!ok) {
+        return;
+      }
     }
 
     this.guardando = true;
@@ -147,7 +155,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
         this.errorMessage =
           err?.error?.mensaje ||
           err?.error?.message ||
-          'Verifique nombre, tipo, imagen y que esté logueado.';
+          'No se pudo guardar. Revisá los campos.';
         this.cdr.markForCheck();
       },
     });
@@ -173,7 +181,7 @@ export class HabilidadFormModalComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       },
       createErrorMessage: 'No se pudieron cargar los datos del formulario.',
-      editErrorMessage: 'No se pudo cargar la habilidad o la sesión expiró.',
+      editErrorMessage: 'No se pudo cargar la habilidad.',
     });
   }
 

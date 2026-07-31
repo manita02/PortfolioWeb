@@ -1,4 +1,8 @@
-<div class="hero-banner" *ngFor="let Banner of banner">
+<div
+  class="hero-banner"
+  *ngFor="let Banner of banner; let first = first"
+  [attr.id]="first ? 'inicio' : null"
+>
   <div class="hero-banner__image">
     <img
       *ngIf="isUrl(Banner.img)"

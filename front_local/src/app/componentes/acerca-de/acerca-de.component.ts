@@ -3,6 +3,7 @@ import { Persona } from 'src/app/modelo/persona';
 import { PersonaModalService } from 'src/app/servicio/persona-modal.service';
 import { PersonaService } from 'src/app/servicio/persona.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,7 +20,8 @@ export class AcercaDeComponent implements OnInit, OnDestroy {
   constructor(
     private personaS: PersonaService,
     private tokenService: TokenService,
-    private personaModal: PersonaModalService
+    private personaModal: PersonaModalService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -51,17 +53,18 @@ export class AcercaDeComponent implements OnInit, OnDestroy {
     return !!img && (img.startsWith('http://') || img.startsWith('https://'));
   }
 
-  delete(id?: number) {
-    if (id != undefined) {
-      this.personaS.delete(id).subscribe(
-        data => {
-          this.cargarPersona();
-        }, err => {
-          alert("No se pudo borrar la persona");
-        }
-      )
+  delete(id?: number): void {
+    if (id == null) {
+      return;
     }
-
+    this.personaS.delete(id).subscribe({
+      next: () => this.cargarPersona(),
+      error: () =>
+        this.alertDialog.alert('No se pudo borrar la persona', {
+          variant: 'danger',
+          title: 'Error',
+        }),
+    });
   }
 
 }

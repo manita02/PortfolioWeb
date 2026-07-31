@@ -52,23 +52,24 @@ public final class ArchivoUtil {
 
         long maxBytes = category == FileCategory.IMAGE ? MAX_IMAGE_BYTES : MAX_PDF_BYTES;
         if (data.length > maxBytes) {
-            String limite = category == FileCategory.IMAGE ? "2MB" : "5MB";
-            return Optional.of("El archivo supera el limite de " + limite);
+            String limite = category == FileCategory.IMAGE ? "2 MB" : "5 MB";
+            return Optional.of("El archivo supera el límite de " + limite + ".");
         }
 
         String detectedMime = detectarMimeType(data);
         if (detectedMime == null) {
-            return Optional.of("Tipo de archivo no permitido");
+            return Optional.of("Tipo de archivo no permitido.");
         }
 
         Set<String> allowedMimeTypes = category == FileCategory.IMAGE ? IMAGE_MIME_TYPES : PDF_MIME_TYPES;
         if (!allowedMimeTypes.contains(detectedMime)) {
-            return Optional.of("Tipo de archivo no permitido. Se esperaba "
-                    + (category == FileCategory.IMAGE ? "JPEG o PNG" : "PDF"));
+            return Optional.of(category == FileCategory.IMAGE
+                    ? "Solo se permiten imágenes JPEG o PNG."
+                    : "Solo se permiten archivos PDF.");
         }
 
         if (StringUtils.isNotBlank(declaredMime) && !mimeTypesCoinciden(declaredMime, detectedMime)) {
-            return Optional.of("El tipo declarado no coincide con el contenido del archivo");
+            return Optional.of("El tipo del archivo no coincide con su contenido.");
         }
 
         return Optional.empty();

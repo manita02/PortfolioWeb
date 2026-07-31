@@ -17,6 +17,7 @@ import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { HabilidadModalService } from 'src/app/servicio/habilidad-modal.service';
 import { TipoHabilidadService } from 'src/app/servicio/tipo-habilidad.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { Subscription } from 'rxjs';
 
 export interface GrupoHabilidades {
@@ -50,8 +51,8 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
   private mediaListeners: Array<(event: MediaQueryListEvent) => void> = [];
   private resizeObserver?: ResizeObserver;
   private viewportHeightFrame?: number;
-  private readonly viewportHoverBuffer = 12;
-  private readonly viewportPaddingBlock = 56;
+  private readonly viewportHoverBuffer = 24;
+  private readonly viewportPaddingBlock = 64;
 
   private modalSavedSub?: Subscription;
 
@@ -60,6 +61,7 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     private tipoHabilidadS: TipoHabilidadService,
     private tokenService: TokenService,
     private habilidadModal: HabilidadModalService,
+    private alertDialog: AlertDialogService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -166,6 +168,11 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     this.resetPagination();
     this.scheduleViewportHeightUpdate();
     this.cdr.markForCheck();
+  }
+
+  onFilterSelect(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    this.selectFilter(value === '' ? null : Number(value));
   }
 
   trackByTipoId(_: number, tipo: TipoHabilidad): number {
@@ -307,13 +314,21 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     this.habilidadModal.open(mode, id);
   }
 
-  delete(id?: number): void {
-    if (!confirm('¿Está seguro que desea eliminar esta habilidad?') || id == null) {
+  async delete(id?: number): Promise<void> {
+    const ok = await this.alertDialog.confirm(
+      '¿Está seguro que desea eliminar esta habilidad?',
+      { variant: 'danger', title: 'Eliminar habilidad', confirmLabel: 'Eliminar' }
+    );
+    if (!ok || id == null) {
       return;
     }
     this.habilidadesS.delete(id).subscribe({
       next: () => this.cargarHabilidad(),
-      error: () => alert('No se pudo borrar la habilidad.'),
+      error: () =>
+        this.alertDialog.alert('No se pudo borrar la habilidad.', {
+          variant: 'danger',
+          title: 'Error',
+        }),
     });
   }
 
@@ -437,7 +452,7 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     this.updateViewportHeightForKey('flat', this.currentPage);
   }
 
-  private updateViewportHeightForKey(key: string, currentPage: number): void {
+  private updateViewportHeightForKey(key: string, _currentPage: number): void {
     const pages = this.carouselPages?.toArray().filter(
       ref => ref.nativeElement.dataset['carouselKey'] === key
     );
@@ -447,14 +462,20 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
       return;
     }
 
-    const activePage = pages[currentPage]?.nativeElement as HTMLElement | undefined;
-    if (!activePage) {
-      return;
+    /* Altura fija del viewport: la mayor de todas las páginas del carrusel. */
+    let maxHeight = 0;
+    for (const pageRef of pages) {
+      const height = Math.ceil(pageRef.nativeElement.getBoundingClientRect().height);
+      if (height > maxHeight) {
+        maxHeight = height;
+      }
     }
 
-    const height = Math.ceil(activePage.getBoundingClientRect().height);
-    if (height > 0) {
-      this.viewportHeights.set(key, height + this.viewportPaddingBlock + this.viewportHoverBuffer);
+    if (maxHeight > 0) {
+      this.viewportHeights.set(
+        key,
+        maxHeight + this.viewportPaddingBlock + this.viewportHoverBuffer
+      );
     }
   }
 

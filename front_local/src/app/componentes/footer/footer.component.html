@@ -1,4 +1,91 @@
 <footer class="site-footer">
   <p>Ana Lucia Juarez | © Argentina Programa 2022</p>
   <p>Miramar, Buenos Aires, Argentina</p>
+
+  <div class="footer-backup" *ngIf="isLogged">
+    <div
+      class="footer-backup__backdrop"
+      *ngIf="menuOpen && !busy"
+      aria-hidden="true"
+      (click)="closeMenu()"
+    ></div>
+
+    <div class="footer-backup__panel" [class.footer-backup__panel--open]="menuOpen && !busy">
+      <button
+        type="button"
+        class="footer-backup__action"
+        (click)="exportar()"
+        [disabled]="busy"
+      >
+        <i class="bi bi-download" aria-hidden="true"></i>
+        <span>Exportar BD</span>
+      </button>
+      <button
+        type="button"
+        class="footer-backup__action"
+        (click)="triggerImport()"
+        [disabled]="busy"
+      >
+        <i class="bi bi-upload" aria-hidden="true"></i>
+        <span>Importar BD</span>
+      </button>
+    </div>
+
+    <button
+      type="button"
+      class="footer-backup__toggle btn-pf btn-pf--ghost"
+      (click)="toggleMenu($event)"
+      [disabled]="busy"
+      [attr.aria-expanded]="menuOpen"
+      aria-controls="footer-backup-menu"
+      data-tip="Base de datos"
+      data-tip-pos="left"
+      aria-label="Opciones de base de datos"
+    >
+      <i class="bi bi-hdd-stack" aria-hidden="true"></i>
+    </button>
+
+    <input
+      #sqlInput
+      type="file"
+      accept=".sql,application/sql,text/plain"
+      hidden
+      (change)="onFileSelected($event)"
+    />
+  </div>
+
+  <div
+    class="backup-progress"
+    *ngIf="busy"
+    role="alertdialog"
+    aria-modal="true"
+    aria-busy="true"
+    [attr.aria-labelledby]="'backup-progress-title'"
+    [attr.aria-describedby]="'backup-progress-message'"
+  >
+    <div class="backup-progress__backdrop" aria-hidden="true"></div>
+    <div class="backup-progress__panel">
+      <span class="backup-progress__icon" aria-hidden="true">
+        <i class="bi" [ngClass]="operation === 'import' ? 'bi-upload' : 'bi-download'"></i>
+      </span>
+      <h2 id="backup-progress-title" class="backup-progress__title">{{ progressTitle }}</h2>
+      <p id="backup-progress-message" class="backup-progress__message">{{ progressMessage }}</p>
+
+      <div
+        class="backup-progress__track"
+        [class.backup-progress__track--indeterminate]="progressIndeterminate"
+        role="progressbar"
+        [attr.aria-valuemin]="0"
+        [attr.aria-valuemax]="100"
+        [attr.aria-valuenow]="progressIndeterminate ? null : progress"
+        [attr.aria-label]="progressPercentLabel"
+      >
+        <div
+          class="backup-progress__bar"
+          [style.width.%]="progressIndeterminate ? 40 : progress"
+        ></div>
+      </div>
+      <p class="backup-progress__percent">{{ progressPercentLabel }}</p>
+    </div>
+  </div>
 </footer>

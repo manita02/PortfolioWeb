@@ -16,6 +16,7 @@ import { EducacionModalService } from 'src/app/servicio/educacion-modal.service'
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { pdfToObjectUrl } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
 
@@ -41,6 +42,10 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   pdfViewerTitle = 'Certificado';
   private mobilePdfObjectUrl: string | null = null;
 
+  imageViewerOpen = false;
+  imageViewerSrc: string | null = null;
+  imageViewerTitle = 'Imagen';
+
   @ViewChild('carousel') carouselRef?: ElementRef<HTMLElement>;
   @ViewChildren('carouselPage', { read: ElementRef })
   private pageElements?: QueryList<ElementRef<HTMLElement>>;
@@ -58,7 +63,8 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     private educacionS: EducacionService,
     private tipoEducacionS: TipoEducacionService,
     private tokenService: TokenService,
-    private educacionModal: EducacionModalService
+    private educacionModal: EducacionModalService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -190,6 +196,20 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     this.pdfViewerSrc = null;
   }
 
+  openImageViewer(edu: EducacionDto): void {
+    if (!edu.archivoImagen?.trim()) {
+      return;
+    }
+    this.imageViewerSrc = edu.archivoImagen;
+    this.imageViewerTitle = edu.nombreE?.trim() || 'Imagen';
+    this.imageViewerOpen = true;
+  }
+
+  closeImageViewer(): void {
+    this.imageViewerOpen = false;
+    this.imageViewerSrc = null;
+  }
+
   private isMobileViewport(): boolean {
     return window.matchMedia('(max-width: 767px)').matches;
   }
@@ -295,13 +315,21 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  delete(id?: number): void {
-    if (!confirm('¿Está seguro que desea eliminar esta educación?') || id == null) {
+  async delete(id?: number): Promise<void> {
+    const ok = await this.alertDialog.confirm(
+      '¿Está seguro que desea eliminar esta educación?',
+      { variant: 'danger', title: 'Eliminar educación', confirmLabel: 'Eliminar' }
+    );
+    if (!ok || id == null) {
       return;
     }
     this.educacionS.delete(id).subscribe({
       next: () => this.cargarEducacion(),
-      error: () => alert('No se pudo borrar la educación'),
+      error: () =>
+        this.alertDialog.alert('No se pudo borrar la educación', {
+          variant: 'danger',
+          title: 'Error',
+        }),
     });
   }
 
@@ -334,14 +362,17 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    const activePage = pages[this.currentPage]?.nativeElement as HTMLElement | undefined;
-    if (!activePage) {
-      return;
+    /* Altura fija del viewport: la mayor de todas las páginas (no la activa). */
+    let maxHeight = 0;
+    for (const pageRef of pages) {
+      const height = Math.ceil(pageRef.nativeElement.getBoundingClientRect().height);
+      if (height > maxHeight) {
+        maxHeight = height;
+      }
     }
 
-    const height = Math.ceil(activePage.getBoundingClientRect().height);
     this.viewportHeight =
-      height > 0 ? height + this.viewportPaddingBlock + this.viewportHoverBuffer : null;
+      maxHeight > 0 ? maxHeight + this.viewportPaddingBlock + this.viewportHoverBuffer : null;
   }
 
   private observePages(): void {

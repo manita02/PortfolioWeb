@@ -12,6 +12,46 @@
     </div>
 
     <div class="hero-bar__actions">
+      <div class="hero-nav">
+        <button
+          type="button"
+          class="btn-pf btn-pf--ghost btn-pf--icon-sm hero-nav__toggle"
+          (click)="toggleMenu($event)"
+          [attr.aria-expanded]="menuOpen"
+          aria-controls="hero-nav-menu"
+          data-tip="Menú"
+          data-tip-pos="bottom"
+          aria-label="Abrir menú de secciones"
+        >
+          <i class="bi" [ngClass]="menuOpen ? 'bi-x-lg' : 'bi-list'" aria-hidden="true"></i>
+        </button>
+
+        <div
+          class="hero-nav__backdrop"
+          *ngIf="menuOpen"
+          aria-hidden="true"
+          (click)="closeMenu()"
+        ></div>
+
+        <nav
+          id="hero-nav-menu"
+          class="hero-nav__panel"
+          [class.hero-nav__panel--open]="menuOpen"
+          [attr.aria-hidden]="!menuOpen"
+        >
+          <p class="hero-nav__label">Ir a</p>
+          <a
+            *ngFor="let item of navItems"
+            class="hero-nav__link"
+            [href]="'#' + item.id"
+            (click)="goToSection($event, item.id)"
+          >
+            <i class="bi" [ngClass]="item.icon" aria-hidden="true"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        </nav>
+      </div>
+
       <button
         type="button"
         class="btn-pf btn-pf--add"

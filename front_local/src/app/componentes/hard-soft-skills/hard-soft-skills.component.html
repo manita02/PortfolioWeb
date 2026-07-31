@@ -1,4 +1,4 @@
-<section class="section section--alt">
+<section id="habilidades" class="section section--alt">
   <div class="section__header">
     <h2 class="section__title">Hard &amp; Soft Skills</h2>
     <button
@@ -14,28 +14,26 @@
     </button>
   </div>
 
-  <div class="skills-filters" *ngIf="showFilters" role="radiogroup" aria-label="Filtrar por tipo de habilidad">
-    <button
-      type="button"
-      class="skills-filter"
-      [class.skills-filter--active]="selectedTipoId === null"
-      role="radio"
-      [attr.aria-checked]="selectedTipoId === null"
-      (click)="selectFilter(null)"
-    >
-      Todas
-    </button>
-    <button
-      type="button"
-      class="skills-filter"
-      *ngFor="let tipo of tiposHabilidad; trackBy: trackByTipoId"
-      [class.skills-filter--active]="selectedTipoId === tipo.id"
-      role="radio"
-      [attr.aria-checked]="selectedTipoId === tipo.id"
-      (click)="selectFilter(tipo.id)"
-    >
-      {{ tipo.nombre }}
-    </button>
+  <div class="skills-filters" *ngIf="showFilters">
+    <label class="skills-filters__label" for="skills-filter-select">Tipo de habilidad</label>
+    <div class="skills-filters__combo">
+      <select
+        id="skills-filter-select"
+        class="skills-filters__select"
+        [value]="selectedTipoId ?? ''"
+        (change)="onFilterSelect($event)"
+        aria-label="Filtrar por tipo de habilidad"
+      >
+        <option value="">Todas</option>
+        <option
+          *ngFor="let tipo of tiposHabilidad; trackBy: trackByTipoId"
+          [value]="tipo.id"
+        >
+          {{ tipo.nombre }}
+        </option>
+      </select>
+      <i class="bi bi-chevron-down skills-filters__chevron" aria-hidden="true"></i>
+    </div>
   </div>
 
   <div

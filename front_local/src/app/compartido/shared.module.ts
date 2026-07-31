@@ -13,6 +13,7 @@ import { OrgBadgeComponent } from './org-badge/org-badge.component';
 import { OrgSelectComponent } from './org-select/org-select.component';
 import { PdfLinkComponent } from './pdf-link/pdf-link.component';
 import { PdfViewerModalComponent } from './pdf-viewer-modal/pdf-viewer-modal.component';
+import { ImageViewerModalComponent } from './image-viewer-modal/image-viewer-modal.component';
 
 const SHARED_COMPONENTS = [
   Base64ImageComponent,
@@ -26,7 +27,8 @@ const SHARED_COMPONENTS = [
   OrgBadgeComponent,
   OrgSelectComponent,
   PdfLinkComponent,
-  PdfViewerModalComponent
+  PdfViewerModalComponent,
+  ImageViewerModalComponent
 ];
 
 @NgModule({

@@ -1,0 +1,133 @@
+.alert-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 2300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.alert-dialog__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-backdrop);
+  backdrop-filter: blur(4px);
+  animation: alertDialogFadeIn 0.22s ease;
+}
+
+.alert-dialog__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 24rem);
+  padding: 1.75rem 1.5rem 1.35rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-card);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-modal);
+  animation: alertDialogSlideIn 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.alert-dialog__header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  padding-inline: 0.35rem;
+}
+
+.alert-dialog__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  margin-bottom: 0.8rem;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  background: var(--gradient-modal-icon);
+  color: var(--color-primary);
+}
+
+.alert-dialog__icon[data-variant='danger'] {
+  background: linear-gradient(135deg, var(--overlay-danger-15) 0%, var(--overlay-danger-25) 100%);
+  color: var(--color-danger);
+}
+
+.alert-dialog__icon[data-variant='warning'] {
+  background: linear-gradient(135deg, var(--overlay-accent-22) 0%, var(--overlay-secondary-12) 100%);
+  color: var(--color-secondary);
+}
+
+.alert-dialog__icon[data-variant='success'] {
+  background: linear-gradient(135deg, var(--overlay-accent-22) 0%, var(--overlay-soft-40) 100%);
+  color: var(--color-primary);
+}
+
+.alert-dialog__icon[data-variant='info'] {
+  background: var(--gradient-modal-icon);
+  color: var(--color-primary);
+}
+
+.alert-dialog__title {
+  margin: 0 0 0.45rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.alert-dialog__message {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.alert-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.alert-dialog__btn {
+  min-width: 7.5rem;
+}
+
+@keyframes alertDialogFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes alertDialogSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 575px) {
+  .alert-dialog__panel {
+    width: min(100%, 22rem);
+    padding: 1.5rem 1.15rem 1.2rem;
+  }
+
+  .alert-dialog__actions {
+    flex-direction: column-reverse;
+  }
+
+  .alert-dialog__btn {
+    width: 100%;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,47 @@
+<div
+  class="pf-modal image-viewer-modal"
+  *ngIf="open"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'image-viewer-modal-title'"
+>
+  <div class="pf-modal__backdrop" aria-hidden="true" (click)="close()"></div>
+
+  <div class="pf-modal__panel image-viewer-modal__panel">
+    <header class="image-viewer-modal__header">
+      <div class="image-viewer-modal__heading">
+        <span class="pf-modal__icon image-viewer-modal__icon" aria-hidden="true">
+          <i class="bi bi-zoom-in"></i>
+        </span>
+        <h2 id="image-viewer-modal-title" class="pf-modal__title image-viewer-modal__title">
+          {{ title }}
+        </h2>
+      </div>
+
+      <button
+        type="button"
+        class="pf-modal__close btn-pf btn-pf--icon-sm image-viewer-modal__close"
+        (click)="close()"
+        data-tip="Cerrar"
+        data-tip-pos="left"
+        aria-label="Cerrar"
+      >
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+    </header>
+
+    <div class="image-viewer-modal__body">
+      <div class="image-viewer-modal__error" *ngIf="loadError">
+        No se pudo cargar la imagen.
+      </div>
+
+      <img
+        *ngIf="displaySrc && !loadError"
+        class="image-viewer-modal__img"
+        [src]="displaySrc"
+        [alt]="title"
+        (error)="onImgError()"
+      />
+    </div>
+  </div>
+</div>

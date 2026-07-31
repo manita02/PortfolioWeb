@@ -3,6 +3,7 @@ import { Banner } from 'src/app/modelo/banner';
 import { BannerModalService } from 'src/app/servicio/banner-modal.service';
 import { BannerService } from 'src/app/servicio/banner.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,7 +20,8 @@ export class BannerComponent implements OnInit, OnDestroy {
   constructor(
     private bannerS: BannerService,
     private tokenService: TokenService,
-    private bannerModal: BannerModalService
+    private bannerModal: BannerModalService,
+    private alertDialog: AlertDialogService
   ) {}
 
   ngOnInit(): void {
@@ -51,17 +53,18 @@ export class BannerComponent implements OnInit, OnDestroy {
     return !!img && (img.startsWith('http://') || img.startsWith('https://'));
   }
 
-  delete(id?: number){
-    if(id != undefined){
-      this.bannerS.delete(id).subscribe(
-        data => {
-          this.cargarBanner(); 
-        }, err => {
-          alert("No se pudo borrar el banner"); 
-        }
-      )
+  delete(id?: number): void {
+    if (id == null) {
+      return;
     }
-
+    this.bannerS.delete(id).subscribe({
+      next: () => this.cargarBanner(),
+      error: () =>
+        this.alertDialog.alert('No se pudo borrar el banner', {
+          variant: 'danger',
+          title: 'Error',
+        }),
+    });
   }
 
 }

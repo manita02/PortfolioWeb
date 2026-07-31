@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,18 +68,52 @@ public class SBackup {
                     StandardCharsets.UTF_8.name()
             );
 
+            List<String> tablas = obtenerTablasAplicacion();
+
             try (Connection connection = dataSource.getConnection()) {
-                ScriptUtils.executeSqlScript(connection, script);
+                boolean autoCommit = connection.getAutoCommit();
+                connection.setAutoCommit(false);
+                try {
+                    /* Limpia toda la BD antes de importar para evitar claves duplicadas. */
+                    vaciarTablas(connection, tablas);
+                    ScriptUtils.executeSqlScript(connection, script);
+                    connection.commit();
+                } catch (ScriptException exception) {
+                    connection.rollback();
+                    throw new BackupSqlException(
+                            "Error al ejecutar el script SQL.",
+                            exception
+                    );
+                } catch (SQLException exception) {
+                    connection.rollback();
+                    throw new BackupSqlException("Error al restaurar la base de datos.", exception);
+                } catch (RuntimeException exception) {
+                    connection.rollback();
+                    throw exception;
+                } finally {
+                    connection.setAutoCommit(autoCommit);
+                }
             }
         } catch (IOException exception) {
-            throw new ArchivoInvalidoException("No se pudo leer el archivo SQL: " + exception.getMessage());
-        } catch (ScriptException exception) {
-            throw new BackupSqlException(
-                    "Error al ejecutar el script SQL. Verifique que el archivo no este corrupto y que las sentencias sean validas.",
-                    exception
-            );
+            throw new ArchivoInvalidoException("No se pudo leer el archivo SQL.");
+        } catch (BackupSqlException exception) {
+            throw exception;
         } catch (SQLException exception) {
-            throw new BackupSqlException("No se pudo conectar con la base de datos para ejecutar el script", exception);
+            throw new BackupSqlException("No se pudo conectar con la base de datos.", exception);
+        }
+    }
+
+    private void vaciarTablas(Connection connection, List<String> tablas) throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute("SET FOREIGN_KEY_CHECKS=0");
+            for (String tabla : tablas) {
+                if (!SqlScriptUtil.isValidTableName(tabla)) {
+                    throw new BackupSqlException("Nombre de tabla no valido: " + tabla);
+                }
+                /* DELETE (no TRUNCATE): permite rollback si el script falla. */
+                statement.execute("DELETE FROM " + SqlScriptUtil.quoteIdentifier(tabla));
+            }
+            statement.execute("SET FOREIGN_KEY_CHECKS=1");
         }
     }
 
