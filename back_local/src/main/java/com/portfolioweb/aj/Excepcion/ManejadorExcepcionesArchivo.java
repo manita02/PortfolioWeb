@@ -12,12 +12,7 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 public class ManejadorExcepcionesArchivo {
 
     private static final String MENSAJE_MAX_ALLOWED_PACKET =
-            "La imagen es demasiado pesada para MySQL. Elegí un JPEG o PNG de menos de 750 KB "
-                    + "en tu PC (tamaño del explorador de archivos). "
-                    + "Una de ~900 KB puede fallar aunque no llegue a 2 MB: al guardar, MySQL envía la imagen "
-                    + "en un paquete que suele superar el límite por defecto de 1 MB en XAMPP. "
-                    + "Opciones: (1) comprimir o reducir la imagen a menos de 750 KB, o (2) en phpMyAdmin ejecutar "
-                    + "SET GLOBAL max_allowed_packet = 4194304;, reiniciar MySQL y el backend (entonces podés usar hasta 2 MB).";
+            "Imagen demasiado pesada para MySQL. Usá menos de 750 KB o aumentá max_allowed_packet.";
 
     @ExceptionHandler(ArchivoInvalidoException.class)
     public ResponseEntity<Mensaje> manejarArchivoInvalido(ArchivoInvalidoException exception) {
@@ -27,7 +22,7 @@ public class ManejadorExcepcionesArchivo {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public ResponseEntity<Mensaje> manejarTamanoMultipart(MaxUploadSizeExceededException exception) {
         return new ResponseEntity<>(
-                new Mensaje("El archivo o la peticion superan el limite permitido (5MB por archivo, 10MB total)"),
+                new Mensaje("Archivo demasiado grande (máx. 5 MB)."),
                 HttpStatus.PAYLOAD_TOO_LARGE
         );
     }

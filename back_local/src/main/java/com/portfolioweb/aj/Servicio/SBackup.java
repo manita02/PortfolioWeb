@@ -81,12 +81,12 @@ public class SBackup {
                 } catch (ScriptException exception) {
                     connection.rollback();
                     throw new BackupSqlException(
-                            "Error al ejecutar el script SQL. Verifique que el archivo no este corrupto y que las sentencias sean validas.",
+                            "Error al ejecutar el script SQL.",
                             exception
                     );
                 } catch (SQLException exception) {
                     connection.rollback();
-                    throw new BackupSqlException("Error al vaciar o restaurar la base de datos", exception);
+                    throw new BackupSqlException("Error al restaurar la base de datos.", exception);
                 } catch (RuntimeException exception) {
                     connection.rollback();
                     throw exception;
@@ -95,11 +95,11 @@ public class SBackup {
                 }
             }
         } catch (IOException exception) {
-            throw new ArchivoInvalidoException("No se pudo leer el archivo SQL: " + exception.getMessage());
+            throw new ArchivoInvalidoException("No se pudo leer el archivo SQL.");
         } catch (BackupSqlException exception) {
             throw exception;
         } catch (SQLException exception) {
-            throw new BackupSqlException("No se pudo conectar con la base de datos para ejecutar el script", exception);
+            throw new BackupSqlException("No se pudo conectar con la base de datos.", exception);
         }
     }
 
