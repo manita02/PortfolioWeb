@@ -16,6 +16,23 @@ export function isDataUri(value: string): boolean {
   return value.trim().startsWith('data:') && value.includes(',');
 }
 
+/** URL externa o ruta de asset empaquetado (modo estatico A1). */
+export function isDirectImageSrc(src: string | null | undefined): boolean {
+  if (!src?.trim()) {
+    return false;
+  }
+  const value = src.trim();
+  return (
+    value.startsWith('http://') ||
+    value.startsWith('https://') ||
+    value.startsWith('assets/')
+  );
+}
+
+export function isAssetPath(src: string | null | undefined): boolean {
+  return !!src?.trim().startsWith('assets/');
+}
+
 export function stripDataUriPrefix(base64: string): string {
   if (!base64) {
     return '';
@@ -36,6 +53,9 @@ export function toDataUri(
     return null;
   }
   const trimmed = base64.trim();
+  if (isDirectImageSrc(trimmed)) {
+    return trimmed;
+  }
   if (isDataUri(trimmed)) {
     return trimmed;
   }
@@ -77,7 +97,31 @@ export function validatePdfFile(file: File): string | null {
 }
 
 export function toPdfDataUri(base64: string | null | undefined): string | null {
+  if (isAssetPath(base64)) {
+    return base64!.trim();
+  }
   return toDataUri(base64, 'application/pdf');
+}
+
+export interface ResolvedPdfUrl {
+  url: string;
+  revoke: boolean;
+}
+
+/** Resuelve PDF en base64 o ruta assets/ para visor y descarga. */
+export function resolvePdfUrl(base64: string | null | undefined): ResolvedPdfUrl | null {
+  if (!base64?.trim()) {
+    return null;
+  }
+  const trimmed = base64.trim();
+  if (isAssetPath(trimmed)) {
+    return { url: trimmed, revoke: false };
+  }
+  const objectUrl = pdfToObjectUrl(trimmed);
+  if (!objectUrl) {
+    return null;
+  }
+  return { url: objectUrl, revoke: true };
 }
 
 export function pdfToObjectUrl(base64: string | null | undefined): string | null {

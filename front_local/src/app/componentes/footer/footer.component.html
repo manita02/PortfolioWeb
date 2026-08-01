@@ -14,6 +14,15 @@
       <button
         type="button"
         class="footer-backup__action"
+        (click)="exportarEstatico()"
+        [disabled]="busy"
+      >
+        <i class="bi bi-cloud-upload" aria-hidden="true"></i>
+        <span>Exportar sitio estatico</span>
+      </button>
+      <button
+        type="button"
+        class="footer-backup__action"
         (click)="exportar()"
         [disabled]="busy"
       >

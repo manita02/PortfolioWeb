@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUsername';
@@ -62,10 +63,16 @@ export class TokenService {
   }
 
   public isLoggedIn(): boolean {
+    if (environment.staticMode) {
+      return false;
+    }
     return !!this.getToken() && !this.isTokenExpired();
   }
 
   public isAdmin(): boolean {
+    if (environment.staticMode) {
+      return false;
+    }
     return this.isLoggedIn() && this.getAuthorities().includes(ADMIN_ROLE);
   }
 

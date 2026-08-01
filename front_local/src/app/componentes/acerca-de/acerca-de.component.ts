@@ -4,6 +4,7 @@ import { PersonaModalService } from 'src/app/servicio/persona-modal.service';
 import { PersonaService } from 'src/app/servicio/persona.service';
 import { TokenService } from 'src/app/servicio/token.service';
 import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
+import { isDirectImageSrc } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -48,9 +49,8 @@ export class AcercaDeComponent implements OnInit, OnDestroy {
     )
   }
 
-  /** Compatibilidad con registros antiguos que guardaban URL externa. */
   isUrl(img: string | undefined): boolean {
-    return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+    return isDirectImageSrc(img);
   }
 
   delete(id?: number): void {

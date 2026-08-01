@@ -2,9 +2,11 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { BackupService } from 'src/app/servicio/backup.service';
+import { StaticExportService } from 'src/app/servicio/static-export.service';
 import { TokenService } from 'src/app/servicio/token.service';
+import { environment } from 'src/environments/environment';
 
-type BackupOperation = 'export' | 'import';
+type BackupOperation = 'export' | 'import' | 'static-export';
 
 @Component({
   selector: 'app-footer',
@@ -24,6 +26,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   constructor(
     private tokenService: TokenService,
     private backupService: BackupService,
+    private staticExportService: StaticExportService,
     private alertDialog: AlertDialogService
   ) {}
 
@@ -36,13 +39,23 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   get progressTitle(): string {
-    return this.operation === 'import' ? 'Importando base de datos' : 'Exportando base de datos';
+    if (this.operation === 'import') {
+      return 'Importando base de datos';
+    }
+    if (this.operation === 'static-export') {
+      return 'Exportando sitio estatico';
+    }
+    return 'Exportando base de datos';
   }
 
   get progressMessage(): string {
-    return this.operation === 'import'
-      ? 'Se están limpiando e importando los datos. No cierres ni recargues la página.'
-      : 'Se está generando el archivo SQL. No cierres ni recargues la página.';
+    if (this.operation === 'import') {
+      return 'Se están limpiando e importando los datos. No cierres ni recargues la página.';
+    }
+    if (this.operation === 'static-export') {
+      return 'Se generan portfolio.json y archivos en front_local/src/assets. No cierres ni recargues la página.';
+    }
+    return 'Se está generando el archivo SQL. No cierres ni recargues la página.';
   }
 
   get progressPercentLabel(): string {
@@ -80,6 +93,51 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   closeMenu(): void {
     this.menuOpen = false;
+  }
+
+  async exportarEstatico(): Promise<void> {
+    if (environment.staticMode || !this.tokenService.isAdmin() || this.busy) {
+      return;
+    }
+    this.closeMenu();
+
+    const ok = await this.alertDialog.confirm(
+      'Se generara portfolio.json y las imagenes/PDF en front_local/src/assets para el deploy estatico (Cloudflare). ¿Continuar?',
+      {
+        variant: 'warning',
+        title: 'Exportar sitio estatico',
+        confirmLabel: 'Exportar',
+        cancelLabel: 'Cancelar',
+      }
+    );
+    if (!ok) {
+      return;
+    }
+
+    this.beginBusy('static-export');
+
+    this.staticExportService.generate().subscribe({
+      next: result => {
+        this.progress = 100;
+        this.progressIndeterminate = false;
+        this.endBusy();
+        this.alertDialog.alert(
+          `${result.message}\nArchivos de media: ${result.mediaFilesWritten}\nRuta: ${result.outputPath}`,
+          {
+            variant: 'success',
+            title: 'Exportacion estatica exitosa',
+            confirmLabel: 'Entendido',
+          }
+        );
+      },
+      error: err => {
+        this.endBusy();
+        this.alertDialog.alert(this.readErrorMessage(err, 'No se pudo exportar el sitio estatico.'), {
+          variant: 'danger',
+          title: 'Error',
+        });
+      },
+    });
   }
 
   async exportar(): Promise<void> {

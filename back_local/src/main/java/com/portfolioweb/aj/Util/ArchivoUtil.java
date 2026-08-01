@@ -129,6 +129,20 @@ public final class ArchivoUtil {
         return normalizedDeclared.equals("image/jpg") && detectedMime.equals("image/jpeg");
     }
 
+    public static String extensionParaBytes(byte[] data) {
+        String mime = detectarMimeType(data);
+        if ("image/jpeg".equals(mime)) {
+            return ".jpg";
+        }
+        if ("image/png".equals(mime)) {
+            return ".png";
+        }
+        if ("application/pdf".equals(mime)) {
+            return ".pdf";
+        }
+        return null;
+    }
+
     private static String detectarMimeType(byte[] data) {
         if (data.length >= 3 && (data[0] & 0xFF) == 0xFF && (data[1] & 0xFF) == 0xD8 && (data[2] & 0xFF) == 0xFF) {
             return "image/jpeg";

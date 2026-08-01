@@ -1,0 +1,3 @@
+# SPA Angular: rutas como /login o /editexp/1 sirven index.html (200, sin cambiar URL).
+# Cloudflare Pages sirve primero archivos reales (*.js, /assets/*, etc.).
+/*    /index.html   200
