@@ -18,6 +18,7 @@ import { HabilidadModalService } from 'src/app/servicio/habilidad-modal.service'
 import { TipoHabilidadService } from 'src/app/servicio/tipo-habilidad.service';
 import { TokenService } from 'src/app/servicio/token.service';
 import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
+import { isDirectImageSrc } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
 
 export interface GrupoHabilidades {
@@ -159,7 +160,7 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   isUrl(img: string | null | undefined): boolean {
-    return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+    return isDirectImageSrc(img);
   }
 
   selectFilter(tipoId: number | null): void {

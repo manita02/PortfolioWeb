@@ -17,7 +17,7 @@ import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TipoEducacionService } from 'src/app/servicio/tipo-educacion.service';
 import { TokenService } from 'src/app/servicio/token.service';
 import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
-import { pdfToObjectUrl } from 'src/app/util/archivo.util';
+import { isDirectImageSrc, resolvePdfUrl } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
 
 type EducationCategory = 'academic' | 'courses' | 'default';
@@ -160,7 +160,7 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   isUrl(img: string | null | undefined): boolean {
-    return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+    return isDirectImageSrc(img);
   }
 
   hasPdf(edu: EducacionDto): boolean {
@@ -179,12 +179,14 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
     /* Mobile: nueva pestaña. Desktop/tablet: modal. */
     if (this.isMobileViewport()) {
       this.revokeMobilePdfUrl();
-      const url = pdfToObjectUrl(edu.archivoPdf);
-      if (!url) {
+      const resolved = resolvePdfUrl(edu.archivoPdf);
+      if (!resolved) {
         return;
       }
-      this.mobilePdfObjectUrl = url;
-      window.open(url, '_blank', 'noopener,noreferrer');
+      if (resolved.revoke) {
+        this.mobilePdfObjectUrl = resolved.url;
+      }
+      window.open(resolved.url, '_blank', 'noopener,noreferrer');
       return;
     }
 

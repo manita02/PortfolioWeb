@@ -15,6 +15,7 @@ import { ProyectoModalService } from 'src/app/servicio/proyecto-modal.service';
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
 import { TokenService } from 'src/app/servicio/token.service';
 import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
+import { isDirectImageSrc } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -126,7 +127,7 @@ export class ProyectoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   isUrl(img: string | null | undefined): boolean {
-    return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+    return isDirectImageSrc(img);
   }
 
   openImageViewer(p: ProyectoDto): void {

@@ -6,6 +6,7 @@ import { Redsocial } from 'src/app/modelo/redsocial';
 import { RedsocialService } from 'src/app/servicio/redsocial.service';
 import { TokenService } from 'src/app/servicio/token.service';
 import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
+import { isDirectImageSrc } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
 
 interface NavItem {
@@ -83,7 +84,7 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   isUrl(img: string | undefined): boolean {
-    return !!img && (img.startsWith('http://') || img.startsWith('https://'));
+    return isDirectImageSrc(img);
   }
 
   toggleMenu(event: Event): void {

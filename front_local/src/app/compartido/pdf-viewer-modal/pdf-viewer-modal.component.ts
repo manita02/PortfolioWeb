@@ -9,7 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { pdfToObjectUrl } from '../../util/archivo.util';
+import { resolvePdfUrl } from '../../util/archivo.util';
 
 /**
  * Modal responsive para visualizar un PDF (base64 / data URI).
@@ -30,6 +30,7 @@ export class PdfViewerModalComponent implements OnChanges, OnDestroy {
 
   safeUrl: SafeResourceUrl | null = null;
   private objectUrl: string | null = null;
+  private revokeOnDestroy = false;
   loadError = false;
 
   constructor(private sanitizer: DomSanitizer) {}
@@ -69,7 +70,10 @@ export class PdfViewerModalComponent implements OnChanges, OnDestroy {
     const link = document.createElement('a');
     link.href = this.objectUrl;
     link.download = this.fileName || 'certificado.pdf';
-    link.rel = 'noopener';
+    if (!this.revokeOnDestroy) {
+      link.target = '_blank';
+      link.rel = 'noopener';
+    }
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -85,16 +89,16 @@ export class PdfViewerModalComponent implements OnChanges, OnDestroy {
   private buildUrl(src: string): void {
     this.revokeUrl();
     this.loadError = false;
-    const url = pdfToObjectUrl(src);
-    if (!url) {
+    const resolved = resolvePdfUrl(src);
+    if (!resolved) {
       this.loadError = true;
       this.safeUrl = null;
       return;
     }
-    this.objectUrl = url;
-    /* page=1 + FitH: arranca en el tope de la primera hoja */
+    this.objectUrl = resolved.url;
+    this.revokeOnDestroy = resolved.revoke;
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.withPdfStartView(url)
+      this.withPdfStartView(resolved.url)
     );
   }
 
@@ -103,10 +107,11 @@ export class PdfViewerModalComponent implements OnChanges, OnDestroy {
   }
 
   private revokeUrl(): void {
-    if (this.objectUrl) {
+    if (this.objectUrl && this.revokeOnDestroy) {
       URL.revokeObjectURL(this.objectUrl);
-      this.objectUrl = null;
     }
+    this.objectUrl = null;
+    this.revokeOnDestroy = false;
     this.safeUrl = null;
   }
 }
