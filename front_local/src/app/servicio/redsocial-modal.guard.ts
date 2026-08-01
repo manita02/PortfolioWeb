@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, UrlTree } from '@angular/router';
+import { AuthGuardService } from './auth-guard.service';
 import { RedsocialModalService } from './redsocial-modal.service';
 
 @Injectable({
@@ -8,11 +9,14 @@ import { RedsocialModalService } from './redsocial-modal.service';
 export class RedsocialCreateGuard implements CanActivate {
   constructor(
     private modal: RedsocialModalService,
+    private authGuard: AuthGuardService,
     private router: Router
   ) {}
 
   canActivate(): UrlTree {
-    this.modal.open('create');
+    if (this.authGuard.ensureAdmin()) {
+      this.modal.open('create');
+    }
     return this.router.createUrlTree(['']);
   }
 }
@@ -23,13 +27,16 @@ export class RedsocialCreateGuard implements CanActivate {
 export class RedsocialEditGuard implements CanActivate {
   constructor(
     private modal: RedsocialModalService,
+    private authGuard: AuthGuardService,
     private router: Router
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot): UrlTree {
-    const id = Number(route.paramMap.get('id'));
-    if (!Number.isNaN(id) && id > 0) {
-      this.modal.open('edit', id);
+    if (this.authGuard.ensureAdmin()) {
+      const id = Number(route.paramMap.get('id'));
+      if (!Number.isNaN(id) && id > 0) {
+        this.modal.open('edit', id);
+      }
     }
     return this.router.createUrlTree(['']);
   }

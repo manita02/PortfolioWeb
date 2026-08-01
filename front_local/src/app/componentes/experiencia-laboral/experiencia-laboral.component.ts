@@ -27,6 +27,7 @@ type EmploymentCategory = 'formal' | 'independent' | 'training' | 'default';
 export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDestroy {
   expe: ExperienciaDto[] = [];
   isLogged = false;
+  isAdmin = false;
   isDesktop = false;
   currentPage = 0;
   pageSize = 1;
@@ -53,7 +54,8 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
   ) {}
 
   ngOnInit(): void {
-    this.isLogged = !!this.tokenService.getToken();
+    this.isLogged = this.tokenService.isLoggedIn();
+    this.isAdmin = this.tokenService.isAdmin();
     this.setupPageSize();
     this.cargarExperiencia();
     this.modalSavedSub = this.experienciaModal.saved$.subscribe(() => {
@@ -106,6 +108,9 @@ export class ExperienciaLaboralComponent implements OnInit, AfterViewInit, OnDes
   }
 
   async delete(id?: number): Promise<void> {
+    if (!this.tokenService.isAdmin()) {
+      return;
+    }
     const ok = await this.alertDialog.confirm(
       '¿Está seguro que desea eliminar esta experiencia?',
       { variant: 'danger', title: 'Eliminar experiencia', confirmLabel: 'Eliminar' }

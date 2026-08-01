@@ -32,6 +32,7 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   tiposEducacion: TipoEducacion[] = [];
   selectedTipoId: number | null = null;
   isLogged = false;
+  isAdmin = false;
   isDesktop = false;
   currentPage = 0;
   pageSize = 1;
@@ -68,7 +69,8 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isLogged = !!this.tokenService.getToken();
+    this.isLogged = this.tokenService.isLoggedIn();
+    this.isAdmin = this.tokenService.isAdmin();
     this.setupPageSize();
     this.cargarTiposEducacion();
     this.cargarEducacion();
@@ -166,7 +168,7 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showCardActions(edu: EducacionDto): boolean {
-    return this.isLogged || this.hasPdf(edu);
+    return this.isAdmin || this.hasPdf(edu);
   }
 
   openPdf(edu: EducacionDto): void {
@@ -316,6 +318,9 @@ export class EducacionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async delete(id?: number): Promise<void> {
+    if (!this.tokenService.isAdmin()) {
+      return;
+    }
     const ok = await this.alertDialog.confirm(
       '¿Está seguro que desea eliminar esta educación?',
       { variant: 'danger', title: 'Eliminar educación', confirmLabel: 'Eliminar' }

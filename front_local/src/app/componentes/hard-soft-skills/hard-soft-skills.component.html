@@ -5,7 +5,7 @@
       type="button"
       class="btn-pf btn-pf--add"
       (click)="openForm('create')"
-      *ngIf="isLogged"
+      *ngIf="isAdmin"
       data-tip="Agregar habilidad"
       data-tip-align="end"
       aria-label="Agregar habilidad"
@@ -235,7 +235,7 @@
     </span>
     <span class="skill-pill__name">{{ h.nombre }}</span>
 
-    <div class="skill-pill__admin" *ngIf="isLogged">
+    <div class="skill-pill__admin" *ngIf="isAdmin">
       <button
         type="button"
         class="btn-pf btn-pf--edit btn-pf--icon-sm skill-pill__btn"

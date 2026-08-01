@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { AuthGuardService } from './auth-guard.service';
 
 export interface OrganizacionModalState {
   open: boolean;
@@ -21,10 +22,15 @@ export class OrganizacionModalService {
 
   private readonly savedSubject = new Subject<OrganizacionSavedEvent>();
 
+  constructor(private authGuard: AuthGuardService) {}
+
   readonly state$ = this.stateSubject.asObservable();
   readonly saved$ = this.savedSubject.asObservable();
 
   open(): void {
+    if (!this.authGuard.ensureAdmin()) {
+      return;
+    }
     this.stateSubject.next({ open: true });
   }
 

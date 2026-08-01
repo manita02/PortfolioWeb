@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class BannerComponent implements OnInit, OnDestroy {
 
   banner: Banner[] = []; 
-  isLogged = false;
+  isAdmin = false;
 
   private modalSavedSub?: Subscription;
 
@@ -26,7 +26,7 @@ export class BannerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cargarBanner();
-    this.isLogged = !!this.tokenService.getToken();
+    this.isAdmin = this.tokenService.isAdmin();
     this.modalSavedSub = this.bannerModal.saved$.subscribe(() => {
       this.cargarBanner();
     });
@@ -54,7 +54,7 @@ export class BannerComponent implements OnInit, OnDestroy {
   }
 
   delete(id?: number): void {
-    if (id == null) {
+    if (!this.tokenService.isAdmin() || id == null) {
       return;
     }
     this.bannerS.delete(id).subscribe({

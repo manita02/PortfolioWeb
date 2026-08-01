@@ -27,7 +27,7 @@
             <h2 class="profile-section__name">{{ Persona.nombre }} {{ Persona.apellido }}</h2>
             <p class="profile-section__profession">{{ Persona.profesion }}</p>
           </div>
-          <div class="admin-actions admin-actions--inline" *ngIf="isLogged">
+          <div class="admin-actions admin-actions--inline" *ngIf="isAdmin">
             <button
               type="button"
               class="btn-pf btn-pf--edit btn-pf--icon-sm"

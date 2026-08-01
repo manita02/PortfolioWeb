@@ -39,6 +39,7 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
   tiposHabilidad: TipoHabilidad[] = [];
   selectedTipoId: number | null = null;
   isLogged = false;
+  isAdmin = false;
   pageSize = 6;
 
   @ViewChildren('carouselPage', { read: ElementRef })
@@ -66,7 +67,8 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
   ) {}
 
   ngOnInit(): void {
-    this.isLogged = !!this.tokenService.getToken();
+    this.isLogged = this.tokenService.isLoggedIn();
+    this.isAdmin = this.tokenService.isAdmin();
     this.setupPageSize();
     this.cargarTiposHabilidad();
     this.cargarHabilidad();
@@ -315,6 +317,9 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   async delete(id?: number): Promise<void> {
+    if (!this.tokenService.isAdmin()) {
+      return;
+    }
     const ok = await this.alertDialog.confirm(
       '¿Está seguro que desea eliminar esta habilidad?',
       { variant: 'danger', title: 'Eliminar habilidad', confirmLabel: 'Eliminar' }
