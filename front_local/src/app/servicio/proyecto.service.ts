@@ -1,45 +1,89 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { ProyectoDto } from '../modelo/proyecto.dto';
-import { PortfolioDataService } from './portfolio-data.service';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class ProyectoService {
-  private readonly url = `${environment.apiUrl}/proyecto/`;
-
-  constructor(
-    private httpClient: HttpClient,
-    private portfolioData: PortfolioDataService
-  ) {}
-
-  public lista(): Observable<ProyectoDto[]> {
-    if (environment.staticMode) {
-      return this.portfolioData.getProyecto();
-    }
-    return this.httpClient.get<ProyectoDto[]>(this.url + 'lista');
-  }
-
-  public detail(id: number): Observable<ProyectoDto> {
-    if (environment.staticMode) {
-      return this.portfolioData.getProyectoDetail(id);
-    }
-    return this.httpClient.get<ProyectoDto>(this.url + `detail/${id}`);
-  }
-
-  public save(proyecto: ProyectoDto): Observable<ProyectoDto> {
-    return this.httpClient.post<ProyectoDto>(this.url + 'create', proyecto);
-  }
-
-  public update(id: number, proyecto: ProyectoDto): Observable<ProyectoDto> {
-    return this.httpClient.put<ProyectoDto>(this.url + `update/${id}`, proyecto);
-  }
-
-  public delete(id: number): Observable<unknown> {
-    return this.httpClient.delete(this.url + `delete/${id}`);
-  }
-}
-
+import { HttpClient } from '@angular/common/http';
+
+import { Injectable } from '@angular/core';
+
+import { Observable } from 'rxjs';
+
+import { environment } from '../../environments/environment';
+
+import { ProyectoDto } from '../modelo/proyecto.dto';
+
+import { PortfolioDataService } from './portfolio-data.service';
+
+
+
+@Injectable({
+
+  providedIn: 'root'
+
+})
+
+export class ProyectoService {
+
+  private readonly url = `${environment.apiUrl}/proyecto/`;
+
+
+
+  constructor(
+
+    private httpClient: HttpClient,
+
+    private portfolioData: PortfolioDataService
+
+  ) {}
+
+
+
+  public lista(): Observable<ProyectoDto[]> {
+
+    if (environment.staticMode) {
+
+      return this.portfolioData.getProyecto();
+
+    }
+
+    return this.httpClient.get<ProyectoDto[]>(this.url + 'lista');
+
+  }
+
+
+
+  public detail(id: number): Observable<ProyectoDto> {
+
+    if (environment.staticMode) {
+
+      return this.portfolioData.getProyectoDetail(id);
+
+    }
+
+    return this.httpClient.get<ProyectoDto>(this.url + `detail/${id}`);
+
+  }
+
+
+
+  public save(proyecto: ProyectoDto): Observable<ProyectoDto> {
+
+    return this.httpClient.post<ProyectoDto>(this.url + 'create', proyecto);
+
+  }
+
+
+
+  public update(id: number, proyecto: ProyectoDto): Observable<ProyectoDto> {
+
+    return this.httpClient.put<ProyectoDto>(this.url + `update/${id}`, proyecto);
+
+  }
+
+
+
+  public delete(id: number): Observable<unknown> {
+
+    return this.httpClient.delete(this.url + `delete/${id}`);
+
+  }
+
+}
+
+
