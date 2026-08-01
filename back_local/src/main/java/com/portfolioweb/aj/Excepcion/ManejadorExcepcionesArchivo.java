@@ -29,7 +29,12 @@ public class ManejadorExcepcionesArchivo {
 
     @ExceptionHandler(BackupSqlException.class)
     public ResponseEntity<Mensaje> manejarBackupSql(BackupSqlException exception) {
-        return new ResponseEntity<>(new Mensaje(exception.getMessage()), HttpStatus.BAD_REQUEST);
+        String mensaje = exception.getMessage();
+        if (exception.getCause() != null && exception.getCause().getMessage() != null
+                && !mensaje.contains(exception.getCause().getMessage())) {
+            mensaje = mensaje + " (" + exception.getCause().getMessage() + ")";
+        }
+        return new ResponseEntity<>(new Mensaje(mensaje), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(JpaSystemException.class)
