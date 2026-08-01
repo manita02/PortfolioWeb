@@ -1,0 +1,3254 @@
+{
+  "exportedAt" : "2026-08-01T10:52:45",
+  "banner" : [ {
+    "id" : 1,
+    "titulo" : "Portfolio Web",
+    "img" : "assets/media/banner/1.jpg"
+  } ],
+  "persona" : [ {
+    "id" : 1,
+    "nombre" : "Ana Lucia",
+    "apellido" : "Juarez",
+    "img" : "assets/media/persona/1.png",
+    "profesion" : "Full Stack Developer",
+    "acercaDe" : "Soy Técnica Superior en Programación, especializada en el desarrollo full-stack. Busco oportunidades\npara aplicar mis habilidades y contribuir al desarrollo de proyectos. Me comprometo a aprender de\nforma continua y a trabajar colaborativamente. Mi objetivo es aportar soluciones creativas a los\ndesafíos, con el objetivo de generar valor en cada proyecto"
+  } ],
+  "educacion" : [ {
+    "id" : 2,
+    "nombreE" : "Curso de Programación Web Full Stack Nivel 2",
+    "descripcionE" : "Curso avanzado de desarrollo web y software: Git, TypeScript, TDD, Clean Code y Clean Architecture, desarrollo por componentes y Docker para contenerización y despliegue.",
+    "fechaInicio" : "08/2025",
+    "fechaFin" : "12/2025",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 7,
+    "habilidadesIds" : [ 56, 49, 48, 47, 39, 29, 28, 22, 21, 10, 9, 5, 4, 3 ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 7,
+      "nombre" : "Software Factory",
+      "ubicacion" : "Buenos Aires, Argentina",
+      "urlWeb" : "https://forit.ar/",
+      "logoImg" : "assets/media/organizacion/7/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 56,
+      "nombre" : "VS Code",
+      "img" : "assets/media/habilidad/56.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 49,
+      "nombre" : "Cursor",
+      "img" : "assets/media/habilidad/49.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 48,
+      "nombre" : "CRUD",
+      "img" : "assets/media/habilidad/48.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 47,
+      "nombre" : "ChatGPT",
+      "img" : "assets/media/habilidad/47.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 39,
+      "nombre" : "Desarrollo Web y Software a Medida",
+      "img" : "assets/media/habilidad/39.png",
+      "tipoHabilidadId" : 5,
+      "tipoHabilidad" : {
+        "id" : 5,
+        "nombre" : "Servicios"
+      }
+    }, {
+      "id" : 29,
+      "nombre" : "GitHub",
+      "img" : "assets/media/habilidad/29.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 28,
+      "nombre" : "Git",
+      "img" : "assets/media/habilidad/28.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 22,
+      "nombre" : "React",
+      "img" : "assets/media/habilidad/22.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 21,
+      "nombre" : "Node.js",
+      "img" : "assets/media/habilidad/21.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 10,
+      "nombre" : "TypeScript",
+      "img" : "assets/media/habilidad/10.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 9,
+      "nombre" : "SQL",
+      "img" : "assets/media/habilidad/9.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "archivoImagen" : "assets/media/educacion/2/imagen.png",
+    "archivoPdf" : null
+  }, {
+    "id" : 3,
+    "nombreE" : "Curso de Programación orientada a videojuegos",
+    "descripcionE" : "Curso sobre programación y desarrollo de videojuegos, utilizando C# y Unity para crear juegos en 2D",
+    "fechaInicio" : "07/2024",
+    "fechaFin" : "10/2024",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 12,
+    "habilidadesIds" : [ 56, 1 ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 12,
+      "nombre" : "Fundación SES",
+      "ubicacion" : "Buenos Aires, Argentina",
+      "urlWeb" : "https://fundses.org.ar/",
+      "logoImg" : "assets/media/organizacion/12/logo.jpg"
+    },
+    "habilidades" : [ {
+      "id" : 56,
+      "nombre" : "VS Code",
+      "img" : "assets/media/habilidad/56.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 1,
+      "nombre" : "C#",
+      "img" : "assets/media/habilidad/1.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "archivoImagen" : "assets/media/educacion/3/imagen.png",
+    "archivoPdf" : null
+  }, {
+    "id" : 5,
+    "nombreE" : "CSS Avanzado",
+    "descripcionE" : "Curso enfocado en el desarrollo de interfaces modernas y responsivas utilizando buenas prácticas de CSS.\nPrincipales contenidos:\n✔ Maquetación responsive con Flexbox y CSS Grid\n✔ Uso de media queries y breakpoints\n✔ Transiciones, transformaciones y animaciones en CSS\n✔ Mejora de la experiencia de usuario mediante diseño adaptable",
+    "fechaInicio" : "06/2024",
+    "fechaFin" : "06/2024",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 11,
+    "habilidadesIds" : [ 47, 5, 4, 3 ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 11,
+      "nombre" : "Desafío LATAM",
+      "ubicacion" : "Santiago, Chile",
+      "urlWeb" : "https://desafiolatam.com/",
+      "logoImg" : "assets/media/organizacion/11/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 47,
+      "nombre" : "ChatGPT",
+      "img" : "assets/media/habilidad/47.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "archivoImagen" : "assets/media/educacion/5/imagen.png",
+    "archivoPdf" : null
+  }, {
+    "id" : 6,
+    "nombreE" : "Taller FIGMA",
+    "descripcionE" : "Taller enfocado en el uso de Figma para diseño y prototipado básico de interfaces digitales, facilitando la colaboración entre diseño y desarrollo.",
+    "fechaInicio" : "06/2024",
+    "fechaFin" : "06/2024",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 11,
+    "habilidadesIds" : [ ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 11,
+      "nombre" : "Desafío LATAM",
+      "ubicacion" : "Santiago, Chile",
+      "urlWeb" : "https://desafiolatam.com/",
+      "logoImg" : "assets/media/organizacion/11/logo.png"
+    },
+    "habilidades" : [ ],
+    "archivoImagen" : "assets/media/educacion/6/imagen.png",
+    "archivoPdf" : null
+  }, {
+    "id" : 7,
+    "nombreE" : "Azure Professional Training",
+    "descripcionE" : "Diplomado orientado a tecnologías y servicios de Microsoft Azure.",
+    "fechaInicio" : "01/2024",
+    "fechaFin" : "06/2024",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 9,
+    "habilidadesIds" : [ 47, 42, 9 ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 9,
+      "nombre" : "ConoSur.Tech",
+      "ubicacion" : "Buenos Aires, Argentina",
+      "urlWeb" : "https://conosur.tech/#",
+      "logoImg" : "assets/media/organizacion/9/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 47,
+      "nombre" : "ChatGPT",
+      "img" : "assets/media/habilidad/47.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 42,
+      "nombre" : "Diseño y Optimización de Bases de Datos",
+      "img" : "assets/media/habilidad/42.png",
+      "tipoHabilidadId" : 5,
+      "tipoHabilidad" : {
+        "id" : 5,
+        "nombre" : "Servicios"
+      }
+    }, {
+      "id" : 9,
+      "nombre" : "SQL",
+      "img" : "assets/media/habilidad/9.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "archivoImagen" : "assets/media/educacion/7/imagen.png",
+    "archivoPdf" : "assets/media/educacion/7/certificado.pdf"
+  }, {
+    "id" : 1,
+    "nombreE" : "Tecnicatura Superior en Análisis, Desarrollo y Programación de Aplicaciones",
+    "descripcionE" : "Tecnicatura enfocada en análisis, diseño e implementación de software y aplicaciones web, con POO, bases de datos, diseño de sistemas y buenas prácticas de desarrollo.",
+    "fechaInicio" : "03/2021",
+    "fechaFin" : "05/2024",
+    "tipoEducacionId" : 1,
+    "organizacionId" : 3,
+    "habilidadesIds" : [ 58, 56, 55, 54, 53, 51, 48, 46, 45, 34, 29, 28, 27, 25, 19, 18, 15, 14, 9, 8, 7, 6, 5, 4, 1 ],
+    "tipoEducacion" : {
+      "id" : 1,
+      "nombre" : "Formacion Académica"
+    },
+    "organizacion" : {
+      "id" : 3,
+      "nombre" : "I.S.F.T N°194",
+      "ubicacion" : "Miramar, Bs.As, Argentina",
+      "urlWeb" : "https://www.isft194.edu.ar/",
+      "logoImg" : "assets/media/organizacion/3/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 58,
+      "nombre" : "C",
+      "img" : "assets/media/habilidad/58.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 56,
+      "nombre" : "VS Code",
+      "img" : "assets/media/habilidad/56.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 55,
+      "nombre" : "VS Community",
+      "img" : "assets/media/habilidad/55.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 54,
+      "nombre" : "SOLID",
+      "img" : "assets/media/habilidad/54.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 53,
+      "nombre" : "O.O.P",
+      "img" : "assets/media/habilidad/53.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 51,
+      "nombre" : "Patrón MVC",
+      "img" : "assets/media/habilidad/51.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 48,
+      "nombre" : "CRUD",
+      "img" : "assets/media/habilidad/48.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 46,
+      "nombre" : "ABM",
+      "img" : "assets/media/habilidad/46.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 45,
+      "nombre" : "Windows Form",
+      "img" : "assets/media/habilidad/45.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 34,
+      "nombre" : "SQL Server",
+      "img" : "assets/media/habilidad/34.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 29,
+      "nombre" : "GitHub",
+      "img" : "assets/media/habilidad/29.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 28,
+      "nombre" : "Git",
+      "img" : "assets/media/habilidad/28.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 27,
+      "nombre" : "GitLab",
+      "img" : "assets/media/habilidad/27.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 25,
+      "nombre" : "MySQL",
+      "img" : "assets/media/habilidad/25.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 19,
+      "nombre" : ".NET Core",
+      "img" : "assets/media/habilidad/19.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 18,
+      "nombre" : "LINQ",
+      "img" : "assets/media/habilidad/18.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 15,
+      "nombre" : "Entity Framework",
+      "img" : "assets/media/habilidad/15.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 14,
+      "nombre" : "Bootstrap",
+      "img" : "assets/media/habilidad/14.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 9,
+      "nombre" : "SQL",
+      "img" : "assets/media/habilidad/9.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 8,
+      "nombre" : "Python",
+      "img" : "assets/media/habilidad/8.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 7,
+      "nombre" : "PHP",
+      "img" : "assets/media/habilidad/7.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 6,
+      "nombre" : "Java",
+      "img" : "assets/media/habilidad/6.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 1,
+      "nombre" : "C#",
+      "img" : "assets/media/habilidad/1.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "archivoImagen" : "assets/media/educacion/1/imagen.jpg",
+    "archivoPdf" : "assets/media/educacion/1/certificado.pdf"
+  }, {
+    "id" : 4,
+    "nombreE" : "Analista en Tecnología Educativa",
+    "descripcionE" : "Formación orientada a la integración de herramientas tecnológicas en entornos educativos, combinando fundamentos pedagógicos con el uso de plataformas digitales para mejorar los procesos de enseñanza y aprendizaje.",
+    "fechaInicio" : "01/2024",
+    "fechaFin" : "02/2024",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 13,
+    "habilidadesIds" : [ ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 13,
+      "nombre" : "Fundación ILADES",
+      "ubicacion" : "Tucumán, Argentina",
+      "urlWeb" : "https://www.facebook.com/fundacionamerica/?locale=es_LA",
+      "logoImg" : "assets/media/organizacion/13/logo.png"
+    },
+    "habilidades" : [ ],
+    "archivoImagen" : "assets/media/educacion/4/imagen.png",
+    "archivoPdf" : "assets/media/educacion/4/certificado.pdf"
+  }, {
+    "id" : 10,
+    "nombreE" : "Desarrollo Web Front-End",
+    "descripcionE" : "Curso enfocado en el desarrollo Front-End con HTML, CSS y JavaScript, aplicando buenas prácticas para construir interfaces web responsivas e interactivas.",
+    "fechaInicio" : "08/2023",
+    "fechaFin" : "09/2023",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 5,
+    "habilidadesIds" : [ 14, 5, 4, 3 ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 5,
+      "nombre" : "Argentina Programa",
+      "ubicacion" : "Argentina",
+      "urlWeb" : "https://www.linkedin.com/school/programa-argentina/about/",
+      "logoImg" : "assets/media/organizacion/5/logo.jpg"
+    },
+    "habilidades" : [ {
+      "id" : 14,
+      "nombre" : "Bootstrap",
+      "img" : "assets/media/habilidad/14.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "archivoImagen" : "assets/media/educacion/10/imagen.png",
+    "archivoPdf" : "assets/media/educacion/10/certificado.pdf"
+  }, {
+    "id" : 12,
+    "nombreE" : "#YoQuieroProgramar",
+    "descripcionE" : "Curso introductorio de #YoQuieroProgramar, enfocado en los conceptos fundamentales de internet, tecnologías web y los primeros pasos en programación. Forma parte de un programa integral de formación orientado al desarrollo de habilidades iniciales en programación web.",
+    "fechaInicio" : "05/2023",
+    "fechaFin" : "06/2023",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 9,
+    "habilidadesIds" : [ 14, 5, 4, 3 ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 9,
+      "nombre" : "ConoSur.Tech",
+      "ubicacion" : "Buenos Aires, Argentina",
+      "urlWeb" : "https://conosur.tech/#",
+      "logoImg" : "assets/media/organizacion/9/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 14,
+      "nombre" : "Bootstrap",
+      "img" : "assets/media/habilidad/14.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "archivoImagen" : "assets/media/educacion/12/imagen.jpg",
+    "archivoPdf" : null
+  }, {
+    "id" : 11,
+    "nombreE" : "Curso de Inglés orientado a programación",
+    "descripcionE" : "Basado en la comprensión lectora, auditiva, producción escrita y oral",
+    "fechaInicio" : "11/2022",
+    "fechaFin" : "01/2023",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 10,
+    "habilidadesIds" : [ ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 10,
+      "nombre" : "CUI Idiomas",
+      "ubicacion" : "Buenos Aires, Argentina",
+      "urlWeb" : "https://cui.edu.ar/",
+      "logoImg" : "assets/media/organizacion/10/logo.png"
+    },
+    "habilidades" : [ ],
+    "archivoImagen" : "assets/media/educacion/11/imagen.png",
+    "archivoPdf" : "assets/media/educacion/11/certificado.pdf"
+  }, {
+    "id" : 9,
+    "nombreE" : "Segunda Etapa - #YoProgramo",
+    "descripcionE" : "Formación full stack centrada en un portfolio web: POO, algoritmos y estructuras de datos, bases de datos y SQL, fundamentos web (HTML, CSS, JavaScript) y desarrollo backend aplicado a la web, con proyecto integrador en equipo desde requisitos hasta producto final.",
+    "fechaInicio" : "01/2022",
+    "fechaFin" : "12/2022",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 5,
+    "habilidadesIds" : [ 57, 56, 53, 51, 48, 46, 29, 28, 25, 23, 21, 14, 12, 6, 5, 4, 3 ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 5,
+      "nombre" : "Argentina Programa",
+      "ubicacion" : "Argentina",
+      "urlWeb" : "https://www.linkedin.com/school/programa-argentina/about/",
+      "logoImg" : "assets/media/organizacion/5/logo.jpg"
+    },
+    "habilidades" : [ {
+      "id" : 57,
+      "nombre" : "XAMPP",
+      "img" : "assets/media/habilidad/57.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 56,
+      "nombre" : "VS Code",
+      "img" : "assets/media/habilidad/56.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 53,
+      "nombre" : "O.O.P",
+      "img" : "assets/media/habilidad/53.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 51,
+      "nombre" : "Patrón MVC",
+      "img" : "assets/media/habilidad/51.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 48,
+      "nombre" : "CRUD",
+      "img" : "assets/media/habilidad/48.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 46,
+      "nombre" : "ABM",
+      "img" : "assets/media/habilidad/46.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 29,
+      "nombre" : "GitHub",
+      "img" : "assets/media/habilidad/29.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 28,
+      "nombre" : "Git",
+      "img" : "assets/media/habilidad/28.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 25,
+      "nombre" : "MySQL",
+      "img" : "assets/media/habilidad/25.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 23,
+      "nombre" : "Spring Boot",
+      "img" : "assets/media/habilidad/23.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 21,
+      "nombre" : "Node.js",
+      "img" : "assets/media/habilidad/21.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 14,
+      "nombre" : "Bootstrap",
+      "img" : "assets/media/habilidad/14.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 12,
+      "nombre" : "Angular",
+      "img" : "assets/media/habilidad/12.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 6,
+      "nombre" : "Java",
+      "img" : "assets/media/habilidad/6.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "archivoImagen" : "assets/media/educacion/9/imagen.png",
+    "archivoPdf" : "assets/media/educacion/9/certificado.pdf"
+  }, {
+    "id" : 8,
+    "nombreE" : "Primera Etapa - #SéProgramar",
+    "descripcionE" : "La primera etapa de Argentina Programa consistió en un curso introductorio orientado a incorporar los fundamentos esenciales de la programación y dar los primeros pasos en el mundo del desarrollo de software.",
+    "fechaInicio" : "09/2021",
+    "fechaFin" : "12/2021",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 5,
+    "habilidadesIds" : [ ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 5,
+      "nombre" : "Argentina Programa",
+      "ubicacion" : "Argentina",
+      "urlWeb" : "https://www.linkedin.com/school/programa-argentina/about/",
+      "logoImg" : "assets/media/organizacion/5/logo.jpg"
+    },
+    "habilidades" : [ ],
+    "archivoImagen" : "assets/media/educacion/8/imagen.png",
+    "archivoPdf" : "assets/media/educacion/8/certificado.pdf"
+  }, {
+    "id" : 13,
+    "nombreE" : "Capacitaciones 4.0",
+    "descripcionE" : "Curso orientado a diseño y producción 3D, abarcando fundamentos de diseño, modelado CAD con Rhinoceros/Blender e introducción a impresión 3D (hardware, materiales y preparación).",
+    "fechaInicio" : "08/2020",
+    "fechaFin" : "02/2021",
+    "tipoEducacionId" : 2,
+    "organizacionId" : 15,
+    "habilidadesIds" : [ ],
+    "tipoEducacion" : {
+      "id" : 2,
+      "nombre" : "Cursos y Certificaciones"
+    },
+    "organizacion" : {
+      "id" : 15,
+      "nombre" : "Ministerio de Desarrollo Productivo",
+      "ubicacion" : "Argentina",
+      "urlWeb" : "https://es.wikipedia.org/wiki/Ministerio_de_Desarrollo_Productivo_(Argentina)",
+      "logoImg" : "assets/media/organizacion/15/logo.png"
+    },
+    "habilidades" : [ ],
+    "archivoImagen" : "assets/media/educacion/13/imagen.png",
+    "archivoPdf" : null
+  } ],
+  "experiencia" : [ {
+    "id" : 8,
+    "nombreE" : "QA Analyst",
+    "descripcionE" : "Colaboración en el diseño e implementación de una estrategia de pruebas funcionales en entorno local. Preparación del ambiente de pruebas, análisis integral de la aplicación web y relevamiento de funcionalidades y reglas de negocio. Elaboración de documentación QA para ejecución y seguimiento de casos, con planificación priorizada por riesgo y complejidad.",
+    "esActual" : true,
+    "fechaInicio" : "11/2025",
+    "fechaFin" : null,
+    "tipoEmpleoId" : 5,
+    "tipoUbicacionId" : 3,
+    "organizacionId" : 2,
+    "habilidadesIds" : [ 41, 24, 22, 21 ],
+    "tipoEmpleo" : {
+      "id" : 5,
+      "nombre" : "Contrato por servicio"
+    },
+    "tipoUbicacion" : {
+      "id" : 3,
+      "nombre" : "Remoto"
+    },
+    "organizacion" : {
+      "id" : 2,
+      "nombre" : "Castellon.CH",
+      "ubicacion" : "Biena, Berna, Suiza",
+      "urlWeb" : "https://www.castellon.ch/",
+      "logoImg" : "assets/media/organizacion/2/logo.jpg"
+    },
+    "habilidades" : [ {
+      "id" : 41,
+      "nombre" : "Testing y Control de Calidad (QA)",
+      "img" : "assets/media/habilidad/41.png",
+      "tipoHabilidadId" : 5,
+      "tipoHabilidad" : {
+        "id" : 5,
+        "nombre" : "Servicios"
+      }
+    }, {
+      "id" : 24,
+      "nombre" : "PostgreSQL",
+      "img" : "assets/media/habilidad/24.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 22,
+      "nombre" : "React",
+      "img" : "assets/media/habilidad/22.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 21,
+      "nombre" : "Node.js",
+      "img" : "assets/media/habilidad/21.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    } ]
+  }, {
+    "id" : 2,
+    "nombreE" : "Desarrollador Full Stack",
+    "descripcionE" : "Desarrollo y mantenimiento de soluciones en tres frentes: aplicaciones web, servicios y APIs, y funcionalidades integradas como plugins en QGIS, con foco en rendimiento y evolución continua del producto. Diseño y ajuste de modelos de datos para consultas y operaciones más eficientes. Trabajo de punta a punta en interfaz, dashboards, reportes y visualizaciones que transforman datos en información clara para el usuario, tanto en entorno web como dentro del ecosistema QGIS.",
+    "esActual" : false,
+    "fechaInicio" : "02/2024",
+    "fechaFin" : "06/2026",
+    "tipoEmpleoId" : 1,
+    "tipoUbicacionId" : 3,
+    "organizacionId" : 1,
+    "habilidadesIds" : [ 35, 33, 32, 31, 30, 28, 26, 24, 19, 17, 14, 13, 12, 8, 5, 4, 3, 1 ],
+    "tipoEmpleo" : {
+      "id" : 1,
+      "nombre" : "Jornada completa"
+    },
+    "tipoUbicacion" : {
+      "id" : 3,
+      "nombre" : "Remoto"
+    },
+    "organizacion" : {
+      "id" : 1,
+      "nombre" : "Geosystems",
+      "ubicacion" : "Capital, Bs.As, Argentina",
+      "urlWeb" : "https://www.geosystems.com.ar/",
+      "logoImg" : "assets/media/organizacion/1/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 35,
+      "nombre" : "SCRUM",
+      "img" : "assets/media/habilidad/35.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 33,
+      "nombre" : "Postman",
+      "img" : "assets/media/habilidad/33.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 32,
+      "nombre" : "Swagger UI",
+      "img" : "assets/media/habilidad/32.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 31,
+      "nombre" : "Jira",
+      "img" : "assets/media/habilidad/31.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 30,
+      "nombre" : "Bitbucket",
+      "img" : "assets/media/habilidad/30.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 28,
+      "nombre" : "Git",
+      "img" : "assets/media/habilidad/28.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 26,
+      "nombre" : "Oracle",
+      "img" : "assets/media/habilidad/26.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 24,
+      "nombre" : "PostgreSQL",
+      "img" : "assets/media/habilidad/24.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 19,
+      "nombre" : ".NET Core",
+      "img" : "assets/media/habilidad/19.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 17,
+      "nombre" : "Flask",
+      "img" : "assets/media/habilidad/17.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 14,
+      "nombre" : "Bootstrap",
+      "img" : "assets/media/habilidad/14.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 13,
+      "nombre" : "ASP.NET",
+      "img" : "assets/media/habilidad/13.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 12,
+      "nombre" : "Angular",
+      "img" : "assets/media/habilidad/12.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 8,
+      "nombre" : "Python",
+      "img" : "assets/media/habilidad/8.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 1,
+      "nombre" : "C#",
+      "img" : "assets/media/habilidad/1.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ]
+  }, {
+    "id" : 13,
+    "nombreE" : "Desarrollador frontend",
+    "descripcionE" : "Maquetación y desarrollo de un sitio web estático para presentar una propiedad en alquiler por temporada en Miramar: estructura de contenidos, diseño responsive y estilos coherentes con la identidad del alojamiento. Implementación de secciones informativas (servicios, ubicación, contacto) con foco en claridad, legibilidad y navegación sencilla en móvil y escritorio.",
+    "esActual" : false,
+    "fechaInicio" : "10/2022",
+    "fechaFin" : "12/2025",
+    "tipoEmpleoId" : 4,
+    "tipoUbicacionId" : 3,
+    "organizacionId" : 4,
+    "habilidadesIds" : [ 39, 28, 14, 5, 4 ],
+    "tipoEmpleo" : {
+      "id" : 4,
+      "nombre" : "Autonomo"
+    },
+    "tipoUbicacion" : {
+      "id" : 3,
+      "nombre" : "Remoto"
+    },
+    "organizacion" : {
+      "id" : 4,
+      "nombre" : "Autónomo",
+      "ubicacion" : "Miramar, Bs.As, Argentina",
+      "urlWeb" : "https://www.linkedin.com/in/ana-lucia-juarez/",
+      "logoImg" : "assets/media/organizacion/4/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 39,
+      "nombre" : "Desarrollo Web y Software a Medida",
+      "img" : "assets/media/habilidad/39.png",
+      "tipoHabilidadId" : 5,
+      "tipoHabilidad" : {
+        "id" : 5,
+        "nombre" : "Servicios"
+      }
+    }, {
+      "id" : 28,
+      "nombre" : "Git",
+      "img" : "assets/media/habilidad/28.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 14,
+      "nombre" : "Bootstrap",
+      "img" : "assets/media/habilidad/14.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ]
+  }, {
+    "id" : 9,
+    "nombreE" : "Desarrollador de software",
+    "descripcionE" : "Colaboración en el desarrollo de funcionalidades de gestión de archivos, con lógica de carga y restauración entre rutas locales definidas y almacenamiento remoto en la nube. Documentación de los métodos desarrollados, incluyendo propósito y comportamiento interno. Registro de eventos y seguimiento de flujos para facilitar la depuración y detectar mejoras. Pruebas en entornos controlados que simulan procesos de carga, con evaluación y ajuste del manejo de rutas dinámicas y de marcas temporales de archivos.",
+    "esActual" : false,
+    "fechaInicio" : "11/2024",
+    "fechaFin" : "11/2024",
+    "tipoEmpleoId" : 5,
+    "tipoUbicacionId" : 3,
+    "organizacionId" : 2,
+    "habilidadesIds" : [ 40, 39, 19, 1 ],
+    "tipoEmpleo" : {
+      "id" : 5,
+      "nombre" : "Contrato por servicio"
+    },
+    "tipoUbicacion" : {
+      "id" : 3,
+      "nombre" : "Remoto"
+    },
+    "organizacion" : {
+      "id" : 2,
+      "nombre" : "Castellon.CH",
+      "ubicacion" : "Biena, Berna, Suiza",
+      "urlWeb" : "https://www.castellon.ch/",
+      "logoImg" : "assets/media/organizacion/2/logo.jpg"
+    },
+    "habilidades" : [ {
+      "id" : 40,
+      "nombre" : "Análisis y Documentación Técnica",
+      "img" : "assets/media/habilidad/40.png",
+      "tipoHabilidadId" : 5,
+      "tipoHabilidad" : {
+        "id" : 5,
+        "nombre" : "Servicios"
+      }
+    }, {
+      "id" : 39,
+      "nombre" : "Desarrollo Web y Software a Medida",
+      "img" : "assets/media/habilidad/39.png",
+      "tipoHabilidadId" : 5,
+      "tipoHabilidad" : {
+        "id" : 5,
+        "nombre" : "Servicios"
+      }
+    }, {
+      "id" : 19,
+      "nombre" : ".NET Core",
+      "img" : "assets/media/habilidad/19.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 1,
+      "nombre" : "C#",
+      "img" : "assets/media/habilidad/1.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ]
+  }, {
+    "id" : 10,
+    "nombreE" : "Desarrollador de software",
+    "descripcionE" : "Desarrollo de aplicaciones de consola y bibliotecas reutilizables, con integración de dependencias según cada proyecto, incluido procesamiento de imágenes. Documentación del código mediante comentarios en el fuente y manuales de usuario para instalación y compilación. Configuración de proyectos y del entorno de build para facilitar la compilación en distintas plataformas y entornos de desarrollo.",
+    "esActual" : false,
+    "fechaInicio" : "04/2024",
+    "fechaFin" : "05/2024",
+    "tipoEmpleoId" : 5,
+    "tipoUbicacionId" : 3,
+    "organizacionId" : 2,
+    "habilidadesIds" : [ 40, 11, 2 ],
+    "tipoEmpleo" : {
+      "id" : 5,
+      "nombre" : "Contrato por servicio"
+    },
+    "tipoUbicacion" : {
+      "id" : 3,
+      "nombre" : "Remoto"
+    },
+    "organizacion" : {
+      "id" : 2,
+      "nombre" : "Castellon.CH",
+      "ubicacion" : "Biena, Berna, Suiza",
+      "urlWeb" : "https://www.castellon.ch/",
+      "logoImg" : "assets/media/organizacion/2/logo.jpg"
+    },
+    "habilidades" : [ {
+      "id" : 40,
+      "nombre" : "Análisis y Documentación Técnica",
+      "img" : "assets/media/habilidad/40.png",
+      "tipoHabilidadId" : 5,
+      "tipoHabilidad" : {
+        "id" : 5,
+        "nombre" : "Servicios"
+      }
+    }, {
+      "id" : 11,
+      "nombre" : "Rust",
+      "img" : "assets/media/habilidad/11.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 2,
+      "nombre" : "C++",
+      "img" : "assets/media/habilidad/2.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ]
+  }, {
+    "id" : 11,
+    "nombreE" : "Documentalista de software",
+    "descripcionE" : "Redacción de documentación integral del software: descripción de la arquitectura, componentes principales, relaciones y comunicaciones entre ellos, y diagramas UML de apoyo. Elaboración de guías de instalación paso a paso y de material de uso con ejemplos de las funcionalidades del sistema.",
+    "esActual" : false,
+    "fechaInicio" : "02/2024",
+    "fechaFin" : "02/2024",
+    "tipoEmpleoId" : 5,
+    "tipoUbicacionId" : 3,
+    "organizacionId" : 2,
+    "habilidadesIds" : [ 40 ],
+    "tipoEmpleo" : {
+      "id" : 5,
+      "nombre" : "Contrato por servicio"
+    },
+    "tipoUbicacion" : {
+      "id" : 3,
+      "nombre" : "Remoto"
+    },
+    "organizacion" : {
+      "id" : 2,
+      "nombre" : "Castellon.CH",
+      "ubicacion" : "Biena, Berna, Suiza",
+      "urlWeb" : "https://www.castellon.ch/",
+      "logoImg" : "assets/media/organizacion/2/logo.jpg"
+    },
+    "habilidades" : [ {
+      "id" : 40,
+      "nombre" : "Análisis y Documentación Técnica",
+      "img" : "assets/media/habilidad/40.png",
+      "tipoHabilidadId" : 5,
+      "tipoHabilidad" : {
+        "id" : 5,
+        "nombre" : "Servicios"
+      }
+    } ]
+  }, {
+    "id" : 12,
+    "nombreE" : "Desarrollador de software",
+    "descripcionE" : "Desarrollo y mantenimiento de una aplicación de escritorio en equipo, con diseño e implementación de funcionalidades orientadas a una experiencia de uso clara. Trabajo con consultas y acceso a datos para búsquedas y filtrados más eficientes, corrección y optimización del código, pruebas unitarias para detectar errores temprano y documentación del código y procesos para facilitar evoluciones futuras.",
+    "esActual" : false,
+    "fechaInicio" : "03/2023",
+    "fechaFin" : "12/2023",
+    "tipoEmpleoId" : 6,
+    "tipoUbicacionId" : 2,
+    "organizacionId" : 3,
+    "habilidadesIds" : [ 45, 36, 34, 29, 28, 25, 19, 18, 15, 9, 1 ],
+    "tipoEmpleo" : {
+      "id" : 6,
+      "nombre" : "Practicas"
+    },
+    "tipoUbicacion" : {
+      "id" : 2,
+      "nombre" : "Híbrido"
+    },
+    "organizacion" : {
+      "id" : 3,
+      "nombre" : "I.S.F.T N°194",
+      "ubicacion" : "Miramar, Bs.As, Argentina",
+      "urlWeb" : "https://www.isft194.edu.ar/",
+      "logoImg" : "assets/media/organizacion/3/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 45,
+      "nombre" : "Windows Form",
+      "img" : "assets/media/habilidad/45.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 36,
+      "nombre" : "Metodologías ágiles",
+      "img" : "assets/media/habilidad/36.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 34,
+      "nombre" : "SQL Server",
+      "img" : "assets/media/habilidad/34.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 29,
+      "nombre" : "GitHub",
+      "img" : "assets/media/habilidad/29.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 28,
+      "nombre" : "Git",
+      "img" : "assets/media/habilidad/28.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 25,
+      "nombre" : "MySQL",
+      "img" : "assets/media/habilidad/25.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 19,
+      "nombre" : ".NET Core",
+      "img" : "assets/media/habilidad/19.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 18,
+      "nombre" : "LINQ",
+      "img" : "assets/media/habilidad/18.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 15,
+      "nombre" : "Entity Framework",
+      "img" : "assets/media/habilidad/15.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 9,
+      "nombre" : "SQL",
+      "img" : "assets/media/habilidad/9.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 1,
+      "nombre" : "C#",
+      "img" : "assets/media/habilidad/1.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ]
+  }, {
+    "id" : 15,
+    "nombreE" : "Instructora de Surf",
+    "descripcionE" : "Clases de surf personalizadas y en grupo (iniciante–intermedio): comunicación didáctica, acompañamiento y evaluación continua del progreso. Experiencia en facilitación, paciencia bajo exigencia del entorno priorizando seguridad y resultados del grupo.",
+    "esActual" : false,
+    "fechaInicio" : "01/2023",
+    "fechaFin" : "03/2023",
+    "tipoEmpleoId" : 8,
+    "tipoUbicacionId" : 1,
+    "organizacionId" : 6,
+    "habilidadesIds" : [ ],
+    "tipoEmpleo" : {
+      "id" : 8,
+      "nombre" : "Trabajo de temporada"
+    },
+    "tipoUbicacion" : {
+      "id" : 1,
+      "nombre" : "Presencial"
+    },
+    "organizacion" : {
+      "id" : 6,
+      "nombre" : "Supertubos",
+      "ubicacion" : "Miramar, Bs.As, Argentina",
+      "urlWeb" : "https://www.instagram.com/_supertubos/",
+      "logoImg" : "assets/media/organizacion/6/logo.jpg"
+    },
+    "habilidades" : [ ]
+  }, {
+    "id" : 14,
+    "nombreE" : "Desarrollador Full Stack",
+    "descripcionE" : "Desarrollo full stack de una plataforma de portfolio desde cero: vista pública informativa y panel de administración para gestionar secciones del perfil profesional. Maquetación responsive, integración front–back vía API REST, base de datos relacional y acceso seguro para edición de contenidos. Proyecto de práctica con ciclo completo de diseño, implementación y despliegue.",
+    "esActual" : false,
+    "fechaInicio" : "01/2022",
+    "fechaFin" : "09/2022",
+    "tipoEmpleoId" : 6,
+    "tipoUbicacionId" : 3,
+    "organizacionId" : 5,
+    "habilidadesIds" : [ 29, 28, 25, 23, 21, 14, 12, 10, 6, 5, 4, 3 ],
+    "tipoEmpleo" : {
+      "id" : 6,
+      "nombre" : "Practicas"
+    },
+    "tipoUbicacion" : {
+      "id" : 3,
+      "nombre" : "Remoto"
+    },
+    "organizacion" : {
+      "id" : 5,
+      "nombre" : "Argentina Programa",
+      "ubicacion" : "Argentina",
+      "urlWeb" : "https://www.linkedin.com/school/programa-argentina/about/",
+      "logoImg" : "assets/media/organizacion/5/logo.jpg"
+    },
+    "habilidades" : [ {
+      "id" : 29,
+      "nombre" : "GitHub",
+      "img" : "assets/media/habilidad/29.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 28,
+      "nombre" : "Git",
+      "img" : "assets/media/habilidad/28.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 25,
+      "nombre" : "MySQL",
+      "img" : "assets/media/habilidad/25.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 23,
+      "nombre" : "Spring Boot",
+      "img" : "assets/media/habilidad/23.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 21,
+      "nombre" : "Node.js",
+      "img" : "assets/media/habilidad/21.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 14,
+      "nombre" : "Bootstrap",
+      "img" : "assets/media/habilidad/14.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 12,
+      "nombre" : "Angular",
+      "img" : "assets/media/habilidad/12.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 10,
+      "nombre" : "TypeScript",
+      "img" : "assets/media/habilidad/10.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 6,
+      "nombre" : "Java",
+      "img" : "assets/media/habilidad/6.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ]
+  } ],
+  "proyecto" : [ {
+    "id" : 11,
+    "nombreE" : "Portfolio Web",
+    "descripcionE" : "Portfolio personal full stack: vista pública del perfil (estudios, experiencia, skills, proyectos), base de datos, API REST y panel de gestión del contenido.",
+    "link" : "https://github.com/manita02/PortfolioWeb",
+    "esActual" : true,
+    "fechaInicio" : "04/2022",
+    "fechaFin" : null,
+    "organizacionId" : 5,
+    "habilidadesIds" : [ 57, 56, 53, 52, 49, 25, 23, 21, 14, 12, 10, 6, 5, 4 ],
+    "organizacion" : {
+      "id" : 5,
+      "nombre" : "Argentina Programa",
+      "ubicacion" : "Argentina",
+      "urlWeb" : "https://www.linkedin.com/school/programa-argentina/about/",
+      "logoImg" : "assets/media/organizacion/5/logo.jpg"
+    },
+    "habilidades" : [ {
+      "id" : 57,
+      "nombre" : "XAMPP",
+      "img" : "assets/media/habilidad/57.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 56,
+      "nombre" : "VS Code",
+      "img" : "assets/media/habilidad/56.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 53,
+      "nombre" : "O.O.P",
+      "img" : "assets/media/habilidad/53.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 52,
+      "nombre" : "phpMyAdmin",
+      "img" : "assets/media/habilidad/52.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 49,
+      "nombre" : "Cursor",
+      "img" : "assets/media/habilidad/49.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 25,
+      "nombre" : "MySQL",
+      "img" : "assets/media/habilidad/25.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 23,
+      "nombre" : "Spring Boot",
+      "img" : "assets/media/habilidad/23.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 21,
+      "nombre" : "Node.js",
+      "img" : "assets/media/habilidad/21.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 14,
+      "nombre" : "Bootstrap",
+      "img" : "assets/media/habilidad/14.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 12,
+      "nombre" : "Angular",
+      "img" : "assets/media/habilidad/12.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 10,
+      "nombre" : "TypeScript",
+      "img" : "assets/media/habilidad/10.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 6,
+      "nombre" : "Java",
+      "img" : "assets/media/habilidad/6.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "imagen" : "assets/media/proyecto/11.png"
+  }, {
+    "id" : 3,
+    "nombreE" : "MusicTab",
+    "descripcionE" : "MusicTab es una aplicación full-stack que permite a los usuarios explorar, administrar e interactuar con tablaturas para diferentes instrumentos.",
+    "link" : "https://github.com/manita02/MusicTab",
+    "esActual" : false,
+    "fechaInicio" : "08/2025",
+    "fechaFin" : "12/2025",
+    "organizacionId" : 7,
+    "habilidadesIds" : [ 39, 22, 21, 20, 10, 8 ],
+    "organizacion" : {
+      "id" : 7,
+      "nombre" : "Software Factory",
+      "ubicacion" : "Buenos Aires, Argentina",
+      "urlWeb" : "https://forit.ar/",
+      "logoImg" : "assets/media/organizacion/7/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 39,
+      "nombre" : "Desarrollo Web y Software a Medida",
+      "img" : "assets/media/habilidad/39.png",
+      "tipoHabilidadId" : 5,
+      "tipoHabilidad" : {
+        "id" : 5,
+        "nombre" : "Servicios"
+      }
+    }, {
+      "id" : 22,
+      "nombre" : "React",
+      "img" : "assets/media/habilidad/22.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 21,
+      "nombre" : "Node.js",
+      "img" : "assets/media/habilidad/21.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 20,
+      "nombre" : "Next.js",
+      "img" : "assets/media/habilidad/20.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 10,
+      "nombre" : "TypeScript",
+      "img" : "assets/media/habilidad/10.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 8,
+      "nombre" : "Python",
+      "img" : "assets/media/habilidad/8.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "imagen" : "assets/media/proyecto/3.png"
+  }, {
+    "id" : 10,
+    "nombreE" : "Sitio Web - Alquiler Temporario",
+    "descripcionE" : "Página web estática construida con HTML, CSS y Bootstrap que contiene información acerca de la casa que está en alquiler por temporada en Miramar.",
+    "link" : "https://github.com/manita02/pagina-alquiler-temporada",
+    "esActual" : false,
+    "fechaInicio" : "10/2022",
+    "fechaFin" : "12/2025",
+    "organizacionId" : 4,
+    "habilidadesIds" : [ 49, 47, 14, 5, 4, 3 ],
+    "organizacion" : {
+      "id" : 4,
+      "nombre" : "Autónomo",
+      "ubicacion" : "Miramar, Bs.As, Argentina",
+      "urlWeb" : "https://www.linkedin.com/in/ana-lucia-juarez/",
+      "logoImg" : "assets/media/organizacion/4/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 49,
+      "nombre" : "Cursor",
+      "img" : "assets/media/habilidad/49.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 47,
+      "nombre" : "ChatGPT",
+      "img" : "assets/media/habilidad/47.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 14,
+      "nombre" : "Bootstrap",
+      "img" : "assets/media/habilidad/14.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "imagen" : "assets/media/proyecto/10.png"
+  }, {
+    "id" : 4,
+    "nombreE" : "Good Vibes Blog",
+    "descripcionE" : "Blog web multiusuario con CRUD de publicaciones y administración de perfil: registro, creación y edición de entradas, y gestión de la cuenta de cada usuario.",
+    "link" : "https://github.com/manita02/Good-Vibes-Blog",
+    "esActual" : false,
+    "fechaInicio" : "12/2023",
+    "fechaFin" : "02/2024",
+    "organizacionId" : 4,
+    "habilidadesIds" : [ 29, 28, 25, 17, 8, 5, 4 ],
+    "organizacion" : {
+      "id" : 4,
+      "nombre" : "Autónomo",
+      "ubicacion" : "Miramar, Bs.As, Argentina",
+      "urlWeb" : "https://www.linkedin.com/in/ana-lucia-juarez/",
+      "logoImg" : "assets/media/organizacion/4/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 29,
+      "nombre" : "GitHub",
+      "img" : "assets/media/habilidad/29.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 28,
+      "nombre" : "Git",
+      "img" : "assets/media/habilidad/28.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 25,
+      "nombre" : "MySQL",
+      "img" : "assets/media/habilidad/25.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 17,
+      "nombre" : "Flask",
+      "img" : "assets/media/habilidad/17.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 8,
+      "nombre" : "Python",
+      "img" : "assets/media/habilidad/8.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "imagen" : "assets/media/proyecto/4.png"
+  }, {
+    "id" : 5,
+    "nombreE" : "API Gestión del Personal",
+    "descripcionE" : "Implementación de la API por medio de .NET Core para gestionar usuarios con los endpoints.",
+    "link" : "https://github.com/manita02/APIGestionDePersonall",
+    "esActual" : false,
+    "fechaInicio" : "01/2024",
+    "fechaFin" : "01/2024",
+    "organizacionId" : 4,
+    "habilidadesIds" : [ 56, 47, 32, 29, 28, 19, 9, 1 ],
+    "organizacion" : {
+      "id" : 4,
+      "nombre" : "Autónomo",
+      "ubicacion" : "Miramar, Bs.As, Argentina",
+      "urlWeb" : "https://www.linkedin.com/in/ana-lucia-juarez/",
+      "logoImg" : "assets/media/organizacion/4/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 56,
+      "nombre" : "VS Code",
+      "img" : "assets/media/habilidad/56.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 47,
+      "nombre" : "ChatGPT",
+      "img" : "assets/media/habilidad/47.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 32,
+      "nombre" : "Swagger UI",
+      "img" : "assets/media/habilidad/32.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 29,
+      "nombre" : "GitHub",
+      "img" : "assets/media/habilidad/29.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 28,
+      "nombre" : "Git",
+      "img" : "assets/media/habilidad/28.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 19,
+      "nombre" : ".NET Core",
+      "img" : "assets/media/habilidad/19.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 9,
+      "nombre" : "SQL",
+      "img" : "assets/media/habilidad/9.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 1,
+      "nombre" : "C#",
+      "img" : "assets/media/habilidad/1.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "imagen" : "assets/media/proyecto/5.png"
+  }, {
+    "id" : 6,
+    "nombreE" : "Entites Game",
+    "descripcionE" : "App MVC con ABM de entidades, ítems y comidas, y capa de juego en mapa hexagonal: movimiento por terreno, combate e interacciones, con tipos de entidad (acuática, terrestre, aérea y mixtas) que definen su desplazamiento y ubicación.",
+    "link" : "https://github.com/manita02/Entities-Game",
+    "esActual" : false,
+    "fechaInicio" : "08/2023",
+    "fechaFin" : "11/2023",
+    "organizacionId" : 3,
+    "habilidadesIds" : [ 55, 54, 53, 51, 48, 46, 45, 19, 1 ],
+    "organizacion" : {
+      "id" : 3,
+      "nombre" : "I.S.F.T N°194",
+      "ubicacion" : "Miramar, Bs.As, Argentina",
+      "urlWeb" : "https://www.isft194.edu.ar/",
+      "logoImg" : "assets/media/organizacion/3/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 55,
+      "nombre" : "VS Community",
+      "img" : "assets/media/habilidad/55.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 54,
+      "nombre" : "SOLID",
+      "img" : "assets/media/habilidad/54.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 53,
+      "nombre" : "O.O.P",
+      "img" : "assets/media/habilidad/53.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 51,
+      "nombre" : "Patrón MVC",
+      "img" : "assets/media/habilidad/51.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 48,
+      "nombre" : "CRUD",
+      "img" : "assets/media/habilidad/48.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 46,
+      "nombre" : "ABM",
+      "img" : "assets/media/habilidad/46.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 45,
+      "nombre" : "Windows Form",
+      "img" : "assets/media/habilidad/45.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 19,
+      "nombre" : ".NET Core",
+      "img" : "assets/media/habilidad/19.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 1,
+      "nombre" : "C#",
+      "img" : "assets/media/habilidad/1.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "imagen" : "assets/media/proyecto/6.png"
+  }, {
+    "id" : 7,
+    "nombreE" : "Queen Website",
+    "descripcionE" : "Página web estática que muestra información de la banda de rock Queen. Construida con HTML, CSS y JavaScript.",
+    "link" : "https://github.com/manita02/Queen-Website",
+    "esActual" : false,
+    "fechaInicio" : "09/2023",
+    "fechaFin" : "09/2023",
+    "organizacionId" : 5,
+    "habilidadesIds" : [ 29, 28, 5, 4, 3 ],
+    "organizacion" : {
+      "id" : 5,
+      "nombre" : "Argentina Programa",
+      "ubicacion" : "Argentina",
+      "urlWeb" : "https://www.linkedin.com/school/programa-argentina/about/",
+      "logoImg" : "assets/media/organizacion/5/logo.jpg"
+    },
+    "habilidades" : [ {
+      "id" : 29,
+      "nombre" : "GitHub",
+      "img" : "assets/media/habilidad/29.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 28,
+      "nombre" : "Git",
+      "img" : "assets/media/habilidad/28.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "imagen" : "assets/media/proyecto/7.png"
+  }, {
+    "id" : 8,
+    "nombreE" : "Tacotito’s Food Truck",
+    "descripcionE" : "App MVC con ABM de tacos e ingredientes: armado de combinaciones, gestión del catálogo y cálculo automático del precio total de cada taco.",
+    "link" : "https://github.com/manita02/Tacotitos",
+    "esActual" : false,
+    "fechaInicio" : "08/2022",
+    "fechaFin" : "12/2022",
+    "organizacionId" : 3,
+    "habilidadesIds" : [ 57, 53, 52, 46, 25, 9, 6 ],
+    "organizacion" : {
+      "id" : 3,
+      "nombre" : "I.S.F.T N°194",
+      "ubicacion" : "Miramar, Bs.As, Argentina",
+      "urlWeb" : "https://www.isft194.edu.ar/",
+      "logoImg" : "assets/media/organizacion/3/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 57,
+      "nombre" : "XAMPP",
+      "img" : "assets/media/habilidad/57.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 53,
+      "nombre" : "O.O.P",
+      "img" : "assets/media/habilidad/53.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 52,
+      "nombre" : "phpMyAdmin",
+      "img" : "assets/media/habilidad/52.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 46,
+      "nombre" : "ABM",
+      "img" : "assets/media/habilidad/46.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 25,
+      "nombre" : "MySQL",
+      "img" : "assets/media/habilidad/25.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 9,
+      "nombre" : "SQL",
+      "img" : "assets/media/habilidad/9.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 6,
+      "nombre" : "Java",
+      "img" : "assets/media/habilidad/6.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "imagen" : "assets/media/proyecto/8.png"
+  }, {
+    "id" : 9,
+    "nombreE" : "Top Pelis",
+    "descripcionE" : "Sitio web realizado con PHP, MYSQL, HTML, CSS, JavaScript y Bootstrap que permite el login de usuarios para visualizar información de películas.",
+    "link" : "https://github.com/manita02/Top-Pelis",
+    "esActual" : false,
+    "fechaInicio" : "05/2022",
+    "fechaFin" : "11/2022",
+    "organizacionId" : 3,
+    "habilidadesIds" : [ 52, 48, 46, 25, 14, 9, 7, 5, 4, 3 ],
+    "organizacion" : {
+      "id" : 3,
+      "nombre" : "I.S.F.T N°194",
+      "ubicacion" : "Miramar, Bs.As, Argentina",
+      "urlWeb" : "https://www.isft194.edu.ar/",
+      "logoImg" : "assets/media/organizacion/3/logo.png"
+    },
+    "habilidades" : [ {
+      "id" : 52,
+      "nombre" : "phpMyAdmin",
+      "img" : "assets/media/habilidad/52.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
+      "id" : 48,
+      "nombre" : "CRUD",
+      "img" : "assets/media/habilidad/48.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 46,
+      "nombre" : "ABM",
+      "img" : "assets/media/habilidad/46.png",
+      "tipoHabilidadId" : 6,
+      "tipoHabilidad" : {
+        "id" : 6,
+        "nombre" : "Metodologías"
+      }
+    }, {
+      "id" : 25,
+      "nombre" : "MySQL",
+      "img" : "assets/media/habilidad/25.png",
+      "tipoHabilidadId" : 3,
+      "tipoHabilidad" : {
+        "id" : 3,
+        "nombre" : "Bases de Datos"
+      }
+    }, {
+      "id" : 14,
+      "nombre" : "Bootstrap",
+      "img" : "assets/media/habilidad/14.png",
+      "tipoHabilidadId" : 2,
+      "tipoHabilidad" : {
+        "id" : 2,
+        "nombre" : "Frameworks y Librerías"
+      }
+    }, {
+      "id" : 9,
+      "nombre" : "SQL",
+      "img" : "assets/media/habilidad/9.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 7,
+      "nombre" : "PHP",
+      "img" : "assets/media/habilidad/7.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 5,
+      "nombre" : "HTML",
+      "img" : "assets/media/habilidad/5.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 4,
+      "nombre" : "CSS",
+      "img" : "assets/media/habilidad/4.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    } ],
+    "imagen" : "assets/media/proyecto/9.png"
+  } ],
+  "habilidades" : [ {
+    "id" : 19,
+    "nombre" : ".NET Core",
+    "img" : "assets/media/habilidad/19.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 46,
+    "nombre" : "ABM",
+    "img" : "assets/media/habilidad/46.png",
+    "tipoHabilidadId" : 6,
+    "tipoHabilidad" : {
+      "id" : 6,
+      "nombre" : "Metodologías"
+    }
+  }, {
+    "id" : 40,
+    "nombre" : "Análisis y Documentación Técnica",
+    "img" : "assets/media/habilidad/40.png",
+    "tipoHabilidadId" : 5,
+    "tipoHabilidad" : {
+      "id" : 5,
+      "nombre" : "Servicios"
+    }
+  }, {
+    "id" : 12,
+    "nombre" : "Angular",
+    "img" : "assets/media/habilidad/12.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 13,
+    "nombre" : "ASP.NET",
+    "img" : "assets/media/habilidad/13.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 30,
+    "nombre" : "Bitbucket",
+    "img" : "assets/media/habilidad/30.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 14,
+    "nombre" : "Bootstrap",
+    "img" : "assets/media/habilidad/14.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 58,
+    "nombre" : "C",
+    "img" : "assets/media/habilidad/58.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 1,
+    "nombre" : "C#",
+    "img" : "assets/media/habilidad/1.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 2,
+    "nombre" : "C++",
+    "img" : "assets/media/habilidad/2.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 47,
+    "nombre" : "ChatGPT",
+    "img" : "assets/media/habilidad/47.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 48,
+    "nombre" : "CRUD",
+    "img" : "assets/media/habilidad/48.png",
+    "tipoHabilidadId" : 6,
+    "tipoHabilidad" : {
+      "id" : 6,
+      "nombre" : "Metodologías"
+    }
+  }, {
+    "id" : 4,
+    "nombre" : "CSS",
+    "img" : "assets/media/habilidad/4.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 49,
+    "nombre" : "Cursor",
+    "img" : "assets/media/habilidad/49.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 39,
+    "nombre" : "Desarrollo Web y Software a Medida",
+    "img" : "assets/media/habilidad/39.png",
+    "tipoHabilidadId" : 5,
+    "tipoHabilidad" : {
+      "id" : 5,
+      "nombre" : "Servicios"
+    }
+  }, {
+    "id" : 42,
+    "nombre" : "Diseño y Optimización de Bases de Datos",
+    "img" : "assets/media/habilidad/42.png",
+    "tipoHabilidadId" : 5,
+    "tipoHabilidad" : {
+      "id" : 5,
+      "nombre" : "Servicios"
+    }
+  }, {
+    "id" : 15,
+    "nombre" : "Entity Framework",
+    "img" : "assets/media/habilidad/15.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 37,
+    "nombre" : "Español (nativo)",
+    "img" : "assets/media/habilidad/37.png",
+    "tipoHabilidadId" : 7,
+    "tipoHabilidad" : {
+      "id" : 7,
+      "nombre" : "Idiomas"
+    }
+  }, {
+    "id" : 16,
+    "nombre" : "Express.js",
+    "img" : "assets/media/habilidad/16.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 17,
+    "nombre" : "Flask",
+    "img" : "assets/media/habilidad/17.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 50,
+    "nombre" : "Gemini",
+    "img" : "assets/media/habilidad/50.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 28,
+    "nombre" : "Git",
+    "img" : "assets/media/habilidad/28.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 29,
+    "nombre" : "GitHub",
+    "img" : "assets/media/habilidad/29.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 27,
+    "nombre" : "GitLab",
+    "img" : "assets/media/habilidad/27.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 5,
+    "nombre" : "HTML",
+    "img" : "assets/media/habilidad/5.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 38,
+    "nombre" : "Ingles (B1)",
+    "img" : "assets/media/habilidad/38.png",
+    "tipoHabilidadId" : 7,
+    "tipoHabilidad" : {
+      "id" : 7,
+      "nombre" : "Idiomas"
+    }
+  }, {
+    "id" : 6,
+    "nombre" : "Java",
+    "img" : "assets/media/habilidad/6.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 3,
+    "nombre" : "JavaScript",
+    "img" : "assets/media/habilidad/3.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 31,
+    "nombre" : "Jira",
+    "img" : "assets/media/habilidad/31.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 18,
+    "nombre" : "LINQ",
+    "img" : "assets/media/habilidad/18.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 43,
+    "nombre" : "Mantenimiento y Refactorización",
+    "img" : "assets/media/habilidad/43.png",
+    "tipoHabilidadId" : 5,
+    "tipoHabilidad" : {
+      "id" : 5,
+      "nombre" : "Servicios"
+    }
+  }, {
+    "id" : 36,
+    "nombre" : "Metodologías ágiles",
+    "img" : "assets/media/habilidad/36.png",
+    "tipoHabilidadId" : 6,
+    "tipoHabilidad" : {
+      "id" : 6,
+      "nombre" : "Metodologías"
+    }
+  }, {
+    "id" : 25,
+    "nombre" : "MySQL",
+    "img" : "assets/media/habilidad/25.png",
+    "tipoHabilidadId" : 3,
+    "tipoHabilidad" : {
+      "id" : 3,
+      "nombre" : "Bases de Datos"
+    }
+  }, {
+    "id" : 20,
+    "nombre" : "Next.js",
+    "img" : "assets/media/habilidad/20.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 21,
+    "nombre" : "Node.js",
+    "img" : "assets/media/habilidad/21.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 53,
+    "nombre" : "O.O.P",
+    "img" : "assets/media/habilidad/53.png",
+    "tipoHabilidadId" : 6,
+    "tipoHabilidad" : {
+      "id" : 6,
+      "nombre" : "Metodologías"
+    }
+  }, {
+    "id" : 26,
+    "nombre" : "Oracle",
+    "img" : "assets/media/habilidad/26.png",
+    "tipoHabilidadId" : 3,
+    "tipoHabilidad" : {
+      "id" : 3,
+      "nombre" : "Bases de Datos"
+    }
+  }, {
+    "id" : 51,
+    "nombre" : "Patrón MVC",
+    "img" : "assets/media/habilidad/51.png",
+    "tipoHabilidadId" : 6,
+    "tipoHabilidad" : {
+      "id" : 6,
+      "nombre" : "Metodologías"
+    }
+  }, {
+    "id" : 7,
+    "nombre" : "PHP",
+    "img" : "assets/media/habilidad/7.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 52,
+    "nombre" : "phpMyAdmin",
+    "img" : "assets/media/habilidad/52.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 24,
+    "nombre" : "PostgreSQL",
+    "img" : "assets/media/habilidad/24.png",
+    "tipoHabilidadId" : 3,
+    "tipoHabilidad" : {
+      "id" : 3,
+      "nombre" : "Bases de Datos"
+    }
+  }, {
+    "id" : 33,
+    "nombre" : "Postman",
+    "img" : "assets/media/habilidad/33.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 44,
+    "nombre" : "PyQGIS",
+    "img" : "assets/media/habilidad/44.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 8,
+    "nombre" : "Python",
+    "img" : "assets/media/habilidad/8.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 22,
+    "nombre" : "React",
+    "img" : "assets/media/habilidad/22.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 11,
+    "nombre" : "Rust",
+    "img" : "assets/media/habilidad/11.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 35,
+    "nombre" : "SCRUM",
+    "img" : "assets/media/habilidad/35.png",
+    "tipoHabilidadId" : 6,
+    "tipoHabilidad" : {
+      "id" : 6,
+      "nombre" : "Metodologías"
+    }
+  }, {
+    "id" : 54,
+    "nombre" : "SOLID",
+    "img" : "assets/media/habilidad/54.png",
+    "tipoHabilidadId" : 6,
+    "tipoHabilidad" : {
+      "id" : 6,
+      "nombre" : "Metodologías"
+    }
+  }, {
+    "id" : 23,
+    "nombre" : "Spring Boot",
+    "img" : "assets/media/habilidad/23.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 9,
+    "nombre" : "SQL",
+    "img" : "assets/media/habilidad/9.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 34,
+    "nombre" : "SQL Server",
+    "img" : "assets/media/habilidad/34.png",
+    "tipoHabilidadId" : 3,
+    "tipoHabilidad" : {
+      "id" : 3,
+      "nombre" : "Bases de Datos"
+    }
+  }, {
+    "id" : 32,
+    "nombre" : "Swagger UI",
+    "img" : "assets/media/habilidad/32.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 41,
+    "nombre" : "Testing y Control de Calidad (QA)",
+    "img" : "assets/media/habilidad/41.png",
+    "tipoHabilidadId" : 5,
+    "tipoHabilidad" : {
+      "id" : 5,
+      "nombre" : "Servicios"
+    }
+  }, {
+    "id" : 10,
+    "nombre" : "TypeScript",
+    "img" : "assets/media/habilidad/10.png",
+    "tipoHabilidadId" : 1,
+    "tipoHabilidad" : {
+      "id" : 1,
+      "nombre" : "Lenguajes"
+    }
+  }, {
+    "id" : 56,
+    "nombre" : "VS Code",
+    "img" : "assets/media/habilidad/56.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 55,
+    "nombre" : "VS Community",
+    "img" : "assets/media/habilidad/55.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  }, {
+    "id" : 45,
+    "nombre" : "Windows Form",
+    "img" : "assets/media/habilidad/45.png",
+    "tipoHabilidadId" : 2,
+    "tipoHabilidad" : {
+      "id" : 2,
+      "nombre" : "Frameworks y Librerías"
+    }
+  }, {
+    "id" : 57,
+    "nombre" : "XAMPP",
+    "img" : "assets/media/habilidad/57.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
+    }
+  } ],
+  "redesSociales" : [ {
+    "id" : 3,
+    "nombreRedS" : "adasd",
+    "img" : "assets/media/red-social/3.png",
+    "link" : "asdasd"
+  }, {
+    "id" : 1,
+    "nombreRedS" : "asdas",
+    "img" : "assets/media/red-social/1.png",
+    "link" : "asdas"
+  } ],
+  "organizacion" : [ {
+    "id" : 1,
+    "nombre" : "Geosystems",
+    "ubicacion" : "Capital, Bs.As, Argentina",
+    "urlWeb" : "https://www.geosystems.com.ar/",
+    "logoImg" : "assets/media/organizacion/1/logo.png"
+  }, {
+    "id" : 2,
+    "nombre" : "Castellon.CH",
+    "ubicacion" : "Biena, Berna, Suiza",
+    "urlWeb" : "https://www.castellon.ch/",
+    "logoImg" : "assets/media/organizacion/2/logo.jpg"
+  }, {
+    "id" : 3,
+    "nombre" : "I.S.F.T N°194",
+    "ubicacion" : "Miramar, Bs.As, Argentina",
+    "urlWeb" : "https://www.isft194.edu.ar/",
+    "logoImg" : "assets/media/organizacion/3/logo.png"
+  }, {
+    "id" : 4,
+    "nombre" : "Autónomo",
+    "ubicacion" : "Miramar, Bs.As, Argentina",
+    "urlWeb" : "https://www.linkedin.com/in/ana-lucia-juarez/",
+    "logoImg" : "assets/media/organizacion/4/logo.png"
+  }, {
+    "id" : 5,
+    "nombre" : "Argentina Programa",
+    "ubicacion" : "Argentina",
+    "urlWeb" : "https://www.linkedin.com/school/programa-argentina/about/",
+    "logoImg" : "assets/media/organizacion/5/logo.jpg"
+  }, {
+    "id" : 6,
+    "nombre" : "Supertubos",
+    "ubicacion" : "Miramar, Bs.As, Argentina",
+    "urlWeb" : "https://www.instagram.com/_supertubos/",
+    "logoImg" : "assets/media/organizacion/6/logo.jpg"
+  }, {
+    "id" : 7,
+    "nombre" : "Software Factory",
+    "ubicacion" : "Buenos Aires, Argentina",
+    "urlWeb" : "https://forit.ar/",
+    "logoImg" : "assets/media/organizacion/7/logo.png"
+  }, {
+    "id" : 8,
+    "nombre" : "CEA N°1",
+    "ubicacion" : "Miramar, Bs.As, Argentina",
+    "urlWeb" : "https://ceamiramar.blogspot.com/",
+    "logoImg" : "assets/media/organizacion/8/logo.png"
+  }, {
+    "id" : 9,
+    "nombre" : "ConoSur.Tech",
+    "ubicacion" : "Buenos Aires, Argentina",
+    "urlWeb" : "https://conosur.tech/#",
+    "logoImg" : "assets/media/organizacion/9/logo.png"
+  }, {
+    "id" : 10,
+    "nombre" : "CUI Idiomas",
+    "ubicacion" : "Buenos Aires, Argentina",
+    "urlWeb" : "https://cui.edu.ar/",
+    "logoImg" : "assets/media/organizacion/10/logo.png"
+  }, {
+    "id" : 11,
+    "nombre" : "Desafío LATAM",
+    "ubicacion" : "Santiago, Chile",
+    "urlWeb" : "https://desafiolatam.com/",
+    "logoImg" : "assets/media/organizacion/11/logo.png"
+  }, {
+    "id" : 12,
+    "nombre" : "Fundación SES",
+    "ubicacion" : "Buenos Aires, Argentina",
+    "urlWeb" : "https://fundses.org.ar/",
+    "logoImg" : "assets/media/organizacion/12/logo.jpg"
+  }, {
+    "id" : 13,
+    "nombre" : "Fundación ILADES",
+    "ubicacion" : "Tucumán, Argentina",
+    "urlWeb" : "https://www.facebook.com/fundacionamerica/?locale=es_LA",
+    "logoImg" : "assets/media/organizacion/13/logo.png"
+  }, {
+    "id" : 14,
+    "nombre" : "INTA",
+    "ubicacion" : "Argentina",
+    "urlWeb" : "https://www.argentina.gob.ar/inta",
+    "logoImg" : "assets/media/organizacion/14/logo.png"
+  }, {
+    "id" : 15,
+    "nombre" : "Ministerio de Desarrollo Productivo",
+    "ubicacion" : "Argentina",
+    "urlWeb" : "https://es.wikipedia.org/wiki/Ministerio_de_Desarrollo_Productivo_(Argentina)",
+    "logoImg" : "assets/media/organizacion/15/logo.png"
+  }, {
+    "id" : 16,
+    "nombre" : "E.E.S.A N°2",
+    "ubicacion" : "Miramar, Bs.As, Argentina",
+    "urlWeb" : "https://www.instagram.com/agricola.miramar/",
+    "logoImg" : "assets/media/organizacion/16/logo.jpg"
+  } ],
+  "tipoHabilidad" : [ {
+    "id" : 1,
+    "nombre" : "Lenguajes"
+  }, {
+    "id" : 2,
+    "nombre" : "Frameworks y Librerías"
+  }, {
+    "id" : 3,
+    "nombre" : "Bases de Datos"
+  }, {
+    "id" : 4,
+    "nombre" : "Herramientas"
+  }, {
+    "id" : 5,
+    "nombre" : "Servicios"
+  }, {
+    "id" : 6,
+    "nombre" : "Metodologías"
+  }, {
+    "id" : 7,
+    "nombre" : "Idiomas"
+  } ],
+  "tipoEducacion" : [ {
+    "id" : 1,
+    "nombre" : "Formacion Académica"
+  }, {
+    "id" : 2,
+    "nombre" : "Cursos y Certificaciones"
+  } ],
+  "tipoEmpleo" : [ {
+    "id" : 1,
+    "nombre" : "Jornada completa"
+  }, {
+    "id" : 2,
+    "nombre" : "Jornada Parcial"
+  }, {
+    "id" : 3,
+    "nombre" : "Por cuenta propia"
+  }, {
+    "id" : 4,
+    "nombre" : "Autonomo"
+  }, {
+    "id" : 5,
+    "nombre" : "Contrato por servicio"
+  }, {
+    "id" : 6,
+    "nombre" : "Practicas"
+  }, {
+    "id" : 7,
+    "nombre" : "Practicas laborales"
+  }, {
+    "id" : 8,
+    "nombre" : "Trabajo de temporada"
+  } ],
+  "tipoUbicacion" : [ {
+    "id" : 1,
+    "nombre" : "Presencial"
+  }, {
+    "id" : 2,
+    "nombre" : "Híbrido"
+  }, {
+    "id" : 3,
+    "nombre" : "Remoto"
+  } ]
+}
