@@ -434,3 +434,104 @@ body.backup-busy {
 body.backup-busy {
   cursor: wait;
 }
+
+/* Overlay bloqueante con barra de progreso (export BD, CV, etc.) */
+.backup-progress {
+  position: fixed;
+  inset: 0;
+  z-index: 2600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.backup-progress__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-backdrop);
+  backdrop-filter: blur(5px);
+}
+
+.backup-progress__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 24rem);
+  padding: 1.75rem 1.5rem 1.4rem;
+  border-radius: var(--border-radius-card);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-modal);
+  text-align: center;
+}
+
+.backup-progress__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0.75rem;
+  border-radius: 50%;
+  background: var(--gradient-modal-icon);
+  color: var(--color-primary);
+  font-size: 1.35rem;
+}
+
+.backup-progress__title {
+  margin: 0 0 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.backup-progress__message {
+  margin: 0 0 1.15rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.backup-progress__track {
+  position: relative;
+  width: 100%;
+  height: 0.65rem;
+  overflow: hidden;
+  border-radius: var(--border-radius-pill);
+  background: var(--overlay-primary-08);
+}
+
+.backup-progress__bar {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-accent));
+  transition: width 180ms ease;
+}
+
+.backup-progress__track--indeterminate .backup-progress__bar {
+  width: 40% !important;
+  animation: backupProgressSlide 1.1s ease-in-out infinite;
+}
+
+.backup-progress__percent {
+  margin: 0.65rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+@keyframes backupProgressSlide {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(280%);
+  }
+}
+
+@media (max-width: 575px) {
+  .backup-progress__panel {
+    padding: 1.45rem 1.15rem 1.2rem;
+  }
+}
