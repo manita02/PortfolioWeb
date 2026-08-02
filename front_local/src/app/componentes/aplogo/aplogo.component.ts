@@ -27,7 +27,9 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   isAdmin = false;
   redsocial: Redsocial[] = [];
   menuOpen = false;
-  cvDownloading = false;
+  cvBusy = false;
+  cvProgress = 0;
+  cvProgressIndeterminate = true;
 
   readonly navItems: NavItem[] = [
     { id: 'inicio', label: 'Inicio', icon: 'bi-house-door' },
@@ -40,6 +42,7 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private resizeObserver?: ResizeObserver;
   private modalSavedSub?: Subscription;
+  private cvProgressTimer?: ReturnType<typeof setInterval>;
 
   constructor(
     private loginModal: LoginModalService,
@@ -72,8 +75,16 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.modalSavedSub?.unsubscribe();
     this.resizeObserver?.disconnect();
+    this.endCvExport();
     document.documentElement.style.removeProperty('--nav-bar-height');
     document.body.classList.remove('hero-nav-open');
+  }
+
+  get cvProgressPercentLabel(): string {
+    if (this.cvProgressIndeterminate) {
+      return 'Procesando…';
+    }
+    return `${Math.round(this.cvProgress)}%`;
   }
 
   @HostListener('window:resize')
@@ -83,8 +94,19 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
+    if (this.cvBusy) {
+      return;
+    }
     if (this.menuOpen) {
       this.closeMenu();
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onDocumentKeydown(event: KeyboardEvent): void {
+    if (this.cvBusy) {
+      event.preventDefault();
+      event.stopPropagation();
     }
   }
 
@@ -161,22 +183,50 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   downloadCv(): void {
-    if (this.cvDownloading) {
+    if (this.cvBusy) {
       return;
     }
-    this.cvDownloading = true;
+    this.closeMenu();
+    this.beginCvExport();
+
     this.cvExportService.downloadCvAts().subscribe({
       next: () => {
-        this.cvDownloading = false;
+        this.cvProgress = 100;
+        this.cvProgressIndeterminate = false;
+        setTimeout(() => this.endCvExport(), 300);
       },
       error: (err: Error) => {
-        this.cvDownloading = false;
+        this.endCvExport();
         this.alertDialog.alert(err?.message || 'No se pudo generar el CV.', {
           variant: 'danger',
           title: 'Error al exportar CV',
         });
       },
     });
+  }
+
+  private beginCvExport(): void {
+    this.cvBusy = true;
+    this.cvProgress = 0;
+    this.cvProgressIndeterminate = true;
+    document.body.classList.add('backup-busy');
+
+    this.cvProgressTimer = setInterval(() => {
+      if (this.cvProgressIndeterminate) {
+        this.cvProgress = Math.min(90, this.cvProgress + 2);
+      }
+    }, 200);
+  }
+
+  private endCvExport(): void {
+    if (this.cvProgressTimer) {
+      clearInterval(this.cvProgressTimer);
+      this.cvProgressTimer = undefined;
+    }
+    this.cvBusy = false;
+    this.cvProgress = 0;
+    this.cvProgressIndeterminate = true;
+    document.body.classList.remove('backup-busy');
   }
 
   private getNavBarElement(): HTMLElement | null {
