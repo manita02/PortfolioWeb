@@ -1,5 +1,5 @@
 {
-  "exportedAt" : "2026-08-01T10:52:45",
+  "exportedAt" : "2026-08-02T11:31:14",
   "banner" : [ {
     "id" : 1,
     "titulo" : "Portfolio Web",
@@ -11,17 +11,17 @@
     "apellido" : "Juarez",
     "img" : "assets/media/persona/1.png",
     "profesion" : "Full Stack Developer",
-    "acercaDe" : "Soy Técnica Superior en Programación, especializada en el desarrollo full-stack. Busco oportunidades\npara aplicar mis habilidades y contribuir al desarrollo de proyectos. Me comprometo a aprender de\nforma continua y a trabajar colaborativamente. Mi objetivo es aportar soluciones creativas a los\ndesafíos, con el objetivo de generar valor en cada proyecto"
+    "acercaDe" : "Full Stack Developer con más de 2 años de experiencia profesional desarrollando aplicaciones web, APIs y soluciones de software. Cuento con experiencia en sistemas empresariales, aplicaciones GIS y desarrollo web, participando en todo el ciclo de desarrollo, desde el análisis hasta la implementación y mantenimiento.\nTrabajo principalmente con .NET (C#), React, Angular, Node.js, Python y bases de datos SQL, creando soluciones escalables, mantenibles y orientadas a generar valor para el negocio."
   } ],
   "educacion" : [ {
     "id" : 2,
     "nombreE" : "Curso de Programación Web Full Stack Nivel 2",
-    "descripcionE" : "Curso avanzado de desarrollo web y software: Git, TypeScript, TDD, Clean Code y Clean Architecture, desarrollo por componentes y Docker para contenerización y despliegue.",
+    "descripcionE" : "Formación avanzada en desarrollo Full Stack con foco en TypeScript, React, Node.js, TDD, Clean Code, Clean Architecture y Docker.",
     "fechaInicio" : "08/2025",
     "fechaFin" : "12/2025",
     "tipoEducacionId" : 2,
     "organizacionId" : 7,
-    "habilidadesIds" : [ 56, 49, 48, 47, 39, 29, 28, 22, 21, 10, 9, 5, 4, 3 ],
+    "habilidadesIds" : [ 25, 22, 21, 10, 9, 5, 4, 3 ],
     "tipoEducacion" : {
       "id" : 2,
       "nombre" : "Cursos y Certificaciones"
@@ -34,67 +34,13 @@
       "logoImg" : "assets/media/organizacion/7/logo.png"
     },
     "habilidades" : [ {
-      "id" : 56,
-      "nombre" : "VS Code",
-      "img" : "assets/media/habilidad/56.png",
-      "tipoHabilidadId" : 4,
+      "id" : 25,
+      "nombre" : "MySQL",
+      "img" : "assets/media/habilidad/25.png",
+      "tipoHabilidadId" : 3,
       "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 49,
-      "nombre" : "Cursor",
-      "img" : "assets/media/habilidad/49.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 48,
-      "nombre" : "CRUD",
-      "img" : "assets/media/habilidad/48.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 47,
-      "nombre" : "ChatGPT",
-      "img" : "assets/media/habilidad/47.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 39,
-      "nombre" : "Desarrollo Web y Software a Medida",
-      "img" : "assets/media/habilidad/39.png",
-      "tipoHabilidadId" : 5,
-      "tipoHabilidad" : {
-        "id" : 5,
-        "nombre" : "Servicios"
-      }
-    }, {
-      "id" : 29,
-      "nombre" : "GitHub",
-      "img" : "assets/media/habilidad/29.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 28,
-      "nombre" : "Git",
-      "img" : "assets/media/habilidad/28.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
+        "id" : 3,
+        "nombre" : "Bases de Datos"
       }
     }, {
       "id" : 22,
@@ -161,11 +107,11 @@
       }
     } ],
     "archivoImagen" : "assets/media/educacion/2/imagen.png",
-    "archivoPdf" : null
+    "archivoPdf" : "assets/media/educacion/2/certificado.pdf"
   }, {
     "id" : 3,
     "nombreE" : "Curso de Programación orientada a videojuegos",
-    "descripcionE" : "Curso sobre programación y desarrollo de videojuegos, utilizando C# y Unity para crear juegos en 2D",
+    "descripcionE" : "Desarrollo de videojuegos 2D utilizando Unity y C#.",
     "fechaInicio" : "07/2024",
     "fechaFin" : "10/2024",
     "tipoEducacionId" : 2,
@@ -202,16 +148,16 @@
       }
     } ],
     "archivoImagen" : "assets/media/educacion/3/imagen.png",
-    "archivoPdf" : null
+    "archivoPdf" : "assets/media/educacion/3/certificado.pdf"
   }, {
     "id" : 5,
     "nombreE" : "CSS Avanzado",
-    "descripcionE" : "Curso enfocado en el desarrollo de interfaces modernas y responsivas utilizando buenas prácticas de CSS.\nPrincipales contenidos:\n✔ Maquetación responsive con Flexbox y CSS Grid\n✔ Uso de media queries y breakpoints\n✔ Transiciones, transformaciones y animaciones en CSS\n✔ Mejora de la experiencia de usuario mediante diseño adaptable",
+    "descripcionE" : "Desarrollo de interfaces responsivas aplicando buenas prácticas de CSS moderno.",
     "fechaInicio" : "06/2024",
     "fechaFin" : "06/2024",
     "tipoEducacionId" : 2,
     "organizacionId" : 11,
-    "habilidadesIds" : [ 47, 5, 4, 3 ],
+    "habilidadesIds" : [ 5, 4, 3 ],
     "tipoEducacion" : {
       "id" : 2,
       "nombre" : "Cursos y Certificaciones"
@@ -224,15 +170,6 @@
       "logoImg" : "assets/media/organizacion/11/logo.png"
     },
     "habilidades" : [ {
-      "id" : 47,
-      "nombre" : "ChatGPT",
-      "img" : "assets/media/habilidad/47.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
       "id" : 5,
       "nombre" : "HTML",
       "img" : "assets/media/habilidad/5.png",
@@ -261,11 +198,11 @@
       }
     } ],
     "archivoImagen" : "assets/media/educacion/5/imagen.png",
-    "archivoPdf" : null
+    "archivoPdf" : "assets/media/educacion/5/certificado.pdf"
   }, {
     "id" : 6,
     "nombreE" : "Taller FIGMA",
-    "descripcionE" : "Taller enfocado en el uso de Figma para diseño y prototipado básico de interfaces digitales, facilitando la colaboración entre diseño y desarrollo.",
+    "descripcionE" : "Taller introductorio de diseño y prototipado de interfaces con Figma.",
     "fechaInicio" : "06/2024",
     "fechaFin" : "06/2024",
     "tipoEducacionId" : 2,
@@ -284,16 +221,16 @@
     },
     "habilidades" : [ ],
     "archivoImagen" : "assets/media/educacion/6/imagen.png",
-    "archivoPdf" : null
+    "archivoPdf" : "assets/media/educacion/6/certificado.pdf"
   }, {
     "id" : 7,
     "nombreE" : "Azure Professional Training",
-    "descripcionE" : "Diplomado orientado a tecnologías y servicios de Microsoft Azure.",
+    "descripcionE" : "Formación en fundamentos y servicios del ecosistema Microsoft Azure.",
     "fechaInicio" : "01/2024",
     "fechaFin" : "06/2024",
     "tipoEducacionId" : 2,
     "organizacionId" : 9,
-    "habilidadesIds" : [ 47, 42, 9 ],
+    "habilidadesIds" : [ 42, 9 ],
     "tipoEducacion" : {
       "id" : 2,
       "nombre" : "Cursos y Certificaciones"
@@ -306,15 +243,6 @@
       "logoImg" : "assets/media/organizacion/9/logo.png"
     },
     "habilidades" : [ {
-      "id" : 47,
-      "nombre" : "ChatGPT",
-      "img" : "assets/media/habilidad/47.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
       "id" : 42,
       "nombre" : "Diseño y Optimización de Bases de Datos",
       "img" : "assets/media/habilidad/42.png",
@@ -338,12 +266,12 @@
   }, {
     "id" : 1,
     "nombreE" : "Tecnicatura Superior en Análisis, Desarrollo y Programación de Aplicaciones",
-    "descripcionE" : "Tecnicatura enfocada en análisis, diseño e implementación de software y aplicaciones web, con POO, bases de datos, diseño de sistemas y buenas prácticas de desarrollo.",
+    "descripcionE" : "Formación superior orientada al análisis, diseño e implementación de software, con énfasis en programación orientada a objetos, bases de datos y desarrollo de aplicaciones.",
     "fechaInicio" : "03/2021",
     "fechaFin" : "05/2024",
     "tipoEducacionId" : 1,
     "organizacionId" : 3,
-    "habilidadesIds" : [ 58, 56, 55, 54, 53, 51, 48, 46, 45, 34, 29, 28, 27, 25, 19, 18, 15, 14, 9, 8, 7, 6, 5, 4, 1 ],
+    "habilidadesIds" : [ 58, 45, 34, 25, 19, 18, 15, 14, 9, 8, 7, 6, 5, 4, 1 ],
     "tipoEducacion" : {
       "id" : 1,
       "nombre" : "Formacion Académica"
@@ -365,69 +293,6 @@
         "nombre" : "Lenguajes"
       }
     }, {
-      "id" : 56,
-      "nombre" : "VS Code",
-      "img" : "assets/media/habilidad/56.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 55,
-      "nombre" : "VS Community",
-      "img" : "assets/media/habilidad/55.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 54,
-      "nombre" : "SOLID",
-      "img" : "assets/media/habilidad/54.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 53,
-      "nombre" : "O.O.P",
-      "img" : "assets/media/habilidad/53.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 51,
-      "nombre" : "Patrón MVC",
-      "img" : "assets/media/habilidad/51.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 48,
-      "nombre" : "CRUD",
-      "img" : "assets/media/habilidad/48.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 46,
-      "nombre" : "ABM",
-      "img" : "assets/media/habilidad/46.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
       "id" : 45,
       "nombre" : "Windows Form",
       "img" : "assets/media/habilidad/45.png",
@@ -444,33 +309,6 @@
       "tipoHabilidad" : {
         "id" : 3,
         "nombre" : "Bases de Datos"
-      }
-    }, {
-      "id" : 29,
-      "nombre" : "GitHub",
-      "img" : "assets/media/habilidad/29.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 28,
-      "nombre" : "Git",
-      "img" : "assets/media/habilidad/28.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 27,
-      "nombre" : "GitLab",
-      "img" : "assets/media/habilidad/27.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
       }
     }, {
       "id" : 25,
@@ -586,7 +424,7 @@
   }, {
     "id" : 4,
     "nombreE" : "Analista en Tecnología Educativa",
-    "descripcionE" : "Formación orientada a la integración de herramientas tecnológicas en entornos educativos, combinando fundamentos pedagógicos con el uso de plataformas digitales para mejorar los procesos de enseñanza y aprendizaje.",
+    "descripcionE" : "Formación orientada a la integración de herramientas tecnológicas en entornos educativos.",
     "fechaInicio" : "01/2024",
     "fechaFin" : "02/2024",
     "tipoEducacionId" : 2,
@@ -609,7 +447,7 @@
   }, {
     "id" : 10,
     "nombreE" : "Desarrollo Web Front-End",
-    "descripcionE" : "Curso enfocado en el desarrollo Front-End con HTML, CSS y JavaScript, aplicando buenas prácticas para construir interfaces web responsivas e interactivas.",
+    "descripcionE" : "Desarrollo de interfaces web responsivas utilizando HTML, CSS y JavaScript.",
     "fechaInicio" : "08/2023",
     "fechaFin" : "09/2023",
     "tipoEducacionId" : 2,
@@ -668,7 +506,7 @@
   }, {
     "id" : 12,
     "nombreE" : "#YoQuieroProgramar",
-    "descripcionE" : "Curso introductorio de #YoQuieroProgramar, enfocado en los conceptos fundamentales de internet, tecnologías web y los primeros pasos en programación. Forma parte de un programa integral de formación orientado al desarrollo de habilidades iniciales en programación web.",
+    "descripcionE" : "Introducción al desarrollo web y fundamentos de programación.",
     "fechaInicio" : "05/2023",
     "fechaFin" : "06/2023",
     "tipoEducacionId" : 2,
@@ -723,11 +561,11 @@
       }
     } ],
     "archivoImagen" : "assets/media/educacion/12/imagen.jpg",
-    "archivoPdf" : null
+    "archivoPdf" : "assets/media/educacion/12/certificado.pdf"
   }, {
     "id" : 11,
     "nombreE" : "Curso de Inglés orientado a programación",
-    "descripcionE" : "Basado en la comprensión lectora, auditiva, producción escrita y oral",
+    "descripcionE" : "Inglés técnico orientado a la comprensión y comunicación en el ámbito del desarrollo de software.",
     "fechaInicio" : "11/2022",
     "fechaFin" : "01/2023",
     "tipoEducacionId" : 2,
@@ -750,12 +588,12 @@
   }, {
     "id" : 9,
     "nombreE" : "Segunda Etapa - #YoProgramo",
-    "descripcionE" : "Formación full stack centrada en un portfolio web: POO, algoritmos y estructuras de datos, bases de datos y SQL, fundamentos web (HTML, CSS, JavaScript) y desarrollo backend aplicado a la web, con proyecto integrador en equipo desde requisitos hasta producto final.",
+    "descripcionE" : "Formación Full Stack con desarrollo de un proyecto integrador, abarcando programación orientada a objetos, bases de datos, APIs y desarrollo web.",
     "fechaInicio" : "01/2022",
     "fechaFin" : "12/2022",
     "tipoEducacionId" : 2,
     "organizacionId" : 5,
-    "habilidadesIds" : [ 57, 56, 53, 51, 48, 46, 29, 28, 25, 23, 21, 14, 12, 6, 5, 4, 3 ],
+    "habilidadesIds" : [ 57, 56, 25, 23, 21, 14, 12, 6, 5, 4, 3 ],
     "tipoEducacion" : {
       "id" : 2,
       "nombre" : "Cursos y Certificaciones"
@@ -780,60 +618,6 @@
       "id" : 56,
       "nombre" : "VS Code",
       "img" : "assets/media/habilidad/56.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 53,
-      "nombre" : "O.O.P",
-      "img" : "assets/media/habilidad/53.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 51,
-      "nombre" : "Patrón MVC",
-      "img" : "assets/media/habilidad/51.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 48,
-      "nombre" : "CRUD",
-      "img" : "assets/media/habilidad/48.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 46,
-      "nombre" : "ABM",
-      "img" : "assets/media/habilidad/46.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 29,
-      "nombre" : "GitHub",
-      "img" : "assets/media/habilidad/29.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 28,
-      "nombre" : "Git",
-      "img" : "assets/media/habilidad/28.png",
       "tipoHabilidadId" : 4,
       "tipoHabilidad" : {
         "id" : 4,
@@ -926,7 +710,7 @@
   }, {
     "id" : 8,
     "nombreE" : "Primera Etapa - #SéProgramar",
-    "descripcionE" : "La primera etapa de Argentina Programa consistió en un curso introductorio orientado a incorporar los fundamentos esenciales de la programación y dar los primeros pasos en el mundo del desarrollo de software.",
+    "descripcionE" : "Curso introductorio enfocado en fundamentos de programación y desarrollo de software.",
     "fechaInicio" : "09/2021",
     "fechaFin" : "12/2021",
     "tipoEducacionId" : 2,
@@ -949,7 +733,7 @@
   }, {
     "id" : 13,
     "nombreE" : "Capacitaciones 4.0",
-    "descripcionE" : "Curso orientado a diseño y producción 3D, abarcando fundamentos de diseño, modelado CAD con Rhinoceros/Blender e introducción a impresión 3D (hardware, materiales y preparación).",
+    "descripcionE" : "Formación en diseño y producción 3D, modelado CAD e introducción a impresión 3D.",
     "fechaInicio" : "08/2020",
     "fechaFin" : "02/2021",
     "tipoEducacionId" : 2,
@@ -968,12 +752,12 @@
     },
     "habilidades" : [ ],
     "archivoImagen" : "assets/media/educacion/13/imagen.png",
-    "archivoPdf" : null
+    "archivoPdf" : "assets/media/educacion/13/certificado.pdf"
   } ],
   "experiencia" : [ {
     "id" : 8,
     "nombreE" : "QA Analyst",
-    "descripcionE" : "Colaboración en el diseño e implementación de una estrategia de pruebas funcionales en entorno local. Preparación del ambiente de pruebas, análisis integral de la aplicación web y relevamiento de funcionalidades y reglas de negocio. Elaboración de documentación QA para ejecución y seguimiento de casos, con planificación priorizada por riesgo y complejidad.",
+    "descripcionE" : "Participación en el diseño e implementación de una estrategia de pruebas funcionales para una aplicación web. Preparación del entorno de pruebas, análisis de funcionalidades y reglas de negocio, y elaboración de documentación QA para la ejecución y seguimiento de casos de prueba priorizados por riesgo y complejidad.",
     "esActual" : true,
     "fechaInicio" : "11/2025",
     "fechaFin" : null,
@@ -1036,14 +820,14 @@
   }, {
     "id" : 2,
     "nombreE" : "Desarrollador Full Stack",
-    "descripcionE" : "Desarrollo y mantenimiento de soluciones en tres frentes: aplicaciones web, servicios y APIs, y funcionalidades integradas como plugins en QGIS, con foco en rendimiento y evolución continua del producto. Diseño y ajuste de modelos de datos para consultas y operaciones más eficientes. Trabajo de punta a punta en interfaz, dashboards, reportes y visualizaciones que transforman datos en información clara para el usuario, tanto en entorno web como dentro del ecosistema QGIS.",
+    "descripcionE" : "Participación en el desarrollo y mantenimiento de aplicaciones web, APIs REST y plugins para QGIS destinados a soluciones para empresas de telecomunicaciones y gestión catastral. Implementación de nuevas funcionalidades, optimización de consultas y modelos de datos, y desarrollo de interfaces, dashboards y reportes para facilitar el análisis y la visualización de información.",
     "esActual" : false,
     "fechaInicio" : "02/2024",
     "fechaFin" : "06/2026",
     "tipoEmpleoId" : 1,
     "tipoUbicacionId" : 3,
     "organizacionId" : 1,
-    "habilidadesIds" : [ 35, 33, 32, 31, 30, 28, 26, 24, 19, 17, 14, 13, 12, 8, 5, 4, 3, 1 ],
+    "habilidadesIds" : [ 35, 26, 24, 19, 17, 14, 13, 12, 8, 5, 4, 3, 1 ],
     "tipoEmpleo" : {
       "id" : 1,
       "nombre" : "Jornada completa"
@@ -1067,51 +851,6 @@
       "tipoHabilidad" : {
         "id" : 6,
         "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 33,
-      "nombre" : "Postman",
-      "img" : "assets/media/habilidad/33.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 32,
-      "nombre" : "Swagger UI",
-      "img" : "assets/media/habilidad/32.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 31,
-      "nombre" : "Jira",
-      "img" : "assets/media/habilidad/31.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 30,
-      "nombre" : "Bitbucket",
-      "img" : "assets/media/habilidad/30.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 28,
-      "nombre" : "Git",
-      "img" : "assets/media/habilidad/28.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
       }
     }, {
       "id" : 26,
@@ -1225,14 +964,14 @@
   }, {
     "id" : 13,
     "nombreE" : "Desarrollador frontend",
-    "descripcionE" : "Maquetación y desarrollo de un sitio web estático para presentar una propiedad en alquiler por temporada en Miramar: estructura de contenidos, diseño responsive y estilos coherentes con la identidad del alojamiento. Implementación de secciones informativas (servicios, ubicación, contacto) con foco en claridad, legibilidad y navegación sencilla en móvil y escritorio.",
+    "descripcionE" : "Desarrollo de un sitio web responsive para promocionar una propiedad destinada al alquiler temporario, priorizando una navegación clara, una correcta organización del contenido y una experiencia de usuario optimizada para dispositivos móviles y de escritorio.",
     "esActual" : false,
     "fechaInicio" : "10/2022",
     "fechaFin" : "12/2025",
     "tipoEmpleoId" : 4,
     "tipoUbicacionId" : 3,
     "organizacionId" : 4,
-    "habilidadesIds" : [ 39, 28, 14, 5, 4 ],
+    "habilidadesIds" : [ 14, 5, 4, 3 ],
     "tipoEmpleo" : {
       "id" : 4,
       "nombre" : "Autonomo"
@@ -1249,24 +988,6 @@
       "logoImg" : "assets/media/organizacion/4/logo.png"
     },
     "habilidades" : [ {
-      "id" : 39,
-      "nombre" : "Desarrollo Web y Software a Medida",
-      "img" : "assets/media/habilidad/39.png",
-      "tipoHabilidadId" : 5,
-      "tipoHabilidad" : {
-        "id" : 5,
-        "nombre" : "Servicios"
-      }
-    }, {
-      "id" : 28,
-      "nombre" : "Git",
-      "img" : "assets/media/habilidad/28.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
       "id" : 14,
       "nombre" : "Bootstrap",
       "img" : "assets/media/habilidad/14.png",
@@ -1293,18 +1014,27 @@
         "id" : 1,
         "nombre" : "Lenguajes"
       }
+    }, {
+      "id" : 3,
+      "nombre" : "JavaScript",
+      "img" : "assets/media/habilidad/3.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
     } ]
   }, {
     "id" : 9,
     "nombreE" : "Desarrollador de software",
-    "descripcionE" : "Colaboración en el desarrollo de funcionalidades de gestión de archivos, con lógica de carga y restauración entre rutas locales definidas y almacenamiento remoto en la nube. Documentación de los métodos desarrollados, incluyendo propósito y comportamiento interno. Registro de eventos y seguimiento de flujos para facilitar la depuración y detectar mejoras. Pruebas en entornos controlados que simulan procesos de carga, con evaluación y ajuste del manejo de rutas dinámicas y de marcas temporales de archivos.",
+    "descripcionE" : "Desarrollo de funcionalidades para la gestión de archivos entre almacenamiento local y la nube, implementando lógica de carga, restauración y trazabilidad mediante registros de eventos. Documentación técnica de los componentes desarrollados y validación de procesos en entornos de prueba.",
     "esActual" : false,
     "fechaInicio" : "11/2024",
     "fechaFin" : "11/2024",
     "tipoEmpleoId" : 5,
     "tipoUbicacionId" : 3,
     "organizacionId" : 2,
-    "habilidadesIds" : [ 40, 39, 19, 1 ],
+    "habilidadesIds" : [ 19, 1 ],
     "tipoEmpleo" : {
       "id" : 5,
       "nombre" : "Contrato por servicio"
@@ -1321,24 +1051,6 @@
       "logoImg" : "assets/media/organizacion/2/logo.jpg"
     },
     "habilidades" : [ {
-      "id" : 40,
-      "nombre" : "Análisis y Documentación Técnica",
-      "img" : "assets/media/habilidad/40.png",
-      "tipoHabilidadId" : 5,
-      "tipoHabilidad" : {
-        "id" : 5,
-        "nombre" : "Servicios"
-      }
-    }, {
-      "id" : 39,
-      "nombre" : "Desarrollo Web y Software a Medida",
-      "img" : "assets/media/habilidad/39.png",
-      "tipoHabilidadId" : 5,
-      "tipoHabilidad" : {
-        "id" : 5,
-        "nombre" : "Servicios"
-      }
-    }, {
       "id" : 19,
       "nombre" : ".NET Core",
       "img" : "assets/media/habilidad/19.png",
@@ -1360,14 +1072,14 @@
   }, {
     "id" : 10,
     "nombreE" : "Desarrollador de software",
-    "descripcionE" : "Desarrollo de aplicaciones de consola y bibliotecas reutilizables, con integración de dependencias según cada proyecto, incluido procesamiento de imágenes. Documentación del código mediante comentarios en el fuente y manuales de usuario para instalación y compilación. Configuración de proyectos y del entorno de build para facilitar la compilación en distintas plataformas y entornos de desarrollo.",
+    "descripcionE" : "Desarrollo de aplicaciones de consola y bibliotecas reutilizables, incluyendo procesamiento de imágenes e integración de dependencias. Configuración del entorno de compilación y elaboración de documentación técnica para facilitar la instalación y el mantenimiento del software.",
     "esActual" : false,
     "fechaInicio" : "04/2024",
     "fechaFin" : "05/2024",
     "tipoEmpleoId" : 5,
     "tipoUbicacionId" : 3,
     "organizacionId" : 2,
-    "habilidadesIds" : [ 40, 11, 2 ],
+    "habilidadesIds" : [ 11, 2 ],
     "tipoEmpleo" : {
       "id" : 5,
       "nombre" : "Contrato por servicio"
@@ -1384,15 +1096,6 @@
       "logoImg" : "assets/media/organizacion/2/logo.jpg"
     },
     "habilidades" : [ {
-      "id" : 40,
-      "nombre" : "Análisis y Documentación Técnica",
-      "img" : "assets/media/habilidad/40.png",
-      "tipoHabilidadId" : 5,
-      "tipoHabilidad" : {
-        "id" : 5,
-        "nombre" : "Servicios"
-      }
-    }, {
       "id" : 11,
       "nombre" : "Rust",
       "img" : "assets/media/habilidad/11.png",
@@ -1414,14 +1117,14 @@
   }, {
     "id" : 11,
     "nombreE" : "Documentalista de software",
-    "descripcionE" : "Redacción de documentación integral del software: descripción de la arquitectura, componentes principales, relaciones y comunicaciones entre ellos, y diagramas UML de apoyo. Elaboración de guías de instalación paso a paso y de material de uso con ejemplos de las funcionalidades del sistema.",
+    "descripcionE" : "Elaboración de documentación técnica del software, incluyendo arquitectura, componentes, diagramas UML, guías de instalación y manuales de uso para facilitar la implementación y el mantenimiento de la solución.",
     "esActual" : false,
     "fechaInicio" : "02/2024",
     "fechaFin" : "02/2024",
     "tipoEmpleoId" : 5,
     "tipoUbicacionId" : 3,
     "organizacionId" : 2,
-    "habilidadesIds" : [ 40 ],
+    "habilidadesIds" : [ 59, 40 ],
     "tipoEmpleo" : {
       "id" : 5,
       "nombre" : "Contrato por servicio"
@@ -1438,6 +1141,15 @@
       "logoImg" : "assets/media/organizacion/2/logo.jpg"
     },
     "habilidades" : [ {
+      "id" : 59,
+      "nombre" : "Diagrama UML",
+      "img" : "assets/media/habilidad/59.png",
+      "tipoHabilidadId" : 4,
+      "tipoHabilidad" : {
+        "id" : 4,
+        "nombre" : "Herramientas"
+      }
+    }, {
       "id" : 40,
       "nombre" : "Análisis y Documentación Técnica",
       "img" : "assets/media/habilidad/40.png",
@@ -1450,14 +1162,14 @@
   }, {
     "id" : 12,
     "nombreE" : "Desarrollador de software",
-    "descripcionE" : "Desarrollo y mantenimiento de una aplicación de escritorio en equipo, con diseño e implementación de funcionalidades orientadas a una experiencia de uso clara. Trabajo con consultas y acceso a datos para búsquedas y filtrados más eficientes, corrección y optimización del código, pruebas unitarias para detectar errores temprano y documentación del código y procesos para facilitar evoluciones futuras.",
+    "descripcionE" : "Desarrollo y mantenimiento de un sistema de gestión académica para un instituto terciario, destinado a la administración de alumnos, docentes, mesas de examen, calificaciones y otras funcionalidades institucionales. Implementación de nuevas funcionalidades, optimización de consultas y mantenimiento del sistema en un entorno de trabajo colaborativo.",
     "esActual" : false,
     "fechaInicio" : "03/2023",
     "fechaFin" : "12/2023",
     "tipoEmpleoId" : 6,
     "tipoUbicacionId" : 2,
     "organizacionId" : 3,
-    "habilidadesIds" : [ 45, 36, 34, 29, 28, 25, 19, 18, 15, 9, 1 ],
+    "habilidadesIds" : [ 45, 34, 25, 19, 18, 15, 1 ],
     "tipoEmpleo" : {
       "id" : 6,
       "nombre" : "Practicas"
@@ -1483,15 +1195,6 @@
         "nombre" : "Frameworks y Librerías"
       }
     }, {
-      "id" : 36,
-      "nombre" : "Metodologías ágiles",
-      "img" : "assets/media/habilidad/36.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
       "id" : 34,
       "nombre" : "SQL Server",
       "img" : "assets/media/habilidad/34.png",
@@ -1499,24 +1202,6 @@
       "tipoHabilidad" : {
         "id" : 3,
         "nombre" : "Bases de Datos"
-      }
-    }, {
-      "id" : 29,
-      "nombre" : "GitHub",
-      "img" : "assets/media/habilidad/29.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 28,
-      "nombre" : "Git",
-      "img" : "assets/media/habilidad/28.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
       }
     }, {
       "id" : 25,
@@ -1555,15 +1240,6 @@
         "nombre" : "Frameworks y Librerías"
       }
     }, {
-      "id" : 9,
-      "nombre" : "SQL",
-      "img" : "assets/media/habilidad/9.png",
-      "tipoHabilidadId" : 1,
-      "tipoHabilidad" : {
-        "id" : 1,
-        "nombre" : "Lenguajes"
-      }
-    }, {
       "id" : 1,
       "nombre" : "C#",
       "img" : "assets/media/habilidad/1.png",
@@ -1576,7 +1252,7 @@
   }, {
     "id" : 15,
     "nombreE" : "Instructora de Surf",
-    "descripcionE" : "Clases de surf personalizadas y en grupo (iniciante–intermedio): comunicación didáctica, acompañamiento y evaluación continua del progreso. Experiencia en facilitación, paciencia bajo exigencia del entorno priorizando seguridad y resultados del grupo.",
+    "descripcionE" : "Dictado de clases personalizadas y grupales para niveles inicial e intermedio, promoviendo un aprendizaje mediante comunicación clara, seguimiento del progreso y adaptación a las necesidades de cada alumno.",
     "esActual" : false,
     "fechaInicio" : "01/2023",
     "fechaFin" : "03/2023",
@@ -1603,14 +1279,14 @@
   }, {
     "id" : 14,
     "nombreE" : "Desarrollador Full Stack",
-    "descripcionE" : "Desarrollo full stack de una plataforma de portfolio desde cero: vista pública informativa y panel de administración para gestionar secciones del perfil profesional. Maquetación responsive, integración front–back vía API REST, base de datos relacional y acceso seguro para edición de contenidos. Proyecto de práctica con ciclo completo de diseño, implementación y despliegue.",
+    "descripcionE" : "Desarrollo de una plataforma Full Stack desde cero con vista pública y panel de administración, implementando autenticación, API REST, base de datos relacional y funcionalidades para la gestión dinámica del contenido.",
     "esActual" : false,
     "fechaInicio" : "01/2022",
     "fechaFin" : "09/2022",
     "tipoEmpleoId" : 6,
     "tipoUbicacionId" : 3,
     "organizacionId" : 5,
-    "habilidadesIds" : [ 29, 28, 25, 23, 21, 14, 12, 10, 6, 5, 4, 3 ],
+    "habilidadesIds" : [ 25, 23, 21, 14, 12, 10, 6, 5, 4, 3 ],
     "tipoEmpleo" : {
       "id" : 6,
       "nombre" : "Practicas"
@@ -1627,24 +1303,6 @@
       "logoImg" : "assets/media/organizacion/5/logo.jpg"
     },
     "habilidades" : [ {
-      "id" : 29,
-      "nombre" : "GitHub",
-      "img" : "assets/media/habilidad/29.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 28,
-      "nombre" : "Git",
-      "img" : "assets/media/habilidad/28.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
       "id" : 25,
       "nombre" : "MySQL",
       "img" : "assets/media/habilidad/25.png",
@@ -1739,13 +1397,13 @@
   "proyecto" : [ {
     "id" : 11,
     "nombreE" : "Portfolio Web",
-    "descripcionE" : "Portfolio personal full stack: vista pública del perfil (estudios, experiencia, skills, proyectos), base de datos, API REST y panel de gestión del contenido.",
+    "descripcionE" : "Portfolio Full Stack con panel de administración, API REST y gestión dinámica del contenido para actualizar experiencia, estudios, habilidades y proyectos.",
     "link" : "https://github.com/manita02/PortfolioWeb",
-    "esActual" : true,
+    "esActual" : false,
     "fechaInicio" : "04/2022",
-    "fechaFin" : null,
+    "fechaFin" : "07/2026",
     "organizacionId" : 5,
-    "habilidadesIds" : [ 57, 56, 53, 52, 49, 25, 23, 21, 14, 12, 10, 6, 5, 4 ],
+    "habilidadesIds" : [ 57, 25, 23, 21, 14, 12, 10, 6, 5, 4 ],
     "organizacion" : {
       "id" : 5,
       "nombre" : "Argentina Programa",
@@ -1757,42 +1415,6 @@
       "id" : 57,
       "nombre" : "XAMPP",
       "img" : "assets/media/habilidad/57.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 56,
-      "nombre" : "VS Code",
-      "img" : "assets/media/habilidad/56.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 53,
-      "nombre" : "O.O.P",
-      "img" : "assets/media/habilidad/53.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 52,
-      "nombre" : "phpMyAdmin",
-      "img" : "assets/media/habilidad/52.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 49,
-      "nombre" : "Cursor",
-      "img" : "assets/media/habilidad/49.png",
       "tipoHabilidadId" : 4,
       "tipoHabilidad" : {
         "id" : 4,
@@ -1884,13 +1506,13 @@
   }, {
     "id" : 3,
     "nombreE" : "MusicTab",
-    "descripcionE" : "MusicTab es una aplicación full-stack que permite a los usuarios explorar, administrar e interactuar con tablaturas para diferentes instrumentos.",
+    "descripcionE" : "Plataforma Full Stack para la gestión y consulta de tablaturas musicales, con arquitectura cliente-servidor y funcionalidades para explorar, administrar e interactuar con contenido de diferentes instrumentos.",
     "link" : "https://github.com/manita02/MusicTab",
     "esActual" : false,
     "fechaInicio" : "08/2025",
     "fechaFin" : "12/2025",
     "organizacionId" : 7,
-    "habilidadesIds" : [ 39, 22, 21, 20, 10, 8 ],
+    "habilidadesIds" : [ 22, 21, 20, 10, 9, 8 ],
     "organizacion" : {
       "id" : 7,
       "nombre" : "Software Factory",
@@ -1899,15 +1521,6 @@
       "logoImg" : "assets/media/organizacion/7/logo.png"
     },
     "habilidades" : [ {
-      "id" : 39,
-      "nombre" : "Desarrollo Web y Software a Medida",
-      "img" : "assets/media/habilidad/39.png",
-      "tipoHabilidadId" : 5,
-      "tipoHabilidad" : {
-        "id" : 5,
-        "nombre" : "Servicios"
-      }
-    }, {
       "id" : 22,
       "nombre" : "React",
       "img" : "assets/media/habilidad/22.png",
@@ -1944,6 +1557,15 @@
         "nombre" : "Lenguajes"
       }
     }, {
+      "id" : 9,
+      "nombre" : "SQL",
+      "img" : "assets/media/habilidad/9.png",
+      "tipoHabilidadId" : 1,
+      "tipoHabilidad" : {
+        "id" : 1,
+        "nombre" : "Lenguajes"
+      }
+    }, {
       "id" : 8,
       "nombre" : "Python",
       "img" : "assets/media/habilidad/8.png",
@@ -1957,13 +1579,13 @@
   }, {
     "id" : 10,
     "nombreE" : "Sitio Web - Alquiler Temporario",
-    "descripcionE" : "Página web estática construida con HTML, CSS y Bootstrap que contiene información acerca de la casa que está en alquiler por temporada en Miramar.",
+    "descripcionE" : "Landing Page responsive desarrollada para promocionar una propiedad destinada al alquiler temporario, priorizando experiencia de usuario, navegación y adaptación a dispositivos móviles.",
     "link" : "https://github.com/manita02/pagina-alquiler-temporada",
     "esActual" : false,
     "fechaInicio" : "10/2022",
     "fechaFin" : "12/2025",
     "organizacionId" : 4,
-    "habilidadesIds" : [ 49, 47, 14, 5, 4, 3 ],
+    "habilidadesIds" : [ 49, 14, 5, 4, 3 ],
     "organizacion" : {
       "id" : 4,
       "nombre" : "Autónomo",
@@ -1975,15 +1597,6 @@
       "id" : 49,
       "nombre" : "Cursor",
       "img" : "assets/media/habilidad/49.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 47,
-      "nombre" : "ChatGPT",
-      "img" : "assets/media/habilidad/47.png",
       "tipoHabilidadId" : 4,
       "tipoHabilidad" : {
         "id" : 4,
@@ -2030,13 +1643,13 @@
   }, {
     "id" : 4,
     "nombreE" : "Good Vibes Blog",
-    "descripcionE" : "Blog web multiusuario con CRUD de publicaciones y administración de perfil: registro, creación y edición de entradas, y gestión de la cuenta de cada usuario.",
+    "descripcionE" : "Blog web multiusuario con autenticación, gestión de perfiles y administración de publicaciones mediante operaciones CRUD.",
     "link" : "https://github.com/manita02/Good-Vibes-Blog",
     "esActual" : false,
     "fechaInicio" : "12/2023",
     "fechaFin" : "02/2024",
     "organizacionId" : 4,
-    "habilidadesIds" : [ 29, 28, 25, 17, 8, 5, 4 ],
+    "habilidadesIds" : [ 25, 17, 8, 5, 4 ],
     "organizacion" : {
       "id" : 4,
       "nombre" : "Autónomo",
@@ -2045,24 +1658,6 @@
       "logoImg" : "assets/media/organizacion/4/logo.png"
     },
     "habilidades" : [ {
-      "id" : 29,
-      "nombre" : "GitHub",
-      "img" : "assets/media/habilidad/29.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 28,
-      "nombre" : "Git",
-      "img" : "assets/media/habilidad/28.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
       "id" : 25,
       "nombre" : "MySQL",
       "img" : "assets/media/habilidad/25.png",
@@ -2112,13 +1707,13 @@
   }, {
     "id" : 5,
     "nombreE" : "API Gestión del Personal",
-    "descripcionE" : "Implementación de la API por medio de .NET Core para gestionar usuarios con los endpoints.",
+    "descripcionE" : "API REST desarrollada en .NET para la gestión de usuarios, implementando operaciones CRUD y documentación interactiva mediante Swagger.",
     "link" : "https://github.com/manita02/APIGestionDePersonall",
     "esActual" : false,
     "fechaInicio" : "01/2024",
     "fechaFin" : "01/2024",
     "organizacionId" : 4,
-    "habilidadesIds" : [ 56, 47, 32, 29, 28, 19, 9, 1 ],
+    "habilidadesIds" : [ 32, 29, 28, 19, 9, 1 ],
     "organizacion" : {
       "id" : 4,
       "nombre" : "Autónomo",
@@ -2127,24 +1722,6 @@
       "logoImg" : "assets/media/organizacion/4/logo.png"
     },
     "habilidades" : [ {
-      "id" : 56,
-      "nombre" : "VS Code",
-      "img" : "assets/media/habilidad/56.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 47,
-      "nombre" : "ChatGPT",
-      "img" : "assets/media/habilidad/47.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
       "id" : 32,
       "nombre" : "Swagger UI",
       "img" : "assets/media/habilidad/32.png",
@@ -2203,13 +1780,13 @@
   }, {
     "id" : 6,
     "nombreE" : "Entites Game",
-    "descripcionE" : "App MVC con ABM de entidades, ítems y comidas, y capa de juego en mapa hexagonal: movimiento por terreno, combate e interacciones, con tipos de entidad (acuática, terrestre, aérea y mixtas) que definen su desplazamiento y ubicación.",
+    "descripcionE" : "Aplicación de escritorio desarrollada como proyecto académico, basada en arquitectura MVC e implementando un sistema de gestión de entidades con movimiento sobre un mapa hexagonal, reglas de combate e interacción entre distintos tipos de personajes.",
     "link" : "https://github.com/manita02/Entities-Game",
     "esActual" : false,
     "fechaInicio" : "08/2023",
     "fechaFin" : "11/2023",
     "organizacionId" : 3,
-    "habilidadesIds" : [ 55, 54, 53, 51, 48, 46, 45, 19, 1 ],
+    "habilidadesIds" : [ 51, 45, 19, 1 ],
     "organizacion" : {
       "id" : 3,
       "nombre" : "I.S.F.T N°194",
@@ -2218,54 +1795,9 @@
       "logoImg" : "assets/media/organizacion/3/logo.png"
     },
     "habilidades" : [ {
-      "id" : 55,
-      "nombre" : "VS Community",
-      "img" : "assets/media/habilidad/55.png",
-      "tipoHabilidadId" : 4,
-      "tipoHabilidad" : {
-        "id" : 4,
-        "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 54,
-      "nombre" : "SOLID",
-      "img" : "assets/media/habilidad/54.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 53,
-      "nombre" : "O.O.P",
-      "img" : "assets/media/habilidad/53.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
       "id" : 51,
       "nombre" : "Patrón MVC",
       "img" : "assets/media/habilidad/51.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 48,
-      "nombre" : "CRUD",
-      "img" : "assets/media/habilidad/48.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 46,
-      "nombre" : "ABM",
-      "img" : "assets/media/habilidad/46.png",
       "tipoHabilidadId" : 6,
       "tipoHabilidad" : {
         "id" : 6,
@@ -2303,7 +1835,7 @@
   }, {
     "id" : 7,
     "nombreE" : "Queen Website",
-    "descripcionE" : "Página web estática que muestra información de la banda de rock Queen. Construida con HTML, CSS y JavaScript.",
+    "descripcionE" : "Sitio web estático desarrollado como proyecto académico para presentar información sobre la banda Queen, aplicando buenas prácticas de maquetación responsive, estructura semántica y desarrollo Front-End.",
     "link" : "https://github.com/manita02/Queen-Website",
     "esActual" : false,
     "fechaInicio" : "09/2023",
@@ -2367,7 +1899,7 @@
   }, {
     "id" : 8,
     "nombreE" : "Tacotito’s Food Truck",
-    "descripcionE" : "App MVC con ABM de tacos e ingredientes: armado de combinaciones, gestión del catálogo y cálculo automático del precio total de cada taco.",
+    "descripcionE" : "Aplicación desarrollada como proyecto académico para la gestión de un food truck, permitiendo administrar productos e ingredientes, generar combinaciones y calcular automáticamente el precio final de cada pedido.",
     "link" : "https://github.com/manita02/Tacotitos",
     "esActual" : false,
     "fechaInicio" : "08/2022",
@@ -2449,13 +1981,13 @@
   }, {
     "id" : 9,
     "nombreE" : "Top Pelis",
-    "descripcionE" : "Sitio web realizado con PHP, MYSQL, HTML, CSS, JavaScript y Bootstrap que permite el login de usuarios para visualizar información de películas.",
+    "descripcionE" : "Aplicación web desarrollada como proyecto académico con autenticación de usuarios y funcionalidades CRUD para la consulta y gestión de información de películas mediante una base de datos relacional.",
     "link" : "https://github.com/manita02/Top-Pelis",
     "esActual" : false,
     "fechaInicio" : "05/2022",
     "fechaFin" : "11/2022",
     "organizacionId" : 3,
-    "habilidadesIds" : [ 52, 48, 46, 25, 14, 9, 7, 5, 4, 3 ],
+    "habilidadesIds" : [ 52, 25, 14, 9, 7, 5, 4, 3 ],
     "organizacion" : {
       "id" : 3,
       "nombre" : "I.S.F.T N°194",
@@ -2471,24 +2003,6 @@
       "tipoHabilidad" : {
         "id" : 4,
         "nombre" : "Herramientas"
-      }
-    }, {
-      "id" : 48,
-      "nombre" : "CRUD",
-      "img" : "assets/media/habilidad/48.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
-      }
-    }, {
-      "id" : 46,
-      "nombre" : "ABM",
-      "img" : "assets/media/habilidad/46.png",
-      "tipoHabilidadId" : 6,
-      "tipoHabilidad" : {
-        "id" : 6,
-        "nombre" : "Metodologías"
       }
     }, {
       "id" : 25,
@@ -2690,6 +2204,15 @@
     "tipoHabilidad" : {
       "id" : 5,
       "nombre" : "Servicios"
+    }
+  }, {
+    "id" : 59,
+    "nombre" : "Diagrama UML",
+    "img" : "assets/media/habilidad/59.png",
+    "tipoHabilidadId" : 4,
+    "tipoHabilidad" : {
+      "id" : 4,
+      "nombre" : "Herramientas"
     }
   }, {
     "id" : 42,
@@ -3080,15 +2603,25 @@
     }
   } ],
   "redesSociales" : [ {
-    "id" : 3,
-    "nombreRedS" : "adasd",
-    "img" : "assets/media/red-social/3.png",
-    "link" : "asdasd"
+    "id" : 9,
+    "nombreRedS" : "LinkedIn",
+    "img" : "assets/media/red-social/9.png",
+    "link" : "https://www.linkedin.com/in/ana-lucia-juarez/"
   }, {
-    "id" : 1,
-    "nombreRedS" : "asdas",
-    "img" : "assets/media/red-social/1.png",
-    "link" : "asdas"
+    "id" : 8,
+    "nombreRedS" : "GitHub",
+    "img" : "assets/media/red-social/8.png",
+    "link" : "https://github.com/manita02"
+  }, {
+    "id" : 7,
+    "nombreRedS" : "Gmail",
+    "img" : "assets/media/red-social/7.png",
+    "link" : "mailto:manitacoqui@gmail.com"
+  }, {
+    "id" : 6,
+    "nombreRedS" : "Portfolio",
+    "img" : "assets/media/red-social/6.png",
+    "link" : "https://portfolioweb-analuciajuarez.pages.dev/"
   } ],
   "organizacion" : [ {
     "id" : 1,
@@ -3215,6 +2748,9 @@
   }, {
     "id" : 2,
     "nombre" : "Cursos y Certificaciones"
+  }, {
+    "id" : 4,
+    "nombre" : "Formacion AcadÃ©mica"
   } ],
   "tipoEmpleo" : [ {
     "id" : 1,
@@ -3250,5 +2786,8 @@
   }, {
     "id" : 3,
     "nombre" : "Remoto"
+  }, {
+    "id" : 5,
+    "nombre" : "HÃ­brido"
   } ]
 }
