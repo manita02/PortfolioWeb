@@ -54,14 +54,14 @@
 
       <button
         type="button"
-        class="btn-pf btn-pf--add"
-        (click)="openForm('create')"
-        *ngIf="isAdmin"
-        data-tip="Agregar red social"
-        data-tip-pos="left"
-        aria-label="Agregar red social"
+        class="btn-pf btn-pf--ghost btn-pf--icon-sm hero-bar__cv-btn"
+        (click)="downloadCv()"
+        [disabled]="cvDownloading"
+        data-tip="Descargar cv"
+        data-tip-pos="bottom"
+        aria-label="Descargar cv"
       >
-        <i class="bi bi-plus-lg"></i>
+        <i class="bi bi-file-earmark-person" aria-hidden="true"></i>
       </button>
 
       <div class="social-links">
@@ -114,9 +114,21 @@
 
       <button
         type="button"
+        class="btn-pf btn-pf--add"
+        (click)="openForm('create')"
+        *ngIf="isAdmin"
+        data-tip="Agregar red social"
+        data-tip-pos="bottom"
+        aria-label="Agregar red social"
+      >
+        <i class="bi bi-plus-lg"></i>
+      </button>
+
+      <button
+        type="button"
         class="btn-pf btn-pf--ghost btn-pf--auth"
         (click)="login()"
-        *ngIf="!isLogged"
+        *ngIf="!isLogged && !staticMode"
         data-tip="Ingresar"
         data-tip-pos="bottom"
         aria-label="Ingresar"
@@ -127,7 +139,7 @@
         type="button"
         class="btn-pf btn-pf--ghost btn-pf--auth"
         (click)="onLogOut()"
-        *ngIf="isLogged"
+        *ngIf="isLogged && !staticMode"
         data-tip="Cerrar sesión"
         data-tip-pos="bottom"
         aria-label="Cerrar sesión"

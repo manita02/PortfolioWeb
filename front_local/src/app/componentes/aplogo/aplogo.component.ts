@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { CvExportService } from 'src/app/servicio/cv-export.service';
 import { LoginModalService } from 'src/app/servicio/login-modal.service';
 import { RedsocialModalService } from 'src/app/servicio/redsocial-modal.service';
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
@@ -8,6 +9,7 @@ import { TokenService } from 'src/app/servicio/token.service';
 import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { isDirectImageSrc } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 interface NavItem {
   id: string;
@@ -20,10 +22,12 @@ interface NavItem {
   templateUrl: './aplogo.component.html',
 })
 export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
+  readonly staticMode = environment.staticMode;
   isLogged = false;
   isAdmin = false;
   redsocial: Redsocial[] = [];
   menuOpen = false;
+  cvDownloading = false;
 
   readonly navItems: NavItem[] = [
     { id: 'inicio', label: 'Inicio', icon: 'bi-house-door' },
@@ -43,6 +47,7 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
     private proyectoS: RedsocialService,
     private redsocialModal: RedsocialModalService,
     private alertDialog: AlertDialogService,
+    private cvExportService: CvExportService,
     private el: ElementRef<HTMLElement>
   ) {}
 
@@ -153,6 +158,25 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openForm(mode: FormModalMode, id?: number): void {
     this.redsocialModal.open(mode, id);
+  }
+
+  downloadCv(): void {
+    if (this.cvDownloading) {
+      return;
+    }
+    this.cvDownloading = true;
+    this.cvExportService.downloadCvAts().subscribe({
+      next: () => {
+        this.cvDownloading = false;
+      },
+      error: (err: Error) => {
+        this.cvDownloading = false;
+        this.alertDialog.alert(err?.message || 'No se pudo generar el CV.', {
+          variant: 'danger',
+          title: 'Error al exportar CV',
+        });
+      },
+    });
   }
 
   private getNavBarElement(): HTMLElement | null {
