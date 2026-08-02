@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { CvExportService } from 'src/app/servicio/cv-export.service';
 import { LoginModalService } from 'src/app/servicio/login-modal.service';
 import { RedsocialModalService } from 'src/app/servicio/redsocial-modal.service';
 import { FormModalMode } from 'src/app/servicio/form-modal.types';
@@ -8,6 +9,7 @@ import { TokenService } from 'src/app/servicio/token.service';
 import { AlertDialogService } from 'src/app/servicio/alert-dialog.service';
 import { isDirectImageSrc } from 'src/app/util/archivo.util';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 interface NavItem {
   id: string;
@@ -20,10 +22,14 @@ interface NavItem {
   templateUrl: './aplogo.component.html',
 })
 export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
+  readonly staticMode = environment.staticMode;
   isLogged = false;
   isAdmin = false;
   redsocial: Redsocial[] = [];
   menuOpen = false;
+  cvBusy = false;
+  cvProgress = 0;
+  cvProgressIndeterminate = true;
 
   readonly navItems: NavItem[] = [
     { id: 'inicio', label: 'Inicio', icon: 'bi-house-door' },
@@ -36,6 +42,7 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private resizeObserver?: ResizeObserver;
   private modalSavedSub?: Subscription;
+  private cvProgressTimer?: ReturnType<typeof setInterval>;
 
   constructor(
     private loginModal: LoginModalService,
@@ -43,6 +50,7 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
     private proyectoS: RedsocialService,
     private redsocialModal: RedsocialModalService,
     private alertDialog: AlertDialogService,
+    private cvExportService: CvExportService,
     private el: ElementRef<HTMLElement>
   ) {}
 
@@ -67,8 +75,16 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.modalSavedSub?.unsubscribe();
     this.resizeObserver?.disconnect();
+    this.endCvExport();
     document.documentElement.style.removeProperty('--nav-bar-height');
     document.body.classList.remove('hero-nav-open');
+  }
+
+  get cvProgressPercentLabel(): string {
+    if (this.cvProgressIndeterminate) {
+      return 'Procesando…';
+    }
+    return `${Math.round(this.cvProgress)}%`;
   }
 
   @HostListener('window:resize')
@@ -78,8 +94,19 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
+    if (this.cvBusy) {
+      return;
+    }
     if (this.menuOpen) {
       this.closeMenu();
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onDocumentKeydown(event: KeyboardEvent): void {
+    if (this.cvBusy) {
+      event.preventDefault();
+      event.stopPropagation();
     }
   }
 
@@ -153,6 +180,53 @@ export class APlogoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openForm(mode: FormModalMode, id?: number): void {
     this.redsocialModal.open(mode, id);
+  }
+
+  downloadCv(): void {
+    if (this.cvBusy) {
+      return;
+    }
+    this.closeMenu();
+    this.beginCvExport();
+
+    this.cvExportService.downloadCvAts().subscribe({
+      next: () => {
+        this.cvProgress = 100;
+        this.cvProgressIndeterminate = false;
+        setTimeout(() => this.endCvExport(), 300);
+      },
+      error: (err: Error) => {
+        this.endCvExport();
+        this.alertDialog.alert(err?.message || 'No se pudo generar el CV.', {
+          variant: 'danger',
+          title: 'Error al exportar CV',
+        });
+      },
+    });
+  }
+
+  private beginCvExport(): void {
+    this.cvBusy = true;
+    this.cvProgress = 0;
+    this.cvProgressIndeterminate = true;
+    document.body.classList.add('backup-busy');
+
+    this.cvProgressTimer = setInterval(() => {
+      if (this.cvProgressIndeterminate) {
+        this.cvProgress = Math.min(90, this.cvProgress + 2);
+      }
+    }, 200);
+  }
+
+  private endCvExport(): void {
+    if (this.cvProgressTimer) {
+      clearInterval(this.cvProgressTimer);
+      this.cvProgressTimer = undefined;
+    }
+    this.cvBusy = false;
+    this.cvProgress = 0;
+    this.cvProgressIndeterminate = true;
+    document.body.classList.remove('backup-busy');
   }
 
   private getNavBarElement(): HTMLElement | null {

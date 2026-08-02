@@ -51,12 +51,8 @@ SELECT 'Cursos y Certificaciones' FROM DUAL
 WHERE NOT EXISTS (SELECT 1 FROM tipo_educacion WHERE nombre = 'Cursos y Certificaciones');
 
 INSERT INTO tipo_habilidad (nombre)
-SELECT 'Backend' FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM tipo_habilidad WHERE nombre = 'Backend');
-
-INSERT INTO tipo_habilidad (nombre)
-SELECT 'Frontend' FROM DUAL
-WHERE NOT EXISTS (SELECT 1 FROM tipo_habilidad WHERE nombre = 'Frontend');
+SELECT 'Lenguajes' FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM tipo_habilidad WHERE nombre = 'Lenguajes');
 
 INSERT INTO tipo_habilidad (nombre)
 SELECT 'Frameworks y Librerías' FROM DUAL
@@ -69,6 +65,10 @@ WHERE NOT EXISTS (SELECT 1 FROM tipo_habilidad WHERE nombre = 'Bases de Datos');
 INSERT INTO tipo_habilidad (nombre)
 SELECT 'Herramientas' FROM DUAL
 WHERE NOT EXISTS (SELECT 1 FROM tipo_habilidad WHERE nombre = 'Herramientas');
+
+INSERT INTO tipo_habilidad (nombre)
+SELECT 'Servicios' FROM DUAL
+WHERE NOT EXISTS (SELECT 1 FROM tipo_habilidad WHERE nombre = 'Servicios');
 
 INSERT INTO tipo_habilidad (nombre)
 SELECT 'Metodologías' FROM DUAL

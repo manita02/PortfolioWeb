@@ -224,6 +224,11 @@
   margin-left: auto;
 }
 
+.hero-bar__cv-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
 /* Menú hamburguesa → secciones del home */
 .hero-nav {
   position: relative;

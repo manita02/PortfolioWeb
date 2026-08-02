@@ -7,7 +7,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 })
 export class SplashScreenComponent implements OnInit, OnDestroy {
   /** Duración fija del temporizador (ms). */
-  private readonly durationMs = 5_000;
+  private readonly durationMs = 3_000;
 
   @Output() complete = new EventEmitter<void>();
 
