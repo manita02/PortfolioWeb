@@ -1,5 +1,5 @@
 {
-  "exportedAt" : "2026-08-02T11:31:14",
+  "exportedAt" : "2026-08-02T14:44:13",
   "banner" : [ {
     "id" : 1,
     "titulo" : "Portfolio Web",
@@ -2748,9 +2748,6 @@
   }, {
     "id" : 2,
     "nombre" : "Cursos y Certificaciones"
-  }, {
-    "id" : 4,
-    "nombre" : "Formacion AcadÃ©mica"
   } ],
   "tipoEmpleo" : [ {
     "id" : 1,
