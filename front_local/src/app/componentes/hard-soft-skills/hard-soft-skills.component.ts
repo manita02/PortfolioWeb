@@ -173,9 +173,8 @@ export class HardSoftSkillsComponent implements OnInit, AfterViewInit, OnDestroy
     this.cdr.markForCheck();
   }
 
-  onFilterSelect(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value;
-    this.selectFilter(value === '' ? null : Number(value));
+  onFilterModelChange(value: number | null): void {
+    this.selectFilter(value);
   }
 
   trackByTipoId(_: number, tipo: TipoHabilidad): number {

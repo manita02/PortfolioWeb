@@ -20,14 +20,14 @@
       <select
         id="skills-filter-select"
         class="skills-filters__select"
-        [value]="selectedTipoId ?? ''"
-        (change)="onFilterSelect($event)"
+        [ngModel]="selectedTipoId"
+        (ngModelChange)="onFilterModelChange($event)"
         aria-label="Filtrar por tipo de habilidad"
       >
-        <option value="">Todas</option>
+        <option [ngValue]="null">Todas</option>
         <option
           *ngFor="let tipo of tiposHabilidad; trackBy: trackByTipoId"
-          [value]="tipo.id"
+          [ngValue]="tipo.id"
         >
           {{ tipo.nombre }}
         </option>
